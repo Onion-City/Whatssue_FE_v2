@@ -28,7 +28,7 @@ jobs:
 
       #ESLint 경고 무시
       - name: Build
-        run: npm run build -- --no-verify
+        run: npm run build 
       
       # Login to ghcr
       - name: Login to ghcr
