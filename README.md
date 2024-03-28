@@ -1,5 +1,4 @@
 # 모임관리 운영 서비스, 누가 왔는지 모르겠다면! 왔슈? (Whatssue)
-왓슈_버전업 및 MVP 코드 개선을 위한 레포입니다.
 ### 프로젝트 소개 
 <img width="919" alt="image" src="https://github.com/Onion-City/Whatssue_BE_v2/assets/79689822/78e8f5e3-f2cb-4e41-a775-e4469ae20209">
 
