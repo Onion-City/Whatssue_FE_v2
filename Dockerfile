@@ -3,9 +3,11 @@ WORKDIR /app/frontend
 
 COPY package*.json ./
 RUN npm install
-RUN yarn install
 
 COPY . .
+
+# 애플리케이션을 빌드합니다.
+RUN npm run build
 
 EXPOSE 3000
 CMD ["npm", "start"] 
