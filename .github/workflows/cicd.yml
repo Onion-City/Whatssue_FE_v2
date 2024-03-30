@@ -24,12 +24,12 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: yarn install
+        run: npm install
 
       #ESLint 경고 무시
       - name: Build
-        run: npm run build -- --no-verify
-      
+        run: npm run build
+
       # Login to ghcr
       - name: Login to ghcr
         uses: docker/login-action@v1
@@ -37,7 +37,7 @@ jobs:
           registry: ghcr.io
           username: pinetree2
           password: ${{ secrets.GHCR_TOKEN }}
-          
+
       # Docker 빌드 생성 및 푸시
       - name: dev Docker build & push
         if: contains(github.ref, 'main') || contains(github.ref, 'develop')
