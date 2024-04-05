@@ -1,64 +1,27 @@
-import "rsuite/dist/rsuite.css";
-import styled from "styled-components";
+import "./steps.css";
 
 export interface StepProps {
-  currentStep: number;
-  content: string;
-  color: string;
-  fontSize: string;
-  fontWeight: string;
+  currentStep?: number;
+  content?: string;
+  color?: string;
+  fontSize?: string;
+  fontWeight?: string;
 }
 
-export function Step({ currentStep = 1, color = "#000", fontSize = "1rem", fontWeight = "700" }: StepProps) {
-  const StepWrapper = styled.div`
-    position: relative;
-    z-index: 1;
-    width: 30vw;
-
-    display: flex;
-
-  `
-
-  const StepStyle = styled.div`
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background-color: #51F8C4;
-    border: 3px solid #51F8C4;
-    transition: 0.4s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  `
-
-  const StepLineWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  align-items: center;
-  `;
-
-  const StepLine = styled.div`
-    height: 2px;
-    width: 100%;
-    background-color: ${currentStep === 1 ? "#404040" : "#51F8C4"};
-  `;
-
-  const StepCount = styled.span`
-    font-size: 19px;
-    color: #000000;
-  `
-
+export function Step({ currentStep = 2 }: StepProps) {
   return (
-    <StepWrapper>
-      <StepStyle>
-        <StepCount>1</StepCount>
-      </StepStyle>
-      <StepLineWrapper>
-        <StepLine></StepLine>
-      </StepLineWrapper>
-      <StepStyle>
-        <StepCount>2</StepCount>
-      </StepStyle>
-    </StepWrapper>
+    <div className="step">
+      <div className="step__content">
+        <div className="step__content__element">
+          <span className="step__content__element__text">1</span>
+        </div>
+        <div className="step__content__line">
+          <div className={currentStep === 1 ? "step__content__line__item" : "step__content__line__item step__line__item--active"}></div>
+        </div>
+        <div className={currentStep === 1 ? "step__content__element" : "step__content__element step__element--active"}>
+          <span className={currentStep === 1 ? "step__content__element__text" : "step__content__element__text step__element__text--active"}>2</span>
+        </div>
+      </div>
+    </div>
   );
 }

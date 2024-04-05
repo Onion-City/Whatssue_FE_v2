@@ -1,0 +1,10 @@
+.register {
+    /* background-color: #2B2B2B; */
+    height: calc(100vh - 5.5rem);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 3rem;
+}

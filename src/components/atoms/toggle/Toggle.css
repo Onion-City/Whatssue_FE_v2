@@ -41,16 +41,16 @@ by Mauricio Allende (https://mallendeo.com/)
   left: 50%;
 }
 .toggle-btn.toggle-btn.on {
-  background: #86d993;
+  background: #51F8C4;
 }
 .toggle-btn.toggle-btn.on:active {
   box-shadow: none;
 }
 .toggle-btn.toggle-btn.on:active::after {
-  margin-left: -1.6em;
+  margin-left: -0.6em;
 }
 .toggle-btn:active::after {
-  padding-right: 1.6em;
+  padding-right: 0.6em;
 }
 .toggle-input {
   /* visually hidden but still accessible */

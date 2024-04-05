@@ -1,5 +1,6 @@
 "use client";
 import { FunnelProps, StepProps, useFunnel } from "@/hook/user/useFunnel";
+import ClubRegister from "./components/ClubRegister";
 
 export interface ProfileSetupInterface {
     steps: string[];
@@ -34,7 +35,7 @@ export default function SetupUserClub(
         <>
             <Funnel>
                 <Step name="1">
-                    <div onClick={() => nextClickHandler(steps[1])}>1번 화면</div>
+                    <ClubRegister />
                 </Step>
                 <Step name="2">
                     <div onClick={() => nextClickHandler(steps[2])}>2번 화면</div>

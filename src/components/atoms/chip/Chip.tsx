@@ -1,19 +1,18 @@
 import React, { ReactNode, useState } from "react";
 
 export interface ChipProps {
-  children: ReactNode;
-  chipOn: boolean;
-//   backgroundColor?: string;
-  width: string;
-  height: string;
-  content: string;
-//   color?: string;
-  borderRadius: string;
-  fontSize: string;
-  fontWeight: string;
+  children?: ReactNode;
+  chipOn?: boolean;
+  width?: string;
+  height?: string;
+  padding?: string;
+  content?: string;
+  borderRadius?: string;
+  fontSize?: string;
+  fontWeight?: string;
 }
 
-export function Chip({ children, width = "5.2125rem", height = "2.125rem", padding = "0.75rem 2rem", borderRadius = "50px", fontSize = "1rem", fontWeight = "500" }: TextProps) {
+export function Chip({ children, width = "5.4375rem", height, padding = "0.65rem 0", borderRadius = "50px", fontSize = "1rem", fontWeight = "500" }: ChipProps) {
   const [chipOn, setChipOn] = useState(false);
   const chipStyle: React.CSSProperties = {
     backgroundColor: chipOn ? "#51F8C4" : "#404040",
@@ -25,6 +24,8 @@ export function Chip({ children, width = "5.2125rem", height = "2.125rem", paddi
     fontSize: fontSize,
     fontWeight: fontWeight,
     cursor: "pointer",
+    textAlign: "center",
+    fontFamily: "Pretendard Variable",
   };
 
   const handleChip = () => {
