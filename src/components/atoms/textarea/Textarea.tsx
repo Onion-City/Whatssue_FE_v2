@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import { InputWrapper } from "../input/Input";
 
-export interface InputProps {
+export interface TextareaProps {
   content?: string;
   backgroundColor?: string;
   color?: string;
@@ -11,7 +11,7 @@ export interface InputProps {
   maxCnt?: number;
 }
 
-export function Input({ backgroundColor = "#2B2B2B", color = "#fff", size = "big", height = "3.5rem", fontSize = "16px", content = "", maxCnt = 20 }: InputProps) {
+export function Textarea({ backgroundColor = "#2B2B2B", color = "#fff", size = "big", height = "12rem", fontSize = "16px", content = "", maxCnt = 300 }: TextareaProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [textCnt, setTextCnt] = useState(0);
   const style: React.CSSProperties = {
@@ -20,11 +20,12 @@ export function Input({ backgroundColor = "#2B2B2B", color = "#fff", size = "big
     width: size === "big" ? "90vw" : "50vw",
     height: height,
     fontSize: fontSize,
+    padding: "1rem",
     border: isFocused ? "none" : "1px solid #fff",
     cursor: "pointer",
     borderRadius: "10px",
-    padding: "0 1rem", 
     outline: isFocused ? "1px solid #51F8C4" : "none",
+    resize: "none",
   };
 
   const handleFocus = () => {
@@ -42,12 +43,12 @@ export function Input({ backgroundColor = "#2B2B2B", color = "#fff", size = "big
 
   return (
     <InputWrapper>
-      <input 
+      <textarea 
         style={style} 
         placeholder={content}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        onChange={handleTextCnt}
+        // onChange={handleTextCnt}
         maxLength={maxCnt}
       />
       <p>
@@ -57,11 +58,3 @@ export function Input({ backgroundColor = "#2B2B2B", color = "#fff", size = "big
     </InputWrapper>
   );
 }
-
-export const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  text-align: right;
-  color: #fff;
-`;

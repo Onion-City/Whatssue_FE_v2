@@ -2,13 +2,13 @@ import { ReactNode, useState } from "react";
 import "./Toggle.css";
 
 export interface ToggleProps {
-  children: ReactNode;
-  color: string;
-  backgroundColor: string;
-  size: string;
-  height: string;
-  fontSize: string;
-  content: string;
+  children?: ReactNode;
+  color?: string;
+  backgroundColor?: string;
+  size?: string;
+  height?: string;
+  fontSize?: string;
+  content?: string;
 }
 
 export function Toggle({ children, color = "#2b2b2b", backgroundColor = "#51F8C4", size = "big", height = "3.5rem", fontSize = "16rem", content = "" }: ToggleProps) {
@@ -33,14 +33,14 @@ export function Toggle({ children, color = "#2b2b2b", backgroundColor = "#51F8C4
     boxSizing: "initial",
     display: "inline-block",
     outline: "0",
-    width: "8em",
-    height: "4em",
+    width: "4rem",
+    height: "2rem",
     position: "relative",
     cursor: "pointer",
     userSelect: "none",
-    backgroundColor: on ? "#86d993" : "#404040",
-    borderRadius: "4rem",
-    padding: "4px",
+    backgroundColor: on ? "#51F8C4" : "#404040",
+    borderRadius: "2rem",
+    padding: "2px",
     transition: "all 0.4s ease",
     border: "2px solid #e8eae9",
   };
@@ -52,12 +52,12 @@ export function Toggle({ children, color = "#2b2b2b", backgroundColor = "#51F8C4
           type="checkbox"
           checked={on}
         //   onChange={noop}
-          onClick={changeToggle}
           data-testid="toggle-input"
         />
         <span 
           className={toggleClassName} 
           style={spanStyle} 
+          onClick={changeToggle}
         />
       </label>
   );
