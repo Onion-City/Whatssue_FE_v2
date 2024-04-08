@@ -1,7 +1,7 @@
 import { Button } from "@/components/atoms/button";
 import { Step } from "@/components/atoms/steps";
 import { InputBox } from "@/components/molecules/inputBox";
-import { REGISTER_BTN, REGISTER_INPUT_ARR } from "../const";
+import { REGISTER_BTN, REGISTER_INPUT_ARR } from "../constants";
 import "./FirstClubRegister.css";
 
 const FirstClubRegister = ({nextClickHandler}: any) => {

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useFormContext } from "react-hook-form";
 import styled from "styled-components";
 
 export interface InputProps {
@@ -14,7 +13,7 @@ export interface InputProps {
 }
 
 export function Input({ backgroundColor = "#2B2B2B", color = "#fff", size = "big", height = "3.5rem", fontSize = "16px", content = "", maxCnt = 0, name }: InputProps) {
-  const { register } = useFormContext();
+  // const { register } = useFormContext();
   const [isFocused, setIsFocused] = useState(false);
   const [textCnt, setTextCnt] = useState(0);
   const style: React.CSSProperties = {
