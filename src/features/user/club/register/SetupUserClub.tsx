@@ -1,11 +1,25 @@
 "use client";
+import GenericForm from "@/hook/user/GenericForm";
 import { FunnelProps, StepProps, useFunnel } from "@/hook/user/useFunnel";
+import FirstClubRegister from "./components/FirstClubRegister";
+import SecondClubRegister from "./components/SecondClubRegister";
+import ThirdClubRegister from "./components/ThirdClubRegister";
 
 export interface ProfileSetupInterface {
     steps: string[];
     nextClickHandler: (nextStep: string) => void;
     Funnel: React.ComponentType<FunnelProps>;
     Step: React.ComponentType<StepProps>;
+}
+
+interface FormData {
+    clubName: string;
+    clubContent: string;
+    recruit: boolean;
+    usernameMethod: string;
+    clubImg: string;
+    mobile: string;
+    link: string[];
 }
 
 export default function SetupUserClub(
@@ -22,6 +36,7 @@ export default function SetupUserClub(
 
     // 다음 step으로
     const nextClickHandler = (step: string) => {
+        console.log('step: ', step);
         setStep(step);
     }
 
@@ -30,19 +45,34 @@ export default function SetupUserClub(
         setStep(step);
     };
 
+    // 폼 제출 함수
+    const submitSignup = () => {
+        console.log("form 제출");
+    };
+
     return (
         <>
+            <GenericForm<ProfileSetupInterface>
+                formOptions={{ mode: 'onChange' }}
+                onSubmit={submitSignup}
+            >
             <Funnel>
                 <Step name="1">
-                    <div onClick={() => nextClickHandler(steps[1])}>1번 화면</div>
+                    <FirstClubRegister 
+                        nextClickHandler={nextClickHandler}
+                    />
                 </Step>
                 <Step name="2">
-                    <div onClick={() => nextClickHandler(steps[2])}>2번 화면</div>
+                    <SecondClubRegister 
+                        nextClickHandler={nextClickHandler} 
+                        prevClickHandler={prevClickHandler}
+                    />
                 </Step>
                 <Step name="3">
-                    <div onClick={() => prevClickHandler(steps[1])}>3번 화면</div>
+                    <ThirdClubRegister />
                 </Step>
             </Funnel>
+            </GenericForm>
         </>
     );
 }
