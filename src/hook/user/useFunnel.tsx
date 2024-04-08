@@ -22,7 +22,8 @@ export function useFunnel (defaultStep: string) {
         const targetStep: ReactElement<StepProps> = children.find((childStep) => childStep.props.name === step)!;
 
         return <>{targetStep}</>
+        // return Object.assign(targetStep, {Step});
     }
 
-    return { Funnel, Step, setStep, currentStep: step } as const;
+    return { Funnel, Step, step, setStep, currentStep: step } as const;
 }
