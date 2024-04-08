@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useFormContext } from "react-hook-form";
 import styled from "styled-components";
 
 export interface InputProps {
@@ -9,9 +10,11 @@ export interface InputProps {
   height?: string;
   fontSize?: string;
   maxCnt?: number;
+  name?: string;
 }
 
-export function Input({ backgroundColor = "#2B2B2B", color = "#fff", size = "big", height = "3.5rem", fontSize = "16px", content = "", maxCnt = 20 }: InputProps) {
+export function Input({ backgroundColor = "#2B2B2B", color = "#fff", size = "big", height = "3.5rem", fontSize = "16px", content = "", maxCnt = 0, name }: InputProps) {
+  const { register } = useFormContext();
   const [isFocused, setIsFocused] = useState(false);
   const [textCnt, setTextCnt] = useState(0);
   const style: React.CSSProperties = {
@@ -36,24 +39,26 @@ export function Input({ backgroundColor = "#2B2B2B", color = "#fff", size = "big
   };
 
   const handleTextCnt = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
     setTextCnt(e.target.value.length);
   }
 
   return (
     <InputWrapper>
       <input 
-        style={style} 
+        type="text"
+        style={style}
         placeholder={content}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={handleTextCnt}
         maxLength={maxCnt}
+        name={name}
+        // {...register(name)}
       />
-      <p>
+      {maxCnt !== 0 && <p>
         <span>{textCnt}</span>
         <span>/{maxCnt}</span>
-      </p>
+      </p>}
     </InputWrapper>
   );
 }

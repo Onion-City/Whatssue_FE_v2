@@ -2,9 +2,9 @@ import { Button } from "@/components/atoms/button";
 import { Step } from "@/components/atoms/steps";
 import { InputBox } from "@/components/molecules/inputBox";
 import { REGISTER_BTN, REGISTER_INPUT_ARR } from "../const";
-import "./ClubRegister.css";
+import "./FirstClubRegister.css";
 
-const ClubRegister = () => {
+const FirstClubRegister = ({nextClickHandler}: any) => {
     return(
         <div className="register">
             <div className="register__content">
@@ -17,14 +17,15 @@ const ClubRegister = () => {
                         type={box.type && box.type}
                         subtitle={box.subtitle && box.subtitle}
                         essential={true}
+                        name={box.name && box.name}
                     />
                 ))}
             </div>
             <div className="register__btn">
-                <Button>{REGISTER_BTN.next}</Button>
+                <Button onClick={() => nextClickHandler('2')}>{REGISTER_BTN.next}</Button>
             </div>
         </div>
     );
 };
 
-export default ClubRegister;
+export default FirstClubRegister;

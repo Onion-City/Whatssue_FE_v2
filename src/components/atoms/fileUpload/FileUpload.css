@@ -1,0 +1,34 @@
+.fileUpload {
+    /* width: 100vw;
+    height: 7.1875rem; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fileUpload__box {
+    width: 7.1875rem;
+    height: 7.1875rem;
+    background-color: #404040;
+    border-radius: 11px;
+    cursor: pointer;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fileUpload__box__img{
+    width: 1.5625rem;
+    height: 1.5625rem;
+}
+
+.fileUpload__box__selectedImg {
+    /* width: 7.1875rem;
+    height: 7.1875rem; */
+    border-radius: 11px;
+}
+
+#first-upload-input {
+    display: none;
+}

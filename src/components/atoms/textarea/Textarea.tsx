@@ -36,8 +36,7 @@ export function Textarea({ backgroundColor = "#2B2B2B", color = "#fff", size = "
     setIsFocused(false);
   };
 
-  const handleTextCnt = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
+  const handleTextCnt = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTextCnt(e.target.value.length);
   }
 
@@ -48,7 +47,7 @@ export function Textarea({ backgroundColor = "#2B2B2B", color = "#fff", size = "
         placeholder={content}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        // onChange={handleTextCnt}
+        onChange={handleTextCnt}
         maxLength={maxCnt}
       />
       <p>

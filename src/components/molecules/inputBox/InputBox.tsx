@@ -1,9 +1,9 @@
-import { Chip } from "@/components/atoms/chip";
+import { FileUpload } from "@/components/atoms/fileUpload";
 import { Input } from "@/components/atoms/input";
 import { Text } from "@/components/atoms/text";
 import { Textarea } from "@/components/atoms/textarea";
 import { Toggle } from "@/components/atoms/toggle";
-import { REGISTER_CHIP_ARR } from "@/features/user/club/register/const";
+import { ChipBox } from "../chipBox/ChipBox";
 import "./InputBox.css";
 
 export interface InputBoxProps {
@@ -12,12 +12,13 @@ export interface InputBoxProps {
     type?: string;
     subtitle?: string;
     essential?: boolean;
+    name?: string;
 }
-export function InputBox ( {title, maxCnt, type, subtitle, essential}: InputBoxProps ) {
+export function InputBox ( {title, maxCnt, type, subtitle, essential, name}: InputBoxProps ) {
     let inputComponent;
     switch (type) {
         case "input":
-            inputComponent = <Input maxCnt={maxCnt} />;
+            inputComponent = <Input maxCnt={maxCnt} name={name}/>;
             break;
         case "textarea":
             inputComponent = <Textarea maxCnt={maxCnt} />;
@@ -26,21 +27,14 @@ export function InputBox ( {title, maxCnt, type, subtitle, essential}: InputBoxP
             inputComponent = <Toggle />;
             break;
         case "chip":
-            inputComponent = (
-                <div className="chipBox">
-                    {REGISTER_CHIP_ARR.map((name, index) => (
-                        <Chip 
-                            key={index}
-                            fontSize="0.8125rem"
-                            fontWeight="700"
-                        >{name}</Chip>
-                    ))}
-                </div>
-            );
+            inputComponent = <ChipBox />
+            break;
+        case "fileUpload":
+            inputComponent = <FileUpload />;
             break;
         default:
             // default는 Input
-            inputComponent = <Input maxCnt={maxCnt} />;
+            inputComponent = <Input />;
             break;
     }
     return (

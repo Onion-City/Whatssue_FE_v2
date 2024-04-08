@@ -2,19 +2,21 @@ import React, { ReactNode } from "react";
 
 export interface ButtonProps {
   children?: ReactNode;
+  onClick?: () => any;
   color?: string;
   backgroundColor?: string;
+  width?: string;
   size?: string;
   height?: string;
   fontSize?: string;
   fontWeight?: string;
 }
 
-export function Button({ children, color = "#2b2b2b", backgroundColor = "#51F8C4", size = "big", fontSize = "1rem", fontWeight = "700" }: ButtonProps) {
+export function Button({ children, onClick, color = "#2b2b2b", backgroundColor = "#51F8C4", width = "90vw", size = "big", fontSize = "1rem", fontWeight = "700" }: ButtonProps) {
   const style: React.CSSProperties = {
     color: color,
     backgroundColor: backgroundColor,
-    width: size === "big" ? "90vw" : "50vw",
+    width: width,
     fontSize: fontSize,
     fontWeight: fontWeight,
     padding: "1rem 0",
@@ -23,5 +25,5 @@ export function Button({ children, color = "#2b2b2b", backgroundColor = "#51F8C4
     textAlign: "center",
     fontFamily: "Pretendard Variable",
   };
-  return <div style={style}>{children}</div>;
+  return <div onClick={onClick} style={style}>{children}</div>;
 }
