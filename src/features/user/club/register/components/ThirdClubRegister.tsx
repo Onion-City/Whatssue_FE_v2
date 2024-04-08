@@ -4,7 +4,7 @@ import { Button } from "@/components/atoms/button";
 import { Text } from "@/components/atoms/text";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { REGISTER_BTN, REGISTER_COMPLETE_ARR } from "../const";
+import { REGISTER_BTN, REGISTER_COMPLETE_ARR } from "../constants";
 import "./ThirdClubRegister.css";
 
 const ThirdClubRegister = () => {
