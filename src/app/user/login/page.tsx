@@ -1,7 +1,7 @@
-import UserLogin from "@/features/user/Login/UserLogin";
+import Login from "@/features/user/Login/Login";
 
-const UserLoginPage = () => {
-  return <UserLogin />;
+const UserLogin = () => {
+  return <Login />;
 };
 
-export default UserLoginPage;
+export default UserLogin;

@@ -1,0 +1,68 @@
+.account_info {
+  margin: 4.94rem 0.94rem 29.19rem 0.94rem;
+}
+
+.account_info__head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.62rem;
+}
+
+.account_info__title {
+  color: #fff;
+  font-family: "Pretendard Variable";
+  font-size: 1.0625rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.account_info__edit {
+  width: 2.125rem;
+  height: 1.25rem;
+  border-radius: 1.875rem;
+  background: #efefef;
+  padding: 0.28rem 0.56rem;
+  color: #5f5f5f;
+  font-family: "Pretendard Variable";
+  font-size: 0.5625rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.account_info__body {
+  display: flex;
+  height: 9rem;
+  flex-shrink: 0;
+  border-radius: 0.5625rem;
+  border: 1px solid #efefef;
+  background: #fff;
+  padding: 1.44rem 0 1.81rem 0.94rem;
+}
+
+.account_info__sub_title {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: fit-content;
+  color: #000;
+  font-family: "Pretendard Variable";
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-right: 1rem;
+}
+
+.account_info__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #5f5f5f;
+  font-family: "Pretendard Variable";
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
