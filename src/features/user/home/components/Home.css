@@ -1,0 +1,49 @@
+.home {
+  height: calc(100vh - 5.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 3rem;
+}
+
+.home__content__choice {
+  display: flex;
+  width: 100vw;
+  align-items: center;
+}
+.home__content__choice__box {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
+.home__content__choice__line_wrapper {
+  width: 100%;
+  display: flex;
+  margin-top: 0.37rem;
+}
+.home__content__choice__line {
+  width: 50%;
+  height: 0.125rem;
+  border: none;
+  transition: background-color 0.6s ease;
+}
+
+.home__content__floating {
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 5vw;
+}
+
+/* 미팅용 */
+.home__content__meeting {
+  width: 90vw;
+  margin-left: 0.94rem;
+  margin-right: 0.94rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  overflow-y: auto;
+}
