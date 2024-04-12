@@ -1,5 +1,5 @@
 import testimg from "@/assets/images/chiikyaw.png";
-import { Text } from "@/components/atoms/text";
+import { ChoiceBox } from "@/components/molecules/choiceBox/index";
 import { FloatingBox } from "@/components/molecules/floatingBox/FloatingBox";
 import { useState } from "react";
 import "./Home.css";
@@ -53,76 +53,49 @@ const Home = () => {
   const handleChoice = (e: number) => {
     setIsChoice(e);
   };
-  const leftColor = isChoice === 0 ? "#51F8C4" : "#989898";
-  const rightColor = isChoice === 1 ? "#51F8C4" : "#989898";
-
   return (
     <div className="home">
-      <div className="home__content">
-        <div className="home__content__choice">
-          <div
-            className="home__content__choice__box"
-            onClick={() => handleChoice(0)}
-          >
-            <Text color={leftColor} fontSize="0.9375rem" fontWeight="600">
-              모임
-            </Text>
-          </div>
-          <div
-            className="home__content__choice__box"
-            onClick={() => handleChoice(1)}
-          >
-            <Text color={rightColor} fontSize="0.9375rem" fontWeight="600">
-              신청한 모임
-            </Text>
-          </div>
-        </div>
-        <div className="home__content__choice__line_wrapper">
-          <hr
-            className="home__content__choice__line"
-            style={{ background: `${leftColor}` }}
-          />
-          <hr
-            className="home__content__choice__line"
-            style={{ background: `${rightColor}` }}
-          />
-        </div>
-      </div>
+      <ChoiceBox
+        textLeft="모임"
+        textRight="신청한 모임"
+        onClick={handleChoice}
+        isSelected={isChoice}
+      />
 
       <div className="home__content__meeting">
-  {isChoice === 0 && testArr.length === 0 && <HomeNoneContent />}
-  {isChoice === 0 && testArr.length > 0 && (
-    <>
-      {/* 모임 */}
-      {testArr.map((item, index) => (
-        <MeetingItem
-          key={index}
-          id={item.id}
-          title={item.title}
-          date={item.date}
-          member={item.member}
-          contentImg={item.contentImg}
-          tag={item.tag}
-        />
-      ))}
-    </>
-  )}
-  {isChoice !== 0 && testArr2.length === 0 && <HomeNoneContent />}
-  {isChoice !== 0 && testArr2.length > 0 && (
-    <>
-      {/* 신청한 모임 */}
-      {testArr2.map((item, index) => (
-        <RequestedMeetingItem
-          key={index}
-          id={item.id}
-          title={item.title}
-          date={item.date}
-          approval={item.approval}
-        />
-      ))}
-    </>
-  )}
-</div>
+        {isChoice === 0 && testArr.length === 0 && <HomeNoneContent />}
+        {isChoice === 0 && testArr.length > 0 && (
+          <>
+            {/* 모임 */}
+            {testArr.map((item, index) => (
+              <MeetingItem
+                key={index}
+                id={item.id}
+                title={item.title}
+                date={item.date}
+                member={item.member}
+                contentImg={item.contentImg}
+                tag={item.tag}
+              />
+            ))}
+          </>
+        )}
+        {isChoice !== 0 && testArr2.length === 0 && <HomeNoneContent />}
+        {isChoice !== 0 && testArr2.length > 0 && (
+          <>
+            {/* 신청한 모임 */}
+            {testArr2.map((item, index) => (
+              <RequestedMeetingItem
+                key={index}
+                id={item.id}
+                title={item.title}
+                date={item.date}
+                approval={item.approval}
+              />
+            ))}
+          </>
+        )}
+      </div>
 
       <div className="home__content__floating">
         <FloatingBox />

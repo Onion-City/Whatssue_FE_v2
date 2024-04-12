@@ -1,0 +1,10 @@
+.choice_box {
+  display: flex;
+  width: 100vw;
+  align-items: center;
+}
+.choice_box__line_wrapper {
+  width: 100%;
+  display: flex;
+  margin-top: 0.37rem;
+}
