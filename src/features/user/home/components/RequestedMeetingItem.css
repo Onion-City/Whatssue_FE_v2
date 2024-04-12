@@ -8,42 +8,25 @@
   border-radius: 0.625rem;
   background: #404040;
   white-space: nowrap;
-  
+
   height: 4.75rem;
   margin-top: 1.19rem;
 }
 .home__content__Requeste__left {
   display: flex;
   flex-direction: column;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
   overflow-x: hidden;
 }
 .home__content__Requeste__left_title {
-  color: #fff;
-  font-size: 0.9375rem;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   word-break: break-all;
 }
 .home__content__Requeste__left_date {
-  color: #b8b8b8;
-  font-size: 0.6875rem;
-  font-weight: 500;
-
   margin-top: 0.56rem;
 }
 .home__content__Requeste__right {
   display: flex;
-  color: #fff;
   text-align: right;
-  font-size: 0.8125rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
-.home__content__Requeste__right.refuse {
-  color: #f44;
 }

@@ -5,9 +5,16 @@ export interface TextProps {
   color?: string;
   fontSize?: string;
   fontWeight?: string;
+  className?: string;
 }
 
-export function Text({ children, color = "#000", fontSize = "1rem", fontWeight = "700" }: TextProps) {
+export function Text({
+  children,
+  color = "#000",
+  fontSize = "1rem",
+  fontWeight = "700",
+  className = "",
+}: TextProps) {
   const textStyle: React.CSSProperties = {
     color: color,
     fontSize: fontSize,
@@ -15,5 +22,9 @@ export function Text({ children, color = "#000", fontSize = "1rem", fontWeight =
     fontFamily: "Pretendard Variable",
   };
 
-  return <span style={textStyle}>{children}</span>;
+  return (
+    <span style={textStyle} className={className}>
+      {children}
+    </span>
+  );
 }

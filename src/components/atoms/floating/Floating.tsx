@@ -1,5 +1,6 @@
 "use client";
 import Image, { StaticImageData } from "next/image";
+import { Text } from "../text";
 import "./Floating.css";
 
 export interface FloatingProps {
@@ -29,7 +30,14 @@ export function Floating({
       onClick={onClick}
     >
       <Image src={img} alt={alt} className="floating__img" style={inStyle} />
-      <span className="floating__span">{text}</span>
+      <Text
+        color="#fff"
+        fontSize="1.0625rem"
+        fontWeight="500"
+        className="floating__span"
+      >
+        {text}
+      </Text>
     </div>
   );
 }
