@@ -1,4 +1,5 @@
 import Person from "@/assets/images/ic_person_gray.png";
+import { Text } from "@/components/atoms/text";
 import Image, { StaticImageData } from "next/image";
 import { useRouter } from "next/navigation";
 import "./MeetingItem.css";
@@ -38,13 +39,27 @@ const MeetingItem = ({
       onClick={() => handleRouteBoard(id)}
     >
       <div className="home__content__meeting__left">
-        <span className="home__content__meeting__left_title">{title}</span>
-        <span className="home__content__meeting__left_date">
+        <Text
+          color="#fff"
+          fontSize="1rem"
+          fontWeight="600"
+          className="home__content__meeting__left_title"
+        >
+          {title}
+        </Text>
+        <Text
+          color="#b8b8b8"
+          fontSize="0.6875rem"
+          fontWeight="500"
+          className="home__content__meeting__left_date"
+        >
           모임 가입일: {date}
-        </span>
+        </Text>
         <div className="home__content__meeting__left_bottom">
           <Image src={Person} alt="person" />
-          <label>{member} 명</label>
+          <Text color="#fff" fontSize="0.6875rem" fontWeight="500">
+            {member} 명
+          </Text>
           <div
             className="home__content__meeting__left_bottom_tag"
             style={tagStyle}

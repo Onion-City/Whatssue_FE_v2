@@ -12,24 +12,15 @@
     display: flex;
     flex-direction: column;
     margin-right: auto;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
     overflow-x: hidden;
   }
   .home__content__meeting__left_title {
-    color: #fff;
-    font-size: 1rem;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     word-break: break-all;
   }
   .home__content__meeting__left_date {
-    color: #b8b8b8;
-    font-size: 0.6875rem;
-    font-weight: 500;
-  
     margin-top: 0.56rem;
   }
   .home__content__meeting__left_bottom {
@@ -40,11 +31,7 @@
     width: 0.6875rem;
     height: 0.75rem;
   }
-  .home__content__meeting__left_bottom label {
-    color: #fff;
-    font-size: 0.6875rem;
-    font-weight: 500;
-  
+  .home__content__meeting__left_bottom span {
     margin-right: 0.81rem;
     margin-left: 0.41rem;
   }
@@ -52,11 +39,13 @@
     width: 2.625rem;
     height: 0.9375rem;
     border-radius: 1.875rem;
-    /* text-align: center; */
+    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.5625rem;
+    font-weight: 600;
+    font-family: "Pretendard Variable";
   }
   .home__content__meeting__right_img {
     width: 4.8125rem;
