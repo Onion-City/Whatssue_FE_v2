@@ -1,71 +1,47 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { forwardRef, useState } from "react";
+import { UseControllerProps, useController } from "react-hook-form";
+import "./input.css";
 
-export interface InputProps {
-  content?: string;
-  backgroundColor?: string;
-  color?: string;
-  size?: string;
-  height?: string;
-  fontSize?: string;
+export interface InputProps extends UseControllerProps{
+  placeholder?: string;
+  size?: 'sm' | 'md' | 'lg';
   maxCnt?: number;
-  name?: string;
 }
 
-export function Input({ backgroundColor = "#2B2B2B", color = "#fff", size = "big", height = "3.5rem", fontSize = "16px", content = "", maxCnt = 0, name }: InputProps) {
-  // const { register } = useFormContext();
-  const [isFocused, setIsFocused] = useState(false);
-  const [textCnt, setTextCnt] = useState(0);
-  const style: React.CSSProperties = {
-    backgroundColor: backgroundColor,
-    color: color,
-    width: size === "big" ? "90vw" : "50vw",
-    height: height,
-    fontSize: fontSize,
-    border: isFocused ? "none" : "1px solid #fff",
-    cursor: "pointer",
-    borderRadius: "10px",
-    padding: "0 1rem", 
-    outline: isFocused ? "1px solid #51F8C4" : "none",
-  };
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ control, size = "lg", placeholder = "", maxCnt = 0, name = '', ...props }, ref) => {
+    const [textCnt, setTextCnt] = useState(0);
+    const {
+      field,
+      fieldState: { error }
+    } = useController({ name, control });
 
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
+    const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setTextCnt(e.target.value.length);
+    }
 
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
-
-  const handleTextCnt = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTextCnt(e.target.value.length);
+    return (
+      <div className="input__wrapper">
+        <input 
+          ref={ref}
+          type="text"
+          className={`input ${size}`}
+          placeholder={placeholder}
+          onChange={field.onChange}
+          value={field.value || ''}
+          maxLength={maxCnt !== 0 ? maxCnt : undefined}
+          name={name}
+          {...props}
+        />
+        {maxCnt !== 0 && (
+          <p>
+            <span>{textCnt}</span>
+            <span>/{maxCnt}</span>
+          </p>
+        )}
+      </div>
+    );
   }
+);
 
-  return (
-    <InputWrapper>
-      <input 
-        type="text"
-        style={style}
-        placeholder={content}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        onChange={handleTextCnt}
-        maxLength={maxCnt}
-        name={name}
-        // {...register(name)}
-      />
-      {maxCnt !== 0 && <p>
-        <span>{textCnt}</span>
-        <span>/{maxCnt}</span>
-      </p>}
-    </InputWrapper>
-  );
-}
-
-export const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  text-align: right;
-  color: #fff;
-`;
+Input.displayName = "Input";
