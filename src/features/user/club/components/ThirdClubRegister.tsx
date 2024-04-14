@@ -2,6 +2,7 @@
 import chiikyaw from "@/assets/images/chiikyaw.png";
 import { Button } from "@/components/atoms/button";
 import { Text } from "@/components/atoms/text";
+import { Wrapper } from "@/components/organisms/Wrapper";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { REGISTER_BTN, REGISTER_COMPLETE_ARR } from "../constants";
@@ -10,7 +11,7 @@ import "./ThirdClubRegister.css";
 const ThirdClubRegister = () => {
     const router = useRouter();
     return(
-        <div className="register">
+        <Wrapper>
             <div className="register3__content">
                 <div className="register3__clubInfo">
                     <div className="register3_clubInfo__img">
@@ -37,10 +38,10 @@ const ThirdClubRegister = () => {
                 </div>
             </div>
             <div className="register3__rowBtn">
-                <Button backgroundColor="#404040" color="#fff" width="31.5vw" onClick={() => router.push("/")}>{REGISTER_BTN.home}</Button>
-                <Button width="54vw" onClick={() => router.push("/")}>{REGISTER_BTN.toClub}</Button>
+                <Button backgroundColor="#404040" color="#fff" size="sm" onClick={() => router.push("/")}>{REGISTER_BTN.home}</Button>
+                <Button size="md" onClick={() => router.push("/")}>{REGISTER_BTN.toClub}</Button>
             </div>
-        </div>
+        </Wrapper>
     );
 };
 
