@@ -4,7 +4,7 @@ import { ReactNode, useState } from "react";
 import "./FileUpload.css";
 
 export interface FileUploadProps {
-    children?: ReactNode;
+  children?: ReactNode;
 }
 
 export function FileUpload({ children }: FileUploadProps) {

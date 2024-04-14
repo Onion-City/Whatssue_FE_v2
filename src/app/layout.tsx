@@ -1,5 +1,5 @@
 "use client";
-import { HistoryHeader } from "@/components/organisms/Header";
+import { HistoryHeader, LogoHeader } from "@/components/organisms/Header";
 import { usePathname } from "next/navigation";
 import "./globals.css";
 
@@ -10,6 +10,10 @@ export default function RootLayout({
 }>) {
   const pathname = usePathname();
 
+  const logoHeaderList = [
+    "/"
+  ]
+
   const historyHeaderList = [
     "/user/onboarding",
     "/user/club"
@@ -18,6 +22,7 @@ export default function RootLayout({
     <html lang="kr">
       <body>
         {historyHeaderList.includes(pathname) && <HistoryHeader />}
+        {logoHeaderList.includes(pathname) && <LogoHeader />}
         {children}
       </body>
     </html>

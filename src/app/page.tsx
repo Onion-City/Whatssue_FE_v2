@@ -1,11 +1,13 @@
 "use client";
 import { Text } from "@/components/atoms/text";
+import SetupUserHome from "@/features/user/home/SetupUserHome";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
   const router = useRouter();
   return (
     <>
+      <SetupUserHome />;
       <div onClick={() => router.push("/user/club")}>
         <Text
           color="#fff"

@@ -1,0 +1,55 @@
+.home__content__meeting__box {
+    display: flex;
+    padding: 0.94rem 1rem 0.94rem 1.06rem;
+    width: 100%;
+    border-radius: 0.625rem;
+    background: #404040;
+  
+    height: 6.6875rem;
+    margin-top: 1.19rem;
+  }
+  .home__content__meeting__left {
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;
+    overflow-x: hidden;
+  }
+  .home__content__meeting__left_title {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+  }
+  .home__content__meeting__left_date {
+    margin-top: 0.56rem;
+  }
+  .home__content__meeting__left_bottom {
+    display: flex;
+    margin-top: auto;
+  }
+  .home__content__meeting__left_bottom img {
+    width: 0.6875rem;
+    height: 0.75rem;
+  }
+  .home__content__meeting__left_bottom span {
+    margin-right: 0.81rem;
+    margin-left: 0.41rem;
+  }
+  .home__content__meeting__left_bottom_tag {
+    width: 2.625rem;
+    height: 0.9375rem;
+    border-radius: 1.875rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.5625rem;
+    font-weight: 600;
+    font-family: "Pretendard Variable";
+  }
+  .home__content__meeting__right_img {
+    width: 4.8125rem;
+    height: 4.8125rem;
+    object-fit: contain;
+  }
+  
