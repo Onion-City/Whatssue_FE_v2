@@ -32,12 +32,12 @@ export function FileUpload({ children }: FileUploadProps) {
 
   return (
     <div className="fileUpload">
-      <div className="fileUpload__box">
-        {selectedImageList.length === 0 ? (
-          <>
-            <label htmlFor="first-upload-input">
-              <div className="fileUpload__box">
-                {/* <Image 
+        <div className="fileUpload__box">
+          {selectedImageList.length === 0 ? (
+            <>
+              <label htmlFor="first-upload-input">
+                <div className="fileUpload__box">
+                  {/* <Image 
                     src={AddPic} 
                     alt="pic"
                     className="fileUpload__box__img"
@@ -45,28 +45,28 @@ export function FileUpload({ children }: FileUploadProps) {
                     width={115}
                     height={115}
                   /> */}
-              </div>
-            </label>
-            <input
-              id="first-upload-input"
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              multiple
-            />
-          </>
-        ) : (
-          <div>
-            <Image
-              src={image?.url || ""}
-              alt="clubImg"
-              className="fileUpload__box__selectedImg"
-              width={115}
-              height={115}
-            />
-          </div>
-        )}
-      </div>
+                </div>
+              </label>
+              <input
+                id="first-upload-input"
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                multiple
+              />
+            </>
+          ) : (
+            <div>
+              <Image 
+                src={image?.url || ""} 
+                alt="clubImg"
+                className="fileUpload__box__selectedImg"
+                width={115}
+                height={115}
+              />
+            </div>
+          )}
+        </div>
     </div>
   );
 }

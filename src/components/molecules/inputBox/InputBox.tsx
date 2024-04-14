@@ -3,7 +3,11 @@ import { Input } from "@/components/atoms/input";
 import { Text } from "@/components/atoms/text";
 import { Textarea } from "@/components/atoms/textarea";
 import { Toggle } from "@/components/atoms/toggle";
+
+import { AuthBox } from "../authBox";
 import { ChipBox } from "../chipBox/ChipBox";
+
+import { FieldValues, useForm } from "react-hook-form";
 import "./InputBox.css";
 
 export interface InputBoxProps {
@@ -15,10 +19,14 @@ export interface InputBoxProps {
     name?: string;
 }
 export function InputBox ( {title, maxCnt, type, subtitle, essential, name}: InputBoxProps ) {
+    const {
+        control,
+    } = useForm<FieldValues>();
+
     let inputComponent;
     switch (type) {
         case "input":
-            inputComponent = <Input maxCnt={maxCnt} name={name}/>;
+            inputComponent = <Input maxCnt={maxCnt} name="name" control={control}/>;
             break;
         case "textarea":
             inputComponent = <Textarea maxCnt={maxCnt} />;
@@ -32,9 +40,12 @@ export function InputBox ( {title, maxCnt, type, subtitle, essential, name}: Inp
         case "fileUpload":
             inputComponent = <FileUpload />;
             break;
+        case "btnInput": 
+            inputComponent = <AuthBox />;
+            break;
         default:
             // default는 Input
-            inputComponent = <Input />;
+            inputComponent = <Input maxCnt={maxCnt} name="name" control={control}/>;
             break;
     }
     return (

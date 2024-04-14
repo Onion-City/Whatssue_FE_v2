@@ -2,12 +2,13 @@ import { Button } from "@/components/atoms/button";
 import { FileUpload } from "@/components/atoms/fileUpload";
 import { Text } from "@/components/atoms/text";
 import { InputBox } from "@/components/molecules/inputBox";
+import { Wrapper } from "@/components/organisms/Wrapper";
 import React from "react";
 import { ONBOARDING_BTN, ONBOARDING_INPUT_ARR } from "../constants/const";
 
 const RealnameOnboarding = () => {
     return (
-        <div className="register">
+        <Wrapper>
             <div className="register__content">
                 <div className="register__content__img">
                     <Text
@@ -33,7 +34,7 @@ const RealnameOnboarding = () => {
             <div className="register__btn">
                 <Button>{ONBOARDING_BTN}</Button>
             </div>
-        </div>
+        </Wrapper>
     )
 }
 

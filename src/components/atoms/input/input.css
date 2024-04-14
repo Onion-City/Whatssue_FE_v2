@@ -1,0 +1,44 @@
+.input__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    text-align: right;
+    color: #fff;
+}
+
+.input{
+    background-color: #2B2B2B;
+    color: #fff;
+    height: 3.5rem;
+    font-size: 16px;
+    border: 1px solid #fff;
+    outline: none;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 0 1rem;
+}
+
+input::-webkit-input-placeholder {
+    color: #767676;
+}
+
+input:-ms-input-placeholder {
+    color: #767676;
+}
+
+.input:focus {
+    border: none;
+    outline: 1px solid #51F8C4;
+}
+
+.input.sm {
+    width: 30vw;
+}
+
+.input.md {
+    width: 55vw;
+}
+
+.input.lg {
+    width: 90vw;
+}

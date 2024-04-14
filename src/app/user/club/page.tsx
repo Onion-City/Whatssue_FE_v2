@@ -1,4 +1,4 @@
-import SetupUserClub from "@/features/user/club/register/SetupUserClub";
+import SetupUserClub from "@/features/user/club/SetupUserClub";
 
 const UserClub = () => {
     // 모임 등록 페이지
