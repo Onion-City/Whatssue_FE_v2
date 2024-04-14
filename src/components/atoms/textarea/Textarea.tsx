@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { InputWrapper } from "../input/Input";
 
 export interface TextareaProps {
   content?: string;
@@ -41,7 +40,7 @@ export function Textarea({ backgroundColor = "#2B2B2B", color = "#fff", size = "
   }
 
   return (
-    <InputWrapper>
+    <div className="input__wrapper">
       <textarea 
         style={style} 
         placeholder={content}
@@ -54,6 +53,6 @@ export function Textarea({ backgroundColor = "#2B2B2B", color = "#fff", size = "
         <span>{textCnt}</span>
         <span>/{maxCnt}</span>
       </p>
-    </InputWrapper>
+    </div>
   );
 }
