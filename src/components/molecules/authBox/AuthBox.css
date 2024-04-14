@@ -1,0 +1,4 @@
+.signup__inputBox {
+    display: flex;
+    justify-content: space-between;
+}
