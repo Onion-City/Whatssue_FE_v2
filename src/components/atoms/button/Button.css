@@ -1,0 +1,19 @@
+.btn {
+    padding: 1rem 0;
+    cursor: pointer;
+    border-radius: 10px;
+    text-align: center;
+    font-family: "Pretendard Variable";
+}
+
+.btn.sm {
+    width: 30vw;
+}
+
+.btn.md {
+    width: 55vw;
+}
+
+.btn.lg {
+    width: 90vw;
+}

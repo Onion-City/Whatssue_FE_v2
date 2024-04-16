@@ -1,0 +1,18 @@
+.floating__box {
+  position: relative;
+}
+.floating__box__inner {
+  position: absolute;
+  bottom: 100%;
+  margin-bottom: 1.37rem;
+  opacity: 0;
+  transform: translateY(50%);
+  transition: all 0.3s ease-in-out;
+}
+.floating__box__inner.visible {
+  opacity: 1;
+  transform: translateY(0%);
+}
+.floating__box__inner div {
+  margin-top: 0.75rem;
+}

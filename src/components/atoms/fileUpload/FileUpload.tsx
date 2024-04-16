@@ -1,10 +1,10 @@
-import AddPic from "@/assets/images/AddPic.png";
+// import AddPic from "@/assets/images/AddPic.png";
 import Image from "next/image";
 import { ReactNode, useState } from "react";
 import "./FileUpload.css";
 
 export interface FileUploadProps {
-    children?: ReactNode;
+  children?: ReactNode;
 }
 
 export function FileUpload({ children }: FileUploadProps) {
@@ -37,14 +37,14 @@ export function FileUpload({ children }: FileUploadProps) {
             <>
               <label htmlFor="first-upload-input">
                 <div className="fileUpload__box">
-                  <Image 
+                  {/* <Image 
                     src={AddPic} 
                     alt="pic"
                     className="fileUpload__box__img"
                     placeholder="blur"
                     width={115}
                     height={115}
-                  />
+                  /> */}
                 </div>
               </label>
               <input

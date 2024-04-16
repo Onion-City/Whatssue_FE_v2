@@ -1,0 +1,33 @@
+.account_setting {
+  margin-left: 0.94rem;
+}
+
+.account_setting__logout {
+  color: #fff;
+  font-family: "Pretendard Variable";
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.account_setting__withdrawal {
+  color: #f44;
+  font-family: "Pretendard Variable";
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-top: 1.31rem;
+  margin-bottom: 1.31rem;
+}
+
+.account_setting__whatssue_ver {
+  color: #c7c7c7;
+  font-family: "Pretendard Variable";
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-bottom: 1.75rem;
+}

@@ -1,0 +1,11 @@
+.historyHeader {
+    display: flex;
+    width: 100vw;
+    align-items: center;
+    height: 5.5rem;
+    padding-left: 5vw;
+}
+
+.historyHeader__img {
+    object-fit: cover;
+}

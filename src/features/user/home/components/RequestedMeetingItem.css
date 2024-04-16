@@ -1,0 +1,32 @@
+.home__content__Requeste__box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 0.94rem;
+  padding-right: 1.06rem;
+  width: 100%;
+  border-radius: 0.625rem;
+  background: #404040;
+  white-space: nowrap;
+
+  height: 4.75rem;
+  margin-top: 1.19rem;
+}
+.home__content__Requeste__left {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+.home__content__Requeste__left_title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+.home__content__Requeste__left_date {
+  margin-top: 0.56rem;
+}
+.home__content__Requeste__right {
+  display: flex;
+  text-align: right;
+}

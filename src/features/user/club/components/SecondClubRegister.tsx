@@ -1,12 +1,13 @@
 import { Button } from "@/components/atoms/button";
 import { Step } from "@/components/atoms/steps";
 import { InputBox } from "@/components/molecules/inputBox";
+import { Wrapper } from "@/components/organisms/Wrapper";
 import { REGISTER_BTN, REGISTER_INPUT_ARR2 } from "../constants";
 import "./SecondClubRegister.css";
 
 const SecondClubRegister = ({nextClickHandler, prevClickHandler}: any) => {
     return(
-        <div className="register">
+        <Wrapper>
             <div className="register__content">
                 <Step currentStep={2}/>
                 {REGISTER_INPUT_ARR2.map((box, index) => (
@@ -21,10 +22,10 @@ const SecondClubRegister = ({nextClickHandler, prevClickHandler}: any) => {
                 ))}
             </div>
             <div className="register__rowBtn">
-                <Button backgroundColor="#404040" color="#fff" width="31.5vw" onClick={() => prevClickHandler('1')}>{REGISTER_BTN.prev}</Button>
-                <Button width="54vw" onClick={() => nextClickHandler('3')}>{REGISTER_BTN.complete}</Button>
+                <Button backgroundColor="#404040" color="#fff" size="sm" onClick={() => prevClickHandler('1')}>{REGISTER_BTN.prev}</Button>
+                <Button size="md" onClick={() => nextClickHandler('3')}>{REGISTER_BTN.complete}</Button>
             </div>
-        </div>
+        </Wrapper>
     );
 };
 

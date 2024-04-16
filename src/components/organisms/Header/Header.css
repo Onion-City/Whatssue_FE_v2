@@ -1,3 +1,5 @@
+/* historyHeader */
+
 .historyHeader {
     display: flex;
     width: 100vw;
@@ -8,4 +10,30 @@
 
 .historyHeader__img {
     object-fit: cover;
+    padding: 0;
+    margin: 0;
+}
+
+/* logoHeader */
+
+.logoHeader {
+    display: flex;
+    width: 100vw;
+    align-items: center;
+    height: 5.5rem;
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+.logoHeader img {
+    object-fit: contain;
+    height: 100%;
+    width: 1.8125rem;
+}
+/* .logoHeader__img__left {
+} */
+.logoHeader__img__right {
+    margin-left: auto;
+}
+.logoHeader__img__right img{
+    margin-left: 0.69rem;
 }

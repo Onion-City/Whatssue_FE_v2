@@ -1,0 +1,18 @@
+.home__content__none {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    height: 80%;
+  }
+  .home__content__none img {
+    width: 2.0625rem;
+    height: 2.0625rem;
+  }
+  .home__content_none_title {
+    margin-top: 1.19rem;
+    margin-bottom: 0.38rem;
+    color: #51f8c4;
+    font-size: 0.9375rem;
+  }
