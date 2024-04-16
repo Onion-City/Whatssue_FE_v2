@@ -30,3 +30,16 @@
     display: flex;
     gap: 0.25rem;
 }
+
+/* signupComplete */
+.signup__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90%;
+}
+
+.signup__text {
+    margin: 0.2rem 0;
+}

@@ -4,7 +4,7 @@
   height: 3.4375rem;
   position: relative;
   cursor: pointer;
-  user-select: none;
+  /* user-select: none; */
   border-radius: 50%;
   display: flex;
   align-items: center;

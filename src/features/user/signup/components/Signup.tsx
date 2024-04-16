@@ -1,12 +1,14 @@
 import { Button } from "@/components/atoms/button";
 import { InputBox } from "@/components/molecules/inputBox";
 import { Wrapper } from "@/components/organisms/Wrapper";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { SIGNUP_BTN, SIGNUP_INPUT_ARR } from "../constants";
 import { SignupHeader } from "./SignupHeader";
 // import "./NicknameOnboarding.css";
 
 const Signup = () => {
+    const router = useRouter();
     return (
         <Wrapper>
             <div>
@@ -23,7 +25,7 @@ const Signup = () => {
                 ))}
             </div>
             <div>
-                <Button>{SIGNUP_BTN.complete}</Button>
+                <Button onClick={() => router.push("/user/signup/complete")}>{SIGNUP_BTN.complete}</Button>
             </div>
         </Wrapper>
     )
