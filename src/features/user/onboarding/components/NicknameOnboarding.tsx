@@ -9,7 +9,7 @@ import "./NicknameOnboarding.css";
 
 const NicknameOnboarding = () => {
     return (
-        <Wrapper>
+        <Wrapper isHeader={true}>
             <div className="register__content">
                 <div className="register__content__img">
                     <Text

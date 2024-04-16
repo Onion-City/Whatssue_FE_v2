@@ -8,7 +8,7 @@ import { ONBOARDING_BTN, ONBOARDING_INPUT_ARR } from "../constants/const";
 
 const RealnameOnboarding = () => {
     return (
-        <Wrapper>
+        <Wrapper isHeader={true}>
             <div className="register__content">
                 <div className="register__content__img">
                     <Text

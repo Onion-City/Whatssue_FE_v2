@@ -14,7 +14,7 @@ export function FloatingBox() {
     setOn((prev) => !prev);
   };
   const handleRouteOnboarding = () => {
-    router.push("/user/onboarding");
+    router.push("/user/club");
   };
   const handleRouteJoin = () => {
     router.push("/user/code");

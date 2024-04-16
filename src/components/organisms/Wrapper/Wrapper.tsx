@@ -1,19 +1,9 @@
-import styled from "styled-components";
+import "./Wrapper.css";
 
-export const Wrapper = ({children}: any) => {
+export const Wrapper = ({children, isHeader}: any) => {
     return (
-        <Register>
+        <div className={`wrapper ${isHeader && "header"}`}>
             {children}
-        </Register>
+        </div>
     )
 }
-
-const Register = styled.div`
-    height: calc(100vh - 5.5rem);
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding-bottom: 3rem;
-`;

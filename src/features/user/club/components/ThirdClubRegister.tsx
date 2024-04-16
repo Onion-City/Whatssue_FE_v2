@@ -3,6 +3,7 @@ import chiikyaw from "@/assets/images/chiikyaw.png";
 import { Button } from "@/components/atoms/button";
 import { Text } from "@/components/atoms/text";
 import { Wrapper } from "@/components/organisms/Wrapper";
+
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { REGISTER_BTN, REGISTER_COMPLETE_ARR } from "../constants";
@@ -11,7 +12,7 @@ import "./ThirdClubRegister.css";
 const ThirdClubRegister = () => {
     const router = useRouter();
     return(
-        <Wrapper>
+        <Wrapper isHeader={true}>
             <div className="register3__content">
                 <div className="register3__clubInfo">
                     <div className="register3_clubInfo__img">
