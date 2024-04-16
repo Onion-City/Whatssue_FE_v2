@@ -26,4 +26,11 @@ export const SIGNUP_BTN = {
     checkNum: "인증번호 확인",
     retryNum: "재전송",
     complete: "회원 가입"
-}
+};
+
+export const SIGNUP_COMPLETE_TXT = [
+    "김준영님 환영합니다!",
+    "다양한 모임을 즐겨보세요!"
+];
+
+export const SIGNUP_COMPLETE_BTN = "왓슈 사용하기";

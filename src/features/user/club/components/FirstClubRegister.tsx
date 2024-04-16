@@ -7,7 +7,7 @@ import "./FirstClubRegister.css";
 
 const FirstClubRegister = ({nextClickHandler}: any) => {
     return(
-        <Wrapper>
+        <Wrapper isHeader={true}>
             <div className="register__content">
                 <Step currentStep={1}/>
                 {REGISTER_INPUT_ARR.map((box, index) => (

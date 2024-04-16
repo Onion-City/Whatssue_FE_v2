@@ -14,7 +14,5 @@ Default.args = {};
 export const Right = Template.bind({});
 Right.args = {
   size: "md",
-  content: "모임 이름을 입력해주세요",
-  backgroundColor: "#2B2B2B", 
-  color: "#fff"
+  placeholder: "모임 이름을 입력해주세요",
 };
