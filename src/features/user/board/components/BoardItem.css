@@ -1,0 +1,63 @@
+.board__item__box {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 5.5rem;
+  margin-top: 0.5rem;
+  border-bottom: 1px solid #4b4b4b;
+}
+.board__item__box__left {
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+  overflow-x: hidden;
+}
+.board__item__box__over__text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+}
+.board__item__box_content {
+  margin-top: 0.38rem;
+  margin-bottom: 0.31rem;
+}
+.board__item__box__left_bottom {
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+}
+.board__item__box__left_bottom_writer {
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+
+.board__item__box__left_bottom_writer img {
+  border-radius: 6.25rem;
+  width: 1.375rem;
+  height: 1.375rem;
+  margin-right: 0.56rem;
+}
+.board__item__box__left_bottom_add_info {
+  display: flex;
+  align-items: center;
+  margin-left: 0.75rem;
+}
+.board__item__box__left_bottom_add_info img {
+  margin-right: 0.25rem;
+}
+.board__item__box__left_bottom_comment img {
+  width: 0.625rem;
+  height: 0.625rem;
+}
+.board__item__box__left_bottom_hearts img {
+  width: 0.6875rem;
+  height: 0.5625rem;
+}
+.home__content__meeting__right_img {
+  width: 4.375rem;
+  height: 4.375rem;
+  border-radius: 0.3125rem;
+  object-fit: contain;
+}
