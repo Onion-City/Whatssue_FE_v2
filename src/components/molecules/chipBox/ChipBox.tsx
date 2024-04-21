@@ -1,3 +1,5 @@
+"use client";
+
 import { Chip } from "@/components/atoms/chip";
 import { REGISTER_CHIP_ARR } from "@/features/user/club/constants";
 import React, { useState } from "react";
