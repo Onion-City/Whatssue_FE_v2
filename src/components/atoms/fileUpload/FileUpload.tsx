@@ -1,3 +1,4 @@
+"use client";
 // import AddPic from "@/assets/images/AddPic.png";
 import Image from "next/image";
 import { ReactNode, useState } from "react";

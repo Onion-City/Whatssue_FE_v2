@@ -1,3 +1,5 @@
+"use client";
+
 import React, { forwardRef, useState } from "react";
 import { UseControllerProps, useController } from "react-hook-form";
 import "./input.css";

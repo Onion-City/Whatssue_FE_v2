@@ -10,3 +10,33 @@ export const ACCOUNT_SETTING = {
   withdrawal: "회원탈퇴",
   whatssueVer: "Whatssue ver 1.0.0",
 };
+
+export const EDIT_ACCOUNT_INFO = "계정 정보 수정";
+
+export const EDIT_ACCOUNT_INFO_INPUT_ARR = [
+    {
+        title: "이름",
+        type: "input",
+        essential: true,
+        name: "username"
+    },
+    {
+        title: "이메일",
+        type: "input",
+        essential: true,
+        name: "email"
+    },
+    {
+        title: "휴대폰 번호",
+        type: "btnInput",
+        essential: true,
+        name: "mobile"
+    }
+]
+
+export const EDIT_ACCOUNT_INFO_BTN = {
+  getNum: "인증번호 받기",
+  checkNum: "인증번호 확인",
+  retryNum: "재전송",
+  complete: "수정 완료"
+};
