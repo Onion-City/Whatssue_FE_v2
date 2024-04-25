@@ -1,8 +1,12 @@
+"use client";
+
 import "./AccountInfo.css";
 import { ACCOUNT_INFO } from "../constants/const";
 import { NAME } from "@/constants/const";
+import { useRouter } from "next/navigation";
 
 const AccountInfo = () => {
+  const router = useRouter();
   const name = "홍길동";
   const email = "whatshu@gamil.com";
   const phoneNum = "010-1234-5678";
@@ -11,7 +15,7 @@ const AccountInfo = () => {
     <div className="account_info">
       <div className="account_info__head">
         <span className="account_info__title">{ACCOUNT_INFO.title}</span>
-        <span className="account_info__edit">{ACCOUNT_INFO.edit}</span>
+        <span className="account_info__edit" onClick={() => router.push("/user/profile/edit")}>{ACCOUNT_INFO.edit}</span>
       </div>
 
       <div className="account_info__body">
