@@ -1,10 +1,10 @@
 "use client";
 import Board from "./components/Board";
 
-export default function SetupNoticeBoard() {
+export default function SetupFreeBoard() {
   return (
     <>
-      <Board boardType={"공지"} />
+      <Board boardType={"자유"} />
     </>
   );
 }

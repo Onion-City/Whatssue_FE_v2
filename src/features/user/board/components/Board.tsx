@@ -1,59 +1,50 @@
+"use client"; //set으로 만들고 해당을 제거
 import Plus from "@/assets/images/Plus.png";
 import { Floating } from "@/components/atoms/floating";
-import { ChoiceBox } from "@/components/molecules/choiceBox/index";
-import React, { useState } from "react";
-import { testArr, testArr2 } from "../constants/testArr/TestArr";
+import { Text } from "@/components/atoms/text";
+import React from "react";
+import { testArr } from "../constants/testArr/TestArr";
 import "./Board.css";
 import BoardItem from "./BoardItem";
 
-const Board = () => {
-  const [isChoice, setIsChoice] = useState(0); // 0 === 공지, 1 === 자유
-  const handleChoice = (e: number) => {
-    setIsChoice(e);
-  };
-  const [on, setOn] = useState(false);
+interface BoardProps {
+  boardType: string;
+}
+const Board = ({ boardType }: BoardProps) => {
+  const boardTypeAddress = boardType === "공지" ? "notice" : "free";
   const handleFloating = () => {
-    setOn((prev) => !prev);
+    // 글쓰기로 이동
   };
   const inPlusStyle: React.CSSProperties = {
     width: "1.625rem",
     height: "1.625rem",
-    transition: "all 0.4s ease",
-    transform: on ? "rotate(-45deg)" : "rotate(0deg)",
+    cursor: "pointer",
   };
   return (
-    <div className="home">
-      <ChoiceBox
-        textLeft="공지 게시판"
-        textRight="자유 게시판"
-        onClick={handleChoice}
-        isSelected={isChoice}
-      />
-
-      <div className="home__content__meeting">
-        {isChoice === 0 && testArr.length === 0 && <>1</>}
-        {isChoice === 0 && testArr.length > 0 && (
-          <>
-            {testArr.map((item, index) => (
-              <BoardItem
-                key={index}
-                id={item.id}
-                title={item.title}
-                content={item.content}
-                date={item.date}
-                contentImg={item.contentImg}
-                comment={item.comment}
-                hearts={item.hearts}
-                isHeart={item.isHeart}
-                writer={item.writer}
-              />
-            ))}
-          </>
-        )}
-        {isChoice !== 0 && testArr2.length === 0 && <>2</>}
-        {isChoice !== 0 && testArr2.length > 0 && <>{/* 신청한 모임 */}</>}
+    <div className="board">
+      <div className="board__content__list__top">
+        <Text color="#989898" fontSize="0.9375rem" fontWeight="600">
+          {boardType} 게시판
+        </Text>
       </div>
-      <div className="home__content__floating">
+      <div className="board__content__meeting">
+        {testArr.map((item, index) => (
+          <BoardItem
+            key={index}
+            boardAddress={boardTypeAddress}
+            id={item.id}
+            title={item.title}
+            content={item.content}
+            date={item.date}
+            contentImgs={item.contentImgs}
+            comment={item.comment}
+            hearts={item.hearts}
+            isHeart={item.isHeart}
+            writer={item.writer}
+          />
+        ))}
+      </div>
+      <div className="board__content__floating">
         <Floating
           backgroundColor="#51F8C4"
           img={Plus}

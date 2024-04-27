@@ -1,7 +1,7 @@
-import SetupUserBoard from "@/features/user/board/SetupUserBoard";
+import SetupUserBoardList from "@/features/user/board/SetupUserBoardList";
 
 const Board = () => {
-    return <SetupUserBoard />;
+    return <SetupUserBoardList />;
 }
 
 export default Board;

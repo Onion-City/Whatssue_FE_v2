@@ -2,40 +2,27 @@ import testimg from "@/assets/images/chiikyaw.png";
 import IconComment from "@/assets/images/ic_comment.png";
 import { Heart } from "@/components/atoms/heart/Heart";
 import { Text } from "@/components/atoms/text";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import "./BoardItem.css";
-export interface BoardItemProps {
-  id: number;
-  title: string;
-  content: string;
-  date: string;
-  comment: number;
-  hearts: number;
-  contentImg?: StaticImageData | null;
-
-  isHeart: boolean;
-  writer: {
-    profile: StaticImageData;
-    name: string;
-  };
-}
+import { BoardItemProps } from "./BoardItemProps";
 
 const BoardItem = ({
+  boardAddress,
   id,
   title,
   content,
   date,
   comment,
   hearts,
-  contentImg,
+  contentImgs,
   isHeart = false,
   writer: { profile = testimg, name },
 }: BoardItemProps) => {
   const router = useRouter();
   // 글 작성페이지로 이동
-  const handleRouteBoardDetail = (Board: number) => {
-    router.push(`/board/${Board}`);
+  const handleRouteBoardDetail = (BoardId: number) => {
+    router.push(`/board/${boardAddress}/${BoardId}`);
   };
 
   return (
@@ -88,9 +75,9 @@ const BoardItem = ({
           </div>
         </div>
       </div>
-      {contentImg && (
+      {contentImgs !== undefined && contentImgs.length > 0 && (
         <Image
-          src={contentImg}
+          src={contentImgs[0]}
           alt="contentImg"
           className="home__content__meeting__right_img"
         />
