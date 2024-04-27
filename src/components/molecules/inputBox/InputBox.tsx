@@ -9,6 +9,7 @@ import { ChipBox } from "../chipBox/ChipBox";
 
 import { FieldValues, useForm } from "react-hook-form";
 import "./InputBox.css";
+import { CodeInput } from "@/components/atoms/input/CodeInput";
 
 export interface InputBoxProps {
   title?: string;
@@ -32,6 +33,11 @@ export function InputBox({
   switch (type) {
     case "input":
       inputComponent = <Input maxCnt={maxCnt} name="name" control={control} />;
+      break;
+    case "numInput":
+      inputComponent = (
+        <CodeInput maxCnt={maxCnt} name="name" control={control} />
+      );
       break;
     case "textarea":
       inputComponent = <Textarea maxCnt={maxCnt} />;
