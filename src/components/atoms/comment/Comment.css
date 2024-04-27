@@ -1,0 +1,41 @@
+.comment__box {
+  display: flex;
+  align-items: center;
+}
+.comment__box__wrapper {
+  margin-top: 0.94rem;
+}
+.comment__box__is__reply img {
+  width: 0.875rem;
+  height: 0.9375rem;
+  margin-right: 0.69rem;
+  margin-left: 0.87rem;
+}
+.comment__box__profile {
+  display: flex;
+  align-items: center;
+}
+.comment__box__profile img {
+  width: 1.8125rem;
+  height: 1.8125rem;
+  border-radius: 6.25rem;
+}
+.comment__box__info {
+  margin-left: 0.63rem;
+  margin-top: 0.31rem;
+  margin-bottom: 0.31rem;
+  display: flex;
+  flex-direction: column;
+}
+.comment__box__edit {
+  margin-left: auto;
+}
+.comment__box__margin__left {
+  margin-left: 2.4125rem;
+}
+.comment__box__content {
+  margin-bottom: 0.31rem;
+}
+.comment__box__creat__reply {
+  cursor: pointer;
+}

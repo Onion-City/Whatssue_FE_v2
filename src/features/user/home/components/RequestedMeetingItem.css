@@ -1,16 +1,47 @@
+.home__content__Requeste__box_wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  width: 100%;
+  height: 4.75rem;
+  margin-top: 1.19rem;
+  border-radius: 0.625rem;
+  background: #404040;
+  overflow-x: hidden;
+}
+
+.home__content__swipe_box_wrapper {
+  position: absolute; /* 절대 위치 지정 */
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0 0.625rem 0.625rem 0;
+  background: #f44;
+  height: 100%;
+  width: 4rem;
+  transform: translateX(100%); /* 초기에는 보이지 않도록 왼쪽으로 이동 */
+  transition: transform 0.3s ease;
+}
+
+.home__content__swipe_box__select {
+  transform: translateX(0);
+}
 .home__content__Requeste__box {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  min-height: 100%;
   padding-left: 0.94rem;
   padding-right: 1.06rem;
-  width: 100%;
-  border-radius: 0.625rem;
-  background: #404040;
-  white-space: nowrap;
-
-  height: 4.75rem;
-  margin-top: 1.19rem;
+  overflow-x: hidden;
+  transition: transform 0.3s ease;
+}
+.home__content__Requeste__box__select {
+  transform: translateX(-4rem);
 }
 .home__content__Requeste__left {
   display: flex;
