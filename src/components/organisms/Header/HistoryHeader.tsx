@@ -9,14 +9,13 @@ export function HistoryHeader() {
   return (
     <header id="header">
       <div className="historyHeader">
-        <span className="historyHeader__img">
-          <Image
-            src={IMAGES.back}
-            alt="back"
-            placeholder="blur"
-            onClick={() => router.back()}
-          />
-        </span>
+        <Image
+          src={IMAGES.back}
+          alt="back"
+          placeholder="blur"
+          onClick={() => router.back()}
+          className="historyHeader__img"
+        />
       </div>
     </header>
   );

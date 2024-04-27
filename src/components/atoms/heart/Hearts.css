@@ -1,0 +1,11 @@
+.hearts {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  cursor: pointer;
+}
+.hearts img {
+  width: 1.0625rem;
+  height: 0.875rem;
+  margin-right: 0.19rem;
+}
