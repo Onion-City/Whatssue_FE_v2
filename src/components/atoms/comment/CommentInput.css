@@ -1,0 +1,32 @@
+.comment__input__wrapper {
+  background: #1b1b1b;
+  width: 100vw;
+  height: 4.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.comment__input {
+  position: relative;
+}
+.comment__input img {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2rem;
+  height: 2rem;
+}
+
+.comment__input input {
+  width: 95vw;
+  height: 2.75rem;
+  border-radius: 1.875rem;
+  background: #fff;
+  padding: 0.88rem 1.06rem;
+  outline: none;
+}
