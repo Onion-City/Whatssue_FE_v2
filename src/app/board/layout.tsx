@@ -1,5 +1,6 @@
 "use client";
 import { HistoryHeader } from "@/components/organisms/Header";
+import { Nav } from "@/components/organisms/Nav";
 
 export default function BoardLayout({
   children,
@@ -10,6 +11,7 @@ export default function BoardLayout({
     <form>
       <HistoryHeader />
       {children}
+      <Nav/>
     </form>
   );
 }
