@@ -17,7 +17,7 @@ export function FloatingBox() {
     router.push("/user/club");
   };
   const handleRouteJoin = () => {
-    router.push("/user/code");
+    router.push("/user/join");
   };
 
   const inPlusStyle: React.CSSProperties = {
@@ -38,22 +38,22 @@ export function FloatingBox() {
     <div className="floating__box">
       <div className={`floating__box__inner ${on ? "visible" : ""}`}>
         {/* {on && ( */}
-          <>
-            <Floating
-              img={Meeting}
-              alt="Meeting"
-              onClick={on ? handleRouteOnboarding : undefined}
-              inStyle={inMeetingStyle}
-              text="모임 생성하기"
-            />
-            <Floating
-              img={Lock}
-              alt="Lock"
-              onClick={on ? handleRouteJoin : undefined}
-              inStyle={inJoinStyle}
-              text="초대코드로 모임 가입"
-            />
-          </>
+        <>
+          <Floating
+            img={Meeting}
+            alt="Meeting"
+            onClick={on ? handleRouteOnboarding : undefined}
+            inStyle={inMeetingStyle}
+            text="모임 생성하기"
+          />
+          <Floating
+            img={Lock}
+            alt="Lock"
+            onClick={on ? handleRouteJoin : undefined}
+            inStyle={inJoinStyle}
+            text="초대코드로 모임 가입"
+          />
+        </>
         {/* )} */}
       </div>
       <Floating
