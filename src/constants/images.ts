@@ -4,10 +4,11 @@ export const IMAGES = {
   addPic: require("@/assets/images/AddPic.png"),
   loginKakao: require("@/assets/images/login_kakao_btn.png"),
   lockWhite: require("@/assets/images/ic_lock_white.png"),
+  attendance: require("@/assets/images/ic_attendance.png"),
 };
 
 export const ICONS = {
   down: require("@/assets/images/ic_down.png"),
   search: require("@/assets/images/ic_search.png"),
   calendar: require("@/assets/images/ic_calendar.png"),
-}
+};
