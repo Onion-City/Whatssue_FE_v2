@@ -1,4 +1,5 @@
-import SetupNoticeBoard from "@/features/user/board/SetupUserBoard";
+"use client";
+import SetupNoticeBoard from "@/features/board/SetupUserBoard";
 
 const NoticeBoard = () => {
     return <SetupNoticeBoard/>;

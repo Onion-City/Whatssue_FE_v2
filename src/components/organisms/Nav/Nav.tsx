@@ -43,7 +43,13 @@ export function Nav({ title, maxCnt, type, subtitle, essential }: NavProps) {
           onClick={() => handleNavigate(path)}
         >
           <Icon
-            fill={selectedPath === path ? "#fff" : "#989898"}
+            fill={
+              path === "atten"
+                ? "none"
+                : selectedPath === path
+                  ? "#fff"
+                  : "#989898"
+            }
             stroke={selectedPath === path ? "#fff" : "#989898"}
           />
           <Text

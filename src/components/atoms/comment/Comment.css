@@ -1,6 +1,7 @@
 .comment__box {
   display: flex;
   align-items: center;
+  width:fit-content;
 }
 .comment__box__wrapper {
   margin-top: 0.94rem;
