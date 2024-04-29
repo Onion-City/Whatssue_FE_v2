@@ -1,4 +1,4 @@
-import "./steps.css";
+import "./Steps.css";
 
 export interface StepProps {
   currentStep?: number;
