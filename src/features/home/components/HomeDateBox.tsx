@@ -5,7 +5,7 @@ import "./Home.css";
 interface HomeDateBoxProps {
     time: Date;
     title: string;
-    onClick: any;
+    onClick?: any;
 }
 
 const HomeDateBox = ({time, title, onClick}: HomeDateBoxProps) => {
