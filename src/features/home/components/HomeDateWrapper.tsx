@@ -22,7 +22,11 @@ const HomeDateWrapper = () => {
             time: new Date(),
             title: "백엔드 회의"
         },
-    ]
+    ];
+
+    const handleDatePage = (scheduleId: number) => {
+        router.push(`/1/calendar/${scheduleId}`)
+    }
     return (
         <div className="homeDateWrapper">
             <div className="homeDateWrapper__header">
@@ -31,17 +35,20 @@ const HomeDateWrapper = () => {
                     fontSize="1.0625rem"
                     fontWeight="700"
                 >2024년 3월 2일 월요일</Text>
-                <Text
-                    color="#fff"
-                    fontSize="0.6875rem"
-                    onClick={() => router.push('/1/calendar')}
-                >더보기</Text>
+                <span>
+                    <Text
+                        color="#fff"
+                        fontSize="0.6875rem"
+                        onClick={() => router.push('/1/calendar')}
+                    >더보기</Text>
+                </span>
             </div>
             {dateList?.map((date) => (
                 <React.Fragment key={date.id}>
                     <HomeDateBox
                         time={date.time}
                         title={date.title}
+                        onClick={() => handleDatePage(date.id)}
                     />
                 </React.Fragment>
             ))}

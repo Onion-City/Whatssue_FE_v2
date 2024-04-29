@@ -35,7 +35,11 @@ const CalendarList = () => {
             time: new Date(),
             title: "와이어프레임 작성 회의"
         },
-    ]
+    ];
+
+    const handleDatePage = (scheduleId: number) => {
+        router.push(`/1/calendar/${scheduleId}`)
+    }
     const renderDateList = (date: dateProps) => (
         <React.Fragment key={date.id}>
             <div className="homeDateWrapper__header">
@@ -45,13 +49,14 @@ const CalendarList = () => {
                     fontWeight="700"
                 >{formatDateKor(date.time)}</Text>
             </div>
-            {dateList?.map((item) => (
-                <HomeDateBox
-                    key={item.id}
-                    time={item.time}
-                    title={item.title}
-                    onClick={() => router.push('/1/calendar/1')}
-                />
+            {dateList?.map((date) => (
+                <React.Fragment key={date.id}>
+                    <HomeDateBox
+                        time={date.time}
+                        title={date.title}
+                        onClick={() => handleDatePage(date.id)}
+                    />
+                </React.Fragment>
             ))}
         </React.Fragment>
     );
