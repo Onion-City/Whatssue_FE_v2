@@ -3,6 +3,7 @@ export const IMAGES = {
   back: require("@/assets/images/Back_btn.png"),
   addPic: require("@/assets/images/AddPic.png"),
   loginKakao: require("@/assets/images/login_kakao_btn.png"),
+  lockWhite: require("@/assets/images/ic_lock_white.png"),
 };
 
 export const ICONS = {

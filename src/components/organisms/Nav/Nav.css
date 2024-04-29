@@ -1,0 +1,22 @@
+.Nav__wrapper {
+  width: 100vw;
+  height: 4.25rem;
+  border-radius: 1.25rem 1.25rem 0rem 0rem;
+  background: #1b1b1b;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  display: flex;
+  align-items: center;
+}
+.Nav__Icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.Nav__Icon svg {
+  width: 1.4375rem;
+  height: 1.37306rem;
+  margin-bottom: 0.53rem;
+}
