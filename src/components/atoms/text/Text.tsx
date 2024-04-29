@@ -6,6 +6,7 @@ export interface TextProps {
   fontSize?: string;
   fontWeight?: string;
   className?: string;
+  onClick?: any;
 }
 
 export function Text({
@@ -14,6 +15,7 @@ export function Text({
   fontSize = "1rem",
   fontWeight = "700",
   className = "",
+  onClick
 }: TextProps) {
   const textStyle: React.CSSProperties = {
     color: color,
@@ -23,7 +25,7 @@ export function Text({
   };
 
   return (
-    <span style={textStyle} className={className}>
+    <span style={textStyle} className={className} onClick={onClick}>
       {children}
     </span>
   );

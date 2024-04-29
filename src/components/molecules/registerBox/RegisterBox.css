@@ -1,0 +1,29 @@
+.registerBox {
+    display: flex;
+    align-items: center;
+
+    width: 90vw;
+    border: 1px solid #989898;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.registerBox span {
+    display: flex;
+    align-items: center;
+}
+
+.registerBox textarea::-webkit-scrollbar {
+    width: 5px;
+}
+
+.registerBox textarea::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #d9d9d9; /* 스크롤바의 색상 */
+    
+    border-radius: 10px;
+}
+
+.registerBox textarea::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);
+}
