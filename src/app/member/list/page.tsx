@@ -1,6 +1,5 @@
-"use client";
-import SetupRegisBoard from "@/features/board/SetupRegisBoard";
-
+import SetupRegisBoard from "@/features/user/board/SetupRegisBoard";
+//memberm list
 const RegisBoard = () => {
     return <SetupRegisBoard/>;
 }
