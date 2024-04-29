@@ -31,7 +31,7 @@ const MeetingItem = ({
 }: MeetingItemProps) => {
   const router = useRouter();
   const handleRouteBoard = (clubId: number) => {
-    router.push(`/home/${clubId}`);
+    router.push(`/${clubId}`);
   };
   return (
     <div

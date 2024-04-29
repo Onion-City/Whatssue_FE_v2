@@ -10,3 +10,44 @@ body {
   max-width: 100vw;
   background-color: #2B2B2B;
 }
+
+.wd-10 {
+  width: 10%;
+}
+.wd-20 {
+  width: 20%;
+}
+.wd-30 {
+  width: 30%;
+}
+.wd-40 {
+  width: 40%;
+}
+.wd-50 {
+  width: 50%;
+}
+.wd-60 {
+  width: 60%;
+}
+.wd-70 {
+  width: 70%;
+}
+.wd-80 {
+  width: 80%;
+}
+.wd-90 {
+  width: 90%;
+}
+.wd-100 {
+  width: 100%;
+}
+
+.align-lt {
+  text-align: left;
+}
+.align-cn {
+  text-align: center;
+}
+.align-rt {
+  text-align: right;
+}
