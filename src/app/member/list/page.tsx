@@ -1,7 +1,8 @@
-import SetupRegisBoard from "@/features/user/board/SetupRegisBoard";
+"use client";
+import SetupMemberList from "@/features/member/list/SetupMemberList";
 //memberm list
-const RegisBoard = () => {
-    return <SetupRegisBoard/>;
-}
+const MemberList = () => {
+  return <SetupMemberList />;
+};
 
-export default RegisBoard;
+export default MemberList;

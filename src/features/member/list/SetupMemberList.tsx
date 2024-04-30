@@ -1,8 +1,9 @@
-"use client";
+import MemberList from "./components/MemberList";
+
 export default function SetupMemberList() {
   return (
     <>
-      {/* memberList */}
+      <MemberList />
     </>
   );
 }

@@ -22,7 +22,7 @@
 }
 .image__modal__img__wrapper img {
   object-fit: contain;
-  width: 90vw;
+  width: 75vw;
   height: auto;
 }
 .image__modal__top {
@@ -30,7 +30,7 @@
   align-items: center;
   justify-content: center;
   padding: 0 5vw;
-  margin-top: 1rem;
+  margin-top: 2.31rem;
 }
 .image__modal__currentIndex {
   margin-left: auto;
@@ -42,9 +42,9 @@
 .image__modal__control {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
-  left: 0;
-  width: 100%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  width: 90vw;
   display: flex;
   justify-content: space-between;
 }

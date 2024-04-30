@@ -1,7 +1,7 @@
-import ImageModal from "@/components/atoms/ImageModal/ImageModal";
 import { Comment, CommentInput } from "@/components/atoms/comment/index";
 import { Heart } from "@/components/atoms/heart/Heart";
 import { Text } from "@/components/atoms/text";
+import { ImageModal } from "@/components/molecules/ImageModal";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
