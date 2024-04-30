@@ -1,5 +1,5 @@
 .react-calendar {
-    background-color: #171717;
+    background-color: #1B1B1B;
     border: none;
   }
 
@@ -13,9 +13,9 @@
 }
 
 .react-calendar__navigation button:enabled:hover{
-  color: #171717;
+  color: #1B1B1B;
     width: 15px;
-    background-color: #171717;
+    background-color: #1B1B1B;
     border-radius: 3px;
 }
 
