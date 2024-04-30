@@ -1,4 +1,5 @@
-import SetupFreeBoard from "@/features/user/board/SetupFreeBoard";
+"use client";
+import SetupFreeBoard from "@/features/board/SetupFreeBoard";
 
 const FreeBoard = () => {
     return <SetupFreeBoard />;

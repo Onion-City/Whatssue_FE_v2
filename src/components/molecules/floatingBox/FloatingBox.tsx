@@ -1,8 +1,6 @@
 "use client";
-import Plus from "@/assets/images/Plus.png";
-import Lock from "@/assets/images/ic_lock.png";
-import Meeting from "@/assets/images/ic_people.png";
 import { Floating } from "@/components/atoms/floating/index";
+import { ICONS } from "@/constants/images";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import "./FloatingBox.css";
@@ -17,7 +15,7 @@ export function FloatingBox() {
     router.push("/user/club");
   };
   const handleRouteJoin = () => {
-    router.push("/user/code");
+    router.push("/user/join");
   };
 
   const inPlusStyle: React.CSSProperties = {
@@ -38,27 +36,27 @@ export function FloatingBox() {
     <div className="floating__box">
       <div className={`floating__box__inner ${on ? "visible" : ""}`}>
         {/* {on && ( */}
-          <>
-            <Floating
-              img={Meeting}
-              alt="Meeting"
-              onClick={on ? handleRouteOnboarding : undefined}
-              inStyle={inMeetingStyle}
-              text="모임 생성하기"
-            />
-            <Floating
-              img={Lock}
-              alt="Lock"
-              onClick={on ? handleRouteJoin : undefined}
-              inStyle={inJoinStyle}
-              text="초대코드로 모임 가입"
-            />
-          </>
+        <>
+          <Floating
+            img={ICONS.floatingMeeting}
+            alt="Meeting"
+            onClick={on ? handleRouteOnboarding : undefined}
+            inStyle={inMeetingStyle}
+            text="모임 생성하기"
+          />
+          <Floating
+            img={ICONS.floatingLock}
+            alt="Lock"
+            onClick={on ? handleRouteJoin : undefined}
+            inStyle={inJoinStyle}
+            text="초대코드로 모임 가입"
+          />
+        </>
         {/* )} */}
       </div>
       <Floating
         backgroundColor="#51F8C4"
-        img={Plus}
+        img={ICONS.floatingPlus}
         alt="Plus"
         inStyle={inPlusStyle}
         onClick={handleFloating}

@@ -1,0 +1,16 @@
+.registerBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1.25rem 0;
+}
+
+.textBox {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.toggleBox {
+  margin-left: 1.06rem;
+}
