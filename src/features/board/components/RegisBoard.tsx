@@ -1,16 +1,23 @@
-import IconRemove from "@/assets/images/Plus.png";
-import IconImageUpload from "@/assets/images/ic_file_upload.png";
+import Iconfileupload from "@/assets/images/ic_file_upload.png";
+import { ICONS } from "@/constants/images";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import "./RegisBoard.css";
-
 export const RegisBoard = () => {
+  const pathname = usePathname();
+  const boardTypeAddress = pathname.split("/board/")[1].split("/")[0];
+  console.log(boardTypeAddress); //해당으로 글쓰기 타겟팅
   const [isInputTitle, setIsInputTitle] = useState<string>("");
   const [isInputContent, setIsInputContent] = useState<string>("");
   const [uploadImages, setUploadImages] = useState<{
     imageFiles: File[];
     imageUrls: string[];
   }>({ imageFiles: [], imageUrls: [] });
+  const fileUploadImgStyle: React.CSSProperties = {
+    width: "6.3875rem",
+    height: "6.3875rem",
+  };
 
   const handleOnChangeInputTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsInputTitle(e.target.value);
@@ -60,7 +67,11 @@ export const RegisBoard = () => {
       <div className="board__write__img">
         <div className="board__write__img__upload">
           <label htmlFor="file__input">
-            <Image src={IconImageUpload} alt="imageUpload" />
+            <Image
+              src={Iconfileupload}
+              alt="imageUpload"
+              style={fileUploadImgStyle}
+            />
           </label>
           <input
             id="file__input"
@@ -85,7 +96,7 @@ export const RegisBoard = () => {
                 className="board__write__maping__img__remove"
                 onClick={() => handleRemoveImage(index)}
               >
-                <Image src={IconRemove} alt="X" />
+                <Image src={ICONS.floatingPlus} alt="X" />
               </div>
             </div>
           ))}

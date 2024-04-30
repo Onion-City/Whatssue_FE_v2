@@ -1,0 +1,11 @@
+.member__profile__edit__content__img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.member__profile__edit__content__img span {
+  margin-bottom: 1.25rem;
+}
+.member__profile__edit__btn {
+  margin-top: auto;
+}

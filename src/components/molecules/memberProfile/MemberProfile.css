@@ -1,0 +1,38 @@
+.member__info__box__wrapper {
+  padding: 0 5vw;
+  width: 100%;
+}
+.member__info__box {
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #4b4b4b;
+}
+.member__info__box__inner {
+  display: flex;
+  align-items: center;
+}
+.member__profile {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+  object-fit: cover;
+}
+.member__manager__img {
+  margin-left: 0.37rem;
+  width: 0.875rem;
+  height: auto;
+}
+.member__point {
+  background: #fff;
+  margin-left: 0.44rem;
+  padding: 0.2rem;
+  text-align: center;
+}
+.member__point.me {
+  border-radius: 50%;
+}
+.member__point.menager {
+  border-radius: 1.875rem;
+}

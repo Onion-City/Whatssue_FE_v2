@@ -1,5 +1,5 @@
-import IconNewBoard from "@/assets/images/ic_new_board.png";
 import { Text } from "@/components/atoms/text";
+import { ICONS } from "@/constants/images";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { testArr } from "../constants/testArr/TestArr";
@@ -33,7 +33,7 @@ const BoardListBox = ({ boardType }: BoardListBoxProp) => {
         <Text color="#D9D9D9" fontSize="0.8125rem" fontWeight="600">
           {title}
         </Text>
-        <Image src={IconNewBoard} alt="new" />
+        <Image src={ICONS.newBoard} alt="new" />
       </div>
     );
   };

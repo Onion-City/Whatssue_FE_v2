@@ -9,16 +9,26 @@ export interface ToggleProps {
   backgroundColor?: string;
   size?: string;
   height?: string;
+  width?: string;
   fontSize?: string;
   content?: string;
 }
 
-export function Toggle({ children, color = "#2b2b2b", backgroundColor = "#51F8C4", size = "big", height = "3.5rem", fontSize = "16rem", content = "" }: ToggleProps) {
+export function Toggle({
+  children,
+  color = "#2b2b2b",
+  backgroundColor = "#51F8C4",
+  size = "big",
+  height = "2rem",
+  width = "4rem",
+  fontSize = "16rem",
+  content = "",
+}: ToggleProps) {
   const [on, setOn] = useState(false);
   const changeToggle = () => {
     setOn((prev) => !prev);
-  }
-  const toggleClassName = `toggle-btn ${on ? "on" : "off"}`
+  };
+  const toggleClassName = `toggle-btn ${on ? "on" : "off"}`;
 
   const inputStyle: React.CSSProperties = {
     border: "none",
@@ -28,15 +38,15 @@ export function Toggle({ children, color = "#2b2b2b", backgroundColor = "#51F8C4
     padding: "0px",
     position: "absolute",
     width: "1px",
-    whiteSpace: "nowrap"
+    whiteSpace: "nowrap",
   };
 
   const spanStyle: React.CSSProperties = {
     boxSizing: "initial",
     display: "inline-block",
     outline: "0",
-    width: "4rem",
-    height: "2rem",
+    width: width,
+    height: height,
     position: "relative",
     cursor: "pointer",
     userSelect: "none",
@@ -47,20 +57,20 @@ export function Toggle({ children, color = "#2b2b2b", backgroundColor = "#51F8C4
     border: "2px solid #e8eae9",
   };
   return (
-    <label aria-label={'Toggle'} style={{display: 'block'}}>
-        <input
-          className="toggle-input"
-          style={inputStyle}
-          type="checkbox"
-          checked={on}
+    <label aria-label={"Toggle"} style={{ display: "block" }}>
+      <input
+        className="toggle-input"
+        style={inputStyle}
+        type="checkbox"
+        checked={on}
         //   onChange={noop}
-          data-testid="toggle-input"
-        />
-        <span 
-          className={toggleClassName} 
-          style={spanStyle} 
-          onClick={changeToggle}
-        />
-      </label>
+        data-testid="toggle-input"
+      />
+      <span
+        className={toggleClassName}
+        style={spanStyle}
+        onClick={changeToggle}
+      />
+    </label>
   );
 }
