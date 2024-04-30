@@ -1,20 +1,18 @@
 "use client"; //set으로 만들고 해당을 제거
-import Plus from "@/assets/images/Plus.png";
 import { Floating } from "@/components/atoms/floating";
 import { Text } from "@/components/atoms/text";
+import { ICONS } from "@/constants/images";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { testArr } from "../constants/testArr/TestArr";
 import "./Board.css";
 import BoardItem from "./BoardItem";
 
-interface BoardProps {
-  boardType: string;
-}
-const Board = ({ boardType }: BoardProps) => {
-  const boardTypeAddress = boardType === "공지" ? "notice" : "free";
-  const handleFloating = () => {
-    // 글쓰기로 이동
-  };
+const Board = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const boardTypeAddress = pathname.split("/board/")[1];
+  const boardType = boardTypeAddress === "notice" ? "공지" : "자유";
   const inPlusStyle: React.CSSProperties = {
     width: "1.625rem",
     height: "1.625rem",
@@ -47,10 +45,10 @@ const Board = ({ boardType }: BoardProps) => {
       <div className="board__content__floating">
         <Floating
           backgroundColor="#51F8C4"
-          img={Plus}
+          img={ICONS.floatingPlus}
           alt="Plus"
           inStyle={inPlusStyle}
-          onClick={handleFloating}
+          onClick={() => router.push(`/board/${boardTypeAddress}/regis`)}
         />
       </div>
     </div>

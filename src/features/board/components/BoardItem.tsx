@@ -1,7 +1,7 @@
 import testimg from "@/assets/images/chiikyaw.png";
-import IconComment from "@/assets/images/ic_comment.png";
 import { Heart } from "@/components/atoms/heart/Heart";
 import { Text } from "@/components/atoms/text";
+import { ICONS } from "@/constants/images";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import "./BoardItem.css";
@@ -65,7 +65,7 @@ const BoardItem = ({
           </Text>
 
           <div className="board__item__box__left_bottom_comment board__item__box__left_bottom_add_info">
-            <Image src={IconComment} alt="comment" />
+            <Image src={ICONS.comment} alt="comment" />
             <Text color="#fff" fontSize="0.6875rem" fontWeight="500">
               {comment}
             </Text>
