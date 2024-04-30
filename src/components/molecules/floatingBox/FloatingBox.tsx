@@ -1,8 +1,6 @@
 "use client";
-import Plus from "@/assets/images/Plus.png";
-import Lock from "@/assets/images/ic_lock.png";
-import Meeting from "@/assets/images/ic_people.png";
 import { Floating } from "@/components/atoms/floating/index";
+import { ICONS } from "@/constants/images";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import "./FloatingBox.css";
@@ -40,14 +38,14 @@ export function FloatingBox() {
         {/* {on && ( */}
         <>
           <Floating
-            img={Meeting}
+            img={ICONS.floatingMeeting}
             alt="Meeting"
             onClick={on ? handleRouteOnboarding : undefined}
             inStyle={inMeetingStyle}
             text="모임 생성하기"
           />
           <Floating
-            img={Lock}
+            img={ICONS.floatingLock}
             alt="Lock"
             onClick={on ? handleRouteJoin : undefined}
             inStyle={inJoinStyle}
@@ -58,7 +56,7 @@ export function FloatingBox() {
       </div>
       <Floating
         backgroundColor="#51F8C4"
-        img={Plus}
+        img={ICONS.floatingPlus}
         alt="Plus"
         inStyle={inPlusStyle}
         onClick={handleFloating}
