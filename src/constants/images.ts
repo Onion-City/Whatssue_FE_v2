@@ -4,6 +4,9 @@ export const IMAGES = {
   addPic: require("@/assets/images/AddPic.png"),
   loginKakao: require("@/assets/images/login_kakao_btn.png"),
   lockWhite: require("@/assets/images/ic_lock_white.png"),
+  attendance: require("@/assets/images/ic_attendance.png"),
+  close: require("@/assets/images/btn_close.png"),
+  link: require("@/assets/images/btn_link.png"),
 };
 
 export const ICONS = {
@@ -24,7 +27,6 @@ export const ICONS = {
   newBoard: require("@/assets/images/ic_new_board.png"),
   comment: require("@/assets/images/ic_comment.png"),
 
-
   heartColor: require("@/assets/images/ic_heartColor.png"),
   heartNone: require("@/assets/images/ic_heartWhite.png"),
 };
@@ -42,4 +44,3 @@ export const NavIcons = {
   member: memberIcon,
   more: moreIcon,
 };
-
