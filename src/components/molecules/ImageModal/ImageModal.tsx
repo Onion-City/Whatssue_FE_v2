@@ -1,14 +1,15 @@
+import { Arrow } from "@/components/atoms/arrow";
+import { Text } from "@/components/atoms/text";
 import _ from "lodash";
 import Image, { StaticImageData } from "next/image";
 import { useState } from "react";
-import { Text } from "../text";
 import "./ImageModal.css";
 interface ImageModalProps {
   imageList: StaticImageData[];
   clickIndex: number;
   onClose: () => void;
 }
-const ImageModal = ({ imageList, clickIndex, onClose }: ImageModalProps) => {
+export const ImageModal = ({ imageList, clickIndex, onClose }: ImageModalProps) => {
   const [currentIndex, setCurrentIndex] = useState<number>(clickIndex);
   const [startX, setStartX] = useState<number>(0);
 
@@ -19,9 +20,9 @@ const ImageModal = ({ imageList, clickIndex, onClose }: ImageModalProps) => {
   const handleSwipe = (endX: number) => {
     const diffX = startX - endX;
     if (diffX > 50) {
-      handleNext();
+      handlePrevNext(-1);
     } else if (diffX < -50) {
-      handlePrev();
+      handlePrevNext(1);
     }
   };
   const debouncedSwipe = _.debounce(handleSwipe, 300);
@@ -29,16 +30,9 @@ const ImageModal = ({ imageList, clickIndex, onClose }: ImageModalProps) => {
   const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
     debouncedSwipe(e.touches[0].pageX);
   };
-  const handlePrev = () => {
-    // 이전 이미지로 이동
-    const prevIndex = currentIndex - 1;
-    if (prevIndex >= 0) setCurrentIndex(prevIndex);
-  };
-
-  const handleNext = () => {
-    // 다음 이미지로 이동
-    const nextIndex = currentIndex + 1;
-    if (nextIndex < imageList.length) setCurrentIndex(nextIndex);
+  const handlePrevNext = (delta: number) => {
+    const newIndex = currentIndex + delta;
+    if (newIndex >= 0 && newIndex < imageList.length) setCurrentIndex(newIndex);
   };
 
   return (
@@ -50,14 +44,14 @@ const ImageModal = ({ imageList, clickIndex, onClose }: ImageModalProps) => {
       <div className="image__modal__top">
         <Text
           color="#fff"
-          fontSize="2rem"
-          fontWeight="700"
+          fontSize="1.0625rem"
+          fontWeight="600"
           className="image__modal__currentIndex"
         >
           {currentIndex + 1}/{imageList.length}
         </Text>
         <div className="image__modal__close" onClick={onClose}>
-          <Text color="#fff" fontSize="2rem" fontWeight="700">
+          <Text color="#fff" fontSize="1.0625rem" fontWeight="600">
             X
           </Text>
         </div>
@@ -70,17 +64,8 @@ const ImageModal = ({ imageList, clickIndex, onClose }: ImageModalProps) => {
             className="image__modal__image"
           />
           <div className="image__modal__control">
-            <div onClick={handlePrev}>
-              <Text color="#404040" fontSize="2rem" fontWeight="700">
-                {"<"}
-              </Text>
-            </div>
-
-            <div onClick={handleNext}>
-              <Text color="#404040" fontSize="2rem" fontWeight="700">
-                {">"}
-              </Text>
-            </div>
+            <Arrow onClick={() => handlePrevNext(-1)} isLeft={true} />
+            <Arrow onClick={() => handlePrevNext(1)} />
           </div>
         </div>
       </div>
@@ -88,4 +73,3 @@ const ImageModal = ({ imageList, clickIndex, onClose }: ImageModalProps) => {
   );
 };
 
-export default ImageModal;
