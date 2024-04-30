@@ -5,6 +5,8 @@ export const IMAGES = {
   loginKakao: require("@/assets/images/login_kakao_btn.png"),
   lockWhite: require("@/assets/images/ic_lock_white.png"),
   attendance: require("@/assets/images/ic_attendance.png"),
+  close: require("@/assets/images/btn_close.png"),
+  link: require("@/assets/images/btn_link.png"),
 };
 
 export const ICONS = {

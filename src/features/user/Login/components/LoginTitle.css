@@ -5,13 +5,8 @@
 }
 
 .login__slogan {
-  color: #fff;
-  text-align: center;
-  font-family: "Pretendard Variable";
-  font-size: 0.9375rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .login_logo {
