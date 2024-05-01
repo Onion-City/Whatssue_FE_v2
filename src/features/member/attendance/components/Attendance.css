@@ -1,0 +1,88 @@
+.attendance_empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 16.06rem auto 21rem auto;
+}
+
+.attendance__icon {
+  display: flex;
+  width: 2.28538rem;
+  height: 2.375rem;
+  flex-shrink: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.no__attendance {
+  text-align: center;
+  margin-top: 1.31rem;
+}
+
+.attendance {
+  display: flex;
+  flex-direction: column;
+}
+
+.attendance__close {
+  width: 0.9375rem;
+  height: 0.9375rem;
+  flex-shrink: 0;
+  margin: 2.56rem 0.94rem 9.94rem auto;
+}
+
+.attendance__club {
+  text-align: center;
+  margin-top: 1.19rem;
+  margin-bottom: 2.56rem;
+}
+
+.attendance__code {
+  display: flex;
+  flex-direction: row;
+  width: 13.13rem;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1.19rem;
+}
+
+.attendance__enter {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.attendance_item {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  height: 7.125rem;
+  border-radius: 0.625rem;
+  background: #404040;
+  padding: 0.81rem 0.62rem 1.19rem 0.94rem;
+  margin: 1rem 0.94rem 1rem 0.94rem;
+}
+
+.attendance_item__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.attendance_item__status {
+  width: 3.4375rem;
+  height: 1.3125rem;
+  border-radius: 3.125rem;
+  background: #51f8c4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.attendance_item__date {
+  margin-right: 0.87rem;
+}
+
+.attendance_item__link {
+  margin: auto 0 auto auto;
+}
