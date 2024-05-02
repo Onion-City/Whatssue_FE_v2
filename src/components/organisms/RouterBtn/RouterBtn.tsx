@@ -10,7 +10,7 @@ interface routerBtnProps {
 export const RouterBtn = ({path, onClick, children}: routerBtnProps) => {
     const router = useRouter();
     const handleRouter = () => {
-        onClick();
+        onClick && onClick();
         router.push(path);
     }
     return (
