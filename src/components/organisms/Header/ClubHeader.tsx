@@ -1,7 +1,7 @@
 "use client";
 import Alarm from "@/assets/images/ic_alarm.png";
 import { Text } from "@/components/atoms/text";
-import { SelectClubBox } from "@/components/molecules/selectClubBox/SelectClubBox";
+import { BottomSheet } from "@/components/organisms/BottomSheet/BottomSheet";
 import { ICONS, IMAGES } from "@/constants/images";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -44,7 +44,7 @@ export function ClubHeader() {
 
         {
           openFloating && (
-            <SelectClubBox 
+            <BottomSheet 
               // openFloating={openFloating}
               setOpenFloating={setOpenFloating}
             />

@@ -51,3 +51,8 @@
     display: flex;
     align-items: center;
 }
+
+.homeDateBox__attend {
+    display: flex;
+    justify-content: flex-end;
+}

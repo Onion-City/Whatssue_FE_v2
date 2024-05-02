@@ -1,8 +1,9 @@
 import { Text } from "@/components/atoms/text";
+import { ScheduleBox } from "@/components/molecules/scheduleBox";
+import { RouterBtn } from "@/components/organisms/RouterBtn/RouterBtn";
 import { useRouter } from "next/navigation";
 import React from "react";
 import "./Home.css";
-import HomeDateBox from "./HomeDateBox";
 
 const HomeDateWrapper = () => {
     const router = useRouter();
@@ -35,21 +36,25 @@ const HomeDateWrapper = () => {
                     fontSize="1.0625rem"
                     fontWeight="700"
                 >2024년 3월 2일 월요일</Text>
-                <span>
+                <RouterBtn
+                    path="/1/calendar"
+                >
                     <Text
                         color="#fff"
                         fontSize="0.6875rem"
-                        onClick={() => router.push('/1/calendar')}
                     >더보기</Text>
-                </span>
+                </RouterBtn>
             </div>
             {dateList?.map((date) => (
                 <React.Fragment key={date.id}>
-                    <HomeDateBox
-                        time={date.time}
-                        title={date.title}
-                        onClick={() => handleDatePage(date.id)}
-                    />
+                    <RouterBtn
+                        path={`/1/calendar/${date.id}`}
+                    >
+                        <ScheduleBox
+                            time={date.time}
+                            title={date.title}
+                        />
+                    </RouterBtn>
                 </React.Fragment>
             ))}
         </div>

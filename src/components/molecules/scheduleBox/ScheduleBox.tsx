@@ -1,39 +1,38 @@
 import { Text } from "@/components/atoms/text";
+import { COLORS } from "@/styles";
 import { formatTime } from "@/utils/date";
-import "./Home.css";
+import "./ScheduleBox.css";
 
-interface HomeDateBoxProps {
+interface ScheduleBoxProps {
     time: Date;
     title: string;
     onClick?: any;
 }
 
-const HomeDateBox = ({time, title, onClick}: HomeDateBoxProps) => {
+export const ScheduleBox = ({time, title}: ScheduleBoxProps) => {
     return (
-        <div className="homeDateBox" onClick={onClick}>
-            <div className="homeDateBox__content">
+        <div className="scheduleBox">
+            <div className="scheduleBox__content">
                 <span className="wd-30">
                     <Text
-                        color="#d9d9d9"
+                        color={COLORS.whitegrey}
                         fontSize="0.8125rem"
                     >{formatTime(time)}</Text>
                 </span>
                 <span className="wd-50">
                     <Text
-                        color="#fff"
+                        color={COLORS.white}
                         fontSize="0.9375rem"
                         fontWeight="700"
                     >{title}</Text>
                 </span>
             </div>
-            <span className="homeDateBox__attend wd-20">
+            <span className="scheduleBox__attend wd-20">
                 <Text
-                    color="#d9d9d9"
+                    color={COLORS.whitegrey}
                     fontSize="0.8125rem"
                 >출석중</Text>
             </span>
         </div>
     )
 };
-
-export default HomeDateBox;
