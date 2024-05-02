@@ -1,4 +1,14 @@
-export const dummyList = [
+export const currentAttendanceList = [
+  {
+    id: 1,
+    status: "진행중",
+    title: "와이어 프레임 작성 회의",
+    date: "2024년 3월 2일 월요일",
+    time: "11:00 AM",
+  },
+];
+
+export const todayScheduleList = [
   {
     id: 1,
     status: "출석 완료",
@@ -8,7 +18,7 @@ export const dummyList = [
   },
   {
     id: 2,
-    status: "출석 전",
+    status: "미출석",
     title: "와이어 프레임 작성 회의",
     date: "2024년 3월 2일 월요일",
     time: "11:00 AM",

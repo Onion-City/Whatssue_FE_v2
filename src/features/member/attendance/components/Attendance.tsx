@@ -4,9 +4,11 @@ import "./Attendance.css";
 import { Button } from "@/components/atoms/button";
 import Image from "next/image";
 import { IMAGES } from "@/constants/images";
+import { ATTEND_BTN } from "../constants/const";
 
 const Attendance = () => {
   const ClubName = "코딩하는 도토리";
+
   return (
     // <Wrapper isHeader={true}>
     <div className="attendance">
@@ -29,7 +31,7 @@ const Attendance = () => {
       </div>
 
       <div className="attendance__enter">
-        <Button>출석하기</Button>
+        <Button>{ATTEND_BTN}</Button>
       </div>
     </div>
     // </Wrapper>
