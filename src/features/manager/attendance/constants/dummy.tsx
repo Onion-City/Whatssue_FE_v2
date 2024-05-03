@@ -31,3 +31,66 @@ export const todayScheduleList = [
     time: "11:00 AM",
   },
 ];
+
+export const attendanceStatusDummy = [
+  {
+    id: 1,
+    name: "김민수",
+    status: "출석",
+  },
+  {
+    id: 2,
+    name: "김민수",
+    status: "결석",
+  },
+  {
+    id: 3,
+    name: "김민수",
+    status: "공결",
+  },
+  {
+    id: 4,
+    name: "김민수",
+    status: "출석",
+  },
+  {
+    id: 5,
+    name: "김민수",
+    status: "결석",
+  },
+  {
+    id: 6,
+    name: "김민수",
+    status: "출석",
+  },
+  {
+    id: 7,
+    name: "김민수",
+    status: "공결",
+  },
+  {
+    id: 8,
+    name: "김민수",
+    status: "결석",
+  },
+  {
+    id: 9,
+    name: "김민수",
+    status: "출석",
+  },
+  {
+    id: 10,
+    name: "김민수",
+    status: "출석",
+  },
+  {
+    id: 11,
+    name: "김민수",
+    status: "결석",
+  },
+  {
+    id: 12,
+    name: "김민수",
+    status: "출석",
+  },
+];
