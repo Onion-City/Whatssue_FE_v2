@@ -1,8 +1,8 @@
 import { CURRENT_ATTENDANCE_TITLE } from "../constants/const";
-import AttendanceItem from "@/components/molecules/attendanceBox/AttendanceItem";
 import { currentAttendanceList } from "../constants/dummy";
 import { Text } from "@/components/atoms/text";
 import "./Attendance.css";
+import AttendanceItem from "@/components/molecules/attendanceItem/AttendanceItem";
 
 const CurrentAttendance = () => {
   return (

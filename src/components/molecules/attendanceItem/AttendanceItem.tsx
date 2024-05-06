@@ -17,7 +17,11 @@ const AttendanceItem = ({
 }: AttendanceItemProps) => {
   const router = useRouter();
   const handleRouteAttendance = (AttendanceId: number) => {
-    router.push(`/${attendanceAddress}/attendance`);
+    if (attendanceAddress === "manager") {
+      router.push("/manager/attendance/status");
+    } else {
+      router.push(`/${attendanceAddress}/attendance`);
+    }
   };
 
   return (
