@@ -1,5 +1,5 @@
 import { dummyList } from "../constants/dummy";
-import AttendanceItem from "../../../../components/molecules/attendanceBox/AttendanceItem";
+import AttendanceItem from "../../../../components/molecules/attendanceItem/AttendanceItem";
 
 const AttendanceList = () => {
   return (

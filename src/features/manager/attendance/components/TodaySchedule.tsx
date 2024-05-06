@@ -1,5 +1,5 @@
 import { TODAY_SCHEDULE_TITLE } from "../constants/const";
-import AttendanceItem from "@/components/molecules/attendanceBox/AttendanceItem";
+import AttendanceItem from "@/components/molecules/attendanceItem/AttendanceItem";
 import { todayScheduleList } from "../constants/dummy";
 import { Text } from "@/components/atoms/text";
 import "./Attendance.css";
