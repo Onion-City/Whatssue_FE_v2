@@ -1,5 +1,7 @@
 "use client";
 import { Text } from "@/components/atoms/text";
+import { DateBox } from "@/components/molecules/dateBox";
+import { ScheduleBox } from "@/components/molecules/scheduleBox";
 import { formatDateKor } from "@/utils/date";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -67,7 +69,30 @@ const CalendarList = () => {
 
     return (
         <div className="homeDateWrapper">
-            {dateList.map((date) => renderDateList(date))}
+            <DateBox
+                date={new Date()}
+            >
+                {dateList.map((date) => (
+                    <React.Fragment key={date.id}>
+                        <ScheduleBox 
+                            time={date.time}
+                            title={date.title}
+                        />
+                    </React.Fragment>
+                ))}
+            </DateBox>
+            <DateBox
+                date={new Date()}
+            >
+                {dateList.map((date) => (
+                    <React.Fragment key={date.id}>
+                        <ScheduleBox 
+                            time={date.time}
+                            title={date.title}
+                        />
+                    </React.Fragment>
+                ))}
+            </DateBox>
         </div>
     );
 };

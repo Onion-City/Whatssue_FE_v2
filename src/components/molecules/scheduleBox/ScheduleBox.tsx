@@ -13,13 +13,13 @@ export const ScheduleBox = ({time, title}: ScheduleBoxProps) => {
     return (
         <div className="scheduleBox">
             <div className="scheduleBox__content">
-                <span className="wd-30">
+                <span>
                     <Text
                         color={COLORS.whitegrey}
                         fontSize="0.8125rem"
                     >{formatTime(time)}</Text>
                 </span>
-                <span className="wd-50">
+                <span>
                     <Text
                         color={COLORS.white}
                         fontSize="0.9375rem"
