@@ -21,6 +21,8 @@ export const ICONS = {
   phoneNumber: require("@/assets/images/ic_phone_number.png"),
   emailAddress: require("@/assets/images/ic_email_address.png"),
   arrowRight: require("@/assets/images/ic_arrow_right.png"),
+  back: require("@/assets/images/ic_back.png"),
+  filter: require("@/assets/images/ic_filter.png"),
 
   floatingPlus: require("@/assets/images/Plus.png"),
   floatingLock: require("@/assets/images/ic_lock.png"),

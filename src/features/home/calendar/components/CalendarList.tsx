@@ -6,7 +6,7 @@ import React from "react";
 import HomeDateBox from "../../components/HomeDateBox";
 import "./Calendar.css";
 
-interface dateProps {
+export interface dateProps {
     id: number;
     time: Date;
     title: string;
@@ -49,15 +49,17 @@ const CalendarList = () => {
                     fontWeight="700"
                 >{formatDateKor(date.time)}</Text>
             </div>
-            {dateList?.map((date) => (
-                <React.Fragment key={date.id}>
-                    <HomeDateBox
-                        time={date.time}
-                        title={date.title}
-                        onClick={() => handleDatePage(date.id)}
-                    />
-                </React.Fragment>
-            ))}
+            <div className="homeDateWrapper__body">
+                {dateList?.map((date) => (
+                    <React.Fragment key={date.id}>
+                        <HomeDateBox
+                            time={date.time}
+                            title={date.title}
+                            onClick={() => handleDatePage(date.id)}
+                        />
+                    </React.Fragment>
+                ))}
+            </div>
         </React.Fragment>
     );
 

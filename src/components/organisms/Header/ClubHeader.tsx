@@ -1,11 +1,13 @@
 "use client";
 import Alarm from "@/assets/images/ic_alarm.png";
 import { Text } from "@/components/atoms/text";
+import { ClubBox } from "@/components/molecules/clubBox";
 import { BottomSheet } from "@/components/organisms/BottomSheet/BottomSheet";
 import { ICONS, IMAGES } from "@/constants/images";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import React, { useState } from "react";
+import { RouterBtn } from "../RouterBtn/RouterBtn";
 import "./Header.css";
 
 export function ClubHeader() {
@@ -14,6 +16,20 @@ export function ClubHeader() {
   const handleAlarmModalOpen = () => {
     //알람 컴포넌트 연결
   };
+
+  const clubList = [
+    {
+        clubId: 1,
+        clubName: "배드민턴 모임",
+        clubImg: IMAGES.profile
+    },
+    {
+        clubId: 2,
+        clubName: "떵개 식사 모임",
+        clubImg: IMAGES.profile
+    }
+  ];
+
   return (
     <header id="header">
       <div className="clubHeader">
@@ -47,7 +63,20 @@ export function ClubHeader() {
             <BottomSheet 
               // openFloating={openFloating}
               setOpenFloating={setOpenFloating}
-            />
+            >
+              {clubList?.map((club) => (
+                    <React.Fragment key={club.clubId}>
+                        <RouterBtn
+                            path={`${club.clubId}`}
+                            onClick={() => setOpenFloating(false)}
+                        >
+                            <ClubBox
+                                clubImg={club.clubImg}
+                            >{club.clubName}</ClubBox>
+                        </RouterBtn>
+                    </React.Fragment>
+                ))}
+            </BottomSheet>
           )
         }
       </div>
