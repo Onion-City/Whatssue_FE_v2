@@ -1,15 +1,14 @@
-import { ClubBox } from "@/components/molecules/clubBox";
-import { IMAGES } from "@/constants/images";
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
-import { RouterBtn } from "../RouterBtn/RouterBtn";
 import "./BottomSheet.css";
 
 interface BottomSheetProps {
     // openFloating: boolean;
+    color?: 'white' | 'black';
     setOpenFloating: Dispatch<SetStateAction<boolean>>;
+    children: React.ReactNode;
 }
 
-export const BottomSheet: React.FC<BottomSheetProps> = ({setOpenFloating}) => {
+export const BottomSheet: React.FC<BottomSheetProps> = ({color, setOpenFloating, children}) => {
     const [bottom, setBottom] = useState('-50%');
     const wrapperRef = useRef<HTMLDivElement | null>(null);
 
@@ -20,40 +19,18 @@ export const BottomSheet: React.FC<BottomSheetProps> = ({setOpenFloating}) => {
         }
     }, []);
 
-    const clubList = [
-        {
-            clubId: 1,
-            clubName: "배드민턴 모임",
-            clubImg: IMAGES.profile
-        },
-        {
-            clubId: 2,
-            clubName: "떵개 식사 모임",
-            clubImg: IMAGES.profile
-        }
-    ]
-
     return(
-        <div className="selectClubBox" onClick={() => setOpenFloating(false)}>
+        <div className="selectClubBox">
+            <div className="selectClubBox__background" onClick={() => setOpenFloating(false)}>
+            </div>
             <div 
-                className={"selectClubBox__wrapper "}
+                className={`selectClubBox__wrapper ${color}`}
                 ref={wrapperRef}
                 style={{
                     bottom
                 }}    
             >
-                {clubList?.map((club) => (
-                    <React.Fragment key={club.clubId}>
-                        <RouterBtn
-                            path={`${club.clubId}`}
-                            onClick={() => setOpenFloating(false)}
-                        >
-                            <ClubBox
-                                clubImg={club.clubImg}
-                            >{club.clubName}</ClubBox>
-                        </RouterBtn>
-                    </React.Fragment>
-                ))}
+                {children}
             </div>
         </div>
     );

@@ -4,7 +4,17 @@
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: 0;
+}
+
+.selectClubBox__background {
+    position: absolute; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 60%;
     background-color: rgba(0, 0, 0, 0.2);
+    z-index: 1;
 }
 
 .selectClubBox__wrapper {
@@ -17,6 +27,11 @@
     position: absolute; 
     left: 0;
     animation: slide 0.5s ease-in-out forwards;
+}
+
+.selectClubBox__wrapper.white {
+    background-color: #fff;
+    z-index: 101;
 }
 
 @keyframes slide {

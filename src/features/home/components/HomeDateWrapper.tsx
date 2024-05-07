@@ -1,6 +1,7 @@
 import { Text } from "@/components/atoms/text";
 import { ScheduleBox } from "@/components/molecules/scheduleBox";
 import { RouterBtn } from "@/components/organisms/RouterBtn/RouterBtn";
+import { formatDateKor } from "@/utils/date";
 import { useRouter } from "next/navigation";
 import React from "react";
 import "./Home.css";
@@ -25,9 +26,6 @@ const HomeDateWrapper = () => {
         },
     ];
 
-    const handleDatePage = (scheduleId: number) => {
-        router.push(`/1/calendar/${scheduleId}`)
-    }
     return (
         <div className="homeDateWrapper">
             <div className="homeDateWrapper__header">
@@ -35,7 +33,7 @@ const HomeDateWrapper = () => {
                     color="#fff"
                     fontSize="1.0625rem"
                     fontWeight="700"
-                >2024년 3월 2일 월요일</Text>
+                >{formatDateKor(new Date())}</Text>
                 <RouterBtn
                     path="/1/calendar"
                 >

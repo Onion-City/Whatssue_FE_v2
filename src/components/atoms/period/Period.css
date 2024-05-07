@@ -1,0 +1,25 @@
+.period {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.period__line {
+    width: 0.625rem;
+    height: 1.5px;
+    background-color: #000;
+}
+
+.period input {
+    width: calc((90vw - 20px) / 2);
+    border-radius: 7px;
+    border: 1.5px solid #d9d9d9;
+    padding: 1rem;
+    color: #000;
+    position: relative;
+}
+
+.period__wrapper {
+    position: absolute;
+    top: 10.5rem;
+}
