@@ -1,0 +1,147 @@
+/* MemberContent */
+
+.memberInfoContent {
+    width: 90vw;
+    margin: 1rem auto;
+}
+
+/* MemberUserInfo */
+
+.memberInfoUser {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.memberInfoUser__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.memberInfoUser__content-img {
+    object-fit: cover;
+}
+
+.memberInfoUser__content-img img {
+    width: 3.3125rem;
+    height: 3.3125rem;
+    border-radius: 9px;
+}
+
+.memberInfoUser__content__txt {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.memberInfoUser__content__txt-title {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-left: 1rem;
+}
+
+.memberInfoUser__content__txt-title img {
+    width: 0.625rem;
+    height: 0.625rem;
+}
+
+.memberInfoUser__content__txt-explain {
+    margin-left: 1rem;
+}
+
+.memberInfoUser__content__txt__role {
+    width: 2.625rem;
+    height: 0.9375rem;
+    background-color: #fff;
+    border-radius: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.memberInfoUser__btn {
+    width: 4rem;
+    height: 1.4375rem;
+    border: 0.5px solid #d9d9d9;
+    border-radius: 2px;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* MemberClubInfo */
+
+.memberInfoClub {
+    width: 90vw;
+    margin: 1rem auto;
+    padding: 0.3rem 1rem;
+    background-color: #404040;
+    border-radius: 7px;
+}
+
+.memberInfoClub__clubName {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem 0;
+}
+
+.memberInfoClub__clubName__span {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.memberInfoClub__clubDate {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.7rem;
+    margin: 1rem 0;
+}
+
+.memberInfoClub img {
+    width: 0.9375rem;
+    height: 0.9375rem;
+}
+
+/* MemberListInfo */
+
+.memberInfoList {
+    width: 90vw;
+    margin: 1rem auto;
+}
+
+.memberInfoList__box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem 0;
+}
+
+.memberInfoList__box img {
+    width: 0.375rem;
+    height: 0.6875rem;
+}
+
+.memberInfoList__line {
+    width: 100%;
+    height: 0.5px;
+    background-color: #4b4b4b;
+}
+
+/* MemberBtn */
+
+.memberBtn{
+    width: 90vw;
+    height: 3.125rem;
+    border: 0.5px solid #d9d9d9;
+    background-color: #2b2b2b;
+    border-radius: 2px;
+    cursor: pointer;
+}
