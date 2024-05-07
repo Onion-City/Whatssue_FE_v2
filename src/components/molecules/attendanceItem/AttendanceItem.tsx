@@ -1,9 +1,9 @@
 "use client"; //set으로 만들고 해당을 제거
 
 import { useRouter } from "next/navigation";
-import { AttendanceItemProps } from "./AttendanceItemProps";
+import { AttendanceItemProps } from "../../../features/member/attendance/components/AttendanceItemProps";
 import { Text } from "@/components/atoms/text";
-import "./Attendance.css";
+import "./AttendanceItem.css";
 import Image from "next/image";
 import { IMAGES } from "@/constants/images";
 
@@ -17,7 +17,11 @@ const AttendanceItem = ({
 }: AttendanceItemProps) => {
   const router = useRouter();
   const handleRouteAttendance = (AttendanceId: number) => {
-    router.push(`/attendance/${attendanceAddress}/${AttendanceId}`);
+    if (attendanceAddress === "manager") {
+      router.push("/manager/attendance/status");
+    } else {
+      router.push(`/${attendanceAddress}/attendance`);
+    }
   };
 
   return (

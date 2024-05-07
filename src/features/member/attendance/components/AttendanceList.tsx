@@ -1,5 +1,5 @@
 import { dummyList } from "../constants/dummy";
-import AttendanceItem from "./AttendanceItem";
+import AttendanceItem from "../../../../components/molecules/attendanceItem/AttendanceItem";
 
 const AttendanceList = () => {
   return (
@@ -7,7 +7,7 @@ const AttendanceList = () => {
       {dummyList.map((attendance) => (
         <AttendanceItem
           key={attendance.id}
-          attendanceAddress="attendance"
+          attendanceAddress="member"
           id={attendance.id}
           status={attendance.status}
           title={attendance.title}

@@ -5,6 +5,11 @@ import { Button } from "@/components/atoms/button";
 import { HistoryHeader } from "@/components/organisms/Header";
 import Image from "next/image";
 import { IMAGES } from "@/constants/images";
+import {
+  ENTER_INVITATION_CODE,
+  JOIN_BTN,
+  RECEIVE_INVITATION_CODE,
+} from "../constants/const";
 
 const EnterInvitationCode = () => {
   return (
@@ -19,10 +24,10 @@ const EnterInvitationCode = () => {
 
       <div className="invitation_code__title">
         <Text color="#FFF" fontSize="1.3125rem" fontWeight="600">
-          초대 코드 입력
+          {ENTER_INVITATION_CODE}
         </Text>
         <Text color="#D9D9D9" fontSize="0.9375rem" fontWeight="500">
-          관리자에게 받은 초대코드 6자리를 입력해주세요
+          {RECEIVE_INVITATION_CODE}
         </Text>
       </div>
 
@@ -33,7 +38,7 @@ const EnterInvitationCode = () => {
       </div>
 
       <div className="invitation_code__enter">
-        <Button>초대코드로 가입하기</Button>
+        <Button>{JOIN_BTN}</Button>
       </div>
     </div>
     // </Wrapper>

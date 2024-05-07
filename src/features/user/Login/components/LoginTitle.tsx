@@ -1,6 +1,6 @@
 import { LOGIN_SLOGAN } from "../constants/const";
 import { IMAGES } from "@/constants/images";
-import "./LoginTitle.css";
+import "./Login.css";
 import Image from "next/image";
 import { Text } from "@/components/atoms/text";
 
