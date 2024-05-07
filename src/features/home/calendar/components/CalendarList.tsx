@@ -42,12 +42,14 @@ const CalendarList = () => {
     }
     const renderDateList = (date: dateProps) => (
         <React.Fragment key={date.id}>
-            <div className="homeDateWrapper__header">
-                <Text
-                    color="#fff"
-                    fontSize="1.0625rem"
-                    fontWeight="700"
-                >{formatDateKor(date.time)}</Text>
+            <div className="homeDateWrapper__sticky">
+                <div className="homeDateWrapper__header">
+                    <Text
+                        color="#fff"
+                        fontSize="1.0625rem"
+                        fontWeight="700"
+                    >{formatDateKor(date.time)}</Text>
+                </div>
             </div>
             <div className="homeDateWrapper__body">
                 {dateList?.map((date) => (

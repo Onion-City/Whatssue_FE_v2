@@ -27,7 +27,7 @@ const HomeDateWrapper = () => {
     ];
 
     return (
-        <div className="homeDateWrapper">
+        <div className="homeDate">
             <div className="homeDateWrapper__header">
                 <Text
                     color="#fff"

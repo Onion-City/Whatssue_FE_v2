@@ -12,13 +12,13 @@ const HomeDateBox = ({time, title, onClick}: HomeDateBoxProps) => {
     return (
         <div className="homeDateBox" onClick={onClick}>
             <div className="homeDateBox__content">
-                <span className="wd-30">
+                <span className="homeDateBox__content__time">
                     <Text
                         color="#d9d9d9"
                         fontSize="0.8125rem"
                     >{formatTime(time)}</Text>
                 </span>
-                <span className="wd-50">
+                <span>
                     <Text
                         color="#fff"
                         fontSize="0.9375rem"

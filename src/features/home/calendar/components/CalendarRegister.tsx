@@ -1,11 +1,15 @@
-import { HomeCalendar } from "@/components/atoms/calendar";
-import { RegisterBox } from "@/components/molecules/registerBox";
-import { ICONS } from "@/constants/images";
 import moment from "moment";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+
+import { HomeCalendar } from "@/components/atoms/calendar";
+import { RegisterBox } from "@/components/molecules/registerBox";
+import { ICONS } from "@/constants/images";
+// import DatePicker from "@types/react-datepicker";
+// import "react-datepicker/dist/react-datepicker.css";
+
 import "./Calendar.css";
 
 interface scheduleProps {
@@ -19,6 +23,7 @@ interface scheduleProps {
 const CalendarRegister = () => {
     const router = useRouter();
     const [calendarOpen, setCalendarOpen] = useState(false); // calendar open
+    const [timeOpen, setTimeOpen] = useState(false);
     const [value, onChange] = useState<Date>(new Date());
     const {
         register,
@@ -89,6 +94,28 @@ const CalendarRegister = () => {
                     placeholder="시간"
                     {...register("time")}
                 />
+                <Image 
+                    src={ICONS.calendar}
+                    alt="calendar"
+                    onClick={() => setTimeOpen((prev) => !prev)}
+                />
+
+                {timeOpen && (
+                    <div className="calendarRegister__background">
+                        <span className="calendarRegister__background__calendar">
+                        {/* <DatePicker
+                            closeOnScroll={true} // 스크롤 하면 선택box 닫히게
+                            selected={startDate} // 처음에 맨 위에 표시된 input에 나오는게 지금 날짜
+                            onChange={(date) => setStartDate(date)} // 내가 선택한 날짜가 맨 위에 표시 됨
+                            showTimeSelect // 시간 나오게 하기
+                            timeFormat="HH:mm" //시간 포맷 
+                            timeIntervals={15} // 15분 단위로 선택 가능한 box가 나옴
+                            timeCaption="time"
+                            dateFormat="MMMM d, yyyy h:mm aa"
+                        /> */}
+                        </span>
+                    </div>
+                )}
             </RegisterBox>
             <RegisterBox
                 title="장소"

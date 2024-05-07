@@ -11,7 +11,7 @@
 
 /* HomeDateWrapper */
 
-.homeDateWrapper {
+.homeDate {
     margin: 1rem auto;
     width: 90vw;
 
@@ -44,7 +44,11 @@
 
 .homeDateBox__content {
     display: flex;
-    width: 90%;
+    width: 100%;
+}
+
+.homeDateBox__content__time {
+    margin-right: 1rem;
 }
 
 .homeDateBox span {
