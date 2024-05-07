@@ -1,3 +1,4 @@
+"use client";
 import { Text } from "@/components/atoms/text";
 import { usePathname, useRouter } from "next/navigation";
 import "./Nav.css";

@@ -5,7 +5,7 @@ import { ClubProfile } from "./components/ClubProfile";
 
 export const MemberClubInfo = () => {
     return(
-        <div>
+        <div className="memberClubInfo">
             <ClubProfile />
             <ClubInfo />
             <Nav />
