@@ -86,3 +86,15 @@
   margin-left: auto;
   margin-top: auto;
 }
+
+.attendance_status_list__edit_btn {
+  position: fixed;
+  bottom: 1.14rem;
+  left: 0;
+  padding: 10px;
+  z-index: 999;
+  height: 3.125rem;
+  border-radius: 0.625rem;
+  margin-left: 0.94rem;
+  margin-right: 0.94rem;
+}

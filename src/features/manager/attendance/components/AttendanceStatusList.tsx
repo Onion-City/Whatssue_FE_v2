@@ -2,14 +2,19 @@
 import { Text } from "@/components/atoms/text";
 import {
   ATTENDANCE_STATUS_ARR,
+  ATTENDANCE_STATUS_EDIT_BTN,
   ATTENDANCE_STATUS_TITLE,
 } from "../constants/const";
 import { attendanceStatusDummy } from "../constants/dummy";
 import AttendanceStatusItem from "./AttendanceStatusItem";
 import "./Attendance.css";
 import { useState } from "react";
+import { Button } from "@/components/atoms/button";
+import { useRouter } from "next/navigation";
 
 const AttendanceStatusList = () => {
+  const router = useRouter();
+
   const [selectedStatus, setSelectedStatus] = useState(null); // 선택된 상태
 
   // 선택된 상태에 따라 필터링된 출석 상태 리스트 반환
@@ -80,6 +85,12 @@ const AttendanceStatusList = () => {
           status={attendanceStatus.status}
         />
       ))}
+
+      <div className="attendance_status_list__edit_btn">
+        <Button onClick={() => router.push("status/edit")}>
+          {ATTENDANCE_STATUS_EDIT_BTN}
+        </Button>
+      </div>
     </div>
   );
 };
