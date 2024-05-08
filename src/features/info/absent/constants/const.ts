@@ -1,0 +1,1 @@
+export const ABSENT_FILTER = "기간 설정";

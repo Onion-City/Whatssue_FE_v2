@@ -4,9 +4,7 @@ import moment from "moment";
 import { Dispatch, ReactElement, SetStateAction, useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // css import
-
-// import "./PeriodCalendar.css";
-
+import "./PeriodCalendar.css";
 
 export interface PeriodCalendarProps {
 //   fetchData: (date: Date) => void;

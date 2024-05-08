@@ -23,16 +23,20 @@ export const ICONS = {
   arrowRight: require("@/assets/images/ic_arrow_right.png"),
   back: require("@/assets/images/ic_back.png"),
   filter: require("@/assets/images/ic_filter.png"),
-
+  
   floatingPlus: require("@/assets/images/Plus.png"),
   floatingLock: require("@/assets/images/ic_lock.png"),
   floatingMeeting: require("@/assets/images/ic_people.png"),
-
+  
   newBoard: require("@/assets/images/ic_new_board.png"),
   comment: require("@/assets/images/ic_comment.png"),
-
+  
   heartColor: require("@/assets/images/ic_heartColor.png"),
   heartNone: require("@/assets/images/ic_heartWhite.png"),
+  
+  edit: require("@/assets/images/ic_edit.png"),
+  member: require("@/assets/images/ic_member.png"),
+  copy: require("@/assets/images/ic_copy.png"),
 };
 
 import attenIcon from "@/assets/images/ic_nav_atten.svg";

@@ -1,0 +1,68 @@
+/* MemberClubInfo */
+
+.memberClubInfo {
+    width: 100%;
+    /* height: 100vh; */
+}
+
+/* ClubProfile */
+
+.clubProfile {
+    width: 90vw;
+    margin: 1rem auto;
+    padding-top: 5.5rem;
+    text-align: center;
+}
+
+.clubProfile__img {
+    object-fit: cover;
+    margin: 1rem 0;
+}
+
+.clubProfile__img img {
+    border-radius: 7px;
+    width: 5.3125rem;
+    height: 5.3125rem;
+}
+
+/* ClubInfo */
+
+.clubInfo {
+    width: 90vw;
+    margin: 1rem auto;
+}
+
+.clubInfo__sub {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.clubInfo__line {
+    color: #c2c2c2;
+}
+
+/* ClubInfoBox */
+
+.clubInfoBox {
+    margin: 1rem 0;
+}
+
+.clubInfoBox__box {
+    background-color: #404040;
+    padding: 1rem;
+    border-radius: 7px;
+    margin: 0.5rem 0;
+}
+
+.clubInfoBox__box.copy {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.clubInfoBox__box.copy img {
+    width: 0.86rem;
+    height: 1.1718rem;
+    cursor: pointer;
+}
