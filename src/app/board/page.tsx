@@ -1,4 +1,5 @@
-import SetupUserBoardList from "@/features/user/board/SetupUserBoardList";
+"use client";
+import SetupUserBoardList from "@/features/board/SetupUserBoardList";
 
 const Board = () => {
     return <SetupUserBoardList />;

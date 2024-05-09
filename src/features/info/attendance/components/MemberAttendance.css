@@ -1,0 +1,98 @@
+/* AttendanceHeader */
+
+.attendHeader {
+    width: 90vw;
+    margin: 1rem auto;
+}
+
+.attendHeader_total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem 0;
+}
+
+.attendHeader__total__span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.attendLine {
+    width: 100%;
+    height: 0.5px;
+    background-color: #7e7e7e;
+}
+
+/* AttendanceFilter */
+
+.attendFilter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.attendFilter__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.attendFilter__btn img {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* AttendanceList */
+
+.attendList {
+    width: 90vw;
+    margin: 1rem auto;
+}
+
+/* AttendanceMonth */
+
+.attendMonth {
+    margin: 1.5rem 0;
+}
+
+/* AttendanceBox */
+
+.attendBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem 0;
+}
+
+.attendBox__left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.attendBox__left__circle {
+    width: 4px;
+    height: 4px;
+    border-radius: 50px;
+}
+
+.attendBox__left__circle.green{
+    background-color: #51f8c4;
+}
+.attendBox__left__circle.red{
+    background-color: #FF4444;
+}
+.attendBox__left__circle.yellow{
+    background-color: #FFEC44;
+}
+
+.attendBox__line {
+    width: 0.5px;
+    height: 11px;
+    background-color: #989898;
+}

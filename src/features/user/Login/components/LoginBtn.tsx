@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { IMAGES } from "@/constants/images";
-import "./LoginBtn.css";
+import "./Login.css";
 
 export default function LoginBtn() {
   return (

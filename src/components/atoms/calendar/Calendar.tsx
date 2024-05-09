@@ -1,8 +1,10 @@
-import moment from 'moment';
+"use client"; //set으로 만들고 해당을 제거
+
+import moment from "moment";
 import { ReactElement, useEffect, useState } from "react";
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css'; // css import
-import './Calendar.css';
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css"; // css import
+import "./Calendar.css";
 
 import { NextIcon } from "./NextIcon";
 import { PreviousIcon } from "./PreviousIcon";
@@ -24,7 +26,7 @@ export interface HomeCalendarProps {
   // setNowDate: (formattedDate: string) => void;
 }
 
-export function HomeCalendar ({
+export function HomeCalendar({
   // setMarkedDate,
   // mark,
   // findSchedule,
@@ -37,7 +39,9 @@ export function HomeCalendar ({
   // setNowDate
 }: HomeCalendarProps) {
   // const [value, onChange] = useState(new Date());
-  const [nowDate, setNowDate] = useState(moment(value).format('YYYY년 MM월 DD일'));
+  const [nowDate, setNowDate] = useState(
+    moment(value).format("YYYY년 MM월 DD일")
+  );
   const [nowMonth, setNowMonth] = useState(new Date());
   const [markedDate, setMarkedDate] = useState([]);
   const [mark, setMark] = useState([]);
@@ -45,9 +49,9 @@ export function HomeCalendar ({
   const [response, setResponse] = useState([]);
   const [filteredRes, setFilteredRes] = useState([]);
 
-  const day: string = moment(value).format('YYYY-MM-DD');
+  const day: string = moment(value).format("YYYY-MM-DD");
   const currDate: Date = new Date();
-  const currDateTime: string = moment(currDate).format('MM-DD');
+  const currDateTime: string = moment(currDate).format("MM-DD");
 
   // 달을 변경할 때마다 데이터 불러오기
   const findMonthSchdule = async (e: any) => {
@@ -55,17 +59,17 @@ export function HomeCalendar ({
     let currentDate = value;
     const currentMonth = value.getMonth();
 
-    if(e === "p"){
-        currentDate.setMonth(value.getMonth() - 1);
+    if (e === "p") {
+      currentDate.setMonth(value.getMonth() - 1);
     } else {
-        currentDate.setMonth(value.getMonth() + 1);
+      currentDate.setMonth(value.getMonth() + 1);
     }
 
-    const subMonth = +currentMonth - +(currentDate.getMonth())
-    if(subMonth === -2){
-        currentDate.setMonth(value.getMonth() - 1);
-    } else if(subMonth === 2){
-        currentDate.setMonth(value.getMonth() + 1);
+    const subMonth = +currentMonth - +currentDate.getMonth();
+    if (subMonth === -2) {
+      currentDate.setMonth(value.getMonth() - 1);
+    } else if (subMonth === 2) {
+      currentDate.setMonth(value.getMonth() + 1);
     }
 
     console.log(currentDate);
@@ -74,16 +78,21 @@ export function HomeCalendar ({
 
   // 해당 날짜 스케줄 찾기
   const findSchedule = (e: any) => {
-      setFilteredRes(response.filter((es: any) => es?.scheduleDate === moment(e).format("YYYY-MM-DD")));
+    setFilteredRes(
+      response.filter(
+        (es: any) => es?.scheduleDate === moment(e).format("YYYY-MM-DD")
+      )
+    );
   };
 
   // PM & AM 형식으로 변경
   const formatTime = (getTime: any) => {
-      const [hour, minute] = getTime.split(":");
-      const formattedHour = parseInt(hour) > 12 ? parseInt(hour) - 12 : parseInt(hour);
-      const period = parseInt(hour) >= 12 ? "PM" : "AM";
+    const [hour, minute] = getTime.split(":");
+    const formattedHour =
+      parseInt(hour) > 12 ? parseInt(hour) - 12 : parseInt(hour);
+    const period = parseInt(hour) >= 12 ? "PM" : "AM";
 
-      return `${formattedHour < 10 ? `0${formattedHour}` : formattedHour}:${minute} ${period}`;
+    return `${formattedHour < 10 ? `0${formattedHour}` : formattedHour}:${minute} ${period}`;
   };
 
   const handleDateChange = (selectedDate: any) => {
@@ -98,7 +107,6 @@ export function HomeCalendar ({
       setCalendarOpen(false);
     }
   };
-  
 
   const handleDate = (e: React.MouseEvent<HTMLButtonElement>): void => {
     setMarkedDate([]);
@@ -111,10 +119,10 @@ export function HomeCalendar ({
     setNowDate(moment(e.activeStartDate).format("YYYY년 MM월 DD일"));
     setNowMonth(e.activeStartDate);
     fetchData(e.activeStartDate);
-  }
+  };
 
   useEffect(() => {
-    if(mark?.length > 0) {
+    if (mark?.length > 0) {
       console.log(mark);
     }
   }, [mark]);
@@ -124,14 +132,16 @@ export function HomeCalendar ({
       onChange={handleDateChange}
       onDrillDown={handleMonthChange}
       value={value}
-      formatDay={(locale: string | undefined, date: Date) => moment(date).format("D")}
-      nextLabel={<NextIcon handleDate={handleDate}/>}
+      formatDay={(locale: string | undefined, date: Date) =>
+        moment(date).format("D")
+      }
+      nextLabel={<NextIcon handleDate={handleDate} />}
       prevLabel={<PreviousIcon handleDate={handleDate} />}
       next2Label={null}
       prev2Label={null}
       tileContent={({ date, view }) => {
         const html: ReactElement[] = [];
-        if (mark?.find((x) => x === moment(date).format('YYYY-MM-DD'))) {
+        if (mark?.find((x) => x === moment(date).format("YYYY-MM-DD"))) {
           html.push(<div className="dot"></div>);
         }
         return (

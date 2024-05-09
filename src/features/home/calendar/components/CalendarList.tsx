@@ -1,12 +1,14 @@
 "use client";
 import { Text } from "@/components/atoms/text";
+import { DateBox } from "@/components/molecules/dateBox";
+import { ScheduleBox } from "@/components/molecules/scheduleBox";
 import { formatDateKor } from "@/utils/date";
 import { useRouter } from "next/navigation";
 import React from "react";
 import HomeDateBox from "../../components/HomeDateBox";
 import "./Calendar.css";
 
-interface dateProps {
+export interface dateProps {
     id: number;
     time: Date;
     title: string;
@@ -42,28 +44,55 @@ const CalendarList = () => {
     }
     const renderDateList = (date: dateProps) => (
         <React.Fragment key={date.id}>
-            <div className="homeDateWrapper__header">
-                <Text
-                    color="#fff"
-                    fontSize="1.0625rem"
-                    fontWeight="700"
-                >{formatDateKor(date.time)}</Text>
+            <div className="homeDateWrapper__sticky">
+                <div className="homeDateWrapper__header">
+                    <Text
+                        color="#fff"
+                        fontSize="1.0625rem"
+                        fontWeight="700"
+                    >{formatDateKor(date.time)}</Text>
+                </div>
             </div>
-            {dateList?.map((date) => (
-                <React.Fragment key={date.id}>
-                    <HomeDateBox
-                        time={date.time}
-                        title={date.title}
-                        onClick={() => handleDatePage(date.id)}
-                    />
-                </React.Fragment>
-            ))}
+            <div className="homeDateWrapper__body">
+                {dateList?.map((date) => (
+                    <React.Fragment key={date.id}>
+                        <HomeDateBox
+                            time={date.time}
+                            title={date.title}
+                            onClick={() => handleDatePage(date.id)}
+                        />
+                    </React.Fragment>
+                ))}
+            </div>
         </React.Fragment>
     );
 
     return (
         <div className="homeDateWrapper">
-            {dateList.map((date) => renderDateList(date))}
+            <DateBox
+                date={new Date()}
+            >
+                {dateList.map((date) => (
+                    <React.Fragment key={date.id}>
+                        <ScheduleBox 
+                            time={date.time}
+                            title={date.title}
+                        />
+                    </React.Fragment>
+                ))}
+            </DateBox>
+            <DateBox
+                date={new Date()}
+            >
+                {dateList.map((date) => (
+                    <React.Fragment key={date.id}>
+                        <ScheduleBox 
+                            time={date.time}
+                            title={date.title}
+                        />
+                    </React.Fragment>
+                ))}
+            </DateBox>
         </div>
     );
 };
