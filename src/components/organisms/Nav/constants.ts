@@ -10,5 +10,5 @@ export const navItems: NavItem[] = [
   { path: "board", icon: NavIcons.board, text: "게시판" },
   { path: "atten", icon: NavIcons.atten, text: "출석" },
   { path: "member", icon: NavIcons.member, text: "맴버" },
-  { path: "more", icon: NavIcons.more, text: "더보기" },
+  { path: "info", icon: NavIcons.more, text: "더보기" },
 ];
