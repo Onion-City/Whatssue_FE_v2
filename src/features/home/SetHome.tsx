@@ -1,3 +1,4 @@
+import { ClubHeader } from "@/components/organisms/Header/ClubHeader";
 import { Nav } from "@/components/organisms/Nav";
 import HomeDateWrapper from "./components/HomeDateWrapper";
 import HomeHeader from "./components/HomeHeader";
@@ -44,6 +45,7 @@ const SetHome = () => {
     return (
         <>
             <div>
+                <ClubHeader color={true} />
                 <HomeHeader />
                 <HomeDateWrapper />
             </div>
