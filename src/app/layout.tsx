@@ -13,22 +13,22 @@ export default function RootLayout({
 
   const logoHeaderList = [
     "/",
-  ]
+  ];
 
   const historyHeaderList = [
     "/user/onboarding",
     "/user/club"
-  ]
+  ];
 
   const clubHeaderList = [
-    getClubHeaderList(pathname),
-  ]
+    "/info",
+    "/board",
+    "/board/notice",
+    "/board/free",
+    "/member/list",
+    "/member/attendance/list",
+  ];
 
-  // 현재 경로에서 클럽 아이디 추출
-  function getClubHeaderList(pathname: string): string {
-    const clubId = pathname.split("/")[1];
-    return clubId ? `/${clubId}` : "";
-  }
   return (
     <html lang="kr">
       <body>

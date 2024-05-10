@@ -1,13 +1,13 @@
-import { ClubHeader } from "@/components/organisms/Header/ClubHeader";
 // import AttendanceEmpty from "./components/AttendanceEmpty";
+import { Nav } from "@/components/organisms/Nav";
 import AttendanceList from "./components/AttendanceList";
 
 export default function AttendanceListPage() {
   return (
     <>
-      <ClubHeader />
       {/* <AttendanceEmpty /> */}
       <AttendanceList />
+      <Nav />
     </>
   );
 }

@@ -2,7 +2,8 @@
 
 .absentHeader {
     width: 90vw;
-    margin: 1rem auto;
+    margin: 0 auto;
+    padding-top: 5.5rem;
 }
 
 .absentHeader__wrapper {

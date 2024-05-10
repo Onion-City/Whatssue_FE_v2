@@ -1,3 +1,5 @@
+"use client";
+
 import testimg from "@/assets/images/chiikyaw.png";
 import { Heart } from "@/components/atoms/heart/Heart";
 import { Text } from "@/components/atoms/text";

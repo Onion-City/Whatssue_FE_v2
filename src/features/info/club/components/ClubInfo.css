@@ -9,9 +9,9 @@
 
 .clubProfile {
     width: 90vw;
-    margin: 1rem auto;
-    padding-top: 5.5rem;
+    margin: 0 auto;
     text-align: center;
+    padding-top: 4.5rem;
 }
 
 .clubProfile__img {
