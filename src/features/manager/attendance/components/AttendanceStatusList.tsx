@@ -1,21 +1,21 @@
 "use client";
+import { Button } from "@/components/atoms/button";
 import { Text } from "@/components/atoms/text";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import {
   ATTENDANCE_STATUS_ARR,
   ATTENDANCE_STATUS_EDIT_BTN,
   ATTENDANCE_STATUS_TITLE,
 } from "../constants/const";
 import { attendanceStatusDummy } from "../constants/dummy";
-import AttendanceStatusItem from "./AttendanceStatusItem";
 import "./Attendance.css";
-import { useState } from "react";
-import { Button } from "@/components/atoms/button";
-import { useRouter } from "next/navigation";
+import AttendanceStatusItem from "./AttendanceStatusItem";
 
 const AttendanceStatusList = () => {
   const router = useRouter();
 
-  const [selectedStatus, setSelectedStatus] = useState(null); // 선택된 상태
+  const [selectedStatus, setSelectedStatus] = useState<string | null>(null); // 선택된 상태
 
   // 선택된 상태에 따라 필터링된 출석 상태 리스트 반환
   const filteredAttendanceStatus = selectedStatus
@@ -64,7 +64,9 @@ const AttendanceStatusList = () => {
           ))}
         </div>
 
+        <label htmlFor="attendance_status_select" style={{'display': 'none'}}>출석 상태 선택</label>
         <select
+          id="attendance_status_select"
           onChange={(e) => setSelectedStatus(e.target.value)}
           value={selectedStatus || ""}
           className="attendance_status_list__content_select"
