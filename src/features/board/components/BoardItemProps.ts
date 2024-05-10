@@ -1,7 +1,7 @@
 import { StaticImageData } from "next/image";
 
 export interface BoardItemProps {
-  boardAddress: string;
+  boardAddress?: string;
   id: number;
   title: string;
   content: string;

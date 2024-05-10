@@ -1,5 +1,4 @@
 "use client";
-import Alarm from "@/assets/images/ic_alarm.png";
 import { Text } from "@/components/atoms/text";
 import { ClubBox } from "@/components/molecules/clubBox";
 import { BottomSheet } from "@/components/organisms/BottomSheet/BottomSheet";
@@ -10,7 +9,11 @@ import React, { useState } from "react";
 import { RouterBtn } from "../RouterBtn/RouterBtn";
 import "./Header.css";
 
-export function ClubHeader() {
+interface ClubHeaderProps {
+  color?: boolean;
+}
+
+export function ClubHeader({color}: ClubHeaderProps) {
   const router = useRouter();
   const [openFloating, setOpenFloating] = useState<boolean>(false);
   const handleAlarmModalOpen = () => {
@@ -32,7 +35,7 @@ export function ClubHeader() {
 
   return (
     <header id="header">
-      <div className="clubHeader">
+      <div className={`clubHeader ${color && "black"}`}>
         <div>
             <Image
                 src={IMAGES.back}
@@ -49,37 +52,37 @@ export function ClubHeader() {
                 className={openFloating ? "clubHeader__title__img active" : "clubHeader__title__img"}
             />
         </div>
-        <div>
-          <Image
+        <p>
+          {/* <Image
             src={Alarm}
             alt="Alarm"
             placeholder="blur"
             onClick={handleAlarmModalOpen}
-          />
-        </div>
+          /> */}
+        </p>
 
-        {
-          openFloating && (
-            <BottomSheet 
-              // openFloating={openFloating}
-              setOpenFloating={setOpenFloating}
-            >
-              {clubList?.map((club) => (
-                    <React.Fragment key={club.clubId}>
-                        <RouterBtn
-                            path={`${club.clubId}`}
-                            onClick={() => setOpenFloating(false)}
-                        >
-                            <ClubBox
-                                clubImg={club.clubImg}
-                            >{club.clubName}</ClubBox>
-                        </RouterBtn>
-                    </React.Fragment>
-                ))}
-            </BottomSheet>
-          )
-        }
       </div>
+      {
+        openFloating && (
+          <BottomSheet 
+            // openFloating={openFloating}
+            setOpenFloating={setOpenFloating}
+          >
+            {clubList?.map((club) => (
+                  <React.Fragment key={club.clubId}>
+                      <RouterBtn
+                          path={`${club.clubId}`}
+                          onClick={() => setOpenFloating(false)}
+                      >
+                          <ClubBox
+                              clubImg={club.clubImg}
+                          >{club.clubName}</ClubBox>
+                      </RouterBtn>
+                  </React.Fragment>
+              ))}
+          </BottomSheet>
+        )
+      }
     </header>
   );
 }
