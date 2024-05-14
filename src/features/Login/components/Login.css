@@ -1,0 +1,24 @@
+.login__title {
+  display: flex;
+  flex-direction: column;
+  margin: 17.25rem auto 23.19rem auto;
+}
+
+.login__slogan {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login_logo {
+  width: 4.3125rem;
+  height: 4.3125rem;
+  flex-shrink: 0;
+  margin: 1.44rem auto 0 auto;
+}
+
+.login_kakao {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1.81rem;
+}
