@@ -35,6 +35,7 @@ const AttendanceStatusList = () => {
       <Text color="#FFF" fontSize="1.1875rem" fontWeight="600">
         {ATTENDANCE_STATUS_TITLE}
       </Text>
+
       <div className="attendance_status_list__content">
         <div className="attendance_status_list__content_title">
           {ATTENDANCE_STATUS_ARR.map((status) => (
@@ -48,6 +49,7 @@ const AttendanceStatusList = () => {
             </Text>
           ))}
         </div>
+
         <div className="attendance_status_list__content_people">
           {ATTENDANCE_STATUS_ARR.map((status) => (
             <Text
@@ -64,7 +66,9 @@ const AttendanceStatusList = () => {
           ))}
         </div>
 
-        <label htmlFor="attendance_status_select" style={{'display': 'none'}}>출석 상태 선택</label>
+        <label htmlFor="attendance_status_select" style={{ display: "none" }}>
+          출석 현황 선택
+        </label>
         <select
           id="attendance_status_select"
           onChange={(e) => setSelectedStatus(e.target.value)}
