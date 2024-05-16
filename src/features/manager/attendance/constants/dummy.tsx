@@ -90,7 +90,7 @@ export const attendanceStatusDummy = [
   },
   {
     id: 12,
-    name: "김민수",
+    name: "신강희",
     status: "출석",
   },
 ];

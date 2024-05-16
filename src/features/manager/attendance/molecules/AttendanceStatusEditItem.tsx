@@ -5,12 +5,16 @@ import "./Attendance.css";
 import { useState } from "react";
 import { ATTENDANCE_STATUS_ARR } from "../constants/const";
 
-const AttendanceStatusEditItem = ({
-  name,
-  status,
-}: {
+interface AttendanceStatusEditItemProps {
   name: string;
   status: string;
+  onStatusChange: (name: string, status: string) => void;
+}
+
+const AttendanceStatusEditItem: React.FC<AttendanceStatusEditItemProps> = ({
+  name,
+  status,
+  onStatusChange,
 }) => {
   let iconColorClass = "";
 
@@ -22,7 +26,13 @@ const AttendanceStatusEditItem = ({
     iconColorClass = "yellow";
   }
 
-  const [selectedStatus, setSelectedStatus] = useState<string | null>(null); // 선택된 상태
+  const [selectedStatus, setSelectedStatus] = useState<string | null>(status); // 선택된 상태
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newStatus = e.target.value;
+    setSelectedStatus(newStatus);
+    onStatusChange(name, newStatus); // 부모 컴포넌트에 상태 변경 알림
+  };
 
   return (
     <div className="attendance_status_item">
@@ -41,16 +51,17 @@ const AttendanceStatusEditItem = ({
         {name}
       </Text>
 
-      <span className={`attendance_status_item__icon ${iconColorClass}`}></span>
-
-      <label htmlFor="attendance_status_select" style={{ display: "none" }}>
+      <label
+        htmlFor={`attendance_status_edit_select_${name}`}
+        style={{ display: "none" }}
+      >
         출석 현황 선택
       </label>
       <select
-        id="attendance_status_select"
-        onChange={(e) => setSelectedStatus(e.target.value)}
+        id={`attendance_status_edit_select_${name}`}
+        onChange={handleChange}
         value={selectedStatus || ""}
-        className="attendance_status_list__content_select"
+        className="attendance_status_list__select"
       >
         <option value="">전체</option>
         {ATTENDANCE_STATUS_ARR.map((status) => (
