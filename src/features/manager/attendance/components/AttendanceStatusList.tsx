@@ -10,11 +10,16 @@ import {
 } from "../constants/const";
 import { attendanceStatusDummy } from "../constants/dummy";
 import "./Attendance.css";
-import AttendanceStatusItem from "./AttendanceStatusItem";
+import AttendanceStatusItem from "../molecules/AttendanceStatusItem";
 
-const AttendanceStatusList = () => {
+interface AttendanceStatus {
+  id: number;
+  name: string;
+  status: string;
+}
+
+const AttendanceStatusList: React.FC = () => {
   const router = useRouter();
-
   const [selectedStatus, setSelectedStatus] = useState<string | null>(null); // 선택된 상태
 
   // 선택된 상태에 따라 필터링된 출석 상태 리스트 반환
@@ -35,6 +40,7 @@ const AttendanceStatusList = () => {
       <Text color="#FFF" fontSize="1.1875rem" fontWeight="600">
         {ATTENDANCE_STATUS_TITLE}
       </Text>
+
       <div className="attendance_status_list__content">
         <div className="attendance_status_list__content_title">
           {ATTENDANCE_STATUS_ARR.map((status) => (
@@ -48,6 +54,7 @@ const AttendanceStatusList = () => {
             </Text>
           ))}
         </div>
+
         <div className="attendance_status_list__content_people">
           {ATTENDANCE_STATUS_ARR.map((status) => (
             <Text
@@ -64,12 +71,14 @@ const AttendanceStatusList = () => {
           ))}
         </div>
 
-        <label htmlFor="attendance_status_select" style={{'display': 'none'}}>출석 상태 선택</label>
+        <label htmlFor="attendance_status_select" style={{ display: "none" }}>
+          출석 현황 선택
+        </label>
         <select
           id="attendance_status_select"
           onChange={(e) => setSelectedStatus(e.target.value)}
           value={selectedStatus || ""}
-          className="attendance_status_list__content_select"
+          className="attendance_status_list__select"
         >
           <option value="">전체</option>
           {ATTENDANCE_STATUS_ARR.map((status) => (
@@ -80,13 +89,15 @@ const AttendanceStatusList = () => {
         </select>
       </div>
 
-      {filteredAttendanceStatus.map((attendanceStatus) => (
-        <AttendanceStatusItem
-          key={attendanceStatus.id}
-          name={attendanceStatus.name}
-          status={attendanceStatus.status}
-        />
-      ))}
+      <div className="attendance_status_list__item">
+        {filteredAttendanceStatus.map((attendanceStatus) => (
+          <AttendanceStatusItem
+            key={attendanceStatus.id}
+            name={attendanceStatus.name}
+            status={attendanceStatus.status}
+          />
+        ))}
+      </div>
 
       <div className="attendance_status_list__edit_btn">
         <Button onClick={() => router.push("status/edit")}>

@@ -4,7 +4,15 @@ import { todayScheduleList } from "../constants/dummy";
 import { Text } from "@/components/atoms/text";
 import "./Attendance.css";
 
-const TodaySchedule = () => {
+interface Schedule {
+  id: number;
+  status: string;
+  title: string;
+  date: string;
+  time: string;
+}
+
+const TodaySchedule: React.FC = () => {
   return (
     <div>
       <Text
@@ -15,7 +23,7 @@ const TodaySchedule = () => {
       >
         {TODAY_SCHEDULE_TITLE}
       </Text>
-      {todayScheduleList.map((attendance) => (
+      {todayScheduleList.map((attendance: Schedule) => (
         <AttendanceItem
           key={attendance.id}
           attendanceAddress="attendance"

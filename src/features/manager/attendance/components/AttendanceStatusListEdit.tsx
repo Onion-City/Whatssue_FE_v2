@@ -1,60 +1,57 @@
 "use client";
-import { Text } from "@/components/atoms/text";
-import {
-  ATTENDANCE_STATUS_ARR,
-  ATTENDANCE_STATUS_EDIT_DONE,
-  ATTENDANCE_STATUS_TITLE,
-} from "../constants/const";
+import { ATTENDANCE_STATUS_EDIT } from "../constants/const";
 import { attendanceStatusDummy } from "../constants/dummy";
-import AttendanceStatusItem from "./AttendanceStatusItem";
 import "./Attendance.css";
 import { useState } from "react";
 import { Button } from "@/components/atoms/button";
+import AttendanceStatusEditItem from "../molecules/AttendanceStatusEditItem";
+import { useRouter } from "next/navigation";
 
-const AttendanceStatusListEdit = () => {
-  //   const [selectedStatus, setSelectedStatus] = useState(null); // 선택된 상태
+interface AttendanceStatus {
+  id: number;
+  name: string;
+  status: string;
+}
 
-  //   // 선택된 상태에 따라 필터링된 출석 상태 리스트 반환
-  //   const filteredAttendanceStatus = selectedStatus
-  //     ? attendanceStatusDummy.filter(
-  //         (attendanceStatus) => attendanceStatus.status === selectedStatus
-  //       )
-  //     : attendanceStatusDummy;
+const AttendanceStatusListEdit: React.FC = () => {
+  const router = useRouter();
+  const [attendanceStatus, setAttendanceStatus] = useState<AttendanceStatus[]>(
+    attendanceStatusDummy
+  );
 
-  //   const countPeopleByStatus = (status: string) => {
-  //     return attendanceStatusDummy.filter(
-  //       (attendanceStatus) => attendanceStatus.status === status
-  //     ).length;
-  //   };
+  const handleStatusChange = (name: string, status: string) => {
+    setAttendanceStatus((prevStatus) =>
+      prevStatus.map((item) =>
+        item.name === name ? { ...item, status } : item
+      )
+    );
+  };
 
   return (
-    <div className="attendance_status_list">
-      <div className="attendance_status_list__content">
-        {/* <select
-          onChange={(e) => setSelectedStatus(e.target.value)}
-          value={selectedStatus || ""}
-          className="attendance_status_list__content_select"
-        >
-          <option value="">전체</option>
-          {ATTENDANCE_STATUS_ARR.map((status) => (
-            <option key={status} value={status}>
-              {status}
-            </option>
-          ))}
-        </select> */}
+    <div className="attendance_status_list_edit">
+      <div className="attendance_status_list__item">
+        {attendanceStatus.map((attendanceStatus) => (
+          <AttendanceStatusEditItem
+            key={attendanceStatus.id}
+            name={attendanceStatus.name}
+            status={attendanceStatus.status}
+            onStatusChange={handleStatusChange}
+          />
+        ))}
       </div>
 
-      {/* {filteredAttendanceStatus.map((attendanceStatus) => (
-        <AttendanceStatusItem
-          key={attendanceStatus.id}
-          name={attendanceStatus.name}
-          status={attendanceStatus.status}
-        />
-        
-      ))} */}
-
       <div className="attendance_status_list__edit_btn">
-        <Button>{ATTENDANCE_STATUS_EDIT_DONE}</Button>
+        <Button
+          backgroundColor="#404040"
+          color="#fff"
+          size="sm"
+          onClick={() => router.back()}
+        >
+          {ATTENDANCE_STATUS_EDIT.cancle}
+        </Button>
+        <Button onClick={() => router.push("/manager/attendance/status")}>
+          {ATTENDANCE_STATUS_EDIT.done}
+        </Button>
       </div>
     </div>
   );
