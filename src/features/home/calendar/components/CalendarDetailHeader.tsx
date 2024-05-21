@@ -1,5 +1,5 @@
 import { Text } from "@/components/atoms/text";
-import { ICONS } from "@/constants/images";
+import { ICONS, IMAGES } from "@/constants/images";
 import { formatDateTime } from "@/utils/date";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -33,8 +33,11 @@ const CalendarDetailHeader = () => {
             </div>
             <div className="calendarDetailHeader__content">
                 <div className="calendarDetailHeader__content__user">
-                    <span>
-                        프사
+                    <span className="calendarDetailHeader__content__user__span">
+                        <Image 
+                            src={IMAGES.profile}
+                            alt="profile"
+                        />
                     </span>
                     <Text
                         color="#fff"
