@@ -4,7 +4,15 @@ import { Text } from "@/components/atoms/text";
 import "./Attendance.css";
 import AttendanceItem from "@/components/molecules/attendanceItem/AttendanceItem";
 
-const CurrentAttendance = () => {
+interface Attendance {
+  id: number;
+  status: string;
+  title: string;
+  date: string;
+  time: string;
+}
+
+const CurrentAttendance: React.FC = () => {
   return (
     <div>
       <Text
@@ -15,7 +23,7 @@ const CurrentAttendance = () => {
       >
         {CURRENT_ATTENDANCE_TITLE}
       </Text>
-      {currentAttendanceList.map((attendance) => (
+      {currentAttendanceList.map((attendance: Attendance) => (
         <AttendanceItem
           key={attendance.id}
           attendanceAddress="manager"

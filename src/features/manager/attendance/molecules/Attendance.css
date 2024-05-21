@@ -1,0 +1,36 @@
+.attendance_status_item {
+  display: flex;
+  align-items: center;
+  height: 4.25rem;
+  border-top: 0.03125rem solid #4b4b4b;
+  /* border-bottom: 0.03125rem solid #4b4b4b; */
+}
+
+.attendance_status_item__profile {
+  width: 2.32981rem;
+  height: 2.32981rem;
+  border-radius: 50%;
+  margin-right: 0.86rem;
+}
+
+.attendance_status_item__icon {
+  width: 0.25rem;
+  height: 0.25rem;
+  flex-shrink: 0;
+  border-radius: 50%;
+  margin-left: 11rem;
+  margin-right: 0.38rem;
+}
+
+/* 추가된 코드: 색상 클래스에 따른 아이콘 색상 지정 */
+.attendance_status_item__icon.green {
+  background-color: green;
+}
+
+.attendance_status_item__icon.red {
+  background-color: red;
+}
+
+.attendance_status_item__icon.yellow {
+  background-color: yellow;
+}

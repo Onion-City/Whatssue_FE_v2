@@ -7,46 +7,8 @@
   margin-top: 3rem;
 }
 
-.attendance_status_item {
-  display: flex;
-  align-items: center;
-  height: 4.25rem;
-  border-top: 0.03125rem solid #4b4b4b;
-  /* border-bottom: 0.03125rem solid #4b4b4b; */
-}
-
-.attendance_status_item__profile {
-  width: 2.32981rem;
-  height: 2.32981rem;
-  border-radius: 50%;
-  margin-right: 0.86rem;
-}
-
-.attendance_status_item__icon {
-  width: 0.25rem;
-  height: 0.25rem;
-  flex-shrink: 0;
-  border-radius: 50%;
-  margin-left: 11rem;
-  margin-right: 0.38rem;
-}
-
-/* 추가된 코드: 색상 클래스에 따른 아이콘 색상 지정 */
-.attendance_status_item__icon.green {
-  background-color: green;
-}
-
-.attendance_status_item__icon.red {
-  background-color: red;
-}
-
-.attendance_status_item__icon.yellow {
-  background-color: yellow;
-}
-
 .attendance_status_list {
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding: 5.5rem 1rem 0 1rem;
 }
 
 .attendance_status_list__content {
@@ -69,7 +31,7 @@
   justify-content: space-between;
 }
 
-.attendance_status_list__content_select {
+.attendance_status_list__select {
   display: flex;
   width: 5.75rem;
   height: 1.875rem;
@@ -84,17 +46,37 @@
   font-weight: 600;
   line-height: normal;
   margin-left: auto;
+}
+
+#attendance_status_select {
   margin-top: auto;
+}
+
+.attendance_status_list__item {
+  margin-bottom: 5rem;
+}
+
+.attendance_status_list_edit {
+  padding: 5.5rem 1rem 0 1rem;
 }
 
 .attendance_status_list__edit_btn {
   position: fixed;
+  width: 100%;
   bottom: 1.14rem;
-  left: 0;
+  left: 50%; /* 왼쪽 기준을 50%로 설정 */
+  transform: translateX(-50%); /* 왼쪽으로 50% 이동하여 가운데 정렬 */
   padding: 10px;
   z-index: 999;
-  height: 3.125rem;
   border-radius: 0.625rem;
-  margin-left: 0.94rem;
-  margin-right: 0.94rem;
+  display: flex; /* Flexbox 사용 */
+  gap: 1.12rem; /* 버튼 사이 간격 조정 (필요 시) */
+}
+
+.attendance_status_list__edit_btn > :first-child {
+  flex: 1; /* 첫 번째 버튼: 1 비율 */
+}
+
+.attendance_status_list__edit_btn > :last-child {
+  flex: 2; /* 두 번째 버튼: 2 비율 */
 }
