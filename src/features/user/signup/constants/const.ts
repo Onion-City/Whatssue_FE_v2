@@ -5,19 +5,19 @@ export const SIGNUP_INPUT_ARR = [
         title: "회원 이름",
         type: "input",
         essential: true,
-        name: "username"
+        name: "userName"
     },
     {
         title: "회원 이메일",
         type: "input",
         essential: true,
-        name: "email"
+        name: "userEmail"
     },
     {
         title: "회원 전화번호",
         type: "btnInput",
         essential: true,
-        name: "mobile"
+        name: "userPhone"
     }
 ]
 
