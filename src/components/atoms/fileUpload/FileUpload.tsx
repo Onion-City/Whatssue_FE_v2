@@ -6,9 +6,11 @@ import "./FileUpload.css";
 
 export interface FileUploadProps {
   children?: ReactNode;
+  name: string;
+  register: any;
 }
 
-export function FileUpload({ children }: FileUploadProps) {
+export function FileUpload({ children, name, register }: FileUploadProps) {
   interface imageState {
     url?: string;
     name?: string;
@@ -53,6 +55,7 @@ export function FileUpload({ children }: FileUploadProps) {
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
+                {...register(name)}
                 multiple
               />
             </>

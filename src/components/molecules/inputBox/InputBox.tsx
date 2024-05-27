@@ -7,9 +7,9 @@ import { Toggle } from "@/components/atoms/toggle";
 import { AuthBox } from "../authBox";
 import { ChipBox } from "../chipBox/ChipBox";
 
-import { FieldValues, useForm } from "react-hook-form";
-import "./InputBox.css";
 import { CodeInput } from "@/components/atoms/input/CodeInput";
+import { COLORS } from "@/styles";
+import "./InputBox.css";
 
 export interface InputBoxProps {
   title?: string;
@@ -17,7 +17,9 @@ export interface InputBoxProps {
   type?: string;
   subtitle?: string;
   essential?: boolean;
-  name?: string;
+  name: string;
+  register: any;
+  control?: any;
 }
 export function InputBox({
   title,
@@ -26,53 +28,89 @@ export function InputBox({
   subtitle,
   essential,
   name,
+  register,
+  control,
 }: InputBoxProps) {
-  const { control } = useForm<FieldValues>();
+  // const { control } = useForm<FieldValues>();
 
   let inputComponent;
   switch (type) {
     case "input":
-      inputComponent = <Input maxCnt={maxCnt} name="name" control={control} />;
+      inputComponent = 
+        <Input 
+          maxCnt={maxCnt} 
+          name={name}
+          // control={control} 
+          register={register}
+        />;
       break;
     case "numInput":
       inputComponent = (
-        <CodeInput maxCnt={maxCnt} name="name" control={control} />
+        <CodeInput 
+          maxCnt={maxCnt} 
+          name="name" 
+          control={control} 
+        />
       );
       break;
     case "textarea":
-      inputComponent = <Textarea maxCnt={maxCnt} />;
+      inputComponent = (
+        <Textarea 
+          maxCnt={maxCnt} 
+          name={name}
+          register={register}
+        />
+      );
       break;
     case "toggle":
-      inputComponent = <Toggle />;
+      inputComponent = (
+        <Toggle 
+          name={name}
+          register={register}
+        />
+      );
       break;
     case "chip":
-      inputComponent = <ChipBox />;
+      inputComponent = (
+        <ChipBox />
+      );
       break;
     case "fileUpload":
-      inputComponent = <FileUpload />;
+      inputComponent = (
+        <FileUpload 
+          name={name}
+          register={register}
+        />
+      );
       break;
     case "btnInput":
-      inputComponent = <AuthBox />;
+      inputComponent = <AuthBox register={register} />;
       break;
     default:
       // default는 Input
-      inputComponent = <Input maxCnt={maxCnt} name="name" control={control} />;
+      inputComponent = 
+        <Input 
+          maxCnt={maxCnt} 
+          name="name" 
+          // control={control} 
+          register={register}
+        />;
       break;
   }
   return (
     <div className="registerBox">
       <div className="textBox">
-        <Text fontSize="1.1875rem" color="#fff">
+        <Text fontSize="1.1875rem" color={COLORS.white}>
           {title}
         </Text>
         {essential && (
-          <Text fontSize="1.1875rem" color="#FF4444">
+          <Text fontSize="1.1875rem" color={COLORS.red}>
             *
           </Text>
         )}
       </div>
       {subtitle && (
-        <Text fontSize="0.6875rem" color="#d9d9d9" fontWeight="500">
+        <Text fontSize="0.6875rem" color={COLORS.whitegrey} fontWeight="500">
           {subtitle}
         </Text>
       )}

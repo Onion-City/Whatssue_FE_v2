@@ -12,17 +12,15 @@ export interface ToggleProps {
   width?: string;
   fontSize?: string;
   content?: string;
+  name: string;
+  register: any;
 }
 
 export function Toggle({
-  children,
-  color = "#2b2b2b",
-  backgroundColor = "#51F8C4",
-  size = "big",
   height = "2rem",
   width = "4rem",
-  fontSize = "16rem",
-  content = "",
+  name,
+  register
 }: ToggleProps) {
   const [on, setOn] = useState(false);
   const changeToggle = () => {
@@ -65,6 +63,7 @@ export function Toggle({
         checked={on}
         //   onChange={noop}
         data-testid="toggle-input"
+        {...register(name)}
       />
       <span
         className={toggleClassName}
