@@ -5,7 +5,7 @@ import "./Login.css";
 
 export default function LoginBtn() {
   const handleLogin = () => {
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_API_KEY}&redirect_url=${process.env.NEXT_PUBLIC_REDIRECT_URL}&response_type=code`
+    window.location.href = `${process.env.NEXT_PUBLIC_KAKAO_URL}`;
   }
   return (
     <Image src={IMAGES.loginKakao} alt="kakao login" className="login_kakao" onClick={handleLogin}/>
