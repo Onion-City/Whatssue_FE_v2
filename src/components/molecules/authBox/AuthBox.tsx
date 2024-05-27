@@ -2,17 +2,24 @@
 import { Button } from "@/components/atoms/button";
 import { Input } from "@/components/atoms/input";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import "./AuthBox.css";
 import { AUTH_BTN, AUTH_PLACEHOLDER } from "./const";
 
-export const AuthBox = () => {
-    const { control, handleSubmit, getValues } = useForm();
+export const AuthBox = ({register}: any) => {
     const [display, setDisplay] = useState(false);
+    // const {mutate, isSuccess} = usePostCertification();
+    const [authNum, setAuthNum] = useState({
+        toNumber: "",
+        certificationNum: 0
+    });
+
     const handleAuthnum = () => {
         setDisplay(true);
-        handleSubmit(onSubmit);
-        console.log(getValues());
+        // mutate({
+        //     toNumber: 
+        // })
+        // handleSubmit(onSubmit);
+        // console.log(getValues());
     }
 
     const onSubmit = () => {
@@ -25,9 +32,14 @@ export const AuthBox = () => {
             <div className="signup__inputBox">
                 <Input 
                     size="md"
-                    name="mobile"
+                    name="userPhone"
                     placeholder={AUTH_PLACEHOLDER.mobile}
-                    control={control}
+                    // value={authNum.toNumber}
+                    // onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAuthNum((prev) => ({
+                    //     ...prev,
+                    //     toNumber: e.target.value
+                    // }))}
+                    register={register}
                 />
                 <Button 
                     size="sm"
@@ -40,7 +52,7 @@ export const AuthBox = () => {
                     size="md"
                     name="authNum"
                     placeholder={AUTH_PLACEHOLDER.authNum}
-                    control={control}
+                    register={register}
                 />
                 <Button size="sm">{AUTH_BTN.checkNum}</Button>
             </div>) :

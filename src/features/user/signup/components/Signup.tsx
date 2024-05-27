@@ -1,32 +1,50 @@
+import { useRouter } from "next/navigation";
+import React from "react";
+import { useForm } from "react-hook-form";
+
 import { Button } from "@/components/atoms/button";
 import { InputBox } from "@/components/molecules/inputBox";
 import { Wrapper } from "@/components/organisms/Wrapper";
-import { useRouter } from "next/navigation";
-import React from "react";
+import { useCreateUser } from "@/hook/user/useCreateUser";
 import { SIGNUP_BTN, SIGNUP_INPUT_ARR } from "../constants";
 import { SignupHeader } from "./SignupHeader";
 // import "./NicknameOnboarding.css";
 
 const Signup = () => {
     const router = useRouter();
+    const { getValues, register, handleSubmit } = useForm();
+    // const { mutate } = usePostCertification
+    const { data: userResponse, mutate } = useCreateUser();
+    // const { control, handleSubmit } = useForm<FieldValues>();
+
+    const onSubmit = (data: any) => {
+        console.log(data);
+        mutate(data);
+        console.log(userResponse);
+        // router.push("/user/signup/complete");
+    }
     return (
         <Wrapper>
-            <div>
-                <SignupHeader />
-                {SIGNUP_INPUT_ARR.map((box, index) => (
-                    <React.Fragment key={index}>
-                        <InputBox 
-                            title={box.title && box.title}
-                            type={box.type && box.type}
-                            essential={box.essential && box.essential}
-                            name={box.name && box.name}
-                        />
-                    </React.Fragment>
-                ))}
-            </div>
-            <div>
-                <Button onClick={() => router.push("/user/signup/complete")}>{SIGNUP_BTN.complete}</Button>
-            </div>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div>
+                    <SignupHeader />
+                        {SIGNUP_INPUT_ARR.map((box, index) => (
+                            <React.Fragment key={index}>
+                                <InputBox 
+                                    title={box.title && box.title}
+                                    type={box.type && box.type}
+                                    essential={box.essential && box.essential}
+                                    name={box.name && box.name}
+                                    register={register}
+                                    // control={control}
+                                />
+                            </React.Fragment>
+                        ))}
+                </div>
+                <div>
+                    <Button type="submit">{SIGNUP_BTN.complete}</Button>
+                </div>
+            </form>
         </Wrapper>
     )
 }

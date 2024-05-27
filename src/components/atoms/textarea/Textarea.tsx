@@ -10,9 +10,11 @@ export interface TextareaProps {
   height?: string;
   fontSize?: string;
   maxCnt?: number;
+  name: string;
+  register: any;
 }
 
-export function Textarea({ backgroundColor = "#2B2B2B", color = "#fff", size = "big", height = "12rem", fontSize = "16px", content = "", maxCnt = 300 }: TextareaProps) {
+export function Textarea({ backgroundColor = "#2B2B2B", color = "#fff", size = "big", height = "12rem", fontSize = "16px", content = "", maxCnt = 300, name, register }: TextareaProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [textCnt, setTextCnt] = useState(0);
   const style: React.CSSProperties = {
@@ -50,6 +52,7 @@ export function Textarea({ backgroundColor = "#2B2B2B", color = "#fff", size = "
         onBlur={handleBlur}
         onChange={handleTextCnt}
         maxLength={maxCnt}
+        {...register(name)}
       />
       <p>
         <span>{textCnt}</span>

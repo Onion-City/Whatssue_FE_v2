@@ -11,14 +11,15 @@ export interface ButtonProps {
   height?: string;
   fontSize?: string;
   fontWeight?: string;
+  type?: "button" | "submit" | "reset" | undefined;
 }
 
-export function Button({ children, onClick, color = "#2b2b2b", backgroundColor = "#51F8C4", size = "lg", fontSize = "1rem", fontWeight = "700" }: ButtonProps) {
+export function Button({ children, onClick, color = "#2b2b2b", backgroundColor = "#51F8C4", size = "lg", fontSize = "1rem", fontWeight = "700", type = "button" }: ButtonProps) {
   const style: React.CSSProperties = {
     color: color,
     backgroundColor: backgroundColor,
     fontSize: fontSize,
     fontWeight: fontWeight,
   };
-  return <div onClick={onClick} className={`btn ${size}`} style={style}>{children}</div>;
+  return <button onClick={onClick} className={`btn ${size}`} style={style} type={type}>{children}</button>;
 }
