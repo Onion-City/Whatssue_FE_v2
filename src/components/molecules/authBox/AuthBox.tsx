@@ -1,14 +1,13 @@
 "use client";
 import { Button } from "@/components/atoms/button";
 import { Input } from "@/components/atoms/input";
-import { usePostCertification } from "@/hook/user/usePostCertification";
 import { useState } from "react";
 import "./AuthBox.css";
 import { AUTH_BTN, AUTH_PLACEHOLDER } from "./const";
 
 export const AuthBox = ({register}: any) => {
     const [display, setDisplay] = useState(false);
-    const {mutate, isSuccess} = usePostCertification();
+    // const {mutate, isSuccess} = usePostCertification();
     const [authNum, setAuthNum] = useState({
         toNumber: "",
         certificationNum: 0
