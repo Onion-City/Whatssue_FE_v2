@@ -18,7 +18,10 @@ interface FetchScheduleRes {
 export const useFetchSchedule = async ({clubId, q, sDate, eDate}: FetchScheduleProps) => {
     return useQuery<FetchScheduleRes[]>({
         queryKey: ['schedule', clubId],
-        queryFn: () => http.get<FetchScheduleRes[]>(`/clubs/${clubId}/schedules?q=${q}&sDate=${sDate}&eDate=${eDate}`),
+        queryFn: () => http.get<FetchScheduleRes[]>(
+            `/clubs/${clubId}/schedules?q=${q}&sDate=${sDate}&eDate=${eDate}`
+            // `/clubs/${clubId}/schedules`
+        ),
         staleTime: 1000,
     })
 }
