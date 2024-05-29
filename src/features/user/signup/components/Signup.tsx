@@ -10,12 +10,20 @@ import { SIGNUP_BTN, SIGNUP_INPUT_ARR } from "../constants";
 import { SignupHeader } from "./SignupHeader";
 // import "./NicknameOnboarding.css";
 
+interface FormData {
+    useName: string;
+    userEmail: string;
+    userPhone: string;
+};
+
 const Signup = () => {
     const router = useRouter();
-    const { getValues, register, handleSubmit } = useForm();
-    // const { mutate } = usePostCertification
     const { data: userResponse, mutate } = useCreateUser();
-    // const { control, handleSubmit } = useForm<FieldValues>();
+    const methods = useForm<FormData>({
+        mode: 'onChange'
+    });
+
+    const { handleSubmit, control } = methods;
 
     const onSubmit = (data: any) => {
         console.log(data);
@@ -35,8 +43,8 @@ const Signup = () => {
                                     type={box.type && box.type}
                                     essential={box.essential && box.essential}
                                     name={box.name && box.name}
-                                    register={register}
-                                    // control={control}
+                                    // register={register}
+                                    control={control}
                                 />
                             </React.Fragment>
                         ))}

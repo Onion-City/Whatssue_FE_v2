@@ -11,7 +11,8 @@ export interface InputProps {
   maxCnt?: number;
   name: string;
   value?: string | number;
-  field: ControllerRenderProps<any, any>;
+  field?: ControllerRenderProps<any, any>;
+  control?: any;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -22,13 +23,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     name, 
     value, 
     field,
+    control,
     ...props 
   }, ref) => {
-    const [textCnt, setTextCnt] = useState(field.value ? String(field.value).length : 0);
+    const [textCnt, setTextCnt] = useState(field?.value ? String(field.value).length : 0);
 
     const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
       setTextCnt(e.target.value.length);
-      field.onChange(e);
+      field?.onChange(e);
     };
 
     return (
@@ -38,7 +40,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           className={`input ${size}`}
           placeholder={placeholder}
           onChange={handleChangeInput}
-          value={field.value || ""}
+          value={field?.value || ""}
           maxLength={maxCnt !== 0 ? maxCnt : undefined}
           name={name}
           ref={ref}
