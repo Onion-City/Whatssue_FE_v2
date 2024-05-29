@@ -39,7 +39,7 @@ export const AuthBox = ({register}: any) => {
                     //     ...prev,
                     //     toNumber: e.target.value
                     // }))}
-                    register={register}
+                    // register={register}
                 />
                 <Button 
                     size="sm"
@@ -52,7 +52,7 @@ export const AuthBox = ({register}: any) => {
                     size="md"
                     name="authNum"
                     placeholder={AUTH_PLACEHOLDER.authNum}
-                    register={register}
+                    // register={register}
                 />
                 <Button size="sm">{AUTH_BTN.checkNum}</Button>
             </div>) :

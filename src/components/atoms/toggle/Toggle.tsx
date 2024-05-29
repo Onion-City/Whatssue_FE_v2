@@ -13,8 +13,8 @@ export interface ToggleProps {
   width?: string;
   fontSize?: string;
   content?: string;
-  name: string;
-  field: ControllerRenderProps<any, any>;
+  name?: string;
+  field?: ControllerRenderProps<any, any>;
 }
 
 export function Toggle({
@@ -23,16 +23,16 @@ export function Toggle({
   name,
   field
 }: ToggleProps) {
-  const [on, setOn] = useState(field.value || false);
+  const [on, setOn] = useState(field?.value || false);
 
   useEffect(() => {
-    setOn(field.value || false);
-  }, [field.value]);
+    setOn(field?.value || false);
+  }, [field?.value]);
 
   const changeToggle = () => {
     const newValue = !on;
     setOn(newValue);
-    field.onChange(newValue);
+    field?.onChange(newValue);
   };
   const toggleClassName = `toggle-btn ${on ? "on" : "off"}`;
 

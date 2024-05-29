@@ -18,7 +18,7 @@ export interface InputBoxProps {
   subtitle?: string;
   essential?: boolean;
   name: string;
-  control: any;
+  control?: any;
 }
 
 const renderInputComponent = (type: string, maxCnt: number | undefined, name: string, field: any) => {
