@@ -11,21 +11,21 @@ export const REGISTER_INPUT_ARR = [
       maxCnt: 300,
       type: "textarea",
       essential: true,
-      name: "clubContent"
+      name: "clubIntro"
     },
     {
       title: "모집 여부",
       type: "toggle",
       subtitle: "모집 여부는 설정에서 변경할 수 있어요",
       essential: true,
-      name: "recruit"
+      name: "isPrivate"
     },
     {
       title: "회원명 설정",
       type: "chip",
       subtitle: "회원명 설정은 최초 설정 이후에 변경할 수 없어요",
       essential: true,
-      name: "usernameMethod"
+      name: "namePolicy"
     }
 ];
 
@@ -33,12 +33,14 @@ export const REGISTER_INPUT_ARR2 = [
   {
     title: "모임 대표 사진",
     type: "fileUpload",
+    name: "profileImage",
     essential: false
   },
   {
     title: "대표 연락 수단",
     type: "input",
     maxCnt: 30,
+    name: "contactMeans",
     essential: false,
     // subtitle: "전화번호, 이메일, sns 등",
     content: "예시) 010-7330-9731"
@@ -46,6 +48,7 @@ export const REGISTER_INPUT_ARR2 = [
   {
     title: "모임 관련 링크",
     type: "textarea",
+    name: "clubLinks",
     essential: false,
     subtitle: "notion, 디스코드, 오픈 채팅방 등",
     maxCnt: 300
@@ -53,8 +56,16 @@ export const REGISTER_INPUT_ARR2 = [
 ]
 
 export const REGISTER_CHIP_ARR = [
-    "실명제",
-    "닉네임제"
+    {
+      id: 0,
+      txt: "실명제",
+      name: "REAL_NAME",
+    },
+    {
+      id: 1,
+      txt: "닉네임제",
+      name: "NICK_NAME",
+    }
 ];
 
 export const REGISTER_COMPLETE_ARR = [

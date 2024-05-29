@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { ControllerRenderProps } from "react-hook-form";
 
 export interface TextareaProps {
   content?: string;
@@ -10,11 +11,23 @@ export interface TextareaProps {
   height?: string;
   fontSize?: string;
   maxCnt?: number;
+  name: string;
+  field: ControllerRenderProps<any, any>;
 }
 
-export function Textarea({ backgroundColor = "#2B2B2B", color = "#fff", size = "big", height = "12rem", fontSize = "16px", content = "", maxCnt = 300 }: TextareaProps) {
+export function Textarea({ 
+  backgroundColor = "#2B2B2B", 
+  color = "#fff", 
+  size = "big", 
+  height = "12rem", 
+  fontSize = "16px", 
+  content = "", 
+  maxCnt = 300, 
+  name, 
+  field,
+}: TextareaProps) {
   const [isFocused, setIsFocused] = useState(false);
-  const [textCnt, setTextCnt] = useState(0);
+  const [textCnt, setTextCnt] = useState(field.value ? String(field.value).length : 0);
   const style: React.CSSProperties = {
     backgroundColor: backgroundColor,
     color: color,
@@ -39,7 +52,8 @@ export function Textarea({ backgroundColor = "#2B2B2B", color = "#fff", size = "
 
   const handleTextCnt = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setTextCnt(e.target.value.length);
-  }
+    field.onChange(e);
+  };
 
   return (
     <div className="input__wrapper">
@@ -50,6 +64,8 @@ export function Textarea({ backgroundColor = "#2B2B2B", color = "#fff", size = "
         onBlur={handleBlur}
         onChange={handleTextCnt}
         maxLength={maxCnt}
+        name={name}
+        value={field.value || ""}
       />
       <p>
         <span>{textCnt}</span>

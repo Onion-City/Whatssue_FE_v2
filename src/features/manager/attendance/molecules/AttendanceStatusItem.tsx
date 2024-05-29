@@ -3,12 +3,14 @@ import { ICONS } from "@/constants/images";
 import Image from "next/image";
 import "./Attendance.css";
 
-const AttendanceStatusItem = ({
-  name,
-  status,
-}: {
+interface AttendanceStatusItemProps {
   name: string;
   status: string;
+}
+
+const AttendanceStatusItem: React.FC<AttendanceStatusItemProps> = ({
+  name,
+  status,
 }) => {
   let iconColorClass = "";
 

@@ -1,38 +1,47 @@
+// Input.tsx
 "use client";
 
-import React, { forwardRef, useState } from "react";
-import { UseControllerProps, useController } from "react-hook-form";
+import { forwardRef, useState } from "react";
+import { ControllerRenderProps } from "react-hook-form";
 import "./input.css";
 
-export interface InputProps extends UseControllerProps{
+export interface InputProps {
   placeholder?: string;
   size?: 'sm' | 'md' | 'lg';
   maxCnt?: number;
+  name: string;
+  value?: string | number;
+  field: ControllerRenderProps<any, any>;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ control, size = "lg", placeholder = "", maxCnt = 0, name = '', ...props }, ref) => {
-    const [textCnt, setTextCnt] = useState(0);
-    const {
-      field,
-      fieldState: { error }
-    } = useController({ name, control });
+  ({ 
+    size = "lg", 
+    placeholder = "", 
+    maxCnt = 0, 
+    name, 
+    value, 
+    field,
+    ...props 
+  }, ref) => {
+    const [textCnt, setTextCnt] = useState(field.value ? String(field.value).length : 0);
 
     const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
       setTextCnt(e.target.value.length);
-    }
+      field.onChange(e);
+    };
 
     return (
       <div className="input__wrapper">
         <input 
-          ref={ref}
           type="text"
           className={`input ${size}`}
           placeholder={placeholder}
-          onChange={field.onChange}
-          value={field.value || ''}
+          onChange={handleChangeInput}
+          value={field.value || ""}
           maxLength={maxCnt !== 0 ? maxCnt : undefined}
           name={name}
+          ref={ref}
           {...props}
         />
         {maxCnt !== 0 && (

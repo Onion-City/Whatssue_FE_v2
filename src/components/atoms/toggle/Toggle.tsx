@@ -1,6 +1,7 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
+import { ControllerRenderProps } from "react-hook-form";
 import "./Toggle.css";
 
 export interface ToggleProps {
@@ -12,21 +13,26 @@ export interface ToggleProps {
   width?: string;
   fontSize?: string;
   content?: string;
+  name: string;
+  field: ControllerRenderProps<any, any>;
 }
 
 export function Toggle({
-  children,
-  color = "#2b2b2b",
-  backgroundColor = "#51F8C4",
-  size = "big",
   height = "2rem",
   width = "4rem",
-  fontSize = "16rem",
-  content = "",
+  name,
+  field
 }: ToggleProps) {
-  const [on, setOn] = useState(false);
+  const [on, setOn] = useState(field.value || false);
+
+  useEffect(() => {
+    setOn(field.value || false);
+  }, [field.value]);
+
   const changeToggle = () => {
-    setOn((prev) => !prev);
+    const newValue = !on;
+    setOn(newValue);
+    field.onChange(newValue);
   };
   const toggleClassName = `toggle-btn ${on ? "on" : "off"}`;
 
@@ -63,13 +69,13 @@ export function Toggle({
         style={inputStyle}
         type="checkbox"
         checked={on}
-        //   onChange={noop}
+        onChange={changeToggle}
         data-testid="toggle-input"
       />
       <span
         className={toggleClassName}
         style={spanStyle}
-        onClick={changeToggle}
+        // onClick={changeToggle}
       />
     </label>
   );

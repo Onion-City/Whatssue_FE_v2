@@ -2,12 +2,13 @@ import { Text } from "@/components/atoms/text";
 import { ScheduleBox } from "@/components/molecules/scheduleBox";
 import { RouterBtn } from "@/components/organisms/RouterBtn/RouterBtn";
 import { formatDateKor } from "@/utils/date";
-import { useRouter } from "next/navigation";
-import React from "react";
+import moment from "moment";
+import React, { useContext } from "react";
+import { ScheduleContext } from "../SetHome";
 import "./Home.css";
 
 const HomeDateWrapper = () => {
-    const router = useRouter();
+    const { value, onChange } = useContext(ScheduleContext);
     const dateList = [
         {
             id: 1,
@@ -33,9 +34,9 @@ const HomeDateWrapper = () => {
                     color="#fff"
                     fontSize="1.0625rem"
                     fontWeight="700"
-                >{formatDateKor(new Date())}</Text>
+                >{formatDateKor(value)}</Text>
                 <RouterBtn
-                    path="/1/calendar"
+                    path={`/1/calendar?month=${moment(value).format("YYYY/MM")}`}
                 >
                     <Text
                         color="#fff"

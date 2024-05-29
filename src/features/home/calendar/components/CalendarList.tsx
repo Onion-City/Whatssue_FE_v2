@@ -1,11 +1,8 @@
 "use client";
-import { Text } from "@/components/atoms/text";
 import { DateBox } from "@/components/molecules/dateBox";
 import { ScheduleBox } from "@/components/molecules/scheduleBox";
-import { formatDateKor } from "@/utils/date";
 import { useRouter } from "next/navigation";
 import React from "react";
-import HomeDateBox from "../../components/HomeDateBox";
 import "./Calendar.css";
 
 export interface dateProps {
@@ -38,34 +35,6 @@ const CalendarList = () => {
             title: "와이어프레임 작성 회의"
         },
     ];
-
-    const handleDatePage = (scheduleId: number) => {
-        router.push(`/1/calendar/${scheduleId}`)
-    }
-    const renderDateList = (date: dateProps) => (
-        <React.Fragment key={date.id}>
-            <div className="homeDateWrapper__sticky">
-                <div className="homeDateWrapper__header">
-                    <Text
-                        color="#fff"
-                        fontSize="1.0625rem"
-                        fontWeight="700"
-                    >{formatDateKor(date.time)}</Text>
-                </div>
-            </div>
-            <div className="homeDateWrapper__body">
-                {dateList?.map((date) => (
-                    <React.Fragment key={date.id}>
-                        <HomeDateBox
-                            time={date.time}
-                            title={date.title}
-                            onClick={() => handleDatePage(date.id)}
-                        />
-                    </React.Fragment>
-                ))}
-            </div>
-        </React.Fragment>
-    );
 
     return (
         <div className="homeDateWrapper">
