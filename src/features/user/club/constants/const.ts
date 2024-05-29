@@ -56,8 +56,16 @@ export const REGISTER_INPUT_ARR2 = [
 ]
 
 export const REGISTER_CHIP_ARR = [
-    "실명제",
-    "닉네임제"
+    {
+      id: 0,
+      txt: "실명제",
+      name: "REAL_NAME",
+    },
+    {
+      id: 1,
+      txt: "닉네임제",
+      name: "NICK_NAME",
+    }
 ];
 
 export const REGISTER_COMPLETE_ARR = [

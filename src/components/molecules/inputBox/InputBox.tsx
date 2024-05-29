@@ -1,14 +1,14 @@
+// InputBox.tsx
 import { FileUpload } from "@/components/atoms/fileUpload";
 import { Input } from "@/components/atoms/input";
+import { CodeInput } from "@/components/atoms/input/CodeInput";
 import { Text } from "@/components/atoms/text";
 import { Textarea } from "@/components/atoms/textarea";
 import { Toggle } from "@/components/atoms/toggle";
-
+import { COLORS } from "@/styles";
+import { Controller } from "react-hook-form";
 import { AuthBox } from "../authBox";
 import { ChipBox } from "../chipBox/ChipBox";
-
-import { CodeInput } from "@/components/atoms/input/CodeInput";
-import { COLORS } from "@/styles";
 import "./InputBox.css";
 
 export interface InputBoxProps {
@@ -18,85 +18,39 @@ export interface InputBoxProps {
   subtitle?: string;
   essential?: boolean;
   name: string;
-  register: any;
-  control?: any;
+  control: any;
 }
-export function InputBox({
-  title,
-  maxCnt,
-  type,
-  subtitle,
-  essential,
-  name,
-  register,
-  control,
-}: InputBoxProps) {
-  // const { control } = useForm<FieldValues>();
 
-  let inputComponent;
+const renderInputComponent = (type: string, maxCnt: number | undefined, name: string, field: any) => {
   switch (type) {
     case "input":
-      inputComponent = 
-        <Input 
-          maxCnt={maxCnt} 
-          name={name}
-          // control={control} 
-          register={register}
-        />;
-      break;
+      return <Input maxCnt={maxCnt} name={name} field={field} />;
     case "numInput":
-      inputComponent = (
-        <CodeInput 
-          maxCnt={maxCnt} 
-          name="name" 
-          control={control} 
-        />
-      );
-      break;
+      return <CodeInput maxCnt={maxCnt} {...field} />;
     case "textarea":
-      inputComponent = (
-        <Textarea 
-          maxCnt={maxCnt} 
-          name={name}
-          register={register}
-        />
-      );
-      break;
+      return <Textarea maxCnt={maxCnt} name={name} field={field} />;
     case "toggle":
-      inputComponent = (
-        <Toggle 
-          name={name}
-          register={register}
-        />
-      );
-      break;
+      return <Toggle name={name} field={field} />;
     case "chip":
-      inputComponent = (
-        <ChipBox />
-      );
-      break;
+      return <ChipBox field={field}/>;
     case "fileUpload":
-      inputComponent = (
-        <FileUpload 
-          name={name}
-          register={register}
-        />
-      );
-      break;
+      return <FileUpload name={name} field={field} />;
     case "btnInput":
-      inputComponent = <AuthBox register={register} />;
-      break;
+      return <AuthBox />;
     default:
-      // default는 Input
-      inputComponent = 
-        <Input 
-          maxCnt={maxCnt} 
-          name="name" 
-          // control={control} 
-          register={register}
-        />;
-      break;
+      return <Input maxCnt={maxCnt} name={name} field={field} />;
   }
+};
+
+export function InputBox({ title, maxCnt, type = "input", subtitle, essential, name, control }: InputBoxProps) {
+  const inputComponent = (
+    <Controller
+      name={name}
+      control={control}
+      render={({ field }) => renderInputComponent(type, maxCnt, name, field)}
+    />
+  );
+
   return (
     <div className="registerBox">
       <div className="textBox">

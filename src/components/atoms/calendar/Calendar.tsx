@@ -1,8 +1,9 @@
-"use client"; //set으로 만들고 해당을 제거
+"use client";
 
 import moment from "moment";
+import dynamic from 'next/dynamic';
 import { ReactElement, useEffect, useState } from "react";
-import Calendar from "react-calendar";
+// import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // css import
 import "./Calendar.css";
 
@@ -11,6 +12,8 @@ import { PreviousIcon } from "./PreviousIcon";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
+
+const Calendar = dynamic(() => import('react-calendar'), { ssr: false }); // 지연 로딩
 
 export interface HomeCalendarProps {
   // setMarkedDate: (dates: string[]) => void;
