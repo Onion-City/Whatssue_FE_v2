@@ -8,8 +8,8 @@ import "./FileUpload.css";
 
 export interface FileUploadProps {
   children?: ReactNode;
-  name: string;
-  field: ControllerRenderProps<any, any>;
+  name?: string;
+  field?: ControllerRenderProps<any, any>;
 }
 
 export function FileUpload({ children, name, field }: FileUploadProps) {
@@ -44,7 +44,7 @@ export function FileUpload({ children, name, field }: FileUploadProps) {
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         setImage(reader.result as string);
-        field.onChange({
+        field?.onChange({
           url: reader.result,
           imageFile: file as File,
         });
