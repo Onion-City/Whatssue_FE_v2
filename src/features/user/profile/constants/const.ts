@@ -18,19 +18,19 @@ export const EDIT_ACCOUNT_INFO_INPUT_ARR = [
         title: "이름",
         type: "input",
         essential: true,
-        name: "username"
+        name: "userName"
     },
     {
         title: "이메일",
         type: "input",
         essential: true,
-        name: "email"
+        name: "userEmail"
     },
     {
         title: "휴대폰 번호",
         type: "btnInput",
         essential: true,
-        name: "mobile"
+        name: "userMobile"
     }
 ]
 
