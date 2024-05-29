@@ -4,6 +4,7 @@
     border-radius: 10px;
     text-align: center;
     font-family: "Pretendard Variable";
+    box-shadow: none;
 }
 
 .btn.sm {

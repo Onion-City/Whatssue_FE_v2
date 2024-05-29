@@ -1,7 +1,9 @@
 .react-calendar {
     background-color: #1B1B1B;
     border: none;
-  }
+    width: 500px;
+    height: 400px;
+}
 
 /* 년-월 */
 .react-calendar__navigation__label > span {
@@ -45,6 +47,12 @@
     flex-direction: column;
     text-align: center;
     align-items: center;;
+}
+
+.react-calendar__month-view__days__day:hover {
+  background-color: #292929;
+  color: #666;
+  border-radius: 50px;
 }
 
 /* 저번 달 & 다음 달 일자 */

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { PeriodCalendar } from "../calendar/PeriodCalendar";
 import "./Period.css";
 
 
@@ -40,10 +39,10 @@ export const Period = ({ tmpPeriod, setTmpPeriod }: PeriodProps) => {
             {openCalendar && 
                 (
                     <div className="period__wrapper">
-                        <PeriodCalendar 
+                        {/* <PeriodCalendar 
                             setCalendarOpen={setOpenCalendar}
                             setTmpPeriod={setTmpPeriod}
-                        />
+                        /> */}
                     </div>
                 )
             }
