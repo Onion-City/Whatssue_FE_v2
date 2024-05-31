@@ -1,31 +1,19 @@
+"use client";
+import moment from "moment";
+import React, { useContext } from "react";
+import "./Home.css";
+
 import { Text } from "@/components/atoms/text";
 import { ScheduleBox } from "@/components/molecules/scheduleBox";
 import { RouterBtn } from "@/components/organisms/RouterBtn/RouterBtn";
+import { ScheduleContent } from "@/types/schedule";
 import { formatDateKor } from "@/utils/date";
-import moment from "moment";
-import React, { useContext } from "react";
 import { ScheduleContext } from "../SetHome";
-import "./Home.css";
 
-const HomeDateWrapper = () => {
+const HomeDateWrapper = ({ dateList }: {
+    dateList: ScheduleContent[]
+}) => {
     const { value, onChange } = useContext(ScheduleContext);
-    const dateList = [
-        {
-            id: 1,
-            time: new Date(),
-            title: "UI 회의"
-        },
-        {
-            id: 2,
-            time: new Date(),
-            title: "와이어 프레임 작성 회의"
-        },
-        {
-            id: 3,
-            time: new Date(),
-            title: "백엔드 회의"
-        },
-    ];
 
     return (
         <div className="homeDate">
@@ -36,7 +24,7 @@ const HomeDateWrapper = () => {
                     fontWeight="700"
                 >{formatDateKor(value)}</Text>
                 <RouterBtn
-                    path={`/1/calendar?month=${moment(value).format("YYYY/MM")}`}
+                    path={`/1/calendar?month=${moment(value).format("YYYY-MM")}`}
                 >
                     <Text
                         color="#fff"
@@ -44,14 +32,14 @@ const HomeDateWrapper = () => {
                     >더보기</Text>
                 </RouterBtn>
             </div>
-            {dateList?.map((date) => (
-                <React.Fragment key={date.id}>
+            {dateList && dateList?.map((date: ScheduleContent) => (
+                <React.Fragment key={date.scheduleId}>
                     <RouterBtn
-                        path={`/1/calendar/${date.id}`}
+                        path={`/1/calendar/${date.scheduleId}`}
                     >
                         <ScheduleBox
-                            time={date.time}
-                            title={date.title}
+                            time={date.scheduleTime}
+                            title={date.scheduleName}
                         />
                     </RouterBtn>
                 </React.Fragment>

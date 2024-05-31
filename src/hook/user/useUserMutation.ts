@@ -8,7 +8,7 @@ export interface CreateUserProps {
   userEmail: string;
 }
 
-export const useCreateUser = () => {
+export const useUserMutation = () => {
   const router = useRouter();
   return useMutation({
     mutationFn: (data: CreateUserProps) => http.post('/user/signUp', data),

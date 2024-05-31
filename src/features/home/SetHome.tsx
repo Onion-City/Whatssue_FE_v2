@@ -1,9 +1,9 @@
 "use client";
+import { createContext } from 'react';
+
 import { ClubHeader } from "@/components/organisms/Header/ClubHeader";
 import { Nav } from "@/components/organisms/Nav";
-import { useFetchSchedule } from "@/hook/schedule/useFetchSchedule";
-import moment from "moment";
-import { createContext, useState } from 'react';
+import useSchedule from "@/hook/schedule/useSchedule";
 import HomeDateWrapper from "./components/HomeDateWrapper";
 import HomeHeader from "./components/HomeHeader";
 
@@ -15,32 +15,21 @@ export const ScheduleContext = createContext<{
     onChange: () => {}
 });
 
-// const useScheduleContext = () => useContext(ScheduleContext);
-
-export interface ScheduleListProps {
-    scheduleId: number;
-    scheduleTitle: string;
-    scheduleContent: string;
-    scheduleDateTime: Date;
-    attendance: number;
-}
-
 const SetHome = () => {
-    const [value, setValue] = useState<Date>(new Date());
-
-    const data = useFetchSchedule({clubId: 1, q: "", sDate: moment(new Date("2023-01-01")).format("YYYY-MM-DD"), eDate: moment(new Date()).format("YYYY-MM-DD")});
+    const { value, setValue, data, isLoading, mark } = useSchedule();
+    // TODO: isLoading 시 skeleton UI 적용
     console.log(data);
 
-    const handleChange = (newValue: Date) => {
-        setValue(newValue);
-    };
-
     return (
-        <ScheduleContext.Provider value={{ value, onChange: handleChange }}>
+        <ScheduleContext.Provider value={{ value, onChange: setValue }}>
             <div>
                 <ClubHeader color={true} />
-                <HomeHeader />
-                <HomeDateWrapper />
+                <HomeHeader 
+                    mark={mark}
+                />
+                <HomeDateWrapper 
+                    dateList={data}
+                />
             </div>
             <Nav />
         </ScheduleContext.Provider>

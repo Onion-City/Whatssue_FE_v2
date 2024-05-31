@@ -4,15 +4,18 @@ import { useContext } from 'react';
 import { ScheduleContext } from '../SetHome'; // Adjust the path as needed
 import "./Home.css";
 
-const HomeHeader = () => {
+const HomeHeader = ({ mark }: {
+    mark: string[]
+}) => {
     const { value, onChange } = useContext(ScheduleContext);
     return (
         <div className="homeHeader">
             <Search />
             <HomeCalendar 
-                fetchData={(date) => console.log(date)}
+                // fetchData={(date) => console.log(date)}
                 value={value}
                 onChange={onChange}
+                mark={mark}
             />
         </div>
     )

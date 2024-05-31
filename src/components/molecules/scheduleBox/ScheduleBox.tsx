@@ -1,13 +1,7 @@
 import { Text } from "@/components/atoms/text";
 import { COLORS } from "@/styles";
-import { formatTime } from "@/utils/date";
+import { ScheduleBoxProps } from "@/types/schedule";
 import "./ScheduleBox.css";
-
-interface ScheduleBoxProps {
-    time: Date;
-    title: string;
-    onClick?: any;
-}
 
 export const ScheduleBox = ({time, title}: ScheduleBoxProps) => {
     return (
@@ -17,7 +11,7 @@ export const ScheduleBox = ({time, title}: ScheduleBoxProps) => {
                     <Text
                         color={COLORS.whitegrey}
                         fontSize="0.8125rem"
-                    >{formatTime(time)}</Text>
+                    >{time}</Text>
                 </span>
                 <span>
                     <Text
