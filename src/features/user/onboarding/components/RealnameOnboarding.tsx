@@ -3,12 +3,13 @@ import { FileUpload } from "@/components/atoms/fileUpload";
 import { Text } from "@/components/atoms/text";
 import { InputBox } from "@/components/molecules/inputBox";
 import { Wrapper } from "@/components/organisms/Wrapper";
+import { COLORS } from "@/styles";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { ONBOARDING_BTN, ONBOARDING_INPUT_ARR } from "../constants/const";
 
 interface FormData {
-    nickname: string;
+    name: string;
     introduce: string;
     emailPublic: boolean;
     mobilePublic: boolean;
@@ -25,12 +26,12 @@ const RealnameOnboarding = () => {
         console.log(data);
     }
     return (
-        <Wrapper isHeader={true}>
-            <form onSubmit={handleSubmit(submitOnboarding)}>
+        <form onSubmit={handleSubmit(submitOnboarding)}>
+            <Wrapper isHeader={true}>
                 <div className="register__content">
                     <div className="register__content__img">
                         <Text
-                            color="#fff"
+                            color={COLORS.white}
                             fontSize="1.0625rem"
                             fontWeight="700"
                         >프로필 사진</Text>
@@ -51,10 +52,12 @@ const RealnameOnboarding = () => {
                     ))}
                 </div>
                 <div className="register__btn">
-                    <Button>{ONBOARDING_BTN}</Button>
+                    <Button
+                        type="submit"
+                    >{ONBOARDING_BTN}</Button>
                 </div>
-            </form>
-        </Wrapper>
+            </Wrapper>
+        </form>
     )
 }
 
