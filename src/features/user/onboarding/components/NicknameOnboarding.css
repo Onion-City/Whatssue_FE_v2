@@ -1,3 +1,7 @@
+.register__content {
+    padding-top: 5.5rem;
+}
+
 .register__content__img {
     display: flex;
     flex-direction: column;
