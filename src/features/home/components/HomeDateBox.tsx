@@ -1,9 +1,8 @@
 import { Text } from "@/components/atoms/text";
-import { formatTime } from "@/utils/date";
 import "./Home.css";
 
 interface HomeDateBoxProps {
-    time: Date;
+    time: string;
     title: string;
     onClick?: any;
 }
@@ -16,7 +15,7 @@ const HomeDateBox = ({time, title, onClick}: HomeDateBoxProps) => {
                     <Text
                         color="#d9d9d9"
                         fontSize="0.8125rem"
-                    >{formatTime(time)}</Text>
+                    >{time}</Text>
                 </span>
                 <span>
                     <Text

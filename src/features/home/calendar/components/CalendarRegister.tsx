@@ -77,7 +77,6 @@ const CalendarRegister = () => {
                     <div className="calendarRegister__background">
                         <span className="calendarRegister__background__calendar">
                             <HomeCalendar 
-                                fetchData={(date) => console.log(date)}
                                 setCalendarOpen={setCalendarOpen}
                                 value={value}
                                 onChange={onChange}

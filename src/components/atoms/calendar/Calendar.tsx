@@ -16,7 +16,7 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 const Calendar = dynamic(() => import('react-calendar'), { ssr: false }); // 지연 로딩
 
 export interface HomeCalendarProps {
-  mark: string[];
+  mark?: string[];
   setCalendarOpen?: any;
   value: Date;
   onChange: (date: Date) => void;
@@ -51,7 +51,7 @@ export function HomeCalendar({
   };
 
   useEffect(() => {
-    if (mark?.length > 0) {
+    if (mark && mark?.length > 0) {
       console.log(mark);
     }
   }, [mark]);
