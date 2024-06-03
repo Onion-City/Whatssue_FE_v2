@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/atoms/button";
 import { InputBox } from "@/components/molecules/inputBox";
 import { Wrapper } from "@/components/organisms/Wrapper";
-import { useCreateUser } from "@/hook/user/useCreateUser";
+import { useUserMutation } from "@/hook/user/useUserMutation";
 import { SIGNUP_BTN, SIGNUP_INPUT_ARR } from "../constants";
 import { SignupHeader } from "./SignupHeader";
 // import "./NicknameOnboarding.css";
@@ -18,7 +18,7 @@ interface FormData {
 
 const Signup = () => {
     const router = useRouter();
-    const { data: userResponse, mutate } = useCreateUser();
+    const { data: userResponse, mutate } = useUserMutation();
     const methods = useForm<FormData>({
         mode: 'onChange'
     });

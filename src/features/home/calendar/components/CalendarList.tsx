@@ -7,7 +7,7 @@ import "./Calendar.css";
 
 export interface dateProps {
     id: number;
-    time: Date;
+    time: string;
     title: string;
 }
 
@@ -16,22 +16,22 @@ const CalendarList = () => {
     const dateList: dateProps[] = [
         {
             id: 1,
-            time: new Date(),
+            time: "20:00:00",
             title: "UI 회의"
         },
         {
             id: 2,
-            time: new Date(),
+            time: "20:00:00",
             title: "와이어 프레임 작성 회의"
         },
         {
             id: 3,
-            time: new Date(),
+            time: "20:00:00",
             title: "백엔드 회의"
         },
         {
             id: 4,
-            time: new Date(),
+            time: "20:00:00",
             title: "와이어프레임 작성 회의"
         },
     ];

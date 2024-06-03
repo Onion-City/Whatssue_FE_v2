@@ -4,12 +4,14 @@ import Image from "next/image"
 //(e: MouseEvent<HTMLButtonElement, MouseEvent>) => void}
 export const PreviousIcon = ({handleDate} : any) => {
     return(
-        <>
+        <div
+            id="prev"
+            onClick={handleDate}
+        >
             <Image 
                 src={PrevIcon}
                 alt="prev"
-                onClick={handleDate}
             />
-        </>
+        </div>
     )
 }

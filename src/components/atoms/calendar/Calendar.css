@@ -99,3 +99,12 @@
     text-align: center;
     margin-top: 3px;
   }
+
+  .dot.selected {
+    height: 8px;
+    width: 8px;
+    background-color: #1B1B1B;
+    border-radius: 50%;
+    text-align: center;
+    margin-top: 3px;
+  }

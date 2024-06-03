@@ -2,7 +2,7 @@
 
 import moment from "moment";
 import dynamic from 'next/dynamic';
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect } from "react";
 // import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // css import
 import "./Calendar.css";
@@ -16,116 +16,42 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 const Calendar = dynamic(() => import('react-calendar'), { ssr: false }); // 지연 로딩
 
 export interface HomeCalendarProps {
-  // setMarkedDate: (dates: string[]) => void;
-  // mark: string[];
-  // findSchedule: (date: Date) => void;
-  // findMonthSchdule: (month: string) => void;
-  fetchData: (date: Date) => void;
+  mark?: string[];
   setCalendarOpen?: any;
-  // fetchData: () => void;
   value: Date;
   onChange: (date: Date) => void;
-  // setNowMonth: (date: Date) => void;
-  // setNowDate: (formattedDate: string) => void;
 }
 
 export function HomeCalendar({
-  // setMarkedDate,
-  // mark,
-  // findSchedule,
-  // findMonthSchdule,
-  fetchData,
+  mark,
   setCalendarOpen,
   value,
   onChange,
-  // setNowMonth,
-  // setNowDate
 }: HomeCalendarProps) {
-  // const [value, onChange] = useState(new Date());
-  const [nowDate, setNowDate] = useState(
-    moment(value).format("YYYY년 MM월 DD일")
-  );
-  const [nowMonth, setNowMonth] = useState(new Date());
-  const [markedDate, setMarkedDate] = useState([]);
-  const [mark, setMark] = useState([]);
-
-  const [response, setResponse] = useState([]);
-  const [filteredRes, setFilteredRes] = useState([]);
-
-  const day: string = moment(value).format("YYYY-MM-DD");
-  const currDate: Date = new Date();
-  const currDateTime: string = moment(currDate).format("MM-DD");
-
-  // 달을 변경할 때마다 데이터 불러오기
-  const findMonthSchdule = async (e: any) => {
-    setMarkedDate([]);
-    let currentDate = value;
-    const currentMonth = value.getMonth();
-
-    if (e === "p") {
-      currentDate.setMonth(value.getMonth() - 1);
-    } else {
-      currentDate.setMonth(value.getMonth() + 1);
-    }
-
-    const subMonth = +currentMonth - +currentDate.getMonth();
-    if (subMonth === -2) {
-      currentDate.setMonth(value.getMonth() - 1);
-    } else if (subMonth === 2) {
-      currentDate.setMonth(value.getMonth() + 1);
-    }
-
-    console.log(currentDate);
-    setNowMonth(new Date(currentDate));
-  };
-
-  // 해당 날짜 스케줄 찾기
-  const findSchedule = (e: any) => {
-    setFilteredRes(
-      response.filter(
-        (es: any) => es?.scheduleDate === moment(e).format("YYYY-MM-DD")
-      )
-    );
-  };
-
-  // PM & AM 형식으로 변경
-  const formatTime = (getTime: any) => {
-    const [hour, minute] = getTime.split(":");
-    const formattedHour =
-      parseInt(hour) > 12 ? parseInt(hour) - 12 : parseInt(hour);
-    const period = parseInt(hour) >= 12 ? "PM" : "AM";
-
-    return `${formattedHour < 10 ? `0${formattedHour}` : formattedHour}:${minute} ${period}`;
-  };
 
   const handleDateChange = (selectedDate: any) => {
     if (selectedDate instanceof Date) {
-      if (moment(value).format("MM") !== moment(selectedDate).format("MM")) {
-        setMarkedDate([]);
-        fetchData(selectedDate);
-      }
       onChange(selectedDate);
-      setNowDate(moment(selectedDate).format("YYYY년 MM월 DD일"));
-      findSchedule(selectedDate);
-      setCalendarOpen(false);
     }
   };
 
   const handleDate = (e: React.MouseEvent<HTMLButtonElement>): void => {
-    setMarkedDate([]);
-    findMonthSchdule(e.currentTarget.id);
+    const newValue = new Date();
+    if (e.currentTarget.id === "next") {
+      // 다음달
+      onChange(moment(newValue.setMonth(value.getMonth() + 1, 1)).toDate())
+    } else if (e.currentTarget.id === "prev") {
+      // 저번달
+      onChange(moment(newValue.setMonth(value.getMonth() - 1, 1)).toDate())
+    }
   };
 
   const handleMonthChange = (e: any): void => {
-    setMarkedDate([]);
     onChange(e.activeStartDate);
-    setNowDate(moment(e.activeStartDate).format("YYYY년 MM월 DD일"));
-    setNowMonth(e.activeStartDate);
-    fetchData(e.activeStartDate);
   };
 
   useEffect(() => {
-    if (mark?.length > 0) {
+    if (mark && mark?.length > 0) {
       console.log(mark);
     }
   }, [mark]);
@@ -144,9 +70,26 @@ export function HomeCalendar({
       prev2Label={null}
       tileContent={({ date, view }) => {
         const html: ReactElement[] = [];
-        if (mark?.find((x) => x === moment(date).format("YYYY-MM-DD"))) {
-          html.push(<div className="dot"></div>);
-        }
+        mark?.forEach((m, i) => {
+          if (m === moment(date).format("YYYY-MM-DD")) {
+            if (moment(date).format("YYYY-MM-DD") === moment(value).format("YYYY-MM-DD")){
+              console.log("!");
+              html.push(
+                <div 
+                  key={i}
+                  className="dot selected"
+                ></div>
+              );
+            } else {
+              html.push(
+                <div 
+                  key={i}
+                  className="dot"
+                ></div>
+              );
+            }
+          }
+        })
         return (
           <>
             <div className="flex justify-center items-center absoluteDiv">

@@ -1,6 +1,5 @@
 import { Text } from "@/components/atoms/text"
 import { RouterBtn } from "@/components/organisms/RouterBtn/RouterBtn"
-import { formatDateKor } from "@/utils/date"
 import React from "react"
 import HomeDateBox from "../../components/HomeDateBox"
 import { dateProps } from "./CalendarList"
@@ -9,22 +8,22 @@ export const CalendarDayBox = (date: dateProps) => {
     const dateList: dateProps[] = [
         {
             id: 1,
-            time: new Date(),
+            time: "20:00:00",
             title: "UI 회의"
         },
         {
             id: 2,
-            time: new Date(),
+            time: "20:00:00",
             title: "와이어 프레임 작성 회의"
         },
         {
             id: 3,
-            time: new Date(),
+            time: "20:00:00",
             title: "백엔드 회의"
         },
         {
             id: 4,
-            time: new Date(),
+            time: "20:00:00",
             title: "와이어프레임 작성 회의"
         },
     ];
@@ -35,7 +34,7 @@ export const CalendarDayBox = (date: dateProps) => {
                     color="#fff"
                     fontSize="1.0625rem"
                     fontWeight="700"
-                >{formatDateKor(date.time)}</Text>
+                >{date.time}</Text>
             </div>
             <div className="homeDateWrapper__body">
                 {dateList?.map((date) => (
