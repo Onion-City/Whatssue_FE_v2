@@ -4,14 +4,17 @@ import React, { useContext } from "react";
 import "./Home.css";
 
 import { Text } from "@/components/atoms/text";
+import { NoData } from "@/components/molecules/noData";
 import { ScheduleBox } from "@/components/molecules/scheduleBox";
+import { SkeletonScheduleBox } from "@/components/molecules/scheduleBox/SkeletonScheduleBox";
 import { RouterBtn } from "@/components/organisms/RouterBtn/RouterBtn";
 import { ScheduleContent } from "@/types/schedule";
 import { formatDateKor } from "@/utils/date";
 import { ScheduleContext } from "../SetHome";
 
-const HomeDateWrapper = ({ dateList }: {
-    dateList: ScheduleContent[]
+const HomeDateWrapper = ({ dateList, isLoading }: {
+    dateList: ScheduleContent[],
+    isLoading: any;
 }) => {
     const { value, onChange } = useContext(ScheduleContext);
 
@@ -32,7 +35,14 @@ const HomeDateWrapper = ({ dateList }: {
                     >더보기</Text>
                 </RouterBtn>
             </div>
-            {dateList && dateList?.map((date: ScheduleContent) => (
+            {isLoading ? (
+                <>
+                    <SkeletonScheduleBox/>
+                    <SkeletonScheduleBox/>
+                    <SkeletonScheduleBox/>
+                </>
+            ) : (
+            dateList && dateList.length > 0 ? (dateList?.map((date: ScheduleContent) => (
                 <React.Fragment key={date.scheduleId}>
                     <RouterBtn
                         path={`/1/calendar/${date.scheduleId}`}
@@ -43,6 +53,10 @@ const HomeDateWrapper = ({ dateList }: {
                         />
                     </RouterBtn>
                 </React.Fragment>
+            ))) : (
+                <NoData
+                    title={"일정이 없습니다"}
+                />
             ))}
         </div>
     )

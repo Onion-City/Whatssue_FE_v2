@@ -1,0 +1,21 @@
+.noData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* padding-top: 3vh; */
+  
+  width: 100%;
+  /* margin: 3vh 0; */
+  height: 100%;
+  padding-bottom: 5.5rem;
+}
+
+.noData__img {
+  width: 18%;
+  height: 40%;
+  min-height: 50px;
+  max-height: 80px;
+  min-width: 50px;
+  max-width: 80px;
+}
