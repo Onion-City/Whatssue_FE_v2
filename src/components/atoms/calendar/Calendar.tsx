@@ -18,7 +18,7 @@ const Calendar = dynamic(() => import('react-calendar'), { ssr: false }); // 지
 export interface HomeCalendarProps {
   mark?: string[];
   setCalendarOpen?: any;
-  value: Date;
+  value?: Date;
   onChange: (date: Date) => void;
 }
 
@@ -32,17 +32,18 @@ export function HomeCalendar({
   const handleDateChange = (selectedDate: any) => {
     if (selectedDate instanceof Date) {
       onChange(selectedDate);
+      setCalendarOpen && setCalendarOpen(false);
     }
   };
 
   const handleDate = (e: React.MouseEvent<HTMLButtonElement>): void => {
     const newValue = new Date();
-    if (e.currentTarget.id === "next") {
+    if (e.currentTarget.id === "next" && value) {
       // 다음달
-      onChange(moment(newValue.setMonth(value.getMonth() + 1, 1)).toDate())
-    } else if (e.currentTarget.id === "prev") {
+      onChange(moment(newValue.setMonth(value?.getMonth() + 1, 1)).toDate())
+    } else if (e.currentTarget.id === "prev" && value) {
       // 저번달
-      onChange(moment(newValue.setMonth(value.getMonth() - 1, 1)).toDate())
+      onChange(moment(newValue.setMonth(value?.getMonth() - 1, 1)).toDate())
     }
   };
 

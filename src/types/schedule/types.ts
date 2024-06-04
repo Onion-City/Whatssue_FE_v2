@@ -1,4 +1,4 @@
-// 일정 목록 content
+// 일정 목록 data
 export interface ScheduleContent {
   scheduleId: number;
   scheduleName: string;
@@ -12,4 +12,19 @@ export interface ScheduleBoxProps {
   time: string;
   title: string;
   onClick?: () => void;
+}
+
+// 일정 등록 data
+
+export interface ScheduleProp {
+  clubId: number;
+  userId: number;
+}
+
+export interface ScheduleData {
+  scheduleName?: string;
+  scheduleContent?: string;
+  schedulePlace?: string;
+  scheduleDate?: string;
+  scheduleTime?: string;
 }

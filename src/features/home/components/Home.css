@@ -14,12 +14,13 @@
 .homeDate {
     margin: 1rem auto;
     width: 90vw;
-
+    height: calc(50% - 5.5rem);
 }
 
 .homeDateWrapper__header {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 1rem;
 }
 
 .homeDateWrapper__header span {
