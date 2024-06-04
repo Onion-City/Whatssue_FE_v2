@@ -22,13 +22,14 @@ const SetHome = () => {
 
     return (
         <ScheduleContext.Provider value={{ value, onChange: setValue }}>
-            <div>
+            <div style={{ 'height': '100%', 'paddingBottom': "4.25rem" }}>
                 <ClubHeader color={true} />
                 <HomeHeader 
                     mark={mark}
                 />
                 <HomeDateWrapper 
                     dateList={data}
+                    isLoading={isLoading}
                 />
             </div>
             <Nav />

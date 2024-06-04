@@ -176,6 +176,12 @@
     color: #fff;
 }
 
+.calendarRegister__time {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .calendarRegister__dateInput {
     position: relative;
     cursor: pointer;
@@ -209,7 +215,7 @@
 .calendarRegister__background__calendar {
     position: absolute;
     left: 20vw;
-    top: calc(7.5rem + 32px);
+    top: calc(11rem);
 }
 
 /* CalendarPeriod */

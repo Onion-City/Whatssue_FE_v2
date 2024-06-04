@@ -14,6 +14,7 @@ export const ICONS = {
   down: require("@/assets/images/ic_down.png"),
   search: require("@/assets/images/ic_search.png"),
   calendar: require("@/assets/images/ic_calendar.png"),
+  clock: require("@/assets/images/ic_clock.png"),
   exchange: require("@/assets/images/ic_exchange.png"),
   memberProfileNone: require("@/assets/images/ic_member_profile_none.png"),
   manager: require("@/assets/images/ic_manager.png"),
@@ -23,6 +24,7 @@ export const ICONS = {
   arrowRight: require("@/assets/images/ic_arrow_right.png"),
   back: require("@/assets/images/ic_back.png"),
   filter: require("@/assets/images/ic_filter.png"),
+  nodata: require("@/assets/images/ic_nodata.png"),
   
   floatingPlus: require("@/assets/images/Plus.png"),
   floatingLock: require("@/assets/images/ic_lock.png"),
