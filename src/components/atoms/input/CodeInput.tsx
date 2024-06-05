@@ -1,38 +1,58 @@
-import React, { forwardRef, useState } from "react";
-import { UseControllerProps, useController } from "react-hook-form";
+import React, { forwardRef, useRef, useEffect } from "react";
+import { UseControllerProps } from "react-hook-form";
 import "./input.css";
 
 export interface InputProps extends UseControllerProps {
-  size?: "sm" | "md" | "lg";
   maxCnt?: number;
+  index?: number;
+  setFocus?: (index: number) => void;
+  onValueChange?: (index: number, value: string) => void;
 }
 
 export const CodeInput = forwardRef<HTMLInputElement, InputProps>(
-  ({ control, size = "lg", maxCnt = 1, name = "", ...props }, ref) => {
-    // const {
-    //   field,
-    //   fieldState: { error },
-    // } = useController({ name, control });
+  (
+    { maxCnt = 1, name = "", index, setFocus, onValueChange, ...props },
+    ref
+  ) => {
+    const inputRef = useRef<HTMLInputElement | null>(null);
 
-    // const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //   const inputValue = e.target.value;
-    //   const filteredInput = inputValue.replace(/[^0-9]/g, "");
-    //   field.onChange(filteredInput);
-    // };
+    useEffect(() => {
+      if (inputRef.current && ref) {
+        if (typeof ref === "function") {
+          ref(inputRef.current);
+        } else {
+          (ref as React.MutableRefObject<HTMLInputElement | null>).current =
+            inputRef.current;
+        }
+      }
+    }, [ref]);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
+      if (value.length >= maxCnt) {
+        setFocus && setFocus(index! + 1);
+      }
+      onValueChange && onValueChange(index!, value);
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === "Backspace" && !inputRef.current?.value) {
+        setFocus && setFocus(index! - 1);
+      }
+    };
 
     return (
       <div className="num_input__wrapper">
         <input
-          ref={ref}
+          ref={inputRef}
           type="text"
           className="num_input"
-          // onChange={handleChangeInput}
-          // value={field.value || ""}
           maxLength={maxCnt !== 0 ? maxCnt : undefined}
           name={name}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
           {...props}
         />
-        {/* {error && <p className="error">{error.message}</p>} */}
       </div>
     );
   }

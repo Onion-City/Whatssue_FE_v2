@@ -50,4 +50,10 @@ input:-ms-input-placeholder {
   border-radius: 0.625rem;
   border: 1px solid #51f8c4;
   background-color: #2b2b2b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  font-size: 1.4rem;
 }

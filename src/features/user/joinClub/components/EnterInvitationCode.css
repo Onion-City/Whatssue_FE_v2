@@ -1,3 +1,11 @@
+.invitation_code {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  margin-top: 5.5rem;
+}
+
 .invitation_code_icon {
   display: flex;
   width: 2.4375rem;
@@ -5,7 +13,6 @@
   flex-shrink: 0;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 5rem;
 }
 
 .invitation_code__title {
@@ -24,8 +31,11 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  max-width: 30rem;
+  width: 100%;
+  max-width: 49.68rem;
   margin: 0 auto 1.19rem auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .invitation_code__enter {
