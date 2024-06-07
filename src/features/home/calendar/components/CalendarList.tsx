@@ -1,7 +1,10 @@
 "use client";
 import { DateBox } from "@/components/molecules/dateBox";
 import { ScheduleBox } from "@/components/molecules/scheduleBox";
-import { useRouter } from "next/navigation";
+import { RouterBtn } from "@/components/organisms/RouterBtn/RouterBtn";
+import useSchedule from "@/hook/schedule/useSchedule";
+import moment from "moment";
+import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import "./Calendar.css";
 
@@ -13,6 +16,9 @@ export interface dateProps {
 
 const CalendarList = () => {
     const router = useRouter();
+    const params = useSearchParams();
+    console.log(params.get('month'));
+    
     const dateList: dateProps[] = [
         {
             id: 1,
@@ -36,32 +42,45 @@ const CalendarList = () => {
         },
     ];
 
+    const { data, isLoading, mark } = useSchedule({
+        clubId: 1,
+        q: "",
+        sDate: moment(params.get('month'), "YYYY-MM").startOf('month').format("YYYY-MM-DD"), 
+        eDate: moment(params.get('month'), "YYYY-MM").endOf('month').format("YYYY-MM-DD")
+    });
+
     return (
         <div className="homeDateWrapper">
-            <DateBox
-                date={new Date()}
-            >
-                {dateList.map((date) => (
-                    <React.Fragment key={date.id}>
-                        <ScheduleBox 
-                            time={date.time}
-                            title={date.title}
-                        />
+            {
+                mark && 
+                mark.length > 0 && 
+                mark?.map((m, i) => (
+                    <React.Fragment key={i}>
+                        <DateBox
+                            date={m}
+                        >
+                            {
+                            data && 
+                            data.data && 
+                            data.data.content
+                                ?.filter((d) => d.scheduleDate === m)
+                                ?.map((date) => (
+                                    <React.Fragment key={date.scheduleId}>
+                                        <RouterBtn
+                                            path={`/1/calendar/${date.scheduleId}`}
+                                        >
+                                            <ScheduleBox
+                                                time={date.scheduleTime}
+                                                title={date.scheduleName}
+                                            />
+                                        </RouterBtn>
+                                    </React.Fragment>
+                                ))
+                            }
+                        </DateBox>
                     </React.Fragment>
-                ))}
-            </DateBox>
-            <DateBox
-                date={new Date()}
-            >
-                {dateList.map((date) => (
-                    <React.Fragment key={date.id}>
-                        <ScheduleBox 
-                            time={date.time}
-                            title={date.title}
-                        />
-                    </React.Fragment>
-                ))}
-            </DateBox>
+                ))
+            }
         </div>
     );
 };

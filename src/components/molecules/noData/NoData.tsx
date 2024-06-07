@@ -9,7 +9,7 @@ export const NoData = ({ title }: { title: string }) => {
   return(
     <div className="noData">
       <Image 
-        src={ICONS.nodata}
+        src={ICONS.calendar}
         alt="no_data"
         className="noData__img"
       />

@@ -8,6 +8,7 @@ import { NoData } from "@/components/molecules/noData";
 import { ScheduleBox } from "@/components/molecules/scheduleBox";
 import { SkeletonScheduleBox } from "@/components/molecules/scheduleBox/SkeletonScheduleBox";
 import { RouterBtn } from "@/components/organisms/RouterBtn/RouterBtn";
+import { COLORS } from "@/styles";
 import { ScheduleContent } from "@/types/schedule";
 import { formatDateKor } from "@/utils/date";
 import { ScheduleContext } from "../SetHome";
@@ -22,7 +23,7 @@ const HomeDateWrapper = ({ dateList, isLoading }: {
         <div className="homeDate">
             <div className="homeDateWrapper__header">
                 <Text
-                    color="#fff"
+                    color={COLORS.white}
                     fontSize="1.0625rem"
                     fontWeight="700"
                 >{formatDateKor(value)}</Text>
@@ -30,7 +31,7 @@ const HomeDateWrapper = ({ dateList, isLoading }: {
                     path={`/1/calendar?month=${moment(value).format("YYYY-MM")}`}
                 >
                     <Text
-                        color="#fff"
+                        color={COLORS.white}
                         fontSize="0.6875rem"
                     >더보기</Text>
                 </RouterBtn>
@@ -55,7 +56,7 @@ const HomeDateWrapper = ({ dateList, isLoading }: {
                 </React.Fragment>
             ))) : (
                 <NoData
-                    title={"일정이 없습니다"}
+                    title={"등록된 일정이 없어요"}
                 />
             ))}
         </div>

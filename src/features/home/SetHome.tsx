@@ -4,6 +4,7 @@ import { createContext } from 'react';
 import { ClubHeader } from "@/components/organisms/Header/ClubHeader";
 import { Nav } from "@/components/organisms/Nav";
 import useSchedule from "@/hook/schedule/useSchedule";
+import moment from 'moment';
 import HomeDateWrapper from "./components/HomeDateWrapper";
 import HomeHeader from "./components/HomeHeader";
 
@@ -16,9 +17,13 @@ export const ScheduleContext = createContext<{
 });
 
 const SetHome = () => {
-    const { value, setValue, data, isLoading, mark } = useSchedule();
-    // TODO: isLoading 시 skeleton UI 적용
-    console.log(data);
+    const { value, setValue, filteredData, isLoading, mark } = useSchedule({
+        clubId: 1,
+        q: "",
+        sDate: moment().startOf('month').format("YYYY-MM-DD"), 
+        eDate: moment().endOf('month').format("YYYY-MM-DD")
+    });
+    console.log(filteredData);
 
     return (
         <ScheduleContext.Provider value={{ value, onChange: setValue }}>
@@ -28,7 +33,7 @@ const SetHome = () => {
                     mark={mark}
                 />
                 <HomeDateWrapper 
-                    dateList={data}
+                    dateList={filteredData}
                     isLoading={isLoading}
                 />
             </div>
