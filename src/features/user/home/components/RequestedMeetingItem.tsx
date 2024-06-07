@@ -1,29 +1,21 @@
+import { Modal } from "@/components/atoms/modal";
 import { Text } from "@/components/atoms/text";
 import useSwipeItemHandles from "@/hook/user/useSwipeItemHandles";
+import { ApprovalStatus, RequestedJoinClubInfo } from "@/types/club";
+import { useState } from "react";
+import { HOME_CANCEL } from "../constants/const";
 import "./RequestedMeetingItem.css";
 
-enum ApprovalStatus {
-  Approved = "ACCEPTED",
-  Waiting = "WAITING",
-  Rejected = "REJECTED",
-}
-export interface MeetingItemProps {
-  id: number;
-  title: string;
-  date: string;
-  approval: string;
-}
-// - 신청 취소 (승인 대기중 신청 스와이프 시)
-// - 거절 사유 조회 (거절 신청 클릭 시)
-// - 내역 삭제 (거절됨, 승인됨 스와이프 시)
 const RequestedMeetingItem = ({
-  id,
-  title,
-  date,
-  approval,
-}: MeetingItemProps) => {
+  clubJoinRequestId,
+  clubId,
+  clubName,
+  status,
+  updatedAt,
+}: RequestedJoinClubInfo) => {
+  const [openCancelModal, setOpenCancelModal] = useState(false);
   const handleRejectedModal = (clubId: number) => {
-    if (approval == ApprovalStatus.Rejected) {
+    if (status == ApprovalStatus.Rejected) {
       // 거절 사유 조회 모달 열기
     }
   };
@@ -34,8 +26,12 @@ const RequestedMeetingItem = ({
     handleMouseMove,
     showDeletePopup,
   } = useSwipeItemHandles();
+  const handleOpenCancelModal = () => {
+    setOpenCancelModal((prop) => !prop);
+  };
   const handleCancel = () => {
-    // 신청 취소 모달 열기
+    setOpenCancelModal((prop) => !prop);
+    // 신청내역 취소
   };
   const handleDelete = () => {
     // 해당 신청 내역 삭제 요청
@@ -43,7 +39,7 @@ const RequestedMeetingItem = ({
   return (
     <div
       className="home__content__Requeste__box_wrapper"
-      onClick={() => handleRejectedModal(id)}
+      onClick={() => handleRejectedModal(clubId)}
       onTouchStart={handleTouchStart}
       onMouseDown={handleMouseDown}
       onTouchMove={handleTouchMove}
@@ -59,7 +55,7 @@ const RequestedMeetingItem = ({
             fontWeight="600"
             className="home__content__Requeste__left_title"
           >
-            {title}
+            {clubName}
           </Text>
           <Text
             color="#b8b8b8"
@@ -67,18 +63,18 @@ const RequestedMeetingItem = ({
             fontWeight="500"
             className="home__content__Requeste__left_date"
           >
-            신청일: {date}
+            신청일: {updatedAt}
           </Text>
         </div>
         <Text
-          color={`${approval == ApprovalStatus.Rejected ? `#f44` : `#fff`}`}
+          color={`${status == ApprovalStatus.Rejected ? `#f44` : `#fff`}`}
           fontSize="0.8125rem"
           fontWeight="600"
           className="home__content__Requeste__right"
         >
-          {approval == ApprovalStatus.Approved
+          {status == ApprovalStatus.Approved
             ? "승인"
-            : approval == ApprovalStatus.Waiting
+            : status == ApprovalStatus.Waiting
               ? "승인 대기 중"
               : "거절됨"}
         </Text>
@@ -89,16 +85,26 @@ const RequestedMeetingItem = ({
       >
         <div className="delete-popup-inner">
           <Text color="#fff" fontSize="0.8125rem" fontWeight="600">
-            {approval == ApprovalStatus.Waiting && (
-              <div onClick={handleCancel}>신청 취소</div>
+            {status == ApprovalStatus.Waiting && (
+              <div onClick={handleOpenCancelModal}>신청 취소</div>
             )}
-            {(approval == ApprovalStatus.Rejected ||
-              approval == ApprovalStatus.Approved) && (
+            {(status == ApprovalStatus.Rejected ||
+              status == ApprovalStatus.Approved) && (
               <div onClick={handleDelete}>삭제</div>
             )}
           </Text>
         </div>
       </div>
+      {openCancelModal && (
+        <Modal
+          title={HOME_CANCEL.title}
+          subtitle={HOME_CANCEL.subtitle}
+          agree={HOME_CANCEL.agree}
+          denial={HOME_CANCEL.denial}
+          agreeVoid={handleCancel}
+          denialVoid={handleOpenCancelModal}
+        />
+      )}
     </div>
   );
 };

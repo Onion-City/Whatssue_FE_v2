@@ -18,6 +18,11 @@ const Board = () => {
     height: "1.625rem",
     cursor: "pointer",
   };
+  const handleRouteBoard = (boardTypeAddress: string) => {
+    const startedPath = pathname.split("/").slice(1)[0];
+    router.push(`/${startedPath}/board/${boardTypeAddress}
+    /regis`);
+  };
   return (
     <div className="board">
       <div className="board__content__list__top">
@@ -48,7 +53,7 @@ const Board = () => {
           img={ICONS.floatingPlus}
           alt="Plus"
           inStyle={inPlusStyle}
-          onClick={() => router.push(`/board/${boardTypeAddress}/regis`)}
+          onClick={() => handleRouteBoard(boardTypeAddress)}
         />
       </div>
     </div>

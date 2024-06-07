@@ -14,37 +14,37 @@ export interface NavProps {
 export function Nav({ title, maxCnt, type, subtitle, essential }: NavProps) {
   const router = useRouter();
   const pathname = usePathname();
-  const selectedPath = pathname.split("/")[1];
+  const selectedPath =
+    pathname === "/" ? pathname : pathname.split("/").slice(1, 3).join("/");
   const handleNavigate = (path: string) => {
-    router.push(`/${path}`);
+    const startedPath = pathname.split("/").slice(1)[0];
+    if (startedPath) router.push(`/${startedPath}/${path}`);
+    else alert("게시판 부터!"); //수정 필요
   };
   return (
     <div className="Nav__wrapper">
-      {navItems.map(({ path, icon: Icon, text }) => (
-        <div
-          key={path}
-          className="Nav__Icon"
-          onClick={() => handleNavigate(path)}
-        >
-          <Icon
-            fill={
-              path === "atten"
-                ? "none"
-                : selectedPath === path
-                  ? "#fff"
-                  : "#989898"
-            }
-            stroke={selectedPath === path ? "#fff" : "#989898"}
-          />
-          <Text
-            color={selectedPath === path ? "#fff" : "#989898"}
-            fontSize="0.6875rem"
-            fontWeight="600"
+      {navItems.map(({ path, icon: Icon, text }) => {
+        const isIcon = path.startsWith(selectedPath);
+        return (
+          <div
+            key={path}
+            className="Nav__Icon"
+            onClick={() => handleNavigate(path)}
           >
-            {text}
-          </Text>
-        </div>
-      ))}
+            <Icon
+              fill={text === "출석" ? "none" : isIcon ? "#fff" : "#989898"}
+              stroke={isIcon ? "#fff" : "#989898"}
+            />
+            <Text
+              color={isIcon ? "#fff" : "#989898"}
+              fontSize="0.6875rem"
+              fontWeight="600"
+            >
+              {text}
+            </Text>
+          </div>
+        );
+      })}
     </div>
   );
 }

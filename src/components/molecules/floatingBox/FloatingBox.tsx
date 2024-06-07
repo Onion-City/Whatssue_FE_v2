@@ -32,6 +32,10 @@ export function FloatingBox() {
     width: "1.125rem",
     height: "1.5625rem",
   };
+
+  const handleSubmit = () => {
+      router.push("/");
+  };
   return (
     <div className="floating__box">
       <div className={`floating__box__inner ${on ? "visible" : ""}`}>

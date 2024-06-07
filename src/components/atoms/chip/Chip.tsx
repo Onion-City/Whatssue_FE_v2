@@ -6,7 +6,11 @@ export interface ChipProps {
   onClick?: any;
 }
 
-export function Chip({ children, chipOn = false, onClick }: ChipProps) {
+export function Chip({
+  children,
+  chipOn = false,
+  onClick,
+}: ChipProps) {
   const chipStyle: React.CSSProperties = {
     backgroundColor: chipOn ? "#51F8C4" : "#404040",
     width: "5.4375rem",
@@ -20,5 +24,9 @@ export function Chip({ children, chipOn = false, onClick }: ChipProps) {
     fontFamily: "Pretendard Variable",
   };
 
-  return <span style={chipStyle} onClick={onClick}>{children}</span>;
+  return (
+    <span style={chipStyle} onClick={onClick}>
+      {children}
+    </span>
+  );
 }
