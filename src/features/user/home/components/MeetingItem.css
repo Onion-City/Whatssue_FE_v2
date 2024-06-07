@@ -36,16 +36,16 @@
     margin-left: 0.41rem;
   }
   .home__content__meeting__left_bottom_tag {
-    width: 2.625rem;
     height: 0.9375rem;
     border-radius: 1.875rem;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.5625rem;
-    font-weight: 600;
-    font-family: "Pretendard Variable";
+    background-color: #fff;
+  }
+  .home__content__meeting__left_bottom_tag span{
+    margin: 1rem;
   }
   .home__content__meeting__right_img {
     width: 4.8125rem;

@@ -5,7 +5,7 @@ import { Heart } from "@/components/atoms/heart/Heart";
 import { Text } from "@/components/atoms/text";
 import { ICONS } from "@/constants/images";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import "./BoardItem.css";
 import { BoardItemProps } from "./BoardItemProps";
 
@@ -22,9 +22,11 @@ const BoardItem = ({
   writer: { profile = testimg, name },
 }: BoardItemProps) => {
   const router = useRouter();
+  const pathname = usePathname();
   // 글 작성페이지로 이동
   const handleRouteBoardDetail = (BoardId: number) => {
-    router.push(`/board/${boardAddress}/${BoardId}`);
+    const startedPath = pathname.split("/").slice(1)[0];
+    router.push(`/${startedPath}/board/${boardAddress}/${BoardId}`);
   };
 
   return (
