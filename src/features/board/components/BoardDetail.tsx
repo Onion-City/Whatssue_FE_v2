@@ -2,13 +2,14 @@ import { Comment, CommentInput } from "@/components/atoms/comment/index";
 import { Heart } from "@/components/atoms/heart/Heart";
 import { Text } from "@/components/atoms/text";
 import { ImageModal } from "@/components/molecules/ImageModal";
+import useGetBoard from "@/hook/board/useGetBoardDetail";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { BoardDetailArr, commentsArr } from "../constants/testArr/TestArr";
 import "./BoardDetail.css";
 export const BoardDetail = () => {
-  const router = useRouter();
+  const data = useGetBoard({ clubId: 1, postId: 1 });
+  console.log("ddd", data);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [currentIndex, setCurrentIndex] = useState<number>(-1);
   const handleIsHeart = () => {
@@ -23,16 +24,6 @@ export const BoardDetail = () => {
     // 사진 모달 닫기
     setIsOpenModal(false);
   };
-
-  //   title,
-  //   content,
-  //   date,
-  //   comment,
-  //   hearts,
-  //   contentImgs,
-  //   isHeart = false,
-  //   writer: { profile = testimg, name },
-  // }: BoardItemProps
   return (
     <>
       <div className="board__detail__wrapper">

@@ -6,3 +6,10 @@ export const HOME_WARNING_ARR = {
     name: "explanation",
   },
 };
+
+export const HOME_CANCEL = {
+  title: "글을 삭제하시겠습니까?",
+  subtitle: "한번 삭제된 글은 복구할 수 없습니다.",
+  agree: "네, 삭제하겠습니다.",
+  denial: "아니요",
+};

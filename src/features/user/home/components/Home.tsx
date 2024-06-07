@@ -1,7 +1,9 @@
 import { ChoiceBox } from "@/components/molecules/choiceBox/index";
 import { FloatingBox } from "@/components/molecules/floatingBox/FloatingBox";
+
+import { useClubJoinQuery } from "@/hook/clubJoin/useClubJoinQuery";
+import { useClubListQuery } from "@/hook/user/useClubListQuery";
 import { useState } from "react";
-import { testArr, testArr2 } from "../constants/testArr/TestArr";
 import "./Home.css";
 import HomeNoneContent from "./HomeNoneContent";
 import MeetingItem from "./MeetingItem";
@@ -9,10 +11,14 @@ import RequestedMeetingItem from "./RequestedMeetingItem";
 // import HomeNoneContent from "./HomeNoneContent";
 
 const Home = () => {
+  const { data: clubList, isLoading } = useClubListQuery({ page: 0, size: 10 });
+  const { data: requestedClubList, isLoading: isLoading2 } =
+    useClubJoinQuery();
   const [isChoice, setIsChoice] = useState(0); // 0 === 모임, 1 === 신청한 모임
   const handleChoice = (e: number) => {
     setIsChoice(e);
   };
+  console.log(clubList?.data);
   return (
     <div className="home">
       <ChoiceBox
@@ -23,36 +29,54 @@ const Home = () => {
       />
 
       <div className="home__content__meeting">
-        {isChoice === 0 && testArr.length === 0 && <HomeNoneContent />}
-        {isChoice === 0 && testArr.length > 0 && (
+        {isChoice === 0 && isLoading && <div>Loading...</div>}
+        {clubList && isChoice === 0 && (
           <>
-            {/* 모임 */}
-            {testArr.map((item, index) => (
-              <MeetingItem
-                key={index}
-                id={item.id}
-                title={item.title}
-                date={item.date}
-                member={item.member}
-                contentImg={item.contentImg}
-                tag={item.tag}
-              />
-            ))}
+            {clubList.data.content && clubList.data.content.length === 0 ? (
+              <HomeNoneContent />
+            ) : (
+              <>
+                {console.log(clubList.data)}
+                {/* 모임 */}
+                {clubList.data.content &&
+                  clubList.data.content.map((item, idx) => (
+                    <MeetingItem
+                      key={idx}
+                      clubId={item.clubId}
+                      clubName={item.clubName}
+                      createdAt={item.createdAt}
+                      role={item.role}
+                      clubProfileImage={item.clubProfileImage}
+                      memberCount={item.memberCount}
+                    />
+                  ))}
+              </>
+            )}
           </>
         )}
-        {isChoice !== 0 && testArr2.length === 0 && <HomeNoneContent />}
-        {isChoice !== 0 && testArr2.length > 0 && (
+        {isChoice !== 0 && isLoading2 && <div>Loading</div>}
+        {isChoice !== 0 && requestedClubList && (
           <>
-            {/* 신청한 모임 */}
-            {testArr2.map((item, index) => (
-              <RequestedMeetingItem
-                key={index}
-                id={item.id}
-                title={item.title}
-                date={item.date}
-                approval={item.approval}
-              />
-            ))}
+            {requestedClubList.data.content &&
+            requestedClubList.data.content.length === 0 ? (
+              <HomeNoneContent />
+            ) : (
+              <>
+                {console.log("dkdk", requestedClubList.data)}
+                {/* 모임 */}
+                {requestedClubList.data.content &&
+                  requestedClubList.data.content.map((item, idx) => (
+                    <RequestedMeetingItem
+                      key={idx}
+                      clubJoinRequestId={item.clubJoinRequestId}
+                      clubId={item.clubId}
+                      clubName={item.clubName}
+                      updatedAt={item.updatedAt}
+                      status={item.status}
+                    />
+                  ))}
+              </>
+            )}
           </>
         )}
       </div>

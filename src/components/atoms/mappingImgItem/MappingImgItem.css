@@ -1,0 +1,20 @@
+.mapping__img__item__img {
+  position: relative;
+}
+.mapping__img__item__img img {
+  width: 6.3875rem;
+  height: 6.3875rem;
+  object-fit: contain;
+  border: 1px solid #4b4a4a;
+  margin-left: 0.5rem;
+  border-radius: 0.625rem;
+}
+.mapping__img__item__remove img {
+  rotate: 45deg;
+  background-color: #fff;
+  width: 1rem;
+  height: 1rem;
+  position: absolute;
+  top: 0.2rem;
+  right: 0.2rem;
+}

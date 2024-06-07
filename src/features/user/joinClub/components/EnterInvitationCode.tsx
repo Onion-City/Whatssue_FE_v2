@@ -1,3 +1,5 @@
+"use client"; // 클라이언트 컴포넌트로 지정
+
 import { CodeInput } from "@/components/atoms/input/CodeInput";
 import { Text } from "@/components/atoms/text";
 import "./EnterInvitationCode.css";
@@ -10,10 +12,41 @@ import {
   JOIN_BTN,
   RECEIVE_INVITATION_CODE,
 } from "../constants/const";
+import React, { useRef, useState, useEffect } from "react";
 
 const EnterInvitationCode = () => {
+  const [codeValues, setCodeValues] = useState<string[]>(Array(6).fill(""));
+  const [isComplete, setIsComplete] = useState(false);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  const setFocus = (index: number) => {
+    if (index >= 0 && index < inputRefs.current.length) {
+      inputRefs.current[index]?.focus();
+    }
+  };
+
+  const handleRef = (index: number): React.RefCallback<HTMLInputElement> => {
+    return (el) => {
+      inputRefs.current[index] = el;
+    };
+  };
+
+  const handleValueChange = (index: number, value: string) => {
+    const newValues = [...codeValues];
+    newValues[index] = value;
+    setCodeValues(newValues);
+  };
+
+  useEffect(() => {
+    const allFilled = codeValues.every((value) => value.length > 0);
+    setIsComplete(allFilled);
+
+    if (allFilled) {
+      inputRefs.current.forEach((input) => input?.blur());
+    }
+  }, [codeValues]);
+
   return (
-    // <Wrapper isHeader={true}>
     <div className="invitation_code">
       <HistoryHeader />
       <Image
@@ -33,15 +66,29 @@ const EnterInvitationCode = () => {
 
       <div className="invitation_code__input">
         {[...Array(6)].map((_, index) => (
-          <CodeInput key={index} name={`invitationCode${index + 1}`} />
+          <CodeInput
+            key={index}
+            name={`invitationCode${index + 1}`}
+            index={index}
+            setFocus={setFocus}
+            onValueChange={handleValueChange}
+            ref={handleRef(index)}
+          />
         ))}
       </div>
 
       <div className="invitation_code__enter">
-        <Button>{JOIN_BTN}</Button>
+        <Button
+          backgroundColor={isComplete ? "#51F8C4" : "#404040"}
+          color={isComplete ? "#2B2B2B" : "#fff"}
+          // onClick={() => {
+          //   if (isComplete) alert("Code Submitted!");
+          // }}
+        >
+          {JOIN_BTN}
+        </Button>
       </div>
     </div>
-    // </Wrapper>
   );
 };
 

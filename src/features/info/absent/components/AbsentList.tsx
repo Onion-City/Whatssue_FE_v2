@@ -5,19 +5,13 @@ export const AbsentList = () => {
     return(
         <>
             <DateBox
-                date={new Date()}
+                date="YYYY-MM"
             >
                 <AbsentBox />
             </DateBox>
             <DateBox
-                date={new Date()}
+                date="YYYY-MM"
             >
-                <AbsentBox />
-            </DateBox>
-            <DateBox
-                date={new Date()}
-            >
-                <AbsentBox />
                 <AbsentBox />
             </DateBox>
         </>

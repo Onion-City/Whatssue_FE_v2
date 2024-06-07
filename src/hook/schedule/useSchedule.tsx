@@ -1,16 +1,17 @@
 import { changeMonth, filterDate } from "@/features/home/utils";
 import { getScheduleExist } from "@/features/home/utils/util";
+import { FetchScheduleParams } from "@/types/schedule";
 import moment from "moment";
 import { useState } from "react";
-import { FetchScheduleProps, useScheduleQuery } from "./useScheduleQuery";
+import { useScheduleQuery } from "./useScheduleQuery";
 
-const useSchedule = () => {
+const useSchedule = ({ clubId, q, sDate, eDate }: FetchScheduleParams) => {
   const [value, setValue] = useState<Date>(new Date());
-  const [params, setParams] = useState<FetchScheduleProps>({
-      clubId: 1, 
-      q: "", 
-      sDate: moment().startOf('month').format("YYYY-MM-DD"), 
-      eDate: moment().endOf('month').format("YYYY-MM-DD")
+  const [params, setParams] = useState<FetchScheduleParams>({
+      clubId: clubId, 
+      q: q, 
+      sDate: sDate, 
+      eDate: eDate
   })
 
   // params에 맞는 일정 fetch
@@ -47,7 +48,8 @@ const useSchedule = () => {
   return {
     value, 
     setValue: handleChange,
-    data: filteredData, 
+    filteredData,
+    data, 
     isLoading,
     mark
   };

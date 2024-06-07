@@ -1,11 +1,11 @@
 import { Text } from "@/components/atoms/text";
 import { COLORS } from "@/styles";
-import { formatDateKor } from "@/utils/date";
 
+import moment from "moment";
 import "./DateBox.css";
 
 interface DateBoxProps {
-    date: Date;
+    date: string | null;
     children: React.ReactNode;
 }
 
@@ -16,7 +16,7 @@ export const DateBox = ({date, children}: DateBoxProps) => {
                 <Text
                     color={COLORS.white}
                     fontSize="1.0625rem"
-                >{formatDateKor(date)}</Text>
+                >{moment(date, "YYYY-MM-DD").format("YYYY년 MM월 DD일")}</Text>
             </div>
             {children}
         </div>
