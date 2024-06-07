@@ -1,11 +1,9 @@
 .board__list__wrapper {
-  height: calc(100vh - 5.5rem);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 4.25rem;
-  padding-top: 3.44rem;
   overflow-y: auto;
+  padding-bottom: 5rem;
 }
 .board__list__wrapper::-webkit-scrollbar {
   display: none;
