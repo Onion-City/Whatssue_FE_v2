@@ -24,16 +24,6 @@ export const BoardDetail = () => {
     // 사진 모달 닫기
     setIsOpenModal(false);
   };
-
-  //   title,
-  //   content,
-  //   date,
-  //   comment,
-  //   hearts,
-  //   contentImgs,
-  //   isHeart = false,
-  //   writer: { profile = testimg, name },
-  // }: BoardItemProps
   return (
     <>
       <div className="board__detail__wrapper">
