@@ -7,6 +7,13 @@ export interface ScheduleContent {
   // attendance: number;
 }
 
+export interface FetchScheduleParams {
+  clubId: number;
+  q?: string;
+  sDate?: string;
+  eDate?: string;
+}
+
 // 일정 박스
 export interface ScheduleBoxProps {
   time: string;
