@@ -1,14 +1,14 @@
 import Iconfileupload from "@/assets/images/ic_file_upload.png";
 import { MappingImgItem } from "@/components/atoms/mappingImgItem";
 import { Text } from "@/components/atoms/text";
-import { BoardCategoryType, useCreateBoard } from "@/hook/board/useCreateBoard";
+// import { BoardCategoryType, useCreateBoard } from "@/hook/board/useCreateBoard";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { REGIS_TEXT } from "../constants/constant";
 import "./RegisBoard.css";
 export const RegisBoard = () => {
-  const { mutate: createPost } = useCreateBoard();
+  // const { mutate: createPost } = useCreateBoard();
   const pathname = usePathname();
   const boardTypeAddress = pathname.split("/board/")[1].split("/")[0]; //free | notic
   const [isInputTitle, setIsInputTitle] = useState<string>("");
@@ -54,21 +54,21 @@ export const RegisBoard = () => {
   };
 
   const handleSubmit = () => {
-    createPost({
-      clubId: 1,
-      memberId: 3,
-      postData: {
-        request: {
-          postTitle: isInputTitle,
-          postContent: isInputContent,
-          postCategory:
-            boardTypeAddress === "free"
-              ? BoardCategoryType.FREE
-              : BoardCategoryType.NOTICE,
-        },
-        postImages: uploadImages.imageUrls,
-      },
-    });
+    // createPost({
+    //   clubId: 1,
+    //   memberId: 3,
+    //   postData: {
+    //     request: {
+    //       postTitle: isInputTitle,
+    //       postContent: isInputContent,
+    //       postCategory:
+    //         boardTypeAddress === "free"
+    //           ? BoardCategoryType.FREE
+    //           : BoardCategoryType.NOTICE,
+    //     },
+    //     postImages: uploadImages.imageUrls,
+    //   },
+    // });
   };
 
   return (

@@ -1,9 +1,7 @@
 import { Text } from "@/components/atoms/text";
 import { ICONS } from "@/constants/images";
-import { useTest } from "@/hook/useTest";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
 import { testArr } from "../constants/testArr/TestArr";
 import "./BoardListBox.css";
 interface BoardListBoxProp {
@@ -15,10 +13,10 @@ interface BoardListItemProp {
 }
 
 const BoardListBox = ({ boardType }: BoardListBoxProp) => {
-  const { data, isLoading, isError } = useTest();
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  // const { data, isLoading, isError } = useTest();
+  // useEffect(() => {
+  //   console.log(data);
+  // }, [data]);
   const boardTypeAddress = boardType === "공지" ? "notice" : "free";
   const router = useRouter();
   const pathname = usePathname();
