@@ -36,7 +36,7 @@ const renderInputComponent = (type: string, maxCnt: number | undefined, name: st
     case "fileUpload":
       return <FileUpload name={name} field={field} />;
     case "btnInput":
-      return <AuthBox />;
+      return <AuthBox field={field}/>;
     default:
       return <Input maxCnt={maxCnt} name={name} field={field} />;
   }
