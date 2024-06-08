@@ -1,13 +1,8 @@
 import { Text } from "@/components/atoms/text";
+import { ScheduleBoxProps } from "@/types/schedule";
 import "./Home.css";
 
-interface HomeDateBoxProps {
-    time: string;
-    title: string;
-    onClick?: any;
-}
-
-const HomeDateBox = ({time, title, onClick}: HomeDateBoxProps) => {
+const HomeDateBox = ({time, title, attendance, onClick}: ScheduleBoxProps) => {
     return (
         <div className="homeDateBox" onClick={onClick}>
             <div className="homeDateBox__content">
@@ -29,7 +24,7 @@ const HomeDateBox = ({time, title, onClick}: HomeDateBoxProps) => {
                 <Text
                     color="#d9d9d9"
                     fontSize="0.8125rem"
-                >출석중</Text>
+                >{attendance}</Text>
             </span>
         </div>
     )

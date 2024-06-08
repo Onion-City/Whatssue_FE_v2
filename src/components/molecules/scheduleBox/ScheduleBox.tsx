@@ -1,9 +1,10 @@
+import AttendanceChip from "@/components/atoms/attendance/AttendanceChip";
 import { Text } from "@/components/atoms/text";
 import { COLORS } from "@/styles";
 import { ScheduleBoxProps } from "@/types/schedule";
 import "./ScheduleBox.css";
 
-export const ScheduleBox = ({time, title}: ScheduleBoxProps) => {
+export const ScheduleBox = ({time, title, attendance}: ScheduleBoxProps) => {
     return (
         <div className="scheduleBox">
             <div className="scheduleBox__content">
@@ -22,10 +23,13 @@ export const ScheduleBox = ({time, title}: ScheduleBoxProps) => {
                 </span>
             </div>
             <span className="scheduleBox__attend wd-20">
-                <Text
+                {/* <Text
                     color={COLORS.whitegrey}
                     fontSize="0.8125rem"
-                >출석중</Text>
+                >{attendance}</Text> */}
+                <AttendanceChip 
+                    type={attendance}
+                />
             </span>
         </div>
     )

@@ -72,6 +72,7 @@ const CalendarList = () => {
                                             <ScheduleBox
                                                 time={date.scheduleTime}
                                                 title={date.scheduleName}
+                                                attendance={date.attendanceStatus}
                                             />
                                         </RouterBtn>
                                     </React.Fragment>
