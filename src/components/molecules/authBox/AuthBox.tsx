@@ -2,12 +2,17 @@
 import { Button } from "@/components/atoms/button";
 import { Input } from "@/components/atoms/input";
 import { useState } from "react";
+import { ControllerRenderProps } from "react-hook-form";
 import "./AuthBox.css";
 import { AUTH_BTN, AUTH_PLACEHOLDER } from "./const";
 
-export const AuthBox = ({register}: any) => {
+
+export interface AuthBoxProps {
+    field?: ControllerRenderProps<any, any>;
+  }
+
+export const AuthBox = ({field}: AuthBoxProps) => {
     const [display, setDisplay] = useState(false);
-    // const {mutate, isSuccess} = usePostCertification();
     const [authNum, setAuthNum] = useState({
         toNumber: "",
         certificationNum: 0
@@ -34,6 +39,7 @@ export const AuthBox = ({register}: any) => {
                     size="md"
                     name="userPhone"
                     placeholder={AUTH_PLACEHOLDER.mobile}
+                    field={field}
                     // value={authNum.toNumber}
                     // onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAuthNum((prev) => ({
                     //     ...prev,
