@@ -32,14 +32,14 @@ const Home = () => {
         {isChoice === 0 && isLoading && <div>Loading...</div>}
         {clubList && isChoice === 0 && (
           <>
-            {clubList.data.content && clubList.data.content.length === 0 ? (
+            {clubList?.data?.content && clubList?.data?.content?.length === 0 ? (
               <HomeNoneContent />
             ) : (
               <>
                 {console.log(clubList.data)}
                 {/* 모임 */}
-                {clubList.data.content &&
-                  clubList.data.content.map((item, idx) => (
+                {clubList?.data?.content &&
+                  clubList?.data?.content.map((item, idx) => (
                     <MeetingItem
                       key={idx}
                       clubId={item.clubId}
@@ -57,15 +57,15 @@ const Home = () => {
         {isChoice !== 0 && isLoading2 && <div>Loading</div>}
         {isChoice !== 0 && requestedClubList && (
           <>
-            {requestedClubList.data.content &&
-            requestedClubList.data.content.length === 0 ? (
+            {requestedClubList?.data?.content &&
+            requestedClubList?.data?.content?.length === 0 ? (
               <HomeNoneContent />
             ) : (
               <>
                 {console.log("dkdk", requestedClubList.data)}
                 {/* 모임 */}
-                {requestedClubList.data.content &&
-                  requestedClubList.data.content.map((item, idx) => (
+                {requestedClubList?.data?.content &&
+                  requestedClubList?.data?.content?.map((item, idx) => (
                     <RequestedMeetingItem
                       key={idx}
                       clubJoinRequestId={item.clubJoinRequestId}

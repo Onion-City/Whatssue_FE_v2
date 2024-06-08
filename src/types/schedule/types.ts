@@ -1,10 +1,16 @@
+export enum Attendance {
+  BEFORE = "BEFORE",  
+  ONGOING = "ONGOING",
+  COMPLETE = "COMPLETE"
+};
+
 // 일정 목록 data
 export interface ScheduleContent {
   scheduleId: number;
   scheduleName: string;
   scheduleDate: string;
   scheduleTime: string;
-  // attendance: number;
+  attendanceStatus: Attendance;
 }
 
 export interface FetchScheduleParams {
@@ -18,6 +24,7 @@ export interface FetchScheduleParams {
 export interface ScheduleBoxProps {
   time: string;
   title: string;
+  attendance: Attendance;
   onClick?: () => void;
 }
 
@@ -34,4 +41,24 @@ export interface ScheduleData {
   schedulePlace?: string;
   scheduleDate?: string;
   scheduleTime?: string;
+}
+
+// 일정 상세 data
+
+export interface ScheduleDetailProp {
+  clubId: number;
+  scheduleId: number
+}
+
+export interface ScheduleDetailContent {
+  scheduleId?: number;
+  scheduleDate?: string;
+  scheduleTime?: string;
+  scheduleName?: string;
+  scheduleContent?: string;
+  schedulePlace?: string;
+  registerName?: string;
+  registerProfileImage: string;
+  registrationDate: string;
+  attendanceStatus: Attendance;
 }

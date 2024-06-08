@@ -51,6 +51,7 @@ const HomeDateWrapper = ({ dateList, isLoading }: {
                         <ScheduleBox
                             time={date.scheduleTime}
                             title={date.scheduleName}
+                            attendance={date.attendanceStatus}
                         />
                     </RouterBtn>
                 </React.Fragment>

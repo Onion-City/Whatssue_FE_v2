@@ -3,7 +3,7 @@ import axios from "axios";
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL,
+    baseURL: process.env.NEXT_PUBLIC_LOCAL_URL,
     withCredentials: true
 });
 
@@ -58,7 +58,7 @@ axiosInstance.interceptors.response.use(
         console.log(err);
         // access token 만료 시
         if (response?.status && response?.status === 403) {
-            window.location.href = "/user/login";
+            window.location.href = "/login";
             localStorage.clear();
             return config;
         }

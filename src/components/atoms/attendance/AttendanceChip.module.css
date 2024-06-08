@@ -1,0 +1,22 @@
+.attendanceChip {
+  padding: 0.35rem 1rem;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gr {
+  background-color: rgba(81, 248, 196, 0.7);;
+  border: 0.5px solid #51F8C4;
+}
+
+.rd {
+  background-color: rgba(255, 68, 68, 0.7);;
+  border: 0.5px solid #FF4444;
+}
+
+.wt {
+  background-color: rgba(255, 255, 255, 0.7);;
+  border: 0.5px solid #FFFFFF;
+}
