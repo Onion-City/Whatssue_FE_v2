@@ -1,12 +1,15 @@
+import AttendanceChip from "@/components/atoms/attendance/AttendanceChip";
 import { Text } from "@/components/atoms/text";
-import { ICONS, IMAGES } from "@/constants/images";
-import { formatDateTime } from "@/utils/date";
+import { ICONS } from "@/constants/images";
+import { ScheduleDetailContent } from "@/types/schedule";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import "./Calendar.css";
 
-const CalendarDetailHeader = () => {
-    const router = useRouter();
+interface CalendarDetailContentProps {
+    detailData: ScheduleDetailContent;
+}
+
+const CalendarDetailHeader = ({detailData}: CalendarDetailContentProps)  => {
     const dateDetail =
         {
             id: 1,
@@ -19,6 +22,7 @@ const CalendarDetailHeader = () => {
         }
     
     return (
+        (detailData && (
         <div className="calendarDetailHeader">
             <div className="calendarDetailHeader__title">
                 <Image 
@@ -29,30 +33,33 @@ const CalendarDetailHeader = () => {
                     color="#fff"
                     fontSize="1.3125rem"
                     fontWeight="700"
-                >{dateDetail.title}</Text>
+                >{detailData.scheduleName}</Text>
             </div>
             <div className="calendarDetailHeader__content">
                 <div className="calendarDetailHeader__content__user">
                     <span className="calendarDetailHeader__content__user__span">
                         <Image 
-                            src={IMAGES.profile}
+                            src={detailData?.registerProfileImage}
                             alt="profile"
+                            width={20}
+                            height={20}
                         />
                     </span>
                     <Text
                         color="#fff"
                         fontSize="0.6875rem"
-                    >{dateDetail.user}</Text>
+                    >{detailData.registerName}</Text>
                     <Text
                         color="#d9d9d9"
                         fontSize="0.6875rem"
                         fontWeight="500"
-                    >{formatDateTime(dateDetail.time)}</Text>
+                    >{detailData.registrationDate}</Text>
                 </div>
-                <Text color="#fff">미출석</Text>
+                <AttendanceChip type={detailData?.attendanceStatus} />
             </div>
             <div className="calendarDetailHeader__line"></div>
-        </div>
+        </div>)
+        )
     )
 };
 

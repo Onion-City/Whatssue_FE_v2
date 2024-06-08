@@ -33,3 +33,7 @@ export interface CommonPage<T> {
 export interface CommonRes<T> {
   data: CommonPage<T>
 }
+
+export interface CommonNoPageRes<T> {
+  data: T;
+}
