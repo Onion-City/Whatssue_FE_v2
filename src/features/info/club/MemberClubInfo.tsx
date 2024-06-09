@@ -1,16 +1,59 @@
+"use client";
+
 import { HistoryHeader } from "@/components/organisms/Header";
 import { Nav } from "@/components/organisms/Nav";
+import { useClubsInfoQuery } from "@/hook/club/useClubsInfoQuery";
 import { ClubInfo } from "./components/ClubInfo";
 import "./components/ClubInfo.css";
 import { ClubProfile } from "./components/ClubProfile";
 
 export const MemberClubInfo = () => {
+    const params = {
+        clubId : 1
+    }
+    const { data: infoData, isLoading, isError } = useClubsInfoQuery(params);
+
+    console.log(infoData);
+
+    const {
+        clubName,
+        clubIntro,
+        isPrivate,
+        contactMeans,
+        namePolicy,
+        clubProfileImage,
+        memberCount
+    } = infoData?.data || {};
+
+    const profiles = {
+        clubName: clubName,
+        clubProfileImage: clubProfileImage
+    };
+
+    const infos = {
+        clubIntro: clubIntro,
+        isPrivate: isPrivate,
+        contactMeans: contactMeans,
+        namePolicy: namePolicy,
+        memberCount: memberCount
+    }
+
     return(
-        <div className="memberClubInfo">
-            <HistoryHeader />
-            <ClubProfile />
-            <ClubInfo />
-            <Nav />
-        </div>
+        <>
+            {!profiles && !infos ? (
+                <div>Loading...</div>
+            ): (
+                <div className="memberClubInfo">
+                    <HistoryHeader />
+                    <ClubProfile 
+                        profiles={profiles}
+                    />
+                    <ClubInfo 
+                        infos={infos}
+                    />
+                    <Nav />
+                </div>
+            )}
+        </>
     )
 }
