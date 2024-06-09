@@ -4,8 +4,9 @@ import "./AccountInfo.css";
 import { ACCOUNT_INFO } from "../constants/const";
 import { NAME } from "@/constants/const";
 import { useRouter } from "next/navigation";
+import React from "react";
 
-const AccountInfo = () => {
+const AccountInfo: React.FC = () => {
   const router = useRouter();
   const name = "홍길동";
   const email = "whatshu@gamil.com";
@@ -15,7 +16,12 @@ const AccountInfo = () => {
     <div className="account_info">
       <div className="account_info__head">
         <span className="account_info__title">{ACCOUNT_INFO.title}</span>
-        <span className="account_info__edit" onClick={() => router.push("/user/profile/edit")}>{ACCOUNT_INFO.edit}</span>
+        <span
+          className="account_info__edit"
+          onClick={() => router.push("/user/profile/edit")}
+        >
+          {ACCOUNT_INFO.edit}
+        </span>
       </div>
 
       <div className="account_info__body">

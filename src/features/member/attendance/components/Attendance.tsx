@@ -9,7 +9,7 @@ import { IMAGES } from "@/constants/images";
 import { ATTEND_BTN } from "../constants/const";
 import React, { useRef, useState, useEffect } from "react";
 
-const Attendance = () => {
+const Attendance: React.FC = () => {
   const ClubName = "코딩하는 도토리";
   const [codeValues, setCodeValues] = useState<string[]>(Array(3).fill(""));
   const [isComplete, setIsComplete] = useState(false);
