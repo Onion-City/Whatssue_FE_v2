@@ -66,3 +66,33 @@ export interface ClubFormData {
   link: string[];
   profileImage?: imageState;
 }
+
+// 클럽 정보 조회
+
+export interface ClubInfoParams {
+  clubId: number;
+}
+
+export interface ClubInfoContent {
+  clubName?: string;
+  clubIntro?: string;
+  isPrivate?: boolean;
+  contactMeans?: string;
+  namePolicy?: "NICK_NAME" | "REAL_NAME";
+  privateCode?: string;
+  clubProfileImage?: string;
+  memberCount?: number;
+}
+
+export interface ClubProfiles {
+  clubName?: string;
+  clubProfileImage?: string;
+}
+
+export interface ClubInfos {
+  clubIntro?: string
+  isPrivate?: boolean;
+  contactMeans?: string | string[];
+  namePolicy?: "NICK_NAME" | "REAL_NAME";
+  memberCount?: number;
+}
