@@ -1,6 +1,6 @@
 export interface AttendanceItemProps {
   attendanceAddress: string;
-  id: number;
+  id: string;
   status: string;
   title: string;
   date: string;
