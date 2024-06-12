@@ -4,7 +4,7 @@ import "./Login.css";
 import Image from "next/image";
 import { Text } from "@/components/atoms/text";
 
-const LoginLogo = () => {
+const LoginLogo: React.FC = () => {
   return (
     <div className="login__title">
       <Text

@@ -4,8 +4,9 @@ import { IMAGES } from "@/constants/images";
 import { useRouter } from "next/navigation";
 import { EDIT_ACCOUNT_INFO } from "../constants/const";
 import "./EditProfileHeader.css";
+import React from "react";
 
-export const EditProfileHeader = () => {
+export const EditProfileHeader: React.FC = () => {
   const router = useRouter();
   return (
     <div className="edit_profile_header">
