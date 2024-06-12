@@ -30,7 +30,10 @@ const SetCalendarDetail = () => {
                         detailData={detailData?.data}
                     />
                 </div>
-                <CalendarDetailBtn />
+                <CalendarDetailBtn 
+                    // scheduleId={detailData?.data?.scheduleId}
+                    scheduleName={detailData?.data?.scheduleName}
+                />
             </Wrapper>
         )}
         </>

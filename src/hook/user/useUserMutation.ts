@@ -8,6 +8,7 @@ export interface CreateUserProps {
   userEmail: string;
 }
 
+// 추가 회원가입 (/user/signUp)
 export const useUserMutation = () => {
   const router = useRouter();
   return useMutation({

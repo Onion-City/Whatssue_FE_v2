@@ -7,6 +7,7 @@ export const IMAGES = {
   profile: require("@/assets/images/img_profile.png"),
   attendance: require("@/assets/images/ic_attendance.png"),
   close: require("@/assets/images/btn_close.png"),
+  closeBlack: require("@/assets/images/ic_closeBlack.png"),
   link: require("@/assets/images/btn_link.png"),
 };
 
