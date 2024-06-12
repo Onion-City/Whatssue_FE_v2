@@ -1,6 +1,7 @@
 "use client";
 import { HistoryHeader, LogoHeader } from "@/components/organisms/Header";
 import { ClubHeader } from "@/components/organisms/Header/ClubHeader";
+import { ModalProvider } from "@/components/organisms/Modal/ModalProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -45,10 +46,12 @@ export default function RootLayout({
     <html lang="kr">
       <body>
         <QueryClientProvider client={queryClient}>
-          {historyHeaderList.includes(pathname) && <HistoryHeader />}
-          {logoHeaderList.includes(pathname) && <LogoHeader />}
-          {clubHeaderList.includes(pathname) && <ClubHeader />}
-          {children}
+          <ModalProvider>
+            {historyHeaderList.includes(pathname) && <HistoryHeader />}
+            {logoHeaderList.includes(pathname) && <LogoHeader />}
+            {clubHeaderList.includes(pathname) && <ClubHeader />}
+            {children}
+          </ModalProvider>
         </QueryClientProvider>
       </body>
     </html>

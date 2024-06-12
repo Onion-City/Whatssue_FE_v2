@@ -43,3 +43,10 @@ export const CALENDAR_PERIOD_BTN = {
     initialize: "초기화",
     apply: "적용하기"
 }
+
+export const ABSENT_MODAL = {
+    member_subtitle: "공결 사유를 작성해주세요",
+    manager_subtitle: "거절 사유를 작성해주세요",
+    member_btn: "공결 신청하기",
+    manager_btn: "확인"
+}
