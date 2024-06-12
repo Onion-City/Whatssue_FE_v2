@@ -7,14 +7,14 @@ export interface ButtonProps {
   color?: string;
   backgroundColor?: string;
   width?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'pr';
   height?: string;
   fontSize?: string;
   fontWeight?: string;
   type?: "button" | "submit" | "reset" | undefined;
 }
 
-export function Button({ children, onClick, color = "#2b2b2b", backgroundColor = "#51F8C4", size = "lg", fontSize = "1rem", fontWeight = "700", type = "button" }: ButtonProps) {
+export function Button({ children, onClick, color = "#2b2b2b", backgroundColor = "#51F8C4", size = "lg", fontSize = "1rem", fontWeight = "700", type = "submit" }: ButtonProps) {
   const style: React.CSSProperties = {
     color: color,
     backgroundColor: backgroundColor,

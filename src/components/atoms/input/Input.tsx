@@ -7,9 +7,10 @@ import "./input.css";
 
 export interface InputProps {
   placeholder?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'pr';
+  color?: 'bk' | 'wt';
   maxCnt?: number;
-  name: string;
+  name?: string;
   value?: string | number;
   field?: ControllerRenderProps<any, any>;
   control?: any;
@@ -18,6 +19,7 @@ export interface InputProps {
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ 
     size = "lg", 
+    color,
     placeholder = "", 
     maxCnt = 0, 
     name, 
@@ -37,7 +39,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       <div className="input__wrapper">
         <input 
           type="text"
-          className={`input ${size}`}
+          className={`input ${size} ${color}`}
           placeholder={placeholder}
           onChange={handleChangeInput}
           value={field?.value || ""}
