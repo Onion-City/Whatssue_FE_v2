@@ -8,7 +8,7 @@ import Image from "next/image";
 import { IMAGES } from "@/constants/images";
 import { ATTEND_BTN } from "../constants/const";
 import React, { useRef, useState, useEffect } from "react";
-import { useAttendanceMutation } from "@/hook/attendance/member/useAttendanceMutation";
+import { useAttendanceMutationQuery } from "@/hook/attendance/member/useAttendanceMutationQuery";
 
 const Attendance: React.FC = () => {
   const ClubName = "코딩하는 도토리";
@@ -16,7 +16,7 @@ const Attendance: React.FC = () => {
   const [isComplete, setIsComplete] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const { mutate } = useAttendanceMutation({
+  const { mutate } = useAttendanceMutationQuery({
     clubId: "club123",
     scheduleId: "schedule123",
     memberId: "member123",

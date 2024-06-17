@@ -1,8 +1,9 @@
 export interface AttendanceItemProps {
   attendanceAddress: string;
-  id: string;
+  id: number;
   status: string;
   title: string;
   date: string;
   time: string;
+  onClick: () => void;
 }

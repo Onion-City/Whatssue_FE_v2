@@ -14,14 +14,9 @@ export default function RootLayout({
 }>) {
   const pathname = usePathname();
 
-  const logoHeaderList = [
-    "/",
-  ];
+  const logoHeaderList = ["/"];
 
-  const historyHeaderList = [
-    "/user/onboarding",
-    "/user/club"
-  ];
+  const historyHeaderList = ["/user/onboarding", "/user/club"];
 
   const clubHeaderList = [
     "/info",
@@ -29,18 +24,21 @@ export default function RootLayout({
     "/board/notice",
     "/board/free",
     "/member/list",
-    "/member/attendance/list",
+    "/member/attendance",
   ];
 
-  const [queryClient] = useState(() => new QueryClient({
-    defaultOptions: {
-      queries: {
-        refetchOnWindowFocus: false,
-        staleTime: Infinity,
-        retry: 1,
-      }
-    }
-  }));
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+            staleTime: Infinity,
+            retry: 1,
+          },
+        },
+      })
+  );
 
   return (
     <html lang="kr">

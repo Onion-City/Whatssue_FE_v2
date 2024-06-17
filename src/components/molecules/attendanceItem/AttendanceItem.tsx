@@ -6,6 +6,7 @@ import { Text } from "@/components/atoms/text";
 import "./AttendanceItem.css";
 import Image from "next/image";
 import { IMAGES } from "@/constants/images";
+import { useAttendanceStartQuery } from "@/hook/attendance/manager/useAttendanceStartQuery";
 
 const AttendanceItem = ({
   attendanceAddress,
@@ -14,14 +15,20 @@ const AttendanceItem = ({
   title,
   date,
   time,
+  onClick,
 }: AttendanceItemProps) => {
   const router = useRouter();
-  const handleRouteAttendance = (AttendanceId: string) => {
-    if (attendanceAddress === "manager") {
-      router.push("/manager/attendance/status");
-    } else {
-      router.push(`/${attendanceAddress}/attendance`);
-    }
+  const { data } = useAttendanceStartQuery({
+    clubId: 1,
+    scheduleId: 13,
+  });
+  console.log(data);
+  const handleRouteAttendance = (AttendanceId: number) => {
+    // if (attendanceAddress === "manager") {
+    //   router.push("/manager/attendance/status");
+    // } else {
+    //   router.push(`/${attendanceAddress}/attendance`);
+    // }
   };
 
   return (

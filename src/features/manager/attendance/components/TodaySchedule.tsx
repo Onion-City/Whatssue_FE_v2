@@ -1,8 +1,12 @@
+"use client"; // 클라이언트 컴포넌트로 지정
+
+import React, { useState } from "react";
 import { TODAY_SCHEDULE_TITLE } from "../constants/const";
 import AttendanceItem from "@/components/molecules/attendanceItem/AttendanceItem";
 import { todayScheduleList } from "../constants/dummy";
 import { Text } from "@/components/atoms/text";
 import "./Attendance.css";
+import { useAttendanceStartQuery } from "@/hook/attendance/manager/useAttendanceStartQuery";
 
 interface Schedule {
   id: number;
@@ -13,6 +17,10 @@ interface Schedule {
 }
 
 const TodaySchedule: React.FC = () => {
+  const handleAttendanceStart = (attendance: Schedule) => {
+    useAttendanceStartQuery({ clubId: 1, scheduleId: 13 });
+  };
+
   return (
     <div>
       <Text
@@ -32,6 +40,7 @@ const TodaySchedule: React.FC = () => {
           title={attendance.title}
           date={attendance.date}
           time={attendance.time}
+          onClick={() => handleAttendanceStart(attendance)}
         />
       ))}
     </div>
