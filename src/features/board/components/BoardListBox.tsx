@@ -13,20 +13,13 @@ interface BoardListItemProp {
 }
 
 const BoardListBox = ({ boardType }: BoardListBoxProp) => {
-  // const { data, isLoading, isError } = useTest();
-  // useEffect(() => {
-  //   console.log(data);
-  // }, [data]);
   const boardTypeAddress = boardType === "공지" ? "notice" : "free";
   const router = useRouter();
   const pathname = usePathname();
   const startedPath = pathname.split("/").slice(1)[0];
-  // 글 작성페이지로 이동
   const handleRouteBoard = (boardTypeAddress: string) => {
     router.push(`/${startedPath}/board/${boardTypeAddress}`);
   };
-
-  // 박스 속 아이템 하나
   const BoardListItem = ({ id, title }: BoardListItemProp) => {
     const handleRouteBoardDetail = (id: number) => {
       router.push(`/${startedPath}/board/${boardTypeAddress}/${id}`);

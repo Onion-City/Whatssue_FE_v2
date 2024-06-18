@@ -7,14 +7,6 @@ import FirstClubRegister from "./components/FirstClubRegister";
 import SecondClubRegister from "./components/SecondClubRegister";
 import ThirdClubRegister from "./components/ThirdClubRegister";
 
-// interface ProfileSetupInterface {
-//   steps: string[];
-//   nextClickHandler: (nextStep: string) => void;
-//   Funnel: React.ComponentType<FunnelProps>;
-//   Step: React.ComponentType<StepProps>;
-// }
-
-
 export default function SetupUserClub() {
   const steps = ["1", "2", "3"];
   const { Funnel, Step, setStep } = useFunnel(steps[0]);
