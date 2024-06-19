@@ -1,27 +1,4 @@
-// // 출석 리스트
-// export interface AttendanceItem {
-//   id: number;
-//   status: string;
-//   title: string;
-//   date: string;
-//   time: string;
-// }
-
-// export interface AttendanceListProps {
-//   clubId: number;
-// }
-
-// // 출석 번호
-// export interface AttendanceData {
-//   attendanceNum: number;
-// }
-
-// // 출석 정보
-// export interface AttendanceProp {
-//   clubId: string;
-//   scheduleId: string;
-//   memberId: string;
-// }
+import { FetchScheduleParams, ScheduleContent } from "../schedule";
 
 // 출석 열기
 export interface AttendanceInfo {
@@ -40,3 +17,18 @@ export interface AttendanceListItem {
   attendanceStatus: string;
 }
 export type GetAttendanceListResponse = AttendanceListItem[];
+
+// 오늘의 일정
+export interface TodayScheduleItem
+  extends Omit<FetchScheduleParams, "sDate" | "eDate"> {
+  sDate: string;
+  eDate: string;
+}
+
+// 출석 아이템
+export interface AttendanceSchedule
+  extends Omit<ScheduleContent, "attendanceStatus"> {
+  attendanceAddress: string;
+  attendanceStatus: string;
+  onClick: () => void;
+}

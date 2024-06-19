@@ -1,28 +1,22 @@
-"use client"; //set으로 만들고 해당을 제거
-
+"use client";
 import { useRouter } from "next/navigation";
 import { AttendanceItemProps } from "../../../features/member/attendance/components/AttendanceItemProps";
 import { Text } from "@/components/atoms/text";
 import "./AttendanceItem.css";
 import Image from "next/image";
 import { IMAGES } from "@/constants/images";
-import { useAttendanceStartQuery } from "@/hook/attendance/manager/useAttendanceStartQuery";
+import { AttendanceSchedule } from "@/types/attendance";
 
 const AttendanceItem = ({
   attendanceAddress,
-  id,
-  status,
-  title,
-  date,
-  time,
+  scheduleId,
+  attendanceStatus,
+  scheduleName,
+  scheduleDate,
+  scheduleTime,
   onClick,
-}: AttendanceItemProps) => {
-  const router = useRouter();
-  const { data } = useAttendanceStartQuery({
-    clubId: 1,
-    scheduleId: 13,
-  });
-  console.log(data);
+}: AttendanceSchedule) => {
+  // const router = useRouter();
   const handleRouteAttendance = (AttendanceId: number) => {
     // if (attendanceAddress === "manager") {
     //   router.push("/manager/attendance/status");
@@ -32,11 +26,14 @@ const AttendanceItem = ({
   };
 
   return (
-    <div className="attendance_item" onClick={() => handleRouteAttendance(id)}>
+    <div
+      className="attendance_item"
+      onClick={() => handleRouteAttendance(scheduleId)}
+    >
       <div className="attendance_item__content">
         <div className="attendance_item__status">
           <Text color="#2B2B2B" fontSize="0.5625rem" fontWeight="600">
-            {status}
+            {attendanceStatus}
           </Text>
         </div>
 
@@ -46,7 +43,7 @@ const AttendanceItem = ({
           fontWeight="600"
           className="attendance_item__title"
         >
-          {title}
+          {scheduleName}
         </Text>
 
         <div>
@@ -56,7 +53,7 @@ const AttendanceItem = ({
             fontWeight="500"
             className="attendance_item__date"
           >
-            {date}
+            {scheduleDate}
           </Text>
 
           <Text
@@ -65,7 +62,7 @@ const AttendanceItem = ({
             fontWeight="500"
             className="attendance_item__time"
           >
-            {time}
+            {scheduleTime}
           </Text>
         </div>
       </div>

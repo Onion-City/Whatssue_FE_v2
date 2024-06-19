@@ -12,7 +12,7 @@ import { AttendanceListItem } from "@/types/attendance/types";
 import { useParams } from "next/navigation";
 
 const AttendanceList: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
+  // const { id } = useParams<{ id: string }>();
   const { isOpen, openModal, closeModal } = useModalContext();
   const [codeValues, setCodeValues] = useState<string[]>(Array(3).fill(""));
   const [isComplete, setIsComplete] = useState(false);
@@ -23,7 +23,7 @@ const AttendanceList: React.FC = () => {
 
   // useAttendanceListQuery 훅을 사용하여 데이터 불러오기
   const { data, isLoading, isError } = useAttendanceListQuery({
-    clubId: Number(id),
+    clubId: 1,
   });
   console.log(data);
 
@@ -76,11 +76,15 @@ const AttendanceList: React.FC = () => {
           <AttendanceItem
             key={attendance.scheduleId}
             attendanceAddress="member"
-            id={attendance.scheduleId}
-            status={attendance.attendanceStatus}
-            title={attendance.scheduleName}
-            date={new Date(attendance.scheduleDateTime).toLocaleDateString()}
-            time={new Date(attendance.scheduleDateTime).toLocaleTimeString()}
+            scheduleId={attendance.scheduleId}
+            attendanceStatus={attendance.attendanceStatus}
+            scheduleName={attendance.scheduleName}
+            scheduleDate={new Date(
+              attendance.scheduleDateTime
+            ).toLocaleDateString()}
+            scheduleTime={new Date(
+              attendance.scheduleDateTime
+            ).toLocaleTimeString()}
             onClick={() => {
               setSelectedAttendance(attendance);
               openModal();
