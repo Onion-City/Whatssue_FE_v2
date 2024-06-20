@@ -8,25 +8,22 @@ import "./Attendance.css";
 import { useAttendanceStartQuery } from "@/hook/attendance/manager/useAttendanceStartQuery";
 import { useTodayScheduleListQuery } from "@/hook/attendance/manager/useTodayScheduleListQuery";
 import { ScheduleContent } from "@/types/schedule";
-import { useModalContext } from "@/components/organisms/Modal/ModalProvider";
 import { Modal } from "@/components/organisms/Modal/Modal";
 
 interface TodayScheduleProps {
-  onAttendanceStart: () => void;
+  attendanceUpdated: boolean;
+  onAttendanceUpdate: () => void;
 }
 
-const TodaySchedule: React.FC<TodayScheduleProps> = ({ onAttendanceStart }) => {
+const TodaySchedule: React.FC<TodayScheduleProps> = ({
+  attendanceUpdated,
+  onAttendanceUpdate,
+}) => {
   const clubId = 1;
   const [selectedSchedule, setSelectedSchedule] =
     useState<ScheduleContent | null>(null);
   const [startAttendance, setStartAttendance] = useState(false);
-  const { isOpen, openModal, closeModal } = useModalContext();
-
-  const today = new Date();
-  const yyyy = today.getFullYear();
-  const mm = String(today.getMonth() + 1).padStart(2, "0");
-  const dd = String(today.getDate()).padStart(2, "0");
-  const formattedToday = `${yyyy}-${mm}-${dd}`;
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {
     data: todayScheduleData,
@@ -45,10 +42,14 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({ onAttendanceStart }) => {
       scheduleId: selectedSchedule?.scheduleId || 0,
     });
 
+  useEffect(() => {
+    refetchTodaySchedule();
+  }, [attendanceUpdated, refetchTodaySchedule]);
+
   const handleOpenModal = (schedule: ScheduleContent) => {
     if (schedule.attendanceStatus === "BEFORE") {
       setSelectedSchedule(schedule);
-      openModal();
+      setIsModalOpen(true);
     }
   };
 
@@ -60,18 +61,15 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({ onAttendanceStart }) => {
     if (startAttendance && selectedSchedule) {
       refetchAttendance().then(() => {
         setStartAttendance(false);
-        onAttendanceStart(); // 상태 변경 함수 호출
-        refetchTodaySchedule(); // 데이터 다시 불러오기
-        closeModal();
+        onAttendanceUpdate(); // 상태 변경 함수 호출
+        setIsModalOpen(false);
       });
     }
   }, [
     startAttendance,
     selectedSchedule,
     refetchAttendance,
-    refetchTodaySchedule,
-    closeModal,
-    onAttendanceStart,
+    onAttendanceUpdate,
   ]);
 
   if (isTodayScheduleError) {
@@ -117,7 +115,7 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({ onAttendanceStart }) => {
         ))}
 
       {selectedSchedule && (
-        <Modal isOpen={isOpen}>
+        <Modal isOpen={isModalOpen}>
           <Modal.Dimmed />
           <Modal.Header>
             <Modal.Title>{ATTENDANCE_MODAL.start}</Modal.Title>

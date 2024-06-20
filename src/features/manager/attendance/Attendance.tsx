@@ -7,15 +7,21 @@ import TodaySchedule from "./components/TodaySchedule";
 const AttendancePage: React.FC = () => {
   const [attendanceUpdated, setAttendanceUpdated] = useState(false);
 
-  const handleAttendanceStart = () => {
+  const handleAttendanceUpdate = () => {
     setAttendanceUpdated(!attendanceUpdated); // 상태 변경
   };
 
   return (
     <>
       <ClubHeader />
-      <CurrentAttendance attendanceUpdated={attendanceUpdated} />
-      <TodaySchedule onAttendanceStart={handleAttendanceStart} />
+      <CurrentAttendance
+        attendanceUpdated={attendanceUpdated}
+        onAttendanceUpdate={handleAttendanceUpdate}
+      />
+      <TodaySchedule
+        attendanceUpdated={attendanceUpdated}
+        onAttendanceUpdate={handleAttendanceUpdate}
+      />
     </>
   );
 };

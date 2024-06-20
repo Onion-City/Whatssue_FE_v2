@@ -6,16 +6,17 @@ import AttendanceItem from "@/components/molecules/attendanceItem/AttendanceItem
 import { useAttendanceListQuery } from "@/hook/attendance/useAttendanceListQuery";
 import { useState, useEffect } from "react";
 import { AttendanceListItem } from "@/types/attendance/types";
-import { useModalContext } from "@/components/organisms/Modal/ModalProvider";
 import { Modal } from "@/components/organisms/Modal/Modal";
 import { useAttendanceEndMutationQuery } from "@/hook/attendance/manager/useAttendanceEndMutationQuery";
 
 interface CurrentAttendanceProps {
   attendanceUpdated: boolean;
+  onAttendanceUpdate: () => void;
 }
 
 const CurrentAttendance: React.FC<CurrentAttendanceProps> = ({
   attendanceUpdated,
+  onAttendanceUpdate,
 }) => {
   const { data, isError, refetch } = useAttendanceListQuery({
     clubId: 1,
@@ -23,8 +24,7 @@ const CurrentAttendance: React.FC<CurrentAttendanceProps> = ({
 
   const [selectedAttendance, setSelectedAttendance] =
     useState<AttendanceListItem | null>(null);
-
-  const { isOpen, openModal, closeModal } = useModalContext();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { mutate: endAttendance } = useAttendanceEndMutationQuery({
     clubId: 1,
@@ -40,7 +40,8 @@ const CurrentAttendance: React.FC<CurrentAttendanceProps> = ({
       endAttendance("", {
         onSuccess: () => {
           console.log("Attendance ended successfully");
-          closeModal();
+          onAttendanceUpdate(); // 상태 변경 함수 호출
+          setIsModalOpen(false);
         },
         onError: (error) => {
           console.error("Error ending attendance:", error);
@@ -92,7 +93,7 @@ const CurrentAttendance: React.FC<CurrentAttendanceProps> = ({
             ).toLocaleTimeString()}
             onClick={() => {
               setSelectedAttendance(attendance);
-              openModal();
+              setIsModalOpen(true);
             }}
           />
         ))
@@ -102,7 +103,7 @@ const CurrentAttendance: React.FC<CurrentAttendanceProps> = ({
 
       {/* Modal */}
       {selectedAttendance && (
-        <Modal isOpen={isOpen}>
+        <Modal isOpen={isModalOpen}>
           <Modal.Dimmed />
           <Modal.Header>
             <Modal.Title>{ATTENDANCE_MODAL.end}</Modal.Title>
