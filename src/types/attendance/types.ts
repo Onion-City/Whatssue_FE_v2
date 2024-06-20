@@ -1,4 +1,4 @@
-import { FetchScheduleParams, ScheduleContent } from "../schedule";
+import { Attendance, FetchScheduleParams, ScheduleContent } from "../schedule";
 
 // 출석 열기
 export interface AttendanceInfo {
@@ -14,7 +14,7 @@ export interface AttendanceListItem {
   scheduleName: string;
   scheduleContent: string;
   scheduleDateTime: string;
-  attendanceStatus: string;
+  attendanceStatus: Attendance;
 }
 export type GetAttendanceListResponse = AttendanceListItem[];
 
@@ -26,9 +26,7 @@ export interface TodayScheduleItem
 }
 
 // 출석 아이템
-export interface AttendanceSchedule
-  extends Omit<ScheduleContent, "attendanceStatus"> {
+export interface AttendanceSchedule extends ScheduleContent {
   attendanceAddress: string;
-  attendanceStatus: string;
   onClick: () => void;
 }

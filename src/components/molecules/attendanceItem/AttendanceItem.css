@@ -16,13 +16,12 @@
 }
 
 .attendance_item__status {
-  width: 3.4375rem;
-  height: 1.3125rem;
+  width: 4.5rem;
+  /* height: 1.3125rem;
   border-radius: 3.125rem;
-  background: #51f8c4;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
 }
 
 .attendance_item__date {

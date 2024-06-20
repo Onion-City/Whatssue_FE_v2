@@ -11,10 +11,15 @@ import { ScheduleContent } from "@/types/schedule";
 import { useModalContext } from "@/components/organisms/Modal/ModalProvider";
 import { Modal } from "@/components/organisms/Modal/Modal";
 
-const TodaySchedule: React.FC = () => {
+interface TodayScheduleProps {
+  onAttendanceStart: () => void;
+}
+
+const TodaySchedule: React.FC<TodayScheduleProps> = ({ onAttendanceStart }) => {
   const clubId = 1;
   const [selectedSchedule, setSelectedSchedule] =
     useState<ScheduleContent | null>(null);
+  const [startAttendance, setStartAttendance] = useState(false);
   const { isOpen, openModal, closeModal } = useModalContext();
 
   const today = new Date();
@@ -27,26 +32,62 @@ const TodaySchedule: React.FC = () => {
     data: todayScheduleData,
     isLoading: isTodayScheduleLoading,
     isError: isTodayScheduleError,
+    refetch: refetchTodaySchedule,
   } = useTodayScheduleListQuery({
     clubId: clubId,
-    // sDate: formattedToday,
-    // eDate: formattedToday,
     sDate: "2024-05-28",
     eDate: "2024-05-28",
   });
 
-  const handleOpenModal = (schedule: any) => {
-    setSelectedSchedule(schedule);
-    openModal();
+  const { data: attendanceData, refetch: refetchAttendance } =
+    useAttendanceStartQuery({
+      clubId: clubId,
+      scheduleId: selectedSchedule?.scheduleId || 0,
+    });
+
+  const handleOpenModal = (schedule: ScheduleContent) => {
+    if (schedule.attendanceStatus === "BEFORE") {
+      setSelectedSchedule(schedule);
+      openModal();
+    }
   };
 
-  const handleAttendanceStart = (clubId: number, scheduleId: number) => {
-    useAttendanceStartQuery({ clubId, scheduleId });
-    closeModal();
+  const handleAttendanceStart = () => {
+    setStartAttendance(true);
   };
+
+  useEffect(() => {
+    if (startAttendance && selectedSchedule) {
+      refetchAttendance().then(() => {
+        setStartAttendance(false);
+        onAttendanceStart(); // 상태 변경 함수 호출
+        refetchTodaySchedule(); // 데이터 다시 불러오기
+        closeModal();
+      });
+    }
+  }, [
+    startAttendance,
+    selectedSchedule,
+    refetchAttendance,
+    refetchTodaySchedule,
+    closeModal,
+    onAttendanceStart,
+  ]);
 
   if (isTodayScheduleError) {
-    return <div>Error loading schedules</div>;
+    return (
+      <div>
+        <Text
+          color="#FFF"
+          fontSize="1.1875rem"
+          fontWeight="600"
+          className="today_schedule"
+        >
+          {TODAY_SCHEDULE_TITLE}
+        </Text>
+        Error loading schedules
+      </div>
+    );
   }
 
   return (
@@ -83,11 +124,7 @@ const TodaySchedule: React.FC = () => {
           </Modal.Header>
           <Modal.Content></Modal.Content>
           <Modal.Footer>
-            <Modal.Button
-              onClick={() => {
-                handleAttendanceStart(clubId, selectedSchedule.scheduleId);
-              }}
-            >
+            <Modal.Button onClick={handleAttendanceStart}>
               {ATTENDANCE_MODAL.yes}
             </Modal.Button>
           </Modal.Footer>

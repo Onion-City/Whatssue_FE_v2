@@ -4,17 +4,22 @@ import { Text } from "@/components/atoms/text";
 import "./Attendance.css";
 import AttendanceItem from "@/components/molecules/attendanceItem/AttendanceItem";
 import { useAttendanceListQuery } from "@/hook/attendance/useAttendanceListQuery";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AttendanceListItem } from "@/types/attendance/types";
 import { useModalContext } from "@/components/organisms/Modal/ModalProvider";
 import { Modal } from "@/components/organisms/Modal/Modal";
 import { useAttendanceEndMutationQuery } from "@/hook/attendance/manager/useAttendanceEndMutationQuery";
 
-const CurrentAttendance: React.FC = () => {
-  const { data } = useAttendanceListQuery({
+interface CurrentAttendanceProps {
+  attendanceUpdated: boolean;
+}
+
+const CurrentAttendance: React.FC<CurrentAttendanceProps> = ({
+  attendanceUpdated,
+}) => {
+  const { data, isError, refetch } = useAttendanceListQuery({
     clubId: 1,
   });
-  console.log(data);
 
   const [selectedAttendance, setSelectedAttendance] =
     useState<AttendanceListItem | null>(null);
@@ -25,6 +30,10 @@ const CurrentAttendance: React.FC = () => {
     clubId: 1,
     scheduleId: 13,
   });
+
+  useEffect(() => {
+    refetch();
+  }, [attendanceUpdated, refetch]);
 
   const handleEndAttendance = () => {
     if (selectedAttendance) {
@@ -39,6 +48,22 @@ const CurrentAttendance: React.FC = () => {
       });
     }
   };
+
+  if (isError) {
+    return (
+      <div>
+        <Text
+          color="#FFF"
+          fontSize="1.1875rem"
+          fontWeight="600"
+          className="today_schedule"
+        >
+          {CURRENT_ATTENDANCE_TITLE}
+        </Text>
+        Error loading schedules
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -80,15 +105,11 @@ const CurrentAttendance: React.FC = () => {
         <Modal isOpen={isOpen}>
           <Modal.Dimmed />
           <Modal.Header>
-            <Modal.Title>{ATTENDANCE_MODAL.start}</Modal.Title>
+            <Modal.Title>{ATTENDANCE_MODAL.end}</Modal.Title>
           </Modal.Header>
           <Modal.Content></Modal.Content>
           <Modal.Footer>
-            <Modal.Button
-              onClick={() => {
-                handleEndAttendance;
-              }}
-            >
+            <Modal.Button onClick={handleEndAttendance}>
               {ATTENDANCE_MODAL.yes}
             </Modal.Button>
           </Modal.Footer>
