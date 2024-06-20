@@ -1,9 +1,11 @@
 import Attendance from "./components/Attendance";
 
-export default function AttendancePage() {
+const AttendancePage: React.FC = () => {
   return (
     <>
       <Attendance />
     </>
   );
-}
+};
+
+export default AttendancePage;

@@ -3,7 +3,7 @@ import { IMAGES } from "@/constants/images";
 import { Text } from "@/components/atoms/text";
 import "./Attendance.css";
 
-const AttendanceEmpty = () => {
+const AttendanceEmpty: React.FC = () => {
   return (
     <div className="attendance_empty">
       <Image

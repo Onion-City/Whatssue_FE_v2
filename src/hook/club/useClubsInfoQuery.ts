@@ -3,6 +3,7 @@ import { CommonNoPageRes } from "@/types";
 import { ClubInfoContent, ClubInfoParams } from "@/types/club";
 import { useQuery } from "@tanstack/react-query";
 
+// 모임 정보 조회 (/clubs/{clubId}/info)
 export const useClubsInfoQuery = ({ clubId }: ClubInfoParams) => {
     return useQuery<CommonNoPageRes<ClubInfoContent>>({
         queryKey: ['clubInfo', [clubId]],

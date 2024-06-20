@@ -1,8 +1,8 @@
-// import AttendanceEmpty from "./components/AttendanceEmpty";
+import React from "react";
 import { Nav } from "@/components/organisms/Nav";
 import AttendanceList from "./components/AttendanceList";
 
-export default function AttendanceListPage() {
+const AttendanceListPage: React.FC = () => {
   return (
     <>
       {/* <AttendanceEmpty /> */}
@@ -10,4 +10,6 @@ export default function AttendanceListPage() {
       <Nav />
     </>
   );
-}
+};
+
+export default AttendanceListPage;

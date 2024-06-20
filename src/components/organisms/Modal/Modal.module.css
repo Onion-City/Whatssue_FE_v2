@@ -1,0 +1,95 @@
+/* ModalDimmed */
+
+.modalDimmed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00000050;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modal */
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  max-width: 430px;
+  height: 30vh;
+  min-height: 250px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  z-index: 1001;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.modal__header {
+  width: 100%;
+}
+
+.modal__content {
+  width: 100%;
+  height: 100%;
+/* 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; */
+}
+
+.modal__footer {
+  width: 100%;
+}
+
+/* ModalHeader */
+
+.modalHeader {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modalHeader__img {
+  width: 90%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.modalHeader__img > span {
+  cursor: pointer;
+}
+
+/* ModalContent */
+
+.modalContent {
+  width: 100%;
+  height: 100%;
+}
+
+/* ModalFooter */
+
+.modalFooter {
+  width: 100%;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

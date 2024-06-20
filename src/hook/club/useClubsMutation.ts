@@ -2,6 +2,7 @@ import { http } from "@/apis/http";
 import { ClubFormData } from "@/types/club";
 import { useMutation } from "@tanstack/react-query";
 
+// 모임 생성 (/clubs)
 async function createClub(data: ClubFormData): Promise<void> {
   const resData = new FormData();
   resData.append(

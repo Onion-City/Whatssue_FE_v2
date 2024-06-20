@@ -1,7 +1,8 @@
 import { dummyList } from "../constants/dummy";
 import AttendanceItem from "../../../../components/molecules/attendanceItem/AttendanceItem";
+import React from "react";
 
-const AttendanceList = () => {
+const AttendanceList: React.FC = () => {
   return (
     <div>
       {dummyList.map((attendance) => (
