@@ -9,6 +9,7 @@ import { useTodayScheduleListQuery } from "@/hook/attendance/manager/useTodaySch
 import { useAttendanceStartQuery } from "@/hook/attendance/manager/useAttendanceStartQuery";
 import { ScheduleContent } from "@/types/schedule";
 import { Modal } from "@/components/organisms/Modal/Modal";
+import { useModalContext } from "@/components/organisms/Modal/ModalProvider";
 
 interface TodayScheduleProps {
   attendanceUpdated: boolean;
@@ -22,7 +23,7 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
   const clubId = 1;
   const [selectedSchedule, setSelectedSchedule] =
     useState<ScheduleContent | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isOpen, openModal, closeModal } = useModalContext();
   const [startAttendance, setStartAttendance] = useState(false);
 
   const {
@@ -46,7 +47,7 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
     console.log("handleOpenModal called with schedule:", schedule); // 디버깅 로그 추가
     if (schedule.attendanceStatus === "BEFORE") {
       setSelectedSchedule(schedule);
-      setIsModalOpen(true);
+      openModal();
       console.log("Modal opened with schedule:", schedule); // 디버깅 로그 추가
     }
   };
@@ -63,7 +64,7 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
       refetchAttendance().then(() => {
         onAttendanceUpdate();
         refetchTodaySchedule();
-        setIsModalOpen(false);
+        closeModal();
         setStartAttendance(false);
         console.log("Attendance started and modal closed"); // 디버깅 로그 추가
       });
@@ -118,20 +119,18 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
           />
         ))}
 
-      {selectedSchedule && (
-        <Modal isOpen={isModalOpen}>
-          <Modal.Dimmed />
-          <Modal.Header>
-            <Modal.Title>{ATTENDANCE_MODAL.start}</Modal.Title>
-          </Modal.Header>
-          <Modal.Content></Modal.Content>
-          <Modal.Footer>
-            <Modal.Button onClick={handleAttendanceStart}>
-              {ATTENDANCE_MODAL.yes}
-            </Modal.Button>
-          </Modal.Footer>
-        </Modal>
-      )}
+      <Modal isOpen={isOpen}>
+        <Modal.Dimmed />
+        <Modal.Header>
+          <Modal.Title>{ATTENDANCE_MODAL.start}</Modal.Title>
+        </Modal.Header>
+        <Modal.Content></Modal.Content>
+        <Modal.Footer>
+          <Modal.Button onClick={handleAttendanceStart}>
+            {ATTENDANCE_MODAL.yes}
+          </Modal.Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

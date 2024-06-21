@@ -15,6 +15,6 @@ export const useAttendanceStartQuery = ({
         `/${clubId}/schedules/${scheduleId}/attendance-start`,
         { headers: { accept: "*/*" } }
       ),
-    enabled, // enabled 옵션 추가
+    enabled,
   });
 };
