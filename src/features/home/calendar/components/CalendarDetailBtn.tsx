@@ -22,13 +22,12 @@ const CalendarDetailBtn = ({
     const { isOpen, openModal, closeModal } = useModalContext();
     // const { register, handleSubmit } = useForm<AbsenceReasonValues>();
     const [absenceReason, setAbsenceReason] = useState("");
-    const { mutate, isSuccess } = useAbsenceReqMutation({
+    const { mutate } = useAbsenceReqMutation({
         clubId: 1,
         scheduleId: +path.split("/")[3],
     });
 
     const onSubmit = () => {
-        console.log(absenceReason);
         closeModal();
         mutate({
             clubMemberId: 14,
@@ -47,7 +46,6 @@ const CalendarDetailBtn = ({
 
                 {/* Modal */}
                 <Modal isOpen={isOpen}>
-                    <Modal.Dimmed />
                     <Modal.Header>
                         <Modal.Title>{scheduleName ?? ""}</Modal.Title>
                         <Modal.Subtitle>{ABSENT_MODAL.member_subtitle}</Modal.Subtitle>
@@ -58,7 +56,6 @@ const CalendarDetailBtn = ({
                             color={COLORS.background}
                             size="pr"
                             height="80%"
-                            // maxCnt={undefined}
                             isBorder={true}
                             value={absenceReason}
                             onChange={(value: string) => setAbsenceReason(value)}

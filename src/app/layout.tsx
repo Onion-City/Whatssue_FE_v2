@@ -42,6 +42,9 @@ export default function RootLayout({
 
   return (
     <html lang="kr">
+      <head>
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+      </head>
       <body>
         <QueryClientProvider client={queryClient}>
           <ModalProvider>
