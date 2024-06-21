@@ -1,8 +1,8 @@
 export enum Attendance {
-  BEFORE = "BEFORE",  
+  BEFORE = "BEFORE",
   ONGOING = "ONGOING",
-  COMPLETE = "COMPLETE"
-};
+  COMPLETE = "COMPLETE",
+}
 
 // 일정 목록 data
 export interface ScheduleContent {
@@ -47,7 +47,11 @@ export interface ScheduleData {
 
 export interface ScheduleDetailProp {
   clubId: number;
-  scheduleId: number
+  scheduleId: number;
+}
+
+export interface ScheduleStartProp extends ScheduleDetailProp {
+  enabled: boolean;
 }
 
 export interface ScheduleDetailContent {

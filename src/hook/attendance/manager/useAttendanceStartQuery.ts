@@ -6,7 +6,8 @@ import { useQuery } from "@tanstack/react-query";
 export const useAttendanceStartQuery = ({
   clubId,
   scheduleId,
-}: ScheduleDetailProp) => {
+  enabled = true,
+}: ScheduleDetailProp & { enabled?: boolean }) => {
   return useQuery<AttendanceInfo>({
     queryKey: [`attendanceStart`, { clubId, scheduleId }],
     queryFn: () =>
@@ -14,5 +15,6 @@ export const useAttendanceStartQuery = ({
         `/${clubId}/schedules/${scheduleId}/attendance-start`,
         { headers: { accept: "*/*" } }
       ),
+    enabled, // enabled 옵션 추가
   });
 };
