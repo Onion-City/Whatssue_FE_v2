@@ -3,13 +3,14 @@ import { Heart } from "@/components/atoms/heart/Heart";
 import { Text } from "@/components/atoms/text";
 import { ImageModal } from "@/components/molecules/ImageModal";
 // import useGetBoard from "@/hook/board/useGetBoardDetail";
+import usePostDetailQuery from "@/hook/post/usePostDetailQuery";
 import Image from "next/image";
 import { useState } from "react";
 import { BoardDetailArr, commentsArr } from "../constants/testArr/TestArr";
 import "./BoardDetail.css";
 export const BoardDetail = () => {
-  // const data = useGetBoard({ clubId: 1, postId: 1 });
-  // console.log("ddd", data);
+  const { data, isLoading } = usePostDetailQuery({ clubId: 4, postId: 9 });
+  console.log(data);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [currentIndex, setCurrentIndex] = useState<number>(-1);
   const handleIsHeart = () => {

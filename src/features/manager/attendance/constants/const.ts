@@ -7,3 +7,9 @@ export const ATTENDANCE_STATUS_EDIT = {
   cancle: "취소",
   done: "수정 완료",
 };
+export const ATTENDANCE_MODAL = {
+  start: "출석을 시작하시겠습니까?",
+  end: "출석을 종료하시겠습니까?",
+  yes: "예",
+  no: "아니요",
+};

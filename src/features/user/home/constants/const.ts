@@ -7,9 +7,6 @@ export const HOME_WARNING_ARR = {
   },
 };
 
-export const HOME_CANCEL = {
-  title: "글을 삭제하시겠습니까?",
-  subtitle: "한번 삭제된 글은 복구할 수 없습니다.",
-  agree: "네, 삭제하겠습니다.",
-  denial: "아니요",
+export const HOME_JOIN_CANCLE = {
+  content: "가입 신청을 취소하시겠습니까?",
 };

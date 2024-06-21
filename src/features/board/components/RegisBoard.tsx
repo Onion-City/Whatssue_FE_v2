@@ -1,82 +1,83 @@
 import Iconfileupload from "@/assets/images/ic_file_upload.png";
 import { MappingImgItem } from "@/components/atoms/mappingImgItem";
 import { Text } from "@/components/atoms/text";
-// import { BoardCategoryType, useCreateBoard } from "@/hook/board/useCreateBoard";
+import { InputBox } from "@/components/molecules/inputBox";
+import { usePostMutation } from "@/hook/post/usePostMutation";
+import { PostFormProps } from "@/types/post";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { REGIS_TEXT } from "../constants/constant";
+import { useForm } from "react-hook-form";
+import { REGISTER_INPUT_ARR } from "../constants/constant";
 import "./RegisBoard.css";
+
 export const RegisBoard = () => {
-  // const { mutate: createPost } = useCreateBoard();
   const pathname = usePathname();
-  const boardTypeAddress = pathname.split("/board/")[1].split("/")[0]; //free | notic
-  const [isInputTitle, setIsInputTitle] = useState<string>("");
-  const [isInputContent, setIsInputContent] = useState<string>("");
+  const boardTypeAddress = pathname.split("/board/")[1].split("/")[0];
+
   const [uploadImages, setUploadImages] = useState<{
     imageFiles: File[];
     imageUrls: string[];
   }>({ imageFiles: [], imageUrls: [] });
+
   const fileUploadImgStyle: React.CSSProperties = {
     width: "6.3875rem",
     height: "6.3875rem",
   };
 
-  const handleOnChangeInputTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsInputTitle(e.target.value);
-  };
-  const handleOnChangeInputContent = (
-    e: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    setIsInputContent(e.target.value);
-  };
+  const { control, handleSubmit } = useForm<PostFormProps>({
+    mode: "onChange",
+  });
+
+  const registePostMutation = usePostMutation();
 
   const handleImageInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return; // a
-    const files = e.target.files;
-    const fileArray = Array.from(files); //b
-    if (uploadImages.imageFiles.length + fileArray.length <= 10) {
-      const newImages = Array.from(files, (file) => URL.createObjectURL(file));
+    if (!e.target.files) return;
+
+    const files = Array.from(e.target.files);
+
+    if (uploadImages.imageFiles.length + files.length <= 10) {
+      const newImages = files.map((file) => URL.createObjectURL(file));
       setUploadImages({
-        imageFiles: [...uploadImages.imageFiles, ...fileArray],
+        imageFiles: [...uploadImages.imageFiles, ...files],
         imageUrls: [...uploadImages.imageUrls, ...newImages],
       });
     } else {
-      alert("이미지는 최대 10장까지 첨부할 수 있습니다.");
+      alert(REGISTER_INPUT_ARR.IMGCONTENT.alert);
     }
   };
 
-  const handleRemoveImage = (id: number) => {
-    setUploadImages({
-      imageFiles: uploadImages.imageFiles.filter((_, index) => index !== id),
-      imageUrls: uploadImages.imageUrls.filter((_, index) => index !== id),
-    });
+  const handleRemoveImage = (index: number) => {
+    const updatedFiles = uploadImages.imageFiles.filter(
+      (_, idx) => idx !== index
+    );
+    const updatedUrls = uploadImages.imageUrls.filter(
+      (_, idx) => idx !== index
+    );
+    setUploadImages({ imageFiles: updatedFiles, imageUrls: updatedUrls });
   };
 
-  const handleSubmit = () => {
-    // createPost({
-    //   clubId: 1,
-    //   memberId: 3,
-    //   postData: {
-    //     request: {
-    //       postTitle: isInputTitle,
-    //       postContent: isInputContent,
-    //       postCategory:
-    //         boardTypeAddress === "free"
-    //           ? BoardCategoryType.FREE
-    //           : BoardCategoryType.NOTICE,
-    //     },
-    //     postImages: uploadImages.imageUrls,
-    //   },
-    // });
+  const onSubmit = (data: PostFormProps) => {
+    const postData: PostFormProps = {
+      request: {
+        ...data.request,
+        postCategory: boardTypeAddress === "free" ? "FREE" : "NOTICE",
+      },
+      clubId: parseInt(pathname.split("/")[1]),
+      postImages:
+        uploadImages.imageFiles.length > 0
+          ? uploadImages.imageFiles
+          : undefined,
+    };
+    registePostMutation.mutate(postData);
   };
 
   return (
-    <section className="board__write__wrapper">
+    <form className="board__write__wrapper" onSubmit={handleSubmit(onSubmit)}>
       <>
         <div className="board__write__type">
           <Text color="#989898" fontSize="0.8125rem" fontWeight="500">
-            {REGIS_TEXT.CATEGORY}
+            {REGISTER_INPUT_ARR.CATEGORY.content}
           </Text>
           <Text
             color="#fff"
@@ -84,29 +85,33 @@ export const RegisBoard = () => {
             fontWeight="600"
             className="board__write__type__margin"
           >
-            {boardTypeAddress === "free" ? REGIS_TEXT.FREE : REGIS_TEXT.NOTICE}
+            {boardTypeAddress === "free"
+              ? REGISTER_INPUT_ARR.CATEGORY.FREE
+              : REGISTER_INPUT_ARR.CATEGORY.NOTICE}
           </Text>
         </div>
         <div className="board__write__title">
           <input
-            placeholder={REGIS_TEXT.TITLE}
+            placeholder={REGISTER_INPUT_ARR.TITLE.content}
             type="text"
-            onChange={handleOnChangeInputTitle}
-            value={isInputTitle || ""}
+            {...control.register("request.postTitle")}
           />
         </div>
         <div className="board__write__content">
-          <textarea
-            placeholder={REGIS_TEXT.CONTENT}
-            onChange={handleOnChangeInputContent}
-            value={isInputContent || ""}
+          <InputBox
+            title={REGISTER_INPUT_ARR.CONTENT.title}
+            maxCnt={REGISTER_INPUT_ARR.CONTENT.maxCnt}
+            type={REGISTER_INPUT_ARR.CONTENT.type}
+            essential={REGISTER_INPUT_ARR.CONTENT.essential}
+            name={REGISTER_INPUT_ARR.CONTENT.name}
+            control={control}
           />
         </div>
       </>
 
       <div className="board__write__bottom">
         <Text color="#fff" fontSize="1.0625rem" fontWeight="600">
-          사진 첨부하기 (최대 10개)
+          {REGISTER_INPUT_ARR.IMGCONTENT.content}
         </Text>
         <div className="board__write__img">
           <div className="board__write__img__upload">
@@ -138,12 +143,12 @@ export const RegisBoard = () => {
             ))}
           </div>
         </div>
-        <div className="board__write__button" onClick={handleSubmit}>
+        <div className="board__write__button" onClick={handleSubmit(onSubmit)}>
           <Text color="#2B2B2B" fontSize="0.9375rem" fontWeight="600">
             등록하기
           </Text>
         </div>
       </div>
-    </section>
+    </form>
   );
 };
