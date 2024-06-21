@@ -1,14 +1,14 @@
 "use client"; // 클라이언트 컴포넌트로 지정
 
+import { Button } from "@/components/atoms/button";
 import { CodeInput } from "@/components/atoms/input/CodeInput";
 import { Text } from "@/components/atoms/text";
-import "./Attendance.css";
-import { Button } from "@/components/atoms/button";
-import Image from "next/image";
 import { IMAGES } from "@/constants/images";
+import Image from "next/image";
+import React, { useEffect, useRef, useState } from "react";
 import { ATTEND_BTN } from "../constants/const";
-import React, { useRef, useState, useEffect } from "react";
-import { useAttendanceMutationQuery } from "@/hook/attendance/member/useAttendanceMutationQuery";
+import "./Attendance.css";
+// import { useAttendanceMutationQuery } from "@/hook/attendance/member/useAttendanceMutationQuery";
 
 const Attendance: React.FC = () => {
   const ClubName = "코딩하는 도토리";
@@ -16,11 +16,11 @@ const Attendance: React.FC = () => {
   const [isComplete, setIsComplete] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
-  const { mutate } = useAttendanceMutationQuery({
-    clubId: "club123",
-    scheduleId: "schedule123",
-    memberId: "member123",
-  });
+  // const { mutate } = useAttendanceMutationQuery({
+  //   clubId: "club123",
+  //   scheduleId: "schedule123",
+  //   memberId: "member123",
+  // });
 
   const setFocus = (index: number) => {
     if (index >= 0 && index < inputRefs.current.length) {
@@ -43,7 +43,7 @@ const Attendance: React.FC = () => {
   const handleButtonClick = () => {
     if (isComplete) {
       const attendanceData = { attendanceNum: 0 }; // 실제 데이터를 사용하세요
-      mutate(attendanceData);
+      // mutate(attendanceData);
     }
   };
 
