@@ -5,9 +5,12 @@ import { COLORS } from "@/styles";
 import Image from "next/image";
 import { CALENDAR_FILTER_BTN } from "../constants/const";
 import { useCalendarFilter } from "./CalendarFilterProvider";
+import { CalendarListHeaderProps } from "./CalendarListHeader";
 import { CalendarPeriod } from "./CalendarPeriod";
 
-export const CalendarFilter = () => {
+export const CalendarFilter = ({
+    refetchSchedule
+}: CalendarListHeaderProps) => {
     const {openFloating, setOpenFloating, isPeriod, period} = useCalendarFilter();
 
     return(
@@ -51,7 +54,9 @@ export const CalendarFilter = () => {
                     color="white"
                     setOpenFloating={setOpenFloating}
                 >
-                    <CalendarPeriod />
+                    <CalendarPeriod 
+                        refetchSchedule={refetchSchedule}
+                    />
                 </BottomSheet>
             )}
         </>

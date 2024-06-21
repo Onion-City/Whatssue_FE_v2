@@ -36,8 +36,8 @@ export const CalendarFilterProvider = ({ children }: CalendarFilterProviderProps
   const [selectedIdx, setSelectedIdx] = useState(0);
   const [isPeriod, setIsPeriod] = useState(false);
   const [period, setPeriod] = useState<Period>({
-    startDate: moment(new Date()).format('YYYY년 MM월 DD일'),
-    endDate: moment(new Date()).format('YYYY년 MM월 DD일')
+    startDate: moment(new Date()).format('YYYY-MM-DD'),
+    endDate: moment(new Date()).format('YYYY-MM-DD')
   });
 
   const value: CalendarFilterContextType = {
