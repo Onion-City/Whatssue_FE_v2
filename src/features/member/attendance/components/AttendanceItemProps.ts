@@ -5,4 +5,5 @@ export interface AttendanceItemProps {
   title: string;
   date: string;
   time: string;
+  onClick: () => void;
 }

@@ -1,36 +1,36 @@
-"use client"; //set으로 만들고 해당을 제거
-
-import { useRouter } from "next/navigation";
-import { AttendanceItemProps } from "../../../features/member/attendance/components/AttendanceItemProps";
+"use client";
 import { Text } from "@/components/atoms/text";
 import "./AttendanceItem.css";
 import Image from "next/image";
 import { IMAGES } from "@/constants/images";
+import { AttendanceSchedule } from "@/types/attendance";
+import AttendanceChip from "@/components/atoms/attendance/AttendanceChip";
 
 const AttendanceItem = ({
   attendanceAddress,
-  id,
-  status,
-  title,
-  date,
-  time,
-}: AttendanceItemProps) => {
-  const router = useRouter();
-  const handleRouteAttendance = (AttendanceId: number) => {
-    if (attendanceAddress === "manager") {
-      router.push("/manager/attendance/status");
-    } else {
-      router.push(`/${attendanceAddress}/attendance`);
-    }
-  };
+  scheduleId,
+  attendanceStatus,
+  scheduleName,
+  scheduleDate,
+  scheduleTime,
+  onClick,
+}: AttendanceSchedule) => {
+  // if (attendanceStatus === "BEFORE") {
+  //   attendanceStatus = "미출석";
+  // } else if (attendanceStatus === "ONGOING") {
+  //   attendanceStatus = "출석중";
+  // } else if (attendanceStatus === "COMPLETE") {
+  //   attendanceStatus = "출석완료";
+  // }
 
   return (
-    <div className="attendance_item" onClick={() => handleRouteAttendance(id)}>
+    <div className="attendance_item" onClick={onClick}>
       <div className="attendance_item__content">
         <div className="attendance_item__status">
-          <Text color="#2B2B2B" fontSize="0.5625rem" fontWeight="600">
-            {status}
-          </Text>
+          {/* <Text color="#2B2B2B" fontSize="0.5625rem" fontWeight="600">
+            {attendanceStatus}
+          </Text> */}
+          <AttendanceChip type={attendanceStatus} />
         </div>
 
         <Text
@@ -39,7 +39,7 @@ const AttendanceItem = ({
           fontWeight="600"
           className="attendance_item__title"
         >
-          {title}
+          {scheduleName}
         </Text>
 
         <div>
@@ -49,7 +49,7 @@ const AttendanceItem = ({
             fontWeight="500"
             className="attendance_item__date"
           >
-            {date}
+            {scheduleDate}
           </Text>
 
           <Text
@@ -58,7 +58,7 @@ const AttendanceItem = ({
             fontWeight="500"
             className="attendance_item__time"
           >
-            {time}
+            {scheduleTime}
           </Text>
         </div>
       </div>
