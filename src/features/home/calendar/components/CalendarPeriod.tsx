@@ -5,13 +5,16 @@ import moment from "moment";
 import { useState } from "react";
 import { CALENDAR_PERIOD_BTN, CALENDAR_PERIOD_TXT, CALENDAR_PERIOD_TXT_LIST } from "../constants/const";
 import { useCalendarFilter } from "./CalendarFilterProvider";
+import { CalendarListHeaderProps } from "./CalendarListHeader";
 
-export const CalendarPeriod = () => {
+export const CalendarPeriod = ({
+    refetchSchedule
+}: CalendarListHeaderProps) => {
     const { setOpenFloating, selectedIdx, setSelectedIdx, setIsPeriod, period, setPeriod } = useCalendarFilter();
     const [tmpPeriod, setTmpPeriod] = useState({
         startDate: period.startDate,
         endDate: period.endDate
-    })
+    });
 
     const initializePeriod = () => {
         setSelectedIdx(0);
@@ -21,30 +24,32 @@ export const CalendarPeriod = () => {
         if(selectedIdx === 0){
             setIsPeriod(false);
         } else {
+            let newSDate = period.startDate;
+            let newEDate = period.endDate;
             switch(selectedIdx) {
                 case 1: // 1주일
-                    setPeriod({
-                        startDate: moment(new Date()).subtract(7, 'day').format('YYYY년 MM월 DD일'),
-                        endDate: moment(new Date()).format('YYYY년 MM월 DD일')
-                    })
+                    newSDate = moment(new Date()).subtract(7, 'day').format('YYYY-MM-DD');
+                    newEDate = moment(new Date()).format('YYYY-MM-DD');
                     break;
                 case 2: // 1개월
-                    setPeriod({
-                        startDate: moment(new Date()).subtract(1, 'months').format('YYYY년 MM월 DD일'),
-                        endDate: moment(new Date()).format('YYYY년 MM월 DD일')
-                    })
+                    console.log(moment(new Date()).subtract(1, 'months').format('YYYY-MM-DD'));
+                    newSDate = moment(new Date()).subtract(1, 'months').format('YYYY-MM-DD');
+                    newEDate = moment(new Date()).format('YYYY-MM-DD');
                     break;
                 case 3: // 3개월
-                    setPeriod({
-                        startDate: moment(new Date()).subtract(3, 'months').format('YYYY년 MM월 DD일'),
-                        endDate: moment(new Date()).format('YYYY년 MM월 DD일')
-                    })
+                    newSDate = moment(new Date()).subtract(3, 'months').format('YYYY-MM-DD');
+                    newEDate = moment(new Date()).format('YYYY-MM-DD');
                     break;
                 case 4: // 직접 입력
                     setPeriod(tmpPeriod);
                     break;
             }
-
+            refetchSchedule({
+                clubId: 1,
+                q: "",
+                sDate: newSDate,
+                eDate: newEDate
+            });
             setIsPeriod(true);
         }
         setOpenFloating(false); // 바텀시트 닫기
