@@ -5,17 +5,34 @@ import moment from "moment";
 import { useState } from "react";
 import { useScheduleQuery } from "./useScheduleQuery";
 
-const useSchedule = ({ clubId, q, sDate, eDate }: FetchScheduleParams) => {
+const useSchedule = (
+{ 
+  clubId, q, sDate, eDate 
+}: FetchScheduleParams
+) => {
   const [value, setValue] = useState<Date>(new Date());
   const [params, setParams] = useState<FetchScheduleParams>({
-      clubId: clubId, 
-      q: q, 
-      sDate: sDate, 
-      eDate: eDate
+    clubId: clubId, 
+    q: q, 
+    sDate: sDate, 
+    eDate: eDate
   })
 
   // params에 맞는 일정 fetch
   const { data, isLoading } = useScheduleQuery(params);
+
+  // params 변경
+  const refetchSchedule = ({
+    clubId, 
+    q, 
+    sDate, 
+    eDate
+  }: FetchScheduleParams) => setParams({
+    clubId: clubId, 
+    q: q, 
+    sDate: sDate, 
+    eDate: eDate
+  })
 
   // 일정 변경 시 실행 function
   const handleChange = (newValue: Date) => {
@@ -48,6 +65,7 @@ const useSchedule = ({ clubId, q, sDate, eDate }: FetchScheduleParams) => {
   return {
     value, 
     setValue: handleChange,
+    refetchSchedule,
     filteredData,
     data, 
     isLoading,
