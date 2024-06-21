@@ -4,17 +4,3 @@ export interface PageProps {
     size: number;
     sort?: [string];
   }
-  
-  //
-  export interface PageAble {
-    pageNumber: number;
-    pageSize: number;
-    sort: {
-      empty: false;
-      sorted: true;
-      unsorted: false;
-    };
-    offset: number;
-    unpaged: false;
-    paged: true;
-  }

@@ -1,9 +1,10 @@
-import { Modal } from "@/components/atoms/modal";
 import { Text } from "@/components/atoms/text";
+import { useModalContext } from "@/components/organisms/Modal/ModalProvider";
+import { useJoinCancelMutation } from "@/hook/clubJoin/useJoinCancelMutation";
+import { useJoinRejectedQuery } from "@/hook/clubJoin/useJoinRejectedQuery";
 import useSwipeItemHandles from "@/hook/user/useSwipeItemHandles";
 import { ApprovalStatus, RequestedJoinClubInfo } from "@/types/club";
-import { useState } from "react";
-import { HOME_CANCEL } from "../constants/const";
+import HomeRequestedModal from "./HomeRequestedModal";
 import "./RequestedMeetingItem.css";
 
 const RequestedMeetingItem = ({
@@ -13,12 +14,24 @@ const RequestedMeetingItem = ({
   status,
   updatedAt,
 }: RequestedJoinClubInfo) => {
-  const [openCancelModal, setOpenCancelModal] = useState(false);
-  const handleRejectedModal = (clubId: number) => {
-    if (status == ApprovalStatus.Rejected) {
-      // 거절 사유 조회 모달 열기
-    }
+  const isSwipe = status == ApprovalStatus.Rejected;
+  const { isOpen, openModal, closeModal } = useModalContext();
+  const { mutate: cancelMutate } = useJoinCancelMutation(clubJoinRequestId);
+  const { data: rejectedData, isLoading } =
+    useJoinRejectedQuery(clubJoinRequestId, status);
+
+  const rejectedDataText = rejectedData?.rejectionReason;
+
+  const handleOpenModal = () => {
+    openModal();
   };
+  const requestData = {
+    title: clubName,
+    date: updatedAt,
+    content: rejectedDataText || "",
+    // : HOME_JOIN_CANCLE.content,
+  };
+
   const {
     handleTouchStart,
     handleMouseDown,
@@ -26,27 +39,20 @@ const RequestedMeetingItem = ({
     handleMouseMove,
     showDeletePopup,
   } = useSwipeItemHandles();
-  const handleOpenCancelModal = () => {
-    setOpenCancelModal((prop) => !prop);
-  };
-  const handleCancel = () => {
-    setOpenCancelModal((prop) => !prop);
-    // 신청내역 취소
-  };
-  const handleDelete = () => {
-    // 해당 신청 내역 삭제 요청
-  };
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <div
       className="home__content__Requeste__box_wrapper"
-      onClick={() => handleRejectedModal(clubId)}
-      onTouchStart={handleTouchStart}
-      onMouseDown={handleMouseDown}
-      onTouchMove={handleTouchMove}
-      onMouseMove={handleMouseMove}
+      onTouchStart={!isSwipe ? handleTouchStart : undefined}
+      onMouseDown={!isSwipe ? handleMouseDown : undefined}
+      onTouchMove={!isSwipe ? handleTouchMove : undefined}
+      onMouseMove={!isSwipe ? handleMouseMove : undefined}
     >
       <div
         className={`home__content__Requeste__box ${showDeletePopup ? "home__content__Requeste__box__select" : ""}`}
+        onClick={isSwipe ? handleOpenModal : undefined}
       >
         <div className="home__content__Requeste__left">
           <Text
@@ -86,25 +92,22 @@ const RequestedMeetingItem = ({
         <div className="delete-popup-inner">
           <Text color="#fff" fontSize="0.8125rem" fontWeight="600">
             {status == ApprovalStatus.Waiting && (
-              <div onClick={handleOpenCancelModal}>신청 취소</div>
+              <div onClick={handleOpenModal}>신청 취소</div>
             )}
-            {(status == ApprovalStatus.Rejected ||
-              status == ApprovalStatus.Approved) && (
-              <div onClick={handleDelete}>삭제</div>
+            {status == ApprovalStatus.Approved && (
+              <div onClick={handleOpenModal}>삭제</div>
             )}
           </Text>
         </div>
       </div>
-      {openCancelModal && (
-        <Modal
-          title={HOME_CANCEL.title}
-          subtitle={HOME_CANCEL.subtitle}
-          agree={HOME_CANCEL.agree}
-          denial={HOME_CANCEL.denial}
-          agreeVoid={handleCancel}
-          denialVoid={handleOpenCancelModal}
-        />
-      )}
+      <HomeRequestedModal
+        isOpen={isOpen}
+        closeModal={closeModal}
+        title={clubName}
+        date={updatedAt}
+        content={rejectedDataText || ""}
+        cancelMutate={cancelMutate}
+      />
     </div>
   );
 };
