@@ -1,6 +1,7 @@
 import { http } from "@/apis/http";
 import { PostFormProps } from "@/types/post";
 import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 async function registePost(postData: PostFormProps) {
   const resData = new FormData();
@@ -17,8 +18,11 @@ async function registePost(postData: PostFormProps) {
       { type: "application/json" }
     )
   );
-  if (postData.postImages && postData.postImages.imageFile)
-    resData.append("profileImage", postData.postImages.imageFile);
+  if (postData.postImages && postData.postImages.length > 0) {
+    postData.postImages.forEach((file) => {
+      resData.append(`postImages`, file);
+    });
+  }
 
   const config = {
     headers: {
@@ -39,13 +43,15 @@ async function registePost(postData: PostFormProps) {
   }
 }
 interface UseRegistePost {
-  mutate: (data: PostFormProps) => void; // 매개변수 추가
+  mutate: (data: PostFormProps) => void;
 }
 export function usePostMutation(): UseRegistePost {
+  const router = useRouter();
   const { mutate } = useMutation<void, Error, PostFormProps>({
     mutationFn: registePost,
     onSuccess: () => {
       console.log("게시글 등록 성공");
+      router.back();
     },
     onError: (error) => {
       console.log("게시글 등록 실패", error);

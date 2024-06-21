@@ -1,13 +1,14 @@
 import Iconfileupload from "@/assets/images/ic_file_upload.png";
 import { MappingImgItem } from "@/components/atoms/mappingImgItem";
 import { Text } from "@/components/atoms/text";
+import { InputBox } from "@/components/molecules/inputBox";
 import { usePostMutation } from "@/hook/post/usePostMutation";
 import { PostFormProps } from "@/types/post";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { REGIS_TEXT } from "../constants/constant";
+import { REGISTER_INPUT_ARR } from "../constants/constant";
 import "./RegisBoard.css";
 
 export const RegisBoard = () => {
@@ -25,7 +26,7 @@ export const RegisBoard = () => {
   };
 
   const { control, handleSubmit } = useForm<PostFormProps>({
-    mode: "onChange", // Form validation mode
+    mode: "onChange",
   });
 
   const registePostMutation = usePostMutation();
@@ -42,7 +43,7 @@ export const RegisBoard = () => {
         imageUrls: [...uploadImages.imageUrls, ...newImages],
       });
     } else {
-      alert("이미지는 최대 10장까지 첨부할 수 있습니다.");
+      alert(REGISTER_INPUT_ARR.IMGCONTENT.alert);
     }
   };
 
@@ -58,12 +59,15 @@ export const RegisBoard = () => {
 
   const onSubmit = (data: PostFormProps) => {
     const postData: PostFormProps = {
-      ...data,
       request: {
         ...data.request,
         postCategory: boardTypeAddress === "free" ? "FREE" : "NOTICE",
       },
       clubId: parseInt(pathname.split("/")[1]),
+      postImages:
+        uploadImages.imageFiles.length > 0
+          ? uploadImages.imageFiles
+          : undefined,
     };
     registePostMutation.mutate(postData);
   };
@@ -73,7 +77,7 @@ export const RegisBoard = () => {
       <>
         <div className="board__write__type">
           <Text color="#989898" fontSize="0.8125rem" fontWeight="500">
-            {REGIS_TEXT.CATEGORY}
+            {REGISTER_INPUT_ARR.CATEGORY.content}
           </Text>
           <Text
             color="#fff"
@@ -81,27 +85,33 @@ export const RegisBoard = () => {
             fontWeight="600"
             className="board__write__type__margin"
           >
-            {boardTypeAddress === "free" ? REGIS_TEXT.FREE : REGIS_TEXT.NOTICE}
+            {boardTypeAddress === "free"
+              ? REGISTER_INPUT_ARR.CATEGORY.FREE
+              : REGISTER_INPUT_ARR.CATEGORY.NOTICE}
           </Text>
         </div>
         <div className="board__write__title">
           <input
-            placeholder={REGIS_TEXT.TITLE}
+            placeholder={REGISTER_INPUT_ARR.TITLE.content}
             type="text"
-            {...control.register("request.postTitle")} // Register field with react-hook-form
+            {...control.register("request.postTitle")}
           />
         </div>
         <div className="board__write__content">
-          <textarea
-            placeholder={REGIS_TEXT.CONTENT}
-            {...control.register("request.postContent")} // Register field with react-hook-form
+          <InputBox
+            title={REGISTER_INPUT_ARR.CONTENT.title}
+            maxCnt={REGISTER_INPUT_ARR.CONTENT.maxCnt}
+            type={REGISTER_INPUT_ARR.CONTENT.type}
+            essential={REGISTER_INPUT_ARR.CONTENT.essential}
+            name={REGISTER_INPUT_ARR.CONTENT.name}
+            control={control}
           />
         </div>
       </>
 
       <div className="board__write__bottom">
         <Text color="#fff" fontSize="1.0625rem" fontWeight="600">
-          사진 첨부하기 (최대 10개)
+          {REGISTER_INPUT_ARR.IMGCONTENT.content}
         </Text>
         <div className="board__write__img">
           <div className="board__write__img__upload">
