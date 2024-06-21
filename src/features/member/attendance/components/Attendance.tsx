@@ -8,12 +8,19 @@ import Image from "next/image";
 import { IMAGES } from "@/constants/images";
 import { ATTEND_BTN } from "../constants/const";
 import React, { useRef, useState, useEffect } from "react";
+import { useAttendanceMutationQuery } from "@/hook/attendance/member/useAttendanceMutationQuery";
 
 const Attendance: React.FC = () => {
   const ClubName = "코딩하는 도토리";
   const [codeValues, setCodeValues] = useState<string[]>(Array(3).fill(""));
   const [isComplete, setIsComplete] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  const { mutate } = useAttendanceMutationQuery({
+    clubId: "club123",
+    scheduleId: "schedule123",
+    memberId: "member123",
+  });
 
   const setFocus = (index: number) => {
     if (index >= 0 && index < inputRefs.current.length) {
@@ -31,6 +38,13 @@ const Attendance: React.FC = () => {
     const newValues = [...codeValues];
     newValues[index] = value;
     setCodeValues(newValues);
+  };
+
+  const handleButtonClick = () => {
+    if (isComplete) {
+      const attendanceData = { attendanceNum: 0 }; // 실제 데이터를 사용하세요
+      mutate(attendanceData);
+    }
   };
 
   useEffect(() => {
@@ -74,6 +88,7 @@ const Attendance: React.FC = () => {
         <Button
           backgroundColor={isComplete ? "#51F8C4" : "#404040"}
           color={isComplete ? "#2B2B2B" : "#fff"}
+          onClick={handleButtonClick}
         >
           {ATTEND_BTN}
         </Button>

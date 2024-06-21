@@ -1,11 +1,11 @@
-import AttendancePage from "@/features/member/attendance/AttendancePage";
+import AttendanceListPage from "@/features/member/attendance/AttendanceListPage";
 
-const UserAttendance = () => {
+const UserAttendanceList = () => {
   return (
     <>
-      <AttendancePage />
+      <AttendanceListPage />
     </>
   );
 };
 
-export default UserAttendance;
+export default UserAttendanceList;

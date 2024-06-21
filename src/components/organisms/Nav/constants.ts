@@ -8,7 +8,7 @@ interface NavItem {
 export const navItems: NavItem[] = [
   { path: "", icon: NavIcons.home, text: "홈" },
   { path: "board", icon: NavIcons.board, text: "게시판" },
-  { path: "member/attendance/list", icon: NavIcons.atten, text: "출석" },
+  { path: "member/attendance", icon: NavIcons.atten, text: "출석" },
   { path: "member/list", icon: NavIcons.member, text: "맴버" },
   { path: "info", icon: NavIcons.more, text: "더보기" },
 ];
