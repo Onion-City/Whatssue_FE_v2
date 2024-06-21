@@ -14,3 +14,19 @@ export interface AbsenceReqData {
 export interface AbsenceReasonValues {
   absenceReason: string;
 }
+
+// 공결 리스트 조회
+
+export interface AbsenceListProps {
+  clubId?: number;
+  clubMemberId?: number;
+}
+
+export interface AbsenceMemberData {
+  id: number,
+  clubMemberId: number,
+  scheduleId: number,
+  officialAbsenceContent: string,
+  officialAbsenceRequestType: "WAITING" | "ACCEPTED" | "REJECTED",
+
+}

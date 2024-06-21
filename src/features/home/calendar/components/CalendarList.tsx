@@ -2,9 +2,8 @@
 import { DateBox } from "@/components/molecules/dateBox";
 import { ScheduleBox } from "@/components/molecules/scheduleBox";
 import { RouterBtn } from "@/components/organisms/RouterBtn/RouterBtn";
-import useSchedule from "@/hook/schedule/useSchedule";
-import moment from "moment";
-import { useRouter, useSearchParams } from "next/navigation";
+import { ScheduleContent } from "@/types/schedule";
+import { useRouter } from "next/navigation";
 import React from "react";
 import "./Calendar.css";
 
@@ -14,41 +13,19 @@ export interface dateProps {
     title: string;
 }
 
-const CalendarList = () => {
+export interface CalendarListProps {
+    data?: {
+        content: ScheduleContent[]
+    };
+    mark?: string[];
+}
+
+const CalendarList = ({
+    data: scheduleData,
+    mark
+}: CalendarListProps) => {
     const router = useRouter();
-    const params = useSearchParams();
-    console.log(params.get('month'));
     
-    const dateList: dateProps[] = [
-        {
-            id: 1,
-            time: "20:00:00",
-            title: "UI 회의"
-        },
-        {
-            id: 2,
-            time: "20:00:00",
-            title: "와이어 프레임 작성 회의"
-        },
-        {
-            id: 3,
-            time: "20:00:00",
-            title: "백엔드 회의"
-        },
-        {
-            id: 4,
-            time: "20:00:00",
-            title: "와이어프레임 작성 회의"
-        },
-    ];
-
-    const { data, isLoading, mark } = useSchedule({
-        clubId: 1,
-        q: "",
-        sDate: moment(params.get('month'), "YYYY-MM").startOf('month').format("YYYY-MM-DD"), 
-        eDate: moment(params.get('month'), "YYYY-MM").endOf('month').format("YYYY-MM-DD")
-    });
-
     return (
         <div className="homeDateWrapper">
             {
@@ -60,9 +37,8 @@ const CalendarList = () => {
                             date={m}
                         >
                             {
-                            data && 
-                            data.data && 
-                            data.data.content
+                            scheduleData && 
+                            scheduleData?.content
                                 ?.filter((d) => d.scheduleDate === m)
                                 ?.map((date) => (
                                     <React.Fragment key={date.scheduleId}>
