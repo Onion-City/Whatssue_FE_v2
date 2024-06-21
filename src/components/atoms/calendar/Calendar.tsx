@@ -74,7 +74,6 @@ export function HomeCalendar({
         mark?.forEach((m, i) => {
           if (m === moment(date).format("YYYY-MM-DD")) {
             if (moment(date).format("YYYY-MM-DD") === moment(value).format("YYYY-MM-DD")){
-              console.log("!");
               html.push(
                 <div 
                   key={i}
