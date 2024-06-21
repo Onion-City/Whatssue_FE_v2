@@ -1,14 +1,15 @@
 import { http } from "@/apis/http";
-import { GetClubListResponse } from "@/types/club";
+import { CommonRes } from "@/types";
+import { Club } from "@/types/club";
 import { PageProps } from "@/types/pages";
 import { useQuery } from "@tanstack/react-query";
 
 export const useClubListQuery = ({ page, size }: PageProps) => {
-  return useQuery<GetClubListResponse>({
+  return useQuery<CommonRes<Club>>({
     queryKey: [`clubList`, { page, size }],
     queryFn: () =>
-      http.get<GetClubListResponse>(
-        `/clubs?page=${page}&size=${size}&sort=string`,
+      http.get<CommonRes<Club>>(
+        `/clubs?page=${page}&size=${size}`,
         { headers: { accept: "*/*" } }
       ),
   });

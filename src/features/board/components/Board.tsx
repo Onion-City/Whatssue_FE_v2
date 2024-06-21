@@ -20,8 +20,7 @@ const Board = () => {
   };
   const handleRouteBoard = (boardTypeAddress: string) => {
     const startedPath = pathname.split("/").slice(1)[0];
-    router.push(`/${startedPath}/board/${boardTypeAddress}
-    /regis`);
+    router.push(`/${startedPath}/board/${boardTypeAddress}/regis`);
   };
   return (
     <div className="board">

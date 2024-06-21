@@ -1,4 +1,3 @@
-import { PageAble } from "../pages";
 
 // 클럽 기본 구조
 export interface Club {
@@ -8,34 +7,6 @@ export interface Club {
   createdAt: string;
   role: "MANAGER" | "MEMBER";
   memberCount?: number;
-}
-
-//   memberCount
-export interface GetClubListResponse {
-  data: {
-    content: Club[];
-    pageable: PageAble;
-    last: false;
-    totalElements: number;
-    totalPages: number;
-    size: number;
-    number: number;
-    sort: {
-      empty: false;
-      sorted: true;
-      unsorted: false;
-    };
-    first: true;
-    numberOfElements: number;
-    empty: false;
-  };
-}
-
-export interface GetRequestedJoinListResponse {
-  data: {
-    content: RequestedJoinClubInfo[];
-    pageable: PageAble;
-  };
 }
 
 export interface RequestedJoinClubInfo {

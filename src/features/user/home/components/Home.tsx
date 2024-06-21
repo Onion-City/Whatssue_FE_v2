@@ -1,7 +1,7 @@
 import { ChoiceBox } from "@/components/molecules/choiceBox/index";
 import { FloatingBox } from "@/components/molecules/floatingBox/FloatingBox";
 
-import { useClubJoinQuery } from "@/hook/clubJoin/useClubJoinQuery";
+import { useJoinRequestsQuery } from "@/hook/clubJoin/useJoinRequestsQuery";
 import { useClubListQuery } from "@/hook/user/useClubListQuery";
 import { useState } from "react";
 import "./Home.css";
@@ -13,7 +13,11 @@ import RequestedMeetingItem from "./RequestedMeetingItem";
 const Home = () => {
   const { data: clubList, isLoading } = useClubListQuery({ page: 0, size: 10 });
   const { data: requestedClubList, isLoading: isLoading2 } =
-    useClubJoinQuery();
+    useJoinRequestsQuery({
+      page: 0,
+      size: 10,
+    });
+  console.log(requestedClubList);
   const [isChoice, setIsChoice] = useState(0); // 0 === 모임, 1 === 신청한 모임
   const handleChoice = (e: number) => {
     setIsChoice(e);
@@ -32,7 +36,8 @@ const Home = () => {
         {isChoice === 0 && isLoading && <div>Loading...</div>}
         {clubList && isChoice === 0 && (
           <>
-            {clubList?.data?.content && clubList?.data?.content?.length === 0 ? (
+            {clubList?.data?.content &&
+            clubList?.data?.content?.length === 0 ? (
               <HomeNoneContent />
             ) : (
               <>
