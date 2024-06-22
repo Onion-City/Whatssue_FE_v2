@@ -21,9 +21,11 @@ export const Search = ({
     };
 
     useEffect(() => {
-        refetchKeywordSchedule({
-            keyword
-        })
+        if(refetchKeywordSchedule){
+            refetchKeywordSchedule({
+                keyword
+            })
+        }
     }, [debounceKeyword])
 
     return(
