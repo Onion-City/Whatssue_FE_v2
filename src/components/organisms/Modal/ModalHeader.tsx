@@ -2,16 +2,16 @@ import { IMAGES } from "@/constants/images";
 import Image from "next/image";
 import { ReactNode } from "react";
 import styles from "./Modal.module.css";
-import { useModalContext } from "./ModalProvider";
 
 interface ModalHeaderProps {
   children?: ReactNode;
+  closeModal?: () => void;
 }
 
 export const ModalHeader = ({
-  children
+  children,
+  closeModal
 }: ModalHeaderProps) => {
-  const { closeModal } = useModalContext();
   return (
     <div 
       className={styles.modalHeader}

@@ -12,6 +12,15 @@ import { ModalTitle } from "./ModalTitle";
 import styles from "./Modal.module.css";
 
 // children 요소 중 Header filtering
+const ModalDimmedType = (<ModalDimmed />).type;
+function getModalDimmed(children: ReactNode) {
+  const childrenArray = Children.toArray(children);
+  return childrenArray.filter(
+    (child) => isValidElement(child) && child.type === ModalDimmedType
+  );
+}
+
+// children 요소 중 Header filtering
 const ModalHeaderType = (<ModalHeader />).type;
 function getModalHeader(children: ReactNode) {
   const childrenArray = Children.toArray(children);
@@ -52,13 +61,16 @@ export const Modal = ({ children, isOpen }: ModalProps) => {
   const modalContents = getModalContents(children);
   const modalFooter = getModalFooter(children);
   return createPortal(
-    <div className={styles.modal}>
-      {modalHeader && <div className={styles.modal__header}>{modalHeader}</div>}
-      {modalContents && (
-        <div className={styles.modal__content}>{modalContents}</div>
-      )}
-      {modalFooter && <div className={styles.modal__footer}>{modalFooter}</div>}
-    </div>,
+    <>
+      {getModalDimmed(children)}
+      <div className={styles.modal}>
+        {modalHeader && <div className={styles.modal__header}>{modalHeader}</div>}
+        {modalContents && (
+          <div className={styles.modal__content}>{modalContents}</div>
+        )}
+        {modalFooter && <div className={styles.modal__footer}>{modalFooter}</div>}
+      </div>
+    </>,
     document.body
   );
 };
