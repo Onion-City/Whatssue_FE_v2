@@ -8,7 +8,6 @@ interface CalendarDetailContentProps {
 }
 
 const CalendarDetailContent = ({ detailData } : CalendarDetailContentProps) => {
-    console.log(detailData);
         const renderDetailBox = (label: string, value: string | undefined) => (
             <div className="calendarDetailContent__box">
                 <span className="wd-20">
