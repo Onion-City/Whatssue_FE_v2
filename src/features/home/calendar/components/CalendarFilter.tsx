@@ -2,15 +2,19 @@ import { Text } from "@/components/atoms/text";
 import { BottomSheet } from "@/components/organisms/BottomSheet/BottomSheet";
 import { ICONS } from "@/constants/images";
 import { COLORS } from "@/styles";
+import { ScheduleDate } from "@/types/schedule";
 import Image from "next/image";
 import { CALENDAR_FILTER_BTN } from "../constants/const";
 import { useCalendarFilter } from "./CalendarFilterProvider";
-import { CalendarListHeaderProps } from "./CalendarListHeader";
 import { CalendarPeriod } from "./CalendarPeriod";
 
+export interface CalendarFilterProps {
+    refetchPeriodSchedule: ({ startDate, endDate }: ScheduleDate) => void;
+}
+
 export const CalendarFilter = ({
-    refetchSchedule
-}: CalendarListHeaderProps) => {
+    refetchPeriodSchedule
+}: CalendarFilterProps) => {
     const {openFloating, setOpenFloating, isPeriod, period} = useCalendarFilter();
 
     return(
@@ -55,7 +59,7 @@ export const CalendarFilter = ({
                     setOpenFloating={setOpenFloating}
                 >
                     <CalendarPeriod 
-                        refetchSchedule={refetchSchedule}
+                        refetchPeriodSchedule={refetchPeriodSchedule}
                     />
                 </BottomSheet>
             )}
