@@ -4,13 +4,13 @@ import { Text } from "@/components/atoms/text";
 import moment from "moment";
 import { useState } from "react";
 import { CALENDAR_PERIOD_BTN, CALENDAR_PERIOD_TXT, CALENDAR_PERIOD_TXT_LIST } from "../constants/const";
+import { CalendarFilterProps } from "./CalendarFilter";
 import { useCalendarFilter } from "./CalendarFilterProvider";
-import { CalendarListHeaderProps } from "./CalendarListHeader";
 
 export const CalendarPeriod = ({
-    refetchSchedule
-}: CalendarListHeaderProps) => {
-    const { setOpenFloating, selectedIdx, setSelectedIdx, setIsPeriod, period, setPeriod } = useCalendarFilter();
+    refetchPeriodSchedule
+}: CalendarFilterProps) => {
+    const { setOpenFloating, selectedIdx, setSelectedIdx, isPeriod, setIsPeriod, period, setPeriod } = useCalendarFilter();
     const [tmpPeriod, setTmpPeriod] = useState({
         startDate: period.startDate,
         endDate: period.endDate
@@ -20,10 +20,23 @@ export const CalendarPeriod = ({
         setSelectedIdx(0);
     };
 
+    // 기간별 일정 refetch
+    const refetchNewSchedule = ({ newSDate, newEDate }: {
+        newSDate: string;
+        newEDate: string;
+    }) => {
+        refetchPeriodSchedule && refetchPeriodSchedule({
+            startDate: newSDate,
+            endDate: newEDate
+        });
+    }
+
     const handlePeriod = () => {
         if(selectedIdx === 0){
+            refetchNewSchedule({ newSDate: "", newEDate: "" });
             setIsPeriod(false);
         } else {
+            setIsPeriod(true); // 기간 설정했는지 여부
             let newSDate = period.startDate;
             let newEDate = period.endDate;
             switch(selectedIdx) {
@@ -44,16 +57,21 @@ export const CalendarPeriod = ({
                     setPeriod(tmpPeriod);
                     break;
             }
-            refetchSchedule({
-                clubId: 1,
-                q: "",
-                sDate: newSDate,
-                eDate: newEDate
-            });
-            setIsPeriod(true);
+            refetchNewSchedule({ newSDate: newSDate, newEDate: newEDate });
+            setPeriod({
+                startDate: newSDate,
+                endDate: newEDate
+            }); // 설정한 기간
+            setIsPeriod(true); // 기간 설정했는지 여부
         }
         setOpenFloating(false); // 바텀시트 닫기
     };
+
+    // useEffect(() => {
+    //     if (isPeriod) {
+    //         refetchNewSchedule({ newSDate: period.startDate, newEDate: period.endDate });
+    //     }
+    // }, [period]);
 
     return(
         <div className="calendarPeriod">

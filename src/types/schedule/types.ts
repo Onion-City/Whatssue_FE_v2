@@ -13,11 +13,20 @@ export interface ScheduleContent {
   attendanceStatus: Attendance;
 }
 
+export interface ScheduleDate {
+  startDate?: string;
+  endDate?: string;
+}
+
+export interface ScheduleKeyword {
+  keyword?: string;
+}
+
 export interface FetchScheduleParams {
   clubId: number;
-  q?: string;
-  sDate?: string;
-  eDate?: string;
+  keyword?: string;
+  startDate?: string;
+  endDate?: string;
 }
 
 // 일정 박스
