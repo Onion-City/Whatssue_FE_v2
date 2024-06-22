@@ -1,5 +1,4 @@
 "use client";
-import moment from "moment";
 import React, { useContext } from "react";
 import "./Home.css";
 
@@ -28,11 +27,12 @@ const HomeDateWrapper = ({ dateList, isLoading }: {
                     fontWeight="700"
                 >{formatDateKor(value)}</Text>
                 <RouterBtn
-                    path={`/1/calendar?month=${moment(value).format("YYYY-MM")}`}
+                    path={`/1/calendar`}
                 >
                     <Text
                         color={COLORS.white}
                         fontSize="0.6875rem"
+                        className="homeDateWrapper__header-btn"
                     >더보기</Text>
                 </RouterBtn>
             </div>
