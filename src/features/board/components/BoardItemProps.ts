@@ -1,18 +1,16 @@
-import { StaticImageData } from "next/image";
 
 export interface BoardItemProps {
   boardAddress?: string;
   id: number;
   title: string;
   content: string;
-  date: string;
-  comment: number;
+  commentCount: number;
   hearts: number;
-  contentImgs?: StaticImageData[] | undefined;
-
+  contentImgs?: string[] | undefined;
   isHeart: boolean;
   writer: {
-    profile: StaticImageData;
+    profile: string;
     name: string;
   };
+  createdAt: string;
 }
