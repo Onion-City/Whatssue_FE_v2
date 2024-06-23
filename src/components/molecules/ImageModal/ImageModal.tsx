@@ -1,11 +1,11 @@
 import { Arrow } from "@/components/atoms/arrow";
 import { Text } from "@/components/atoms/text";
 import _ from "lodash";
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { useState } from "react";
 import "./ImageModal.css";
 interface ImageModalProps {
-  imageList: StaticImageData[];
+  imageList: string[];
   clickIndex: number;
   onClose: () => void;
 }
@@ -62,6 +62,8 @@ export const ImageModal = ({ imageList, clickIndex, onClose }: ImageModalProps) 
             src={imageList[currentIndex]}
             alt="contentImg"
             className="image__modal__image"
+            width={400}
+            height={400}
           />
           <div className="image__modal__control">
             <Arrow onClick={() => handlePrevNext(-1)} isLeft={true} />
