@@ -20,9 +20,9 @@ export type GetAttendanceListResponse = AttendanceListItem[];
 
 // 오늘의 일정
 export interface TodayScheduleItem
-  extends Omit<FetchScheduleParams, "sDate" | "eDate"> {
-  sDate: string;
-  eDate: string;
+  extends Omit<FetchScheduleParams, "startDate" | "endDate"> {
+  startDate: string;
+  endDate: string;
 }
 
 // 출석 아이템
