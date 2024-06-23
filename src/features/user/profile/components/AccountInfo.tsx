@@ -5,12 +5,12 @@ import { ACCOUNT_INFO } from "../constants/const";
 import { NAME } from "@/constants/const";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { useGetInfoQuery } from "@/hook/user/useGetInfoQuery";
 
 const AccountInfo: React.FC = () => {
   const router = useRouter();
-  const name = "홍길동";
-  const email = "whatshu@gamil.com";
-  const phoneNum = "010-1234-5678";
+  const { data } = useGetInfoQuery();
+  const userInfo = data?.data;
 
   return (
     <div className="account_info">
@@ -31,9 +31,9 @@ const AccountInfo: React.FC = () => {
           <p>{ACCOUNT_INFO.phoneNum}</p>
         </div>
         <div className="account_info__content">
-          <p>{name}</p>
-          <p>{email}</p>
-          <p>{phoneNum}</p>
+          <p>{userInfo?.userName}</p>
+          <p>{userInfo?.userEmail}</p>
+          <p>{userInfo?.userPhone}</p>
         </div>
       </div>
     </div>

@@ -10,22 +10,17 @@ import {
   EDIT_ACCOUNT_INFO_BTN,
   EDIT_ACCOUNT_INFO_INPUT_ARR,
 } from "../constants/const";
-
-interface FormData {
-  userName: string;
-  userEmail: string;
-  userMobile: string;
-}
+import { signUpInfo } from "@/types/user/types";
 
 const EditProfile: React.FC = () => {
   const router = useRouter();
-  const methods = useForm<FormData>({
+  const methods = useForm<signUpInfo>({
     mode: "onChange",
   });
 
   const { handleSubmit, control } = methods;
 
-  const submitOnboarding: SubmitHandler<FormData> = (data) => {
+  const submitOnboarding: SubmitHandler<signUpInfo> = (data) => {
     console.log(data);
   };
 
