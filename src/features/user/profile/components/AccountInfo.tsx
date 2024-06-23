@@ -5,11 +5,11 @@ import { ACCOUNT_INFO } from "../constants/const";
 import { NAME } from "@/constants/const";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { useGetInfoQuery } from "@/hook/user/useGetInfoQuery";
+import { useGetUserInfoQuery } from "@/hook/user/useGetUserInfoQuery";
 
 const AccountInfo: React.FC = () => {
   const router = useRouter();
-  const { data } = useGetInfoQuery();
+  const { data } = useGetUserInfoQuery();
   const userInfo = data?.data;
 
   return (
