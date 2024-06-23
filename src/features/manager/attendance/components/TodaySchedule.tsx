@@ -33,8 +33,8 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
     refetch: refetchTodaySchedule,
   } = useTodayScheduleListQuery({
     clubId: clubId,
-    sDate: "2024-05-28",
-    eDate: "2024-05-28",
+    startDate: "2024-05-28",
+    endDate: "2024-05-28",
   });
 
   const { refetch: refetchAttendance } = useAttendanceStartQuery({
