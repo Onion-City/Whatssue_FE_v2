@@ -22,9 +22,8 @@ const AttendanceList: React.FC = () => {
     useState<AttendanceListItem | null>(null);
 
   // useAttendanceListQuery 훅을 사용하여 데이터 불러오기
-  const { data, isLoading, isError } = useAttendanceListQuery({
-    clubId: 1,
-  });
+  const clubId = 1;
+  const { data, isError, refetch } = useAttendanceListQuery(clubId);
   console.log(data);
 
   const onSubmit = () => {
@@ -61,9 +60,9 @@ const AttendanceList: React.FC = () => {
     }
   }, [codeValues]);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
 
   if (isError) {
     return <div>Error loading attendance list.</div>;
