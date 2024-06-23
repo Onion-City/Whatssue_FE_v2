@@ -7,7 +7,7 @@ const AttendanceListPage: React.FC = () => {
     <>
       {/* <AttendanceEmpty /> */}
       <AttendanceList />
-      <Nav />
+      {/* <Nav /> */}
     </>
   );
 };
