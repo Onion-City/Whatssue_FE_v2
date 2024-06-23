@@ -4,12 +4,12 @@ import { FetchScheduleParams, ScheduleContent } from "@/types/schedule";
 import { useQuery } from "@tanstack/react-query";
 
 // 일정 조회 (/clubs/{clubs}/schedules)
-export const useScheduleQuery = ({ clubId, q, sDate, eDate }: FetchScheduleParams) => {
+export const useScheduleQuery = ({ clubId, keyword, startDate, endDate }: FetchScheduleParams) => {
     return useQuery<CommonRes<ScheduleContent>>({
-        queryKey: ['schedule', clubId, q, sDate, eDate],
+        queryKey: ['schedule', clubId, keyword, startDate, endDate],
         queryFn: async () => {
             const response = await http.get<CommonRes<ScheduleContent>>(
-                `/clubs/${clubId}/schedules?q=${q}&sDate=${sDate}&eDate=${eDate}`
+                `/clubs/${clubId}/schedules?keyword=${keyword}&startDate=${startDate}&endDate=${endDate}`
             );
             return response;
         },

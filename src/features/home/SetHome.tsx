@@ -19,9 +19,9 @@ export const ScheduleContext = createContext<{
 const SetHome = () => {
     const { value, setValue, filteredData, isLoading, mark } = useSchedule({
         clubId: 1,
-        q: "",
-        sDate: moment().startOf('month').format("YYYY-MM-DD"), 
-        eDate: moment().endOf('month').format("YYYY-MM-DD")
+        keyword: "",
+        startDate: moment().startOf('month').format("YYYY-MM-DD"), 
+        endDate: moment().endOf('month').format("YYYY-MM-DD")
     });
     console.log(filteredData);
 

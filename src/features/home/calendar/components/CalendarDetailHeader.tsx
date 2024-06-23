@@ -10,17 +10,6 @@ interface CalendarDetailContentProps {
 }
 
 const CalendarDetailHeader = ({detailData}: CalendarDetailContentProps)  => {
-    const dateDetail =
-        {
-            id: 1,
-            time: new Date(),
-            user: "문해빈",
-            title: "와이어 프레임 작성 회의",
-            location: "커피빈 홍대입구점",
-            content: "유저 플로우 기반으로 와이어프레임 작성하겠습니다. 테블릿 PC 지참해주세요 :) 출석은 정시에 가차없이 진행할 예정입니다. 지각 시에는 벌금 6000만원 있으니 참고하시어 늦지 마시길 ~ 모두 이따 봅시다",
-            attendance: 0, // 미출석
-        }
-    
     return (
         (detailData && (
         <div className="calendarDetailHeader">

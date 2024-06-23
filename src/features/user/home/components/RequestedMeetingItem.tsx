@@ -1,9 +1,10 @@
 import { Text } from "@/components/atoms/text";
-import { useModalContext } from "@/components/organisms/Modal/ModalProvider";
+// import { useModalContext } from "@/components/organisms/Modal/ModalProvider";
 import { useJoinCancelMutation } from "@/hook/clubJoin/useJoinCancelMutation";
 import { useJoinRejectedQuery } from "@/hook/clubJoin/useJoinRejectedQuery";
 import useSwipeItemHandles from "@/hook/user/useSwipeItemHandles";
 import { ApprovalStatus, RequestedJoinClubInfo } from "@/types/club";
+import { useState } from "react";
 import HomeRequestedModal from "./HomeRequestedModal";
 import "./RequestedMeetingItem.css";
 
@@ -15,7 +16,11 @@ const RequestedMeetingItem = ({
   updatedAt,
 }: RequestedJoinClubInfo) => {
   const isSwipe = status == ApprovalStatus.Rejected;
-  const { isOpen, openModal, closeModal } = useModalContext();
+  // const { isOpen, openModal, closeModal } = useModalContext();
+  const [isOpen, setIsOpen] = useState(false);
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
+
   const { mutate: cancelMutate } = useJoinCancelMutation(clubJoinRequestId);
   const { data: rejectedData, isLoading } =
     useJoinRejectedQuery(clubJoinRequestId, status);

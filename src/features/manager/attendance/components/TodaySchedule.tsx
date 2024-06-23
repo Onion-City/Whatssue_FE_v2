@@ -5,10 +5,11 @@ import { ATTENDANCE_MODAL, TODAY_SCHEDULE_TITLE } from "../constants/const";
 import AttendanceItem from "@/components/molecules/attendanceItem/AttendanceItem";
 import { Text } from "@/components/atoms/text";
 import "./Attendance.css";
-import { useAttendanceStartQuery } from "@/hook/attendance/manager/useAttendanceStartQuery";
 import { useTodayScheduleListQuery } from "@/hook/attendance/manager/useTodayScheduleListQuery";
+import { useAttendanceStartQuery } from "@/hook/attendance/manager/useAttendanceStartQuery";
 import { ScheduleContent } from "@/types/schedule";
 import { Modal } from "@/components/organisms/Modal/Modal";
+import { useModalContext } from "@/components/organisms/Modal/ModalProvider";
 
 interface TodayScheduleProps {
   attendanceUpdated: boolean;
@@ -22,8 +23,8 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
   const clubId = 1;
   const [selectedSchedule, setSelectedSchedule] =
     useState<ScheduleContent | null>(null);
+  const { isOpen, openModal, closeModal } = useModalContext();
   const [startAttendance, setStartAttendance] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {
     data: todayScheduleData,
@@ -36,33 +37,36 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
     eDate: "2024-05-28",
   });
 
-  const { data: attendanceData, refetch: refetchAttendance } =
-    useAttendanceStartQuery({
-      clubId: clubId,
-      scheduleId: selectedSchedule?.scheduleId || 0,
-    });
-
-  useEffect(() => {
-    refetchTodaySchedule();
-  }, [attendanceUpdated, refetchTodaySchedule]);
+  const { refetch: refetchAttendance } = useAttendanceStartQuery({
+    clubId: clubId,
+    scheduleId: selectedSchedule?.scheduleId || 0,
+    enabled: false,
+  });
 
   const handleOpenModal = (schedule: ScheduleContent) => {
+    console.log("handleOpenModal called with schedule:", schedule); // 디버깅 로그 추가
     if (schedule.attendanceStatus === "BEFORE") {
       setSelectedSchedule(schedule);
-      setIsModalOpen(true);
+      openModal();
+      console.log("Modal opened with schedule:", schedule); // 디버깅 로그 추가
     }
   };
 
   const handleAttendanceStart = () => {
-    setStartAttendance(true);
+    console.log("handleAttendanceStart called"); // 디버깅 로그 추가
+    if (selectedSchedule) {
+      setStartAttendance(true);
+    }
   };
 
   useEffect(() => {
     if (startAttendance && selectedSchedule) {
       refetchAttendance().then(() => {
+        onAttendanceUpdate();
+        refetchTodaySchedule();
+        closeModal();
         setStartAttendance(false);
-        onAttendanceUpdate(); // 상태 변경 함수 호출
-        setIsModalOpen(false);
+        console.log("Attendance started and modal closed"); // 디버깅 로그 추가
       });
     }
   }, [
@@ -70,6 +74,7 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
     selectedSchedule,
     refetchAttendance,
     onAttendanceUpdate,
+    refetchTodaySchedule,
   ]);
 
   if (isTodayScheduleError) {
@@ -114,20 +119,18 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
           />
         ))}
 
-      {selectedSchedule && (
-        <Modal isOpen={isModalOpen}>
-          <Modal.Dimmed />
-          <Modal.Header>
-            <Modal.Title>{ATTENDANCE_MODAL.start}</Modal.Title>
-          </Modal.Header>
-          <Modal.Content></Modal.Content>
-          <Modal.Footer>
-            <Modal.Button onClick={handleAttendanceStart}>
-              {ATTENDANCE_MODAL.yes}
-            </Modal.Button>
-          </Modal.Footer>
-        </Modal>
-      )}
+      <Modal isOpen={isOpen}>
+        <Modal.Dimmed />
+        <Modal.Header>
+          <Modal.Title>{ATTENDANCE_MODAL.start}</Modal.Title>
+        </Modal.Header>
+        <Modal.Content></Modal.Content>
+        <Modal.Footer>
+          <Modal.Button onClick={handleAttendanceStart}>
+            {ATTENDANCE_MODAL.yes}
+          </Modal.Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

@@ -32,10 +32,10 @@ interface CalendarFilterProviderProps {
 }
 
 export const CalendarFilterProvider = ({ children }: CalendarFilterProviderProps) => {
-  const [openFloating, setOpenFloating] = useState(false);
-  const [selectedIdx, setSelectedIdx] = useState(0);
-  const [isPeriod, setIsPeriod] = useState(false);
-  const [period, setPeriod] = useState<Period>({
+  const [openFloating, setOpenFloating] = useState(false); // 바텀시트 오픈 여부
+  const [selectedIdx, setSelectedIdx] = useState(0); // 설정한 기간 idx
+  const [isPeriod, setIsPeriod] = useState(false); // 기간 설정 여부
+  const [period, setPeriod] = useState<Period>({ // 설정한 기간
     startDate: moment(new Date()).format('YYYY-MM-DD'),
     endDate: moment(new Date()).format('YYYY-MM-DD')
   });

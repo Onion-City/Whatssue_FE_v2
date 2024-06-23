@@ -24,7 +24,7 @@ const HomeRequestedModal = ({
   return (
     <Modal isOpen={isOpen}>
       <Modal.Dimmed />
-      <Modal.Header>
+      <Modal.Header closeModal={closeModal}>
         <Modal.Title>{title}</Modal.Title>
         <Modal.Subtitle>{date}</Modal.Subtitle>
       </Modal.Header>
