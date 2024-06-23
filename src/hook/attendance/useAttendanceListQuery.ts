@@ -9,10 +9,7 @@ export const useAttendanceListQuery = (clubId: number) => {
     queryKey: [`attendanceList`, clubId],
     queryFn: () =>
       http.get<CommonNoPageRes<GetAttendanceListResponse>>(
-        `/${clubId}/attendance-list`,
-        {
-          headers: { accept: "*/*" },
-        }
+        `/${clubId}/attendance-list`
       ),
   });
 };
