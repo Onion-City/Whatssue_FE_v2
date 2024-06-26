@@ -21,7 +21,9 @@ const SetHome = () => {
         clubId: 1,
         keyword: "",
         startDate: moment().startOf('month').format("YYYY-MM-DD"), 
-        endDate: moment().endOf('month').format("YYYY-MM-DD")
+        endDate: moment().endOf('month').format("YYYY-MM-DD"),
+        page: 0,
+        size: 20,
     });
     console.log(filteredData);
 

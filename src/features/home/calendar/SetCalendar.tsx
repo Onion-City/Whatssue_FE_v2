@@ -8,7 +8,9 @@ const SetCalendar = () => {
         clubId: 1,
         keyword: "",
         startDate: "", 
-        endDate: ""
+        endDate: "",
+        page: 0,
+        size: 20,
     });
 
     return (

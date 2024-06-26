@@ -27,6 +27,9 @@ export interface FetchScheduleParams {
   keyword?: string;
   startDate?: string;
   endDate?: string;
+  page: number;
+  size: number;
+  sort?: string;
 }
 
 // 일정 박스
