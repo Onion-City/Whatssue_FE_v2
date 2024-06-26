@@ -1,4 +1,3 @@
-
 // 클럽 기본 구조
 export interface Club {
   clubId: number;
@@ -20,6 +19,7 @@ export enum ApprovalStatus {
   Approved = "ACCEPTED",
   Waiting = "WAITING",
   Rejected = "REJECTED",
+  Cancel = "CANCELED",
 }
 
 // 클럽 생성 폼
@@ -61,7 +61,7 @@ export interface ClubProfiles {
 }
 
 export interface ClubInfos {
-  clubIntro?: string
+  clubIntro?: string;
   isPrivate?: boolean;
   contactMeans?: string | string[];
   namePolicy?: "NICK_NAME" | "REAL_NAME";

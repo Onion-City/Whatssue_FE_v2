@@ -1,6 +1,6 @@
 import { http } from "@/apis/http";
 import { PostFormProps } from "@/types/post";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 async function registePost(postData: PostFormProps) {
@@ -47,9 +47,13 @@ interface UseRegistePost {
 }
 export function usePostMutation(): UseRegistePost {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { mutate } = useMutation<void, Error, PostFormProps>({
     mutationFn: registePost,
     onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["postList"],
+      });
       console.log("게시글 등록 성공");
       router.back();
     },

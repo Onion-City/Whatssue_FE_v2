@@ -1,52 +1,47 @@
 import replyIcon from "@/assets/images/reply.png";
-import Image, { StaticImageData } from "next/image";
+import { IMAGES } from "@/constants/images";
+import { useCommentDeleteMutation } from "@/hook/comment/useCommentDeleteMutation";
+import { CommentsProps } from "@/types/comment";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Text } from "../text";
 import "./Comment.css";
-export interface CommentProps {
-  commentId: number;
-  createdAt: string;
-  isEditAllowed: boolean; //댓글 작성자와 동일일 경우 수정
-  memberInfo: {
-    profile: StaticImageData;
-    name: string;
-  };
-  content: string;
-  parentId?: number; //대댓글일경우 필요
-  reply?: boolean; // 대댓글일 경우 true
-  onClick?: () => void; //대댓글 작성 핸들러
-}
 
-export function Comment({
-  commentId,
-  createdAt,
-  isEditAllowed,
-  memberInfo: { profile, name },
-  content,
-  parentId,
-  reply,
-  onClick,
-}: CommentProps) {
+export function Comment({ item, onClick }: CommentsProps) {
+  const path = usePathname();
+  const pathProps = path.split("/").slice(1);
+  const { mutate: deleteCommentMutate } = useCommentDeleteMutation({
+    clubId: parseInt(pathProps[0], 10),
+    postId: parseInt(pathProps[3], 10),
+    commentId: item.commentId,
+  });
+  const handleDeleteComment = () => {
+    deleteCommentMutate();
+  };
+  const handleReplyClick = () => {
+    onClick(item.commentId);
+  };
   return (
     <div className="comment__box">
-      {reply && (
+      {item.parentId && (
         <div className="comment__box__is__reply">
           <Image src={replyIcon} alt="replyIcon" />
         </div>
       )}
       <div className="comment__box__wrapper">
         <div className="comment__box__profile">
-          <Image src={profile} alt="userProfile" />
+          <Image src={IMAGES.closeBlack} alt="userProfile" />
           <div className="comment__box__info">
             <Text color="#fff" fontSize="0.8125rem" fontWeight="700">
-              {name}
+              이름자리
             </Text>
             <Text color="#A2A2A2" fontSize="0.5625rem" fontWeight="500">
-              {createdAt}
+              {item.createdAt}
             </Text>
           </div>
 
           {/* 유저 정보 비교 후 동일하다면 */}
-          {isEditAllowed && (
+          {item.memberId && (
             <div className="comment__box__edit">
               <Text color="#fff" fontSize="0.6875rem" fontWeight="600">
                 수정
@@ -54,7 +49,12 @@ export function Comment({
               <Text color="#fff" fontSize="0.6875rem" fontWeight="600">
                 |
               </Text>
-              <Text color="#fff" fontSize="0.6875rem" fontWeight="600">
+              <Text
+                color="#fff"
+                fontSize="0.6875rem"
+                fontWeight="600"
+                onClick={handleDeleteComment}
+              >
                 삭제
               </Text>
             </div>
@@ -63,12 +63,17 @@ export function Comment({
         <div className="comment__box__margin__left">
           <div className="comment__box__content">
             <Text color="#fff" fontSize="0.8125rem" fontWeight="500">
-              {content}
+              {item.content}
             </Text>
           </div>
-          {!reply && (
+          {!item.parentId && (
             <div className="comment__box__creat__reply ">
-              <Text color="#BFBFBF" fontSize="0.8125rem" fontWeight="500">
+              <Text
+                color="#BFBFBF"
+                fontSize="0.8125rem"
+                fontWeight="500"
+                onClick={handleReplyClick}
+              >
                 답글 쓰기
               </Text>
             </div>

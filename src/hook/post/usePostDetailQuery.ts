@@ -8,7 +8,7 @@ export const usePostDetailQuery = ({ clubId, postId }: PostDetailProps) => {
   return useQuery<CommonNoPageRes<PostList>>({
     queryKey: [postKeys.detail({ clubId, postId })],
     queryFn: async () =>
-      await http.get<CommonNoPageRes<PostList>>(`clubs/${clubId}/posts/${postId}`),
+      await http.get<CommonNoPageRes<PostList>>(`/clubs/${clubId}/posts/${postId}`),
   });
 };
 
