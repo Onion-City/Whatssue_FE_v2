@@ -1,12 +1,13 @@
 import { http } from "@/apis/http";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export const useJoinCancelMutation = (joinRequestId: number) => {
+// 모임가입 신청 삭제
+export const useJoinDeleteMutation = (joinRequestId: number) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: () => http.post(`/clubs/join/${joinRequestId}/cancel`),
+    mutationFn: () => http.delete(`/clubs/join/${joinRequestId}`),
     onSuccess: (res) => {
-      alert("취소 성공");
+      alert("삭제 성공");
       console.log(res);
       queryClient.invalidateQueries({
         queryKey: ["JoinRequest"], //신청 목록 재확인
