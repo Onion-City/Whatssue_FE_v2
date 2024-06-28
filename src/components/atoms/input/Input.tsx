@@ -1,8 +1,10 @@
 // Input.tsx
 "use client";
 
+import { COLORS } from "@/styles";
 import { forwardRef, useState } from "react";
 import { ControllerRenderProps } from "react-hook-form";
+import { Text } from "../text";
 import "./input.css";
 
 export interface InputProps {
@@ -50,8 +52,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         />
         {maxCnt !== 0 && (
           <p>
-            <span>{textCnt}</span>
-            <span>/{maxCnt}</span>
+            <Text
+              color={COLORS.white}
+              fontWeight="500"
+            >{textCnt}</Text>
+            <Text
+              color={COLORS.white}
+              fontWeight="500"
+            >/{maxCnt}</Text>
           </p>
         )}
       </div>

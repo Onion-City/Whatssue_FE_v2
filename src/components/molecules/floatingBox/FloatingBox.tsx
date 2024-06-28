@@ -12,10 +12,10 @@ export function FloatingBox() {
     setOn((prev) => !prev);
   };
   const handleRouteOnboarding = () => {
-    router.push("/user/club");
+    router.push("/user/club/create");
   };
   const handleRouteJoin = () => {
-    router.push("/user/join");
+    router.push("/user/club/join");
   };
 
   const inPlusStyle: React.CSSProperties = {

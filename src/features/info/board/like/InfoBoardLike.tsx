@@ -1,15 +1,16 @@
 "use client";
 import { HistoryHeader } from "@/components/organisms/Header";
 import { Nav } from "@/components/organisms/Nav";
-import BoardItem from "@/features/board/components/BoardItem";
-import useMyPostQuery from "@/hook/info/useMyPostQuery";
-
 import { IMAGES } from "@/constants/images";
-import "./components/BoardWrite.css";
+import BoardItem from "@/features/board/components/BoardItem";
+import useMyPostLikeQuery from "@/hook/info/useMyPostLikeQuery";
 
-export const InfoBoardWrite = () => {
-    const { data: boardInfo } = useMyPostQuery({
+import "./components/BoardLike.css";
+
+export const InfoBoardLike = () => {
+    const { data: boardInfo } = useMyPostLikeQuery({
         clubId: 7,
+        userId: 6,
         category: "FREE",
         page: 0,
         size: 10,
@@ -19,7 +20,7 @@ export const InfoBoardWrite = () => {
     return(
         <>
             <HistoryHeader 
-                title="내가 쓴 글"
+                title="내가 좋아요 글"
             />
             {/* TODO: skeleton UI 적용 */}
             {
