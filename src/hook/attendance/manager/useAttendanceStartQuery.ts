@@ -12,8 +12,7 @@ export const useAttendanceStartQuery = ({
     queryKey: [`attendanceStart`, { clubId, scheduleId }],
     queryFn: () =>
       http.post<AttendanceInfo>(
-        `/${clubId}/schedules/${scheduleId}/attendance-start`,
-        {}, // Add any body parameters here if needed
+        `/clubs/${clubId}/schedules/${scheduleId}/attendance-start`,
         { headers: { accept: "*/*" } }
       ),
     enabled,

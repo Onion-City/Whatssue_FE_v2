@@ -15,14 +15,6 @@ const AttendanceItem = ({
   scheduleTime,
   onClick,
 }: AttendanceSchedule) => {
-  // if (attendanceStatus === "BEFORE") {
-  //   attendanceStatus = "미출석";
-  // } else if (attendanceStatus === "ONGOING") {
-  //   attendanceStatus = "출석중";
-  // } else if (attendanceStatus === "COMPLETE") {
-  //   attendanceStatus = "출석완료";
-  // }
-
   return (
     <div className="attendance_item" onClick={onClick}>
       <div className="attendance_item__content">

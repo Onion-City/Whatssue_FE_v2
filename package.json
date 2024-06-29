@@ -29,6 +29,8 @@
     "react-datepicker": "^6.9.0",
     "react-dom": "^18",
     "react-hook-form": "^7.51.2",
+    "react-query": "^3.39.3",
+    "react-toastify": "^10.0.5",
     "rsuite": "^5.58.1",
     "styled-components": "^6.1.8"
   },
