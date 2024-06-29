@@ -56,14 +56,9 @@ export interface ScheduleData {
 }
 
 // 일정 상세 data
-
 export interface ScheduleDetailProp {
   clubId: number;
   scheduleId: number;
-}
-
-export interface ScheduleStartProp extends ScheduleDetailProp {
-  enabled: boolean;
 }
 
 export interface ScheduleDetailContent {
