@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { ControllerRenderProps } from "react-hook-form";
 
+import { COLORS } from "@/styles";
+import { Text } from "../text/Text";
 import "./textarea.css";
 
 export interface TextareaProps {
@@ -81,8 +83,14 @@ export function Textarea({
       />
       {maxCnt !== undefined && (
         <p>
-          <span>{textCnt}</span>
-          <span>/{maxCnt}</span>
+          <Text
+            color={COLORS.white}
+            fontWeight="500"
+          >{textCnt}</Text>
+          <Text
+            color={COLORS.white}
+            fontWeight="500"
+          >/{maxCnt}</Text>
         </p>
       )}
     </div>

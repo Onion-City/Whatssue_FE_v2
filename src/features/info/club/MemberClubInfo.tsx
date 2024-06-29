@@ -4,9 +4,9 @@ import { HistoryHeader } from "@/components/organisms/Header";
 import { Nav } from "@/components/organisms/Nav";
 import { useClubsInfoQuery } from "@/hook/club/useClubsInfoQuery";
 import { ClubInfo } from "./components/ClubInfo";
-import "./components/ClubInfo.css";
 import { ClubProfile } from "./components/ClubProfile";
 
+import "./components/ClubInfo.css";
 export const MemberClubInfo = () => {
     const params = {
         clubId : 1

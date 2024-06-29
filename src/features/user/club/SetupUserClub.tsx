@@ -13,6 +13,18 @@ export default function SetupUserClub() {
 
   const methods = useForm<ClubFormData>({
     mode: "onChange",
+    defaultValues: {
+      clubIntro: "",
+      // clubLinks: "", 링크 추가 시 주석 해제
+      clubName: "",
+      contactMeans: "",
+      isPrivate: false,
+      namePolicy: "REAL_NAME",
+      profileImage: {
+        url: "",
+        imageFile: undefined
+      }
+    }
   });
   const { handleSubmit, control } = methods;
 
@@ -25,6 +37,7 @@ export default function SetupUserClub() {
   };
   const createClubMutation = useClubsMutation();
   const submitSignup = (data: ClubFormData) => {
+    console.log(data);
     createClubMutation.mutate(data);
   };
 

@@ -7,7 +7,7 @@ import { useScheduleQuery } from "./useScheduleQuery";
 
 const useSchedule = (
 { 
-  clubId, keyword, startDate, endDate 
+  clubId, keyword, startDate, endDate, page, size
 }: FetchScheduleParams
 ) => {
   const [value, setValue] = useState<Date>(new Date());
@@ -15,7 +15,9 @@ const useSchedule = (
     clubId: clubId, 
     keyword: keyword, 
     startDate: startDate, 
-    endDate: endDate
+    endDate: endDate,
+    page: page,
+    size: size
   })
 
   // params에 맞는 일정 fetch

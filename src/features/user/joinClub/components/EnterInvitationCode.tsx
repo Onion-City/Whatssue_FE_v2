@@ -1,23 +1,26 @@
 "use client"; // 클라이언트 컴포넌트로 지정
 
+import { Button } from "@/components/atoms/button";
 import { CodeInput } from "@/components/atoms/input/CodeInput";
 import { Text } from "@/components/atoms/text";
-import "./EnterInvitationCode.css";
-import { Button } from "@/components/atoms/button";
 import { HistoryHeader } from "@/components/organisms/Header";
-import Image from "next/image";
 import { IMAGES } from "@/constants/images";
+import { fetchJoinClub } from "@/hook/clubJoin/useJoinClubQuery";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ENTER_INVITATION_CODE,
   JOIN_BTN,
   RECEIVE_INVITATION_CODE,
 } from "../constants/const";
-import React, { useRef, useState, useEffect } from "react";
+import "./EnterInvitationCode.css";
 
 const EnterInvitationCode = () => {
   const [codeValues, setCodeValues] = useState<string[]>(Array(6).fill(""));
   const [isComplete, setIsComplete] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const router = useRouter();
 
   const setFocus = (index: number) => {
     if (index >= 0 && index < inputRefs.current.length) {
@@ -45,6 +48,16 @@ const EnterInvitationCode = () => {
       inputRefs.current.forEach((input) => input?.blur());
     }
   }, [codeValues]);
+
+  const onSubmit = async () => {
+    if (isComplete) {
+      const {
+        data: clubInfo,
+      } = await fetchJoinClub(codeValues.join(''));
+      console.log(clubInfo);
+      router.push(`/user/club/join/${clubInfo.clubId}`);
+    }
+  }
 
   return (
     <div className="invitation_code">
@@ -81,9 +94,7 @@ const EnterInvitationCode = () => {
         <Button
           backgroundColor={isComplete ? "#51F8C4" : "#404040"}
           color={isComplete ? "#2B2B2B" : "#fff"}
-          // onClick={() => {
-          //   if (isComplete) alert("Code Submitted!");
-          // }}
+          onClick={onSubmit}
         >
           {JOIN_BTN}
         </Button>

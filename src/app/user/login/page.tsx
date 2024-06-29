@@ -1,4 +1,4 @@
-import Login from "@/features/Login/Login";
+import Login from "@/features/user/Login/Login";
 
 const UserLogin = () => {
   return <Login />;
