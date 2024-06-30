@@ -10,12 +10,15 @@ export const useTodayScheduleListQuery = ({
   clubId,
   startDate,
   endDate,
+  page,
+  size,
+  sort="",
 }: TodayScheduleItem) => {
   return useQuery<CommonRes<AttendanceSchedule>>({
     queryKey: ["todayScheduleList", clubId, startDate, endDate],
     queryFn: async () => {
       const response = await http.get<CommonRes<AttendanceSchedule>>(
-        `/clubs/${clubId}/schedules?startDate=${startDate}&endDate=${endDate}`
+        `/clubs/${clubId}/schedules?startDate=${startDate}&endDate=${endDate}&page=${page}&size=${size}`
       );
       return response;
     },

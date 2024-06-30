@@ -21,6 +21,7 @@ export type GetAttendanceListResponse = AttendanceListItem[];
 // 오늘의 일정
 export interface TodayScheduleItem
   extends Omit<FetchScheduleParams, "startDate" | "endDate"> {
+  clubId: number;
   startDate: string;
   endDate: string;
 }
