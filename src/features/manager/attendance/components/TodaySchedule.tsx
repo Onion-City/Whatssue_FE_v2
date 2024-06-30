@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { ATTENDANCE_MODAL, TODAY_SCHEDULE_TITLE } from "../constants/const";
-import AttendanceItem from "@/components/molecules/attendanceItem/AttendanceItem";
 import { Text } from "@/components/atoms/text";
-import "./Attendance.css";
-import { useTodayScheduleListQuery } from "@/hook/attendance/manager/useTodayScheduleListQuery";
-import { useAttendanceStartQuery } from "@/hook/attendance/manager/useAttendanceStartQuery";
-import { ScheduleContent } from "@/types/schedule";
+import AttendanceItem from "@/components/molecules/attendanceItem/AttendanceItem";
 import { Modal } from "@/components/organisms/Modal/Modal";
 import { useModalContext } from "@/components/organisms/Modal/ModalProvider";
+import { useAttendanceStartQuery } from "@/hook/attendance/manager/useAttendanceStartQuery";
+import { useTodayScheduleListQuery } from "@/hook/attendance/manager/useTodayScheduleListQuery";
+import { ScheduleContent } from "@/types/schedule";
+import React, { useEffect, useState } from "react";
+import { ATTENDANCE_MODAL, TODAY_SCHEDULE_TITLE } from "../constants/const";
+import "./Attendance.css";
 
 interface TodayScheduleProps {
   attendanceUpdated: boolean;
@@ -42,6 +42,8 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
     clubId: clubId,
     startDate: getCurrentDate(),
     endDate: getCurrentDate(),
+    page: 0,
+    size: 10,
   });
 
   const { refetch: refetchAttendance } = useAttendanceStartQuery({
