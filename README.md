@@ -4,9 +4,6 @@
 
 ##### [상세 소개 링크](https://notefolio.net/kms02336047/360251)
 
-### 🔍배포 url
-(배포 예정)
-
 ---
 
 ### ⌛개발 기간
@@ -21,6 +18,7 @@
 - CSS
 - TypeScript
 - NextJS
+- React-Query
 - Kakao OAuth
 #### 🖥️ Backend
 - Java
