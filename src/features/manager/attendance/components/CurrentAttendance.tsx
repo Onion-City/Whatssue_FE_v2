@@ -18,9 +18,9 @@ const CurrentAttendance: React.FC<CurrentAttendanceProps> = ({
   attendanceUpdated,
   onAttendanceUpdate,
 }) => {
-  const { data, isError, refetch } = useAttendanceListQuery({
-    clubId: 1,
-  });
+  const clubId = 1;
+  const scheduleId = 13;
+  const { data, isError, refetch } = useAttendanceListQuery(clubId);
 
   const [selectedAttendance, setSelectedAttendance] =
     useState<AttendanceListItem | null>(null);

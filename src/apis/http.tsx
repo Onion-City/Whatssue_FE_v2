@@ -58,7 +58,7 @@ axiosInstance.interceptors.response.use(
     console.log(err);
     // access token 만료 시
     if (response?.status && response?.status === 403) {
-      window.location.href = "/login";
+      window.location.href = "/user/login";
       localStorage.clear();
       return config;
     }

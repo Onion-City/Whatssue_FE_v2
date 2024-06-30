@@ -67,7 +67,6 @@ const Home = () => {
               <HomeNoneContent />
             ) : (
               <>
-                {console.log("dkdk", requestedClubList.data)}
                 {/* 모임 */}
                 {requestedClubList?.data?.content &&
                   requestedClubList?.data?.content?.map((item, idx) => (

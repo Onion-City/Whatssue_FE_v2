@@ -12,6 +12,7 @@ export const IMAGES = {
 };
 
 export const ICONS = {
+  headerToggle: require("@/assets/images/ic_header_menuToggle.png"),
   down: require("@/assets/images/ic_down.png"),
   search: require("@/assets/images/ic_search.png"),
   calendar: require("@/assets/images/ic_calendar.png"),
@@ -26,17 +27,17 @@ export const ICONS = {
   back: require("@/assets/images/ic_back.png"),
   filter: require("@/assets/images/ic_filter.png"),
   nodata: require("@/assets/images/ic_nodata.png"),
-  
+
   floatingPlus: require("@/assets/images/Plus.png"),
   floatingLock: require("@/assets/images/ic_lock.png"),
   floatingMeeting: require("@/assets/images/ic_people.png"),
-  
+
   newBoard: require("@/assets/images/ic_new_board.png"),
   comment: require("@/assets/images/ic_comment.png"),
-  
+
   heartColor: require("@/assets/images/ic_heartColor.png"),
   heartNone: require("@/assets/images/ic_heartWhite.png"),
-  
+
   edit: require("@/assets/images/ic_edit.png"),
   member: require("@/assets/images/ic_member.png"),
   copy: require("@/assets/images/ic_copy.png"),

@@ -1,33 +1,50 @@
+"use client";
 import { HistoryHeader } from "@/components/organisms/Header";
 import { Nav } from "@/components/organisms/Nav";
 import BoardItem from "@/features/board/components/BoardItem";
-import { testArr } from "@/features/board/constants/testArr/TestArr";
+import useMyPostQuery from "@/hook/info/useMyPostQuery";
 
+import { IMAGES } from "@/constants/images";
 import "./components/BoardWrite.css";
 
 export const InfoBoardWrite = () => {
+    const { data: boardInfo } = useMyPostQuery({
+        clubId: 7,
+        category: "FREE",
+        page: 0,
+        size: 10,
+    });
+    console.log(boardInfo);
+
     return(
         <>
             <HistoryHeader 
                 title="내가 쓴 글"
             />
-            <div className="infoBoard">
-                {testArr.map((item, index) => (
-                <BoardItem
-                    key={index}
-                    // boardAddress={boardTypeAddress}
-                    id={item.id}
-                    title={item.title}
-                    content={item.content}
-                    date={item.date}
-                    contentImgs={item.contentImgs}
-                    comment={item.comment}
-                    hearts={item.hearts}
-                    isHeart={item.isHeart}
-                    writer={item.writer}
-                />
-                ))}
-            </div>
+            {/* TODO: skeleton UI 적용 */}
+            {
+                !boardInfo || !boardInfo.data ? 
+                <div>Loading...</div> :
+                (
+                    <div className="infoBoard">
+                        {boardInfo?.data?.content?.map((item: any) => (
+                            <BoardItem
+                                key={item.postId}
+                                // boardAddress={boardTypeAddress}
+                                id={item.postId}
+                                title={item.postTitle}
+                                content={item.postContent}
+                                createdAt={item.createdAt}
+                                commentCount={item.commentCount}
+                                contentImgs={item.uploadImage ?? []}
+                                hearts={item.postLikeCount}
+                                isHeart={item.isLiked}
+                                writer={{ name: item.writerName, profile: item.writerProfileImage ?? IMAGES.profile }}
+                            />
+                        ))}
+                    </div>
+                )
+            }
             <Nav />
         </>
     )

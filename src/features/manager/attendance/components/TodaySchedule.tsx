@@ -1,14 +1,15 @@
-"use client"; // 클라이언트 컴포넌트로 지정
+"use client";
 
-import React, { useState, useEffect } from "react";
-import { ATTENDANCE_MODAL, TODAY_SCHEDULE_TITLE } from "../constants/const";
-import AttendanceItem from "@/components/molecules/attendanceItem/AttendanceItem";
 import { Text } from "@/components/atoms/text";
-import "./Attendance.css";
+import AttendanceItem from "@/components/molecules/attendanceItem/AttendanceItem";
+import { Modal } from "@/components/organisms/Modal/Modal";
+import { useModalContext } from "@/components/organisms/Modal/ModalProvider";
 import { useAttendanceStartQuery } from "@/hook/attendance/manager/useAttendanceStartQuery";
 import { useTodayScheduleListQuery } from "@/hook/attendance/manager/useTodayScheduleListQuery";
 import { ScheduleContent } from "@/types/schedule";
-import { Modal } from "@/components/organisms/Modal/Modal";
+import React, { useEffect, useState } from "react";
+import { ATTENDANCE_MODAL, TODAY_SCHEDULE_TITLE } from "../constants/const";
+import "./Attendance.css";
 
 interface TodayScheduleProps {
   attendanceUpdated: boolean;
@@ -22,47 +23,71 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
   const clubId = 1;
   const [selectedSchedule, setSelectedSchedule] =
     useState<ScheduleContent | null>(null);
+  const { isOpen, openModal, closeModal } = useModalContext();
   const [startAttendance, setStartAttendance] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const getCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
 
   const {
     data: todayScheduleData,
-    isLoading: isTodayScheduleLoading,
     isError: isTodayScheduleError,
     refetch: refetchTodaySchedule,
   } = useTodayScheduleListQuery({
     clubId: clubId,
-    sDate: "2024-05-28",
-    eDate: "2024-05-28",
+    startDate: getCurrentDate(),
+    endDate: getCurrentDate(),
+    page: 0,
+    size: 10,
   });
 
-  const { data: attendanceData, refetch: refetchAttendance } =
-    useAttendanceStartQuery({
-      clubId: clubId,
-      scheduleId: selectedSchedule?.scheduleId || 0,
-    });
-
-  useEffect(() => {
-    refetchTodaySchedule();
-  }, [attendanceUpdated, refetchTodaySchedule]);
+  const { refetch: refetchAttendance } = useAttendanceStartQuery({
+    clubId: clubId,
+    scheduleId: selectedSchedule?.scheduleId || 0,
+    enabled: false,
+  });
 
   const handleOpenModal = (schedule: ScheduleContent) => {
+    console.log("handleOpenModal called with schedule:", schedule); // 디버깅 로그 추가
     if (schedule.attendanceStatus === "BEFORE") {
       setSelectedSchedule(schedule);
-      setIsModalOpen(true);
+      openModal();
+      console.log("Modal opened with schedule:", schedule); // 디버깅 로그 추가
     }
   };
 
   const handleAttendanceStart = () => {
-    setStartAttendance(true);
+    console.log("handleAttendanceStart called"); // 디버깅 로그 추가
+    if (selectedSchedule) {
+      setStartAttendance(true);
+    }
+  };
+
+  const handleRefetchAttendance = async () => {
+    try {
+      const { data } = await refetchAttendance();
+      console.log(data); // 여기서 응답 본문을 필요한 대로 처리할 수 있습니다
+      // 응답 데이터를 처리하기 위한 추가 로직
+    } catch (error) {
+      console.error("출석 데이터를 다시 가져오는 중 에러 발생:", error);
+      // 에러를 필요한 대로 처리
+    }
   };
 
   useEffect(() => {
     if (startAttendance && selectedSchedule) {
       refetchAttendance().then(() => {
+        onAttendanceUpdate();
+        refetchTodaySchedule();
+        handleRefetchAttendance();
+        closeModal();
         setStartAttendance(false);
-        onAttendanceUpdate(); // 상태 변경 함수 호출
-        setIsModalOpen(false);
+        console.log("Attendance started and modal closed"); // 디버깅 로그 추가
       });
     }
   }, [
@@ -70,6 +95,7 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
     selectedSchedule,
     refetchAttendance,
     onAttendanceUpdate,
+    refetchTodaySchedule,
   ]);
 
   if (isTodayScheduleError) {
@@ -114,20 +140,18 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
           />
         ))}
 
-      {selectedSchedule && (
-        <Modal isOpen={isModalOpen}>
-          <Modal.Dimmed />
-          <Modal.Header>
-            <Modal.Title>{ATTENDANCE_MODAL.start}</Modal.Title>
-          </Modal.Header>
-          <Modal.Content></Modal.Content>
-          <Modal.Footer>
-            <Modal.Button onClick={handleAttendanceStart}>
-              {ATTENDANCE_MODAL.yes}
-            </Modal.Button>
-          </Modal.Footer>
-        </Modal>
-      )}
+      <Modal isOpen={isOpen}>
+        <Modal.Dimmed />
+        <Modal.Header>
+          <Modal.Title>{ATTENDANCE_MODAL.start}</Modal.Title>
+        </Modal.Header>
+        <Modal.Content></Modal.Content>
+        <Modal.Footer>
+          <Modal.Button onClick={handleAttendanceStart}>
+            {ATTENDANCE_MODAL.yes}
+          </Modal.Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

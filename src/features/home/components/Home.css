@@ -23,7 +23,12 @@
     margin-bottom: 1rem;
 }
 
-.homeDateWrapper__header span {
+.homeDateWrapper__header::before {
+    width: 0px !important;
+    height: 0px !important;
+}
+
+.homeDateWrapper__header-btn {
     cursor: pointer;
 }
 

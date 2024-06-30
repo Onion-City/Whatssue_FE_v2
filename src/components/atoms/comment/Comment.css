@@ -1,10 +1,11 @@
 .comment__box {
   display: flex;
   align-items: center;
-  width:fit-content;
+  width: 100%;
 }
 .comment__box__wrapper {
   margin-top: 0.94rem;
+  width: 100%;
 }
 .comment__box__is__reply img {
   width: 0.875rem;
@@ -15,6 +16,7 @@
 .comment__box__profile {
   display: flex;
   align-items: center;
+  width: 100%;
 }
 .comment__box__profile img {
   width: 1.8125rem;
@@ -27,10 +29,9 @@
   margin-bottom: 0.31rem;
   display: flex;
   flex-direction: column;
+  margin-right: auto;
 }
-.comment__box__edit {
-  margin-left: auto;
-}
+
 .comment__box__margin__left {
   margin-left: 2.4125rem;
 }

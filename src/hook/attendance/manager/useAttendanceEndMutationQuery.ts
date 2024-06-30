@@ -1,11 +1,11 @@
 import { http } from "@/apis/http";
-import { AttendanceInfo } from "@/types/attendance/types";
+import { ScheduleDetailProp } from "@/types/schedule";
 import { useMutation } from "@tanstack/react-query";
 
 export const useAttendanceEndMutationQuery = ({
   clubId,
   scheduleId,
-}: Omit<AttendanceInfo, "attendanceNum">) => {
+}: ScheduleDetailProp) => {
   return useMutation({
     mutationFn: (data: string) =>
       http.post(`/${clubId}/schedules/${scheduleId}/attendance-end`, data),

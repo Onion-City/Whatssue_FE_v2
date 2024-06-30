@@ -20,13 +20,20 @@ export type GetAttendanceListResponse = AttendanceListItem[];
 
 // 오늘의 일정
 export interface TodayScheduleItem
-  extends Omit<FetchScheduleParams, "sDate" | "eDate"> {
-  sDate: string;
-  eDate: string;
+  extends Omit<FetchScheduleParams, "startDate" | "endDate"> {
+  clubId: number;
+  startDate: string;
+  endDate: string;
 }
 
 // 출석 아이템
 export interface AttendanceSchedule extends ScheduleContent {
+  isSuccess?: boolean;
   attendanceAddress: string;
   onClick: () => void;
+}
+
+// 출석하기
+export interface AttendanceReqData {
+  attendanceNum: number;
 }

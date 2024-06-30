@@ -1,18 +1,24 @@
 import { http } from "@/apis/http";
 import { CommonRes } from "@/types";
-import { AttendanceSchedule, TodayScheduleItem } from "@/types/attendance/types";
+import {
+  AttendanceSchedule,
+  TodayScheduleItem,
+} from "@/types/attendance/types";
 import { useQuery } from "@tanstack/react-query";
 
 export const useTodayScheduleListQuery = ({
   clubId,
-  sDate,
-  eDate,
+  startDate,
+  endDate,
+  page,
+  size,
+  sort="",
 }: TodayScheduleItem) => {
   return useQuery<CommonRes<AttendanceSchedule>>({
-    queryKey: ["todayScheduleList", clubId, sDate, eDate],
+    queryKey: ["todayScheduleList", clubId, startDate, endDate],
     queryFn: async () => {
       const response = await http.get<CommonRes<AttendanceSchedule>>(
-        `/clubs/${clubId}/schedules?sDate=${sDate}&eDate=${eDate}`
+        `/clubs/${clubId}/schedules?startDate=${startDate}&endDate=${endDate}&page=${page}&size=${size}`
       );
       return response;
     },

@@ -1,9 +1,12 @@
 import { Text } from "@/components/atoms/text";
-import { useModalContext } from "@/components/organisms/Modal/ModalProvider";
+// import { useModalContext } from "@/components/organisms/Modal/ModalProvider";
 import { useJoinCancelMutation } from "@/hook/clubJoin/useJoinCancelMutation";
+import { useJoinDeleteMutation } from "@/hook/clubJoin/useJoinDeleteMutation";
 import { useJoinRejectedQuery } from "@/hook/clubJoin/useJoinRejectedQuery";
 import useSwipeItemHandles from "@/hook/user/useSwipeItemHandles";
 import { ApprovalStatus, RequestedJoinClubInfo } from "@/types/club";
+import { useState } from "react";
+import { HOME_JOIN_CANCLE } from "../constants/const";
 import HomeRequestedModal from "./HomeRequestedModal";
 import "./RequestedMeetingItem.css";
 
@@ -15,23 +18,25 @@ const RequestedMeetingItem = ({
   updatedAt,
 }: RequestedJoinClubInfo) => {
   const isSwipe = status == ApprovalStatus.Rejected;
-  const { isOpen, openModal, closeModal } = useModalContext();
-  const { mutate: cancelMutate } = useJoinCancelMutation(clubJoinRequestId);
-  const { data: rejectedData, isLoading } =
-    useJoinRejectedQuery(clubJoinRequestId, status);
+  const StateEqualRejectedOrCanceled =
+    status == ApprovalStatus.Cancel || status == ApprovalStatus.Rejected;
+  const [isOpen, setIsOpen] = useState(false);
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
 
-  const rejectedDataText = rejectedData?.rejectionReason;
+  const { mutate: cancelMutate } = useJoinCancelMutation(clubJoinRequestId);
+  const { mutate: deleteMutate } = useJoinDeleteMutation(clubJoinRequestId);
+  const { data: rejectedData, isLoading } = useJoinRejectedQuery(
+    clubJoinRequestId,
+    status
+  );
+
+  const rejectedDataText =
+    rejectedData?.data.rejectionReason || HOME_JOIN_CANCLE.content;
 
   const handleOpenModal = () => {
     openModal();
   };
-  const requestData = {
-    title: clubName,
-    date: updatedAt,
-    content: rejectedDataText || "",
-    // : HOME_JOIN_CANCLE.content,
-  };
-
   const {
     handleTouchStart,
     handleMouseDown,
@@ -45,10 +50,12 @@ const RequestedMeetingItem = ({
   return (
     <div
       className="home__content__Requeste__box_wrapper"
-      onTouchStart={!isSwipe ? handleTouchStart : undefined}
-      onMouseDown={!isSwipe ? handleMouseDown : undefined}
-      onTouchMove={!isSwipe ? handleTouchMove : undefined}
-      onMouseMove={!isSwipe ? handleMouseMove : undefined}
+      onTouchStart={
+        !StateEqualRejectedOrCanceled ? handleTouchStart : undefined
+      }
+      onMouseDown={!StateEqualRejectedOrCanceled ? handleMouseDown : undefined}
+      onTouchMove={!StateEqualRejectedOrCanceled ? handleTouchMove : undefined}
+      onMouseMove={!StateEqualRejectedOrCanceled ? handleMouseMove : undefined}
     >
       <div
         className={`home__content__Requeste__box ${showDeletePopup ? "home__content__Requeste__box__select" : ""}`}
@@ -73,16 +80,19 @@ const RequestedMeetingItem = ({
           </Text>
         </div>
         <Text
-          color={`${status == ApprovalStatus.Rejected ? `#f44` : `#fff`}`}
+          color={`${StateEqualRejectedOrCanceled ? `#f44` : `#fff`}`}
           fontSize="0.8125rem"
           fontWeight="600"
           className="home__content__Requeste__right"
         >
+          
           {status == ApprovalStatus.Approved
             ? "승인"
             : status == ApprovalStatus.Waiting
               ? "승인 대기 중"
-              : "거절됨"}
+              : status == ApprovalStatus.Rejected
+                ? "거절됨"
+                : "취소됨"}
         </Text>
       </div>
 
@@ -106,7 +116,9 @@ const RequestedMeetingItem = ({
         title={clubName}
         date={updatedAt}
         content={rejectedDataText || ""}
-        cancelMutate={cancelMutate}
+        cancelMutate={
+          status == ApprovalStatus.Waiting ? cancelMutate : deleteMutate
+        }
       />
     </div>
   );

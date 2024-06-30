@@ -1,28 +1,33 @@
 import { Text } from "@/components/atoms/text";
 import { ICONS } from "@/constants/images";
+import { PostList } from "@/types/post";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
-import { testArr } from "../constants/testArr/TestArr";
+import { useRouter } from "next/navigation";
 import "./BoardListBox.css";
 interface BoardListBoxProp {
-  boardType: string;
+  clubId: number;
+  boardType: "공지" | "자유";
+  boardTypeAddress: "notice" | "free";
+  data: PostList[]|undefined;
 }
 interface BoardListItemProp {
   id: number;
   title: string;
 }
 
-const BoardListBox = ({ boardType }: BoardListBoxProp) => {
-  const boardTypeAddress = boardType === "공지" ? "notice" : "free";
+const BoardListBox = ({
+  clubId,
+  boardType,
+  boardTypeAddress,
+  data,
+}: BoardListBoxProp) => {
   const router = useRouter();
-  const pathname = usePathname();
-  const startedPath = pathname.split("/").slice(1)[0];
   const handleRouteBoard = (boardTypeAddress: string) => {
-    router.push(`/${startedPath}/board/${boardTypeAddress}`);
+    router.push(`/${clubId}/board/${boardTypeAddress}`);
   };
   const BoardListItem = ({ id, title }: BoardListItemProp) => {
     const handleRouteBoardDetail = (id: number) => {
-      router.push(`/${startedPath}/board/${boardTypeAddress}/${id}`);
+      router.push(`/${clubId}/board/${boardTypeAddress}/${id}`);
     };
     return (
       <div
@@ -53,8 +58,8 @@ const BoardListBox = ({ boardType }: BoardListBoxProp) => {
         </div>
       </div>
       <div className="board__list__item__wrapper">
-        {testArr.slice(0, 7).map((item, index) => (
-          <BoardListItem key={index} id={item.id} title={item.title} />
+        {data?.map((item, index) => (
+          <BoardListItem key={index} id={item.postId} title={item.postTitle} />
         ))}
       </div>
     </div>

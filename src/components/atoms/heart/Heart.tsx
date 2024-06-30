@@ -16,7 +16,7 @@ export function Heart({
   onClick,
 }: ChipProps) {
   return (
-    <div className="hearts">
+    <div className="hearts" onClick={onClick}>
       <Image src={isHeart ? ICONS.heartColor : ICONS.heartNone} alt="hearts" />
       <Text color="#fff" fontSize="0.6875rem" fontWeight="500">
         {hearts}

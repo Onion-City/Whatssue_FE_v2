@@ -1,6 +1,5 @@
 "use client";
 
-import testimg from "@/assets/images/chiikyaw.png";
 import { Heart } from "@/components/atoms/heart/Heart";
 import { Text } from "@/components/atoms/text";
 import { ICONS } from "@/constants/images";
@@ -14,12 +13,12 @@ const BoardItem = ({
   id,
   title,
   content,
-  date,
-  comment,
+  commentCount,
   hearts,
   contentImgs,
+  createdAt,
   isHeart = false,
-  writer: { profile = testimg, name },
+  writer: { profile, name },
 }: BoardItemProps) => {
   const router = useRouter();
   const pathname = usePathname();
@@ -58,20 +57,26 @@ const BoardItem = ({
         {/* 아래쪽 */}
         <div className="board__item__box__left_bottom">
           <div className="board__item__box__left_bottom_writer">
-            <Image src={profile} alt="writerProfile" className="" />
+            <Image
+              src={profile}
+              alt="writerProfile"
+              className=""
+              width={100}
+              height={100}
+            />
             <Text color="#fff" fontSize="0.6875rem" fontWeight="600">
               {name}
             </Text>
           </div>
 
           <Text color="#989898" fontSize="0.6875rem" fontWeight="500">
-            {date}
+            {createdAt}
           </Text>
 
           <div className="board__item__box__left_bottom_comment board__item__box__left_bottom_add_info">
-            <Image src={ICONS.comment} alt="comment" />
+            <Image src={ICONS.comment} alt="comment" width={100} height={100} />
             <Text color="#fff" fontSize="0.6875rem" fontWeight="500">
-              {comment}
+              {commentCount}
             </Text>
           </div>
           <div className="board__item__box__left_bottom_hearts board__item__box__left_bottom_add_info">
@@ -84,6 +89,8 @@ const BoardItem = ({
           src={contentImgs[0]}
           alt="contentImg"
           className="home__content__meeting__right_img"
+          width={100}
+          height={100}
         />
       )}
     </div>

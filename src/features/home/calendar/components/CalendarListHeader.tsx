@@ -1,21 +1,25 @@
 import { Search } from "@/components/atoms/search";
-import { FetchScheduleParams } from "@/types/schedule";
+import { ScheduleDate, ScheduleKeyword } from "@/types/schedule";
 import { CalendarFilter } from "./CalendarFilter";
 import { CalendarFilterProvider } from "./CalendarFilterProvider";
 
 export interface CalendarListHeaderProps {
-    refetchSchedule: (params: FetchScheduleParams) => void;
+    refetchPeriodSchedule: ({ startDate, endDate }: ScheduleDate) => void;
+    refetchKeywordSchedule: ({ keyword }: ScheduleKeyword) => void;
 }
 
 export const CalendarListHeader = ({
-    refetchSchedule
+    refetchPeriodSchedule,
+    refetchKeywordSchedule
 }: CalendarListHeaderProps) => {
     return(
         <CalendarFilterProvider>
             <div className="calendarListHeader">
-                <Search />
+                <Search 
+                    refetchKeywordSchedule={refetchKeywordSchedule}
+                />
                 <CalendarFilter 
-                    refetchSchedule={refetchSchedule}
+                    refetchPeriodSchedule={refetchPeriodSchedule}
                 />
             </div>
         </CalendarFilterProvider>
