@@ -28,6 +28,12 @@ export interface TodayScheduleItem
 
 // 출석 아이템
 export interface AttendanceSchedule extends ScheduleContent {
+  isSuccess?: boolean;
   attendanceAddress: string;
   onClick: () => void;
+}
+
+// 출석하기
+export interface AttendanceReqData {
+  attendanceNum: number;
 }

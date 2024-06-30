@@ -9,10 +9,9 @@ import { useModalContext } from "@/components/organisms/Modal/ModalProvider";
 import { ATTEND_BTN, ATTEND_MODAL } from "../constants/const";
 import { CodeInput } from "@/components/atoms/input/CodeInput";
 import { AttendanceListItem } from "@/types/attendance/types";
-import { useParams } from "next/navigation";
+import { useAttendanceReqMutation } from "@/hook/attendance/member/useAttendanceMutationReqQuery";
 
 const AttendanceList: React.FC = () => {
-  // const { id } = useParams<{ id: string }>();
   const { isOpen, openModal, closeModal } = useModalContext();
   const [codeValues, setCodeValues] = useState<string[]>(Array(3).fill(""));
   const [isComplete, setIsComplete] = useState(false);
@@ -21,15 +20,21 @@ const AttendanceList: React.FC = () => {
   const [selectedAttendance, setSelectedAttendance] =
     useState<AttendanceListItem | null>(null);
 
-  // useAttendanceListQuery 훅을 사용하여 데이터 불러오기
   const clubId = 1;
-  const { data, isError, refetch } = useAttendanceListQuery(clubId);
+  const { data, isError } = useAttendanceListQuery(clubId);
   console.log(data);
+
+  const { mutate: requestAttendance } = useAttendanceReqMutation({
+    clubId: clubId,
+    scheduleId: selectedAttendance?.scheduleId || 0,
+  });
 
   const onSubmit = () => {
     closeModal();
-    if (isComplete) {
-      const attendanceData = { attendanceNum: 0 }; // 실제 데이터를 사용하세요
+    if (isComplete && selectedAttendance) {
+      const attendanceNum = parseInt(codeValues.join(""));
+      const attendanceData = { attendanceNum };
+      requestAttendance(attendanceData);
     }
   };
 
@@ -59,10 +64,6 @@ const AttendanceList: React.FC = () => {
       inputRefs.current.forEach((input) => input?.blur());
     }
   }, [codeValues]);
-
-  // if (isLoading) {
-  //   return <div>Loading...</div>;
-  // }
 
   if (isError) {
     return <div>Error loading attendance list.</div>;

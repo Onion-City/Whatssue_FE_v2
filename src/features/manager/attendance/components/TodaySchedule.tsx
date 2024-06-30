@@ -1,4 +1,4 @@
-"use client"; // 클라이언트 컴포넌트로 지정
+"use client";
 
 import { Text } from "@/components/atoms/text";
 import AttendanceItem from "@/components/molecules/attendanceItem/AttendanceItem";
@@ -26,15 +26,22 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
   const { isOpen, openModal, closeModal } = useModalContext();
   const [startAttendance, setStartAttendance] = useState(false);
 
+  const getCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
   const {
     data: todayScheduleData,
-    isLoading: isTodayScheduleLoading,
     isError: isTodayScheduleError,
     refetch: refetchTodaySchedule,
   } = useTodayScheduleListQuery({
     clubId: clubId,
-    startDate: "2024-05-28",
-    endDate: "2024-05-28",
+    startDate: getCurrentDate(),
+    endDate: getCurrentDate(),
     page: 0,
     size: 10,
   });
@@ -61,11 +68,23 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
     }
   };
 
+  const handleRefetchAttendance = async () => {
+    try {
+      const { data } = await refetchAttendance();
+      console.log(data); // 여기서 응답 본문을 필요한 대로 처리할 수 있습니다
+      // 응답 데이터를 처리하기 위한 추가 로직
+    } catch (error) {
+      console.error("출석 데이터를 다시 가져오는 중 에러 발생:", error);
+      // 에러를 필요한 대로 처리
+    }
+  };
+
   useEffect(() => {
     if (startAttendance && selectedSchedule) {
       refetchAttendance().then(() => {
         onAttendanceUpdate();
         refetchTodaySchedule();
+        handleRefetchAttendance();
         closeModal();
         setStartAttendance(false);
         console.log("Attendance started and modal closed"); // 디버깅 로그 추가
