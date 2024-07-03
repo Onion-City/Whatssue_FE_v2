@@ -34,7 +34,7 @@ export interface ClubFormData {
   isPrivate: boolean;
   namePolicy: "REAL_NAME" | "NICK_NAME";
   contactMeans: string;
-  link: string[];
+  link: string;
   profileImage?: imageState;
 }
 
