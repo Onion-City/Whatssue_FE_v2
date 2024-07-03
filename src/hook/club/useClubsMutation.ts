@@ -1,6 +1,7 @@
 import { http } from "@/apis/http";
 import { ClubFormData } from "@/types/club";
 import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 // 모임 생성 (/clubs)
 async function createClub(data: ClubFormData): Promise<void> {
@@ -15,6 +16,7 @@ async function createClub(data: ClubFormData): Promise<void> {
           isPrivate: data.isPrivate,
           contactMeans: data.contactMeans,
           namePolicy: data.namePolicy,
+          link: data.link,
         }),
       ],
       { type: "application/json" }
@@ -43,10 +45,13 @@ interface UseCreateClubs {
 }
 
 export function useClubsMutation(): UseCreateClubs {
+  const router = useRouter();
   const { mutate } = useMutation<void, Error, ClubFormData>({
     mutationFn: createClub,
     onSuccess: () => {
       console.log("모임 등록 성공");
+      router.push('/');
+
     },
     onError: (error) => {
       console.log("모임 등록 실패", error);

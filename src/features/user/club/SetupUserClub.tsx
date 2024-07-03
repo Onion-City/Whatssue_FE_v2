@@ -15,7 +15,7 @@ export default function SetupUserClub() {
     mode: "onChange",
     defaultValues: {
       clubIntro: "",
-      // clubLinks: "", 링크 추가 시 주석 해제
+      link: "",
       clubName: "",
       contactMeans: "",
       isPrivate: false,

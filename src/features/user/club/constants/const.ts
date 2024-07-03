@@ -47,11 +47,11 @@ export const REGISTER_INPUT_ARR2 = [
   },
   {
     title: "모임 관련 링크",
-    type: "textarea",
-    name: "clubLinks",
+    type: "input",
+    name: "link",
     essential: false,
     subtitle: "notion, 디스코드, 오픈 채팅방 등",
-    maxCnt: 300
+    // maxCnt: 300
   },
 ]
 
