@@ -64,6 +64,14 @@ input:-ms-input-placeholder {
   outline: none;
 }
 
+.input.error {
+  border: 1px solid #FF4444;
+}
+
+.input.error:focus {
+  outline: 1px solid #FF4444;
+}
+
 .num_input {
   width: 3.5rem;
   height: 3.75rem;
