@@ -1,7 +1,7 @@
 import { http } from "@/apis/http";
 import { CommonRes } from "@/types";
 import { PostList } from "@/types/post";
-import { formatClubId } from "@/utils/extractPathElements";
+import { FormatClubId } from "@/utils/extractPathElements";
 import { useQuery } from "@tanstack/react-query";
 
 interface props {
@@ -22,7 +22,7 @@ export const usePostListQuery = ({
   size,
   sort = "string",
 }: props) => {
-  const clubId = formatClubId();
+  const clubId = FormatClubId();
   const keywordUrl = `/clubs/${clubId}/posts?keyword=${keyword}&sortBy=createAt&category=${category}&page=${page}&size=${size}`;
   const datePullUrl = `/clubs/${clubId}/posts?keyword=${keyword}&startDate=${startData}&endData=${endData}&sortBy=createAt&page=${page}&size=${size}`;
   return useQuery<CommonRes<PostList>>({

@@ -3,13 +3,13 @@ import { CommentItem } from "@/components/atoms/comment/CommentItem";
 import { Text } from "@/components/atoms/text";
 import useCommentsQuery from "@/hook/comment/useCommentsQuery";
 import { CommentsListProps } from "@/types/comment";
-import { formatClubId, formatPostId } from "@/utils/extractPathElements";
+import { FormatClubId, FormatPostId } from "@/utils/extractPathElements";
 import React, { useImperativeHandle, useState } from "react";
 export const CommentList = React.forwardRef(
   ({ commentCount }: CommentsListProps, ref) => {
     const { data: commentList } = useCommentsQuery({
-      clubId: formatClubId(),
-      postId: formatPostId(),
+      clubId: FormatClubId(),
+      postId: FormatPostId(),
       size: 100,
       page: 0,
     });
@@ -22,7 +22,9 @@ export const CommentList = React.forwardRef(
     const handleOffTargetComment = () => {
       setTargetComment(undefined);
     };
-    useImperativeHandle(ref, () => ({ handleOffTargetComment })); //부모 컴포넌트로 토스
+    useImperativeHandle(ref, () => ({
+      handleOffTargetComment: () => handleOffTargetComment(),
+    })); //부모 컴포넌트로 토스
     return (
       <>
         <div className="board__detail__comment__warpper" />
@@ -50,3 +52,4 @@ export const CommentList = React.forwardRef(
     );
   }
 );
+CommentList.displayName = "CommentList";

@@ -7,13 +7,13 @@ import { InputBox } from "@/components/molecules/inputBox";
 import { CreatePostFormData } from "@/hook/post/CreatePostFormData";
 import { usePostMutation } from "@/hook/post/usePostMutation";
 import { PostFormDatas, PostFormProps } from "@/types/post";
-import { formatPostCategory } from "@/utils/extractPathElements";
+import { FormatPostCategory } from "@/utils/extractPathElements";
 import { useForm } from "react-hook-form";
 import { REGISTER_INPUT_ARR } from "../constants/constant";
 import "./RegisBoard.css";
 
 export const RegisBoard = () => {
-  const getCategory = formatPostCategory() === "free" ? "FREE" : "NOTICE";
+  const getCategory = FormatPostCategory() === "free" ? "FREE" : "NOTICE";
   const { handleSubmit, control, setValue } = useForm<PostFormDatas>({
     mode: "onChange",
     defaultValues: {

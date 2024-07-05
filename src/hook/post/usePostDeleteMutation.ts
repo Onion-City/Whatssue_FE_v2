@@ -1,11 +1,11 @@
 import { http } from "@/apis/http";
-import { formatClubId, formatPostId } from "@/utils/extractPathElements";
+import { FormatClubId, FormatPostId } from "@/utils/extractPathElements";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 export const usePostDeleteMutation = () => {
-  const clubId = formatClubId();
-  const postId = formatPostId();
+  const clubId = FormatClubId();
+  const postId = FormatPostId();
   const queryClient = useQueryClient();
   const router = useRouter();
   return useMutation({

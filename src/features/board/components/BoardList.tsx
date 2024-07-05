@@ -1,10 +1,10 @@
 import usePostListQuery from "@/hook/post/usePostListQuery";
-import { formatClubId } from "@/utils/extractPathElements";
+import { FormatClubId } from "@/utils/extractPathElements";
 import "./BoardList.css";
 import BoardListBox from "./BoardListBox";
 
 const BoardList = () => {
-  const clubId = formatClubId();
+  const clubId = FormatClubId();
   const { data: noticeList } = usePostListQuery({
     category: "NOTICE",
     page: 0,

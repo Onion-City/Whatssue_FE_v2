@@ -4,7 +4,7 @@ import {
   useHeartCancleMutation,
   useHeartMutation,
 } from "@/hook/post/useheartMutation";
-import { formatClubId, formatPostId } from "@/utils/extractPathElements";
+import { FormatClubId, FormatPostId } from "@/utils/extractPathElements";
 import Image from "next/image";
 import "./Hearts.css";
 export interface ChipProps {
@@ -14,8 +14,8 @@ export interface ChipProps {
 }
 export function Heart({ hearts, isHeart = false, eventOn = false }: ChipProps) {
   const postItem = {
-    clubId: formatClubId(),
-    postId: formatPostId(),
+    clubId: FormatClubId(),
+    postId: FormatPostId(),
   };
   const { mutate: isHaertMutate } = useHeartMutation(postItem);
   const { mutate: isCancelHaertMutate } = useHeartCancleMutation(postItem);

@@ -1,6 +1,6 @@
 import {
-    FileListUpload,
-    FileListUploadHandler,
+  FileListUpload,
+  FileListUploadHandler,
 } from "@/components/atoms/fileListUpload";
 import { Text } from "@/components/atoms/text";
 import { InputBox } from "@/components/molecules/inputBox";
@@ -8,14 +8,14 @@ import { CreatePostFormData } from "@/hook/post/CreatePostFormData";
 import usePostDetailQuery from "@/hook/post/usePostDetailQuery";
 import { usePostPatchMutation } from "@/hook/post/usePostPatchMutation";
 import { PostFormDatas, PostFormProps } from "@/types/post";
-import { formatPostCategory } from "@/utils/extractPathElements";
+import { FormatPostCategory } from "@/utils/extractPathElements";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { REGISTER_INPUT_ARR } from "../constants/constant";
 import "./RegisBoard.css";
 
 export const ModifyBoard = () => {
-  const getCategory = formatPostCategory() === "free" ? "FREE" : "NOTICE";
+  const getCategory = FormatPostCategory() === "free" ? "FREE" : "NOTICE";
   const { handleSubmit, control, setValue, reset } = useForm<PostFormDatas>({
     mode: "onChange",
     defaultValues: {
@@ -60,7 +60,7 @@ export const ModifyBoard = () => {
             fontWeight="600"
             className="board__write__type__margin"
           >
-            {formatPostCategory() === "free"
+            {FormatPostCategory() === "free"
               ? REGISTER_INPUT_ARR.CATEGORY.FREE
               : REGISTER_INPUT_ARR.CATEGORY.NOTICE}
           </Text>

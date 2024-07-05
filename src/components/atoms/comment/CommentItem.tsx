@@ -1,6 +1,6 @@
 import useCommentsChildQuery from "@/hook/comment/useCommentsChildQuery";
 import { CommentsProps } from "@/types/comment";
-import { formatClubId, formatPostId } from "@/utils/extractPathElements";
+import { FormatClubId, FormatPostId } from "@/utils/extractPathElements";
 import { Comment } from "./Comment";
 
 // 댓글 하나에 대한 대댓글 리스트 포함
@@ -11,8 +11,8 @@ export const CommentItem = ({
 }: CommentsProps) => {
   const { data: commentChild } = useCommentsChildQuery({
     parentId: item.commentId,
-    clubId: formatClubId(),
-    postId: formatPostId(),
+    clubId: FormatClubId(),
+    postId: FormatPostId(),
     size: 10,
     page: 0,
   });

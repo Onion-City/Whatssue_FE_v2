@@ -1,12 +1,12 @@
 import { http } from "@/apis/http";
-import { formatClubId } from "@/utils/extractPathElements";
+import { FormatClubId } from "@/utils/extractPathElements";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
 export const usePostMutation = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const clubId = formatClubId();
+  const clubId = FormatClubId();
   return useMutation({
     mutationFn: (data: FormData) => http.post(`/clubs/${clubId}/posts`, data),
     onSuccess: () => {

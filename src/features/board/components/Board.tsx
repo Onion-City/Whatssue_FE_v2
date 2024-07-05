@@ -3,7 +3,7 @@ import { Floating } from "@/components/atoms/floating";
 import { Text } from "@/components/atoms/text";
 import { ICONS } from "@/constants/images";
 import usePostListQuery from "@/hook/post/usePostListQuery";
-import { formatPostCategory } from "@/utils/extractPathElements";
+import { FormatPostCategory } from "@/utils/extractPathElements";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import "./Board.css";
@@ -12,7 +12,7 @@ import BoardItem from "./BoardItem";
 const Board = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const category = formatPostCategory() === "notice" ? "NOTICE" : "FREE";
+  const category = FormatPostCategory() === "notice" ? "NOTICE" : "FREE";
   const boardType = category === "NOTICE" ? "공지" : "자유";
 
   const { data } = usePostListQuery({

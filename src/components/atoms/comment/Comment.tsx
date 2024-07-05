@@ -3,7 +3,10 @@ import { ICONS } from "@/constants/images";
 import { useCommentDeleteMutation } from "@/hook/comment/useCommentDeleteMutation";
 import { CommentsProps } from "@/types/comment";
 import { formatDateTime } from "@/utils/date";
-import { formatClubId, formatPostId } from "@/utils/extractPathElements";
+import {
+  FormatClubId,
+  FormatPostId
+} from "@/utils/extractPathElements";
 import Image from "next/image";
 import { useState } from "react";
 import { Modal } from "../modal";
@@ -14,8 +17,8 @@ export function Comment({ item, targetCommentId, onClick }: CommentsProps) {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
   const { mutate: deleteCommentMutate } = useCommentDeleteMutation({
-    clubId: formatClubId(),
-    postId: formatPostId(),
+    clubId: FormatClubId(),
+    postId: FormatPostId(),
     commentId: item.commentId,
   });
   const handleIsDeleteModal = () => {

@@ -2,7 +2,7 @@ import submitIcon from "@/assets/images/ic_commentSubmit.png";
 import { useCommentChildMutation } from "@/hook/comment/useCommentChildMutation";
 import { useCommentMutation } from "@/hook/comment/useCommentMutation";
 import { CommentData } from "@/types/comment";
-import { formatClubId, formatPostId } from "@/utils/extractPathElements";
+import { FormatClubId, FormatPostId } from "@/utils/extractPathElements";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import "./CommentInput.css";
@@ -24,8 +24,8 @@ export const CommentInput = ({ parentId }: props) => {
     },
   });
   const currentInfo = {
-    clubId: formatClubId(),
-    postId: formatPostId(),
+    clubId: FormatClubId(),
+    postId: FormatPostId(),
   };
   const { mutate: ToCommentMutate } = useCommentMutation(currentInfo);
   const { mutate: ToCommentChildMutate } = useCommentChildMutation(currentInfo);
