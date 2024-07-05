@@ -1,5 +1,5 @@
 import { http } from "@/apis/http";
-import { postKeys } from "@/constants/keys/postKey";
+import { commentKeys } from "@/constants/keys/postKey";
 import { CommonRes } from "@/types";
 import { Comment } from "@/types/comment";
 import { PostDetailProps } from "@/types/post";
@@ -17,7 +17,7 @@ export const useCommentsQuery = ({
   page,
 }: commentListProps) => {
   return useQuery<CommonRes<Comment>>({
-    queryKey: [postKeys.comment({ clubId, postId })],
+    queryKey: [commentKeys.comment({ clubId, postId })],
     queryFn: async () =>
       await http.get<CommonRes<Comment>>(
         `/clubs/${clubId}/comment/${postId}?size=${size}&page=${page}`
