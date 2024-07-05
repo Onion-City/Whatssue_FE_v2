@@ -1,0 +1,26 @@
+/* PostDropdown */
+.PostDropdown {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  margin-left: auto;
+}
+
+/* PostDropdownItem */
+.PostDropdownContentWrapper {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  border-radius: 0.625rem;
+  background: #404040;
+  z-index: 10;
+  height: auto;
+  width: 5.3125rem;
+}
+.PostDropdownContent {
+  border-bottom: 1px solid #fff;
+  padding: 0.7rem 0.5rem;
+}
+.PostDropdownContent:last-child {
+  border-bottom: none;
+}

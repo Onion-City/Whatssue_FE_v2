@@ -1,14 +1,19 @@
 import { http } from "@/apis/http";
 import { postKeys } from "@/constants/keys/postKey";
 import { CommonNoPageRes } from "@/types";
-import { PostDetailProps, PostList } from "@/types/post";
+import { PostList } from "@/types/post";
+import { FormatClubId, FormatPostId } from "@/utils/extractPathElements";
 import { useQuery } from "@tanstack/react-query";
 
-export const usePostDetailQuery = ({ clubId, postId }: PostDetailProps) => {
+export const usePostDetailQuery = () => {
+  const clubId = FormatClubId();
+  const postId = FormatPostId();
   return useQuery<CommonNoPageRes<PostList>>({
     queryKey: [postKeys.detail({ clubId, postId })],
     queryFn: async () =>
-      await http.get<CommonNoPageRes<PostList>>(`/clubs/${clubId}/posts/${postId}`),
+      await http.get<CommonNoPageRes<PostList>>(
+        `/clubs/${clubId}/posts/${postId}`
+      ),
   });
 };
 

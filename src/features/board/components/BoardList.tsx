@@ -1,20 +1,16 @@
 import usePostListQuery from "@/hook/post/usePostListQuery";
-import { usePathname } from "next/navigation";
+import { FormatClubId } from "@/utils/extractPathElements";
 import "./BoardList.css";
 import BoardListBox from "./BoardListBox";
 
 const BoardList = () => {
-  const pathname = usePathname();
-  const startedPath = pathname.split("/").slice(1)[0];
-  const clubId = parseInt(startedPath, 10);
+  const clubId = FormatClubId();
   const { data: noticeList } = usePostListQuery({
-    clubId: clubId,
     category: "NOTICE",
     page: 0,
     size: 7,
   });
   const { data: freeList } = usePostListQuery({
-    clubId: clubId,
     category: "FREE",
     page: 0,
     size: 7,

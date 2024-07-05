@@ -1,5 +1,5 @@
 "use client";
-// import AddPic from "@/assets/images/AddPic.png";
+import AddPic from "@/assets/images/AddPic.png";
 import defaultImg from "@/assets/images/img_profile.png";
 import Image from "next/image";
 import { ReactNode, useState } from "react";
@@ -61,14 +61,14 @@ export function FileUpload({ children, name, field }: FileUploadProps) {
             <>
               <label htmlFor="first-upload-input">
                 <div className="fileUpload__box">
-                  {/* <Image 
+                  <Image 
                     src={AddPic} 
                     alt="pic"
                     className="fileUpload__box__img"
                     placeholder="blur"
                     width={115}
                     height={115}
-                  /> */}
+                  />
                 </div>
               </label>
               <input

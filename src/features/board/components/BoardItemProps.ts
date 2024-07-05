@@ -12,5 +12,5 @@ export interface BoardItemProps {
     profile: string;
     name: string;
   };
-  createdAt: string;
+  createdAt: Date;
 }
