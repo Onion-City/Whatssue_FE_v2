@@ -3,6 +3,7 @@ import { Floating } from "@/components/atoms/floating";
 import { Text } from "@/components/atoms/text";
 import { ICONS } from "@/constants/images";
 import usePostListQuery from "@/hook/post/usePostListQuery";
+import { formatPostCategory } from "@/utils/extractPathElements";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import "./Board.css";
@@ -11,25 +12,21 @@ import BoardItem from "./BoardItem";
 const Board = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const startedPath = pathname.split("/").slice(1)[0];
-  const clubId = parseInt(startedPath, 10);
-  const boardTypeAddress = pathname.split("/board/")[1];
-  const boardCategory = boardTypeAddress === "notice" ? "NOTICE" : "FREE";
+  const category = formatPostCategory() === "notice" ? "NOTICE" : "FREE";
+  const boardType = category === "NOTICE" ? "공지" : "자유";
+
   const { data } = usePostListQuery({
-    clubId: clubId,
-    category: boardCategory,
+    category: category,
     page: 0,
     size: 10,
   });
-  const boardType = boardTypeAddress === "notice" ? "공지" : "자유";
   const inPlusStyle: React.CSSProperties = {
     width: "1.625rem",
     height: "1.625rem",
     cursor: "pointer",
   };
-  const handleRouteBoard = (boardTypeAddress: string) => {
-    const startedPath = pathname.split("/").slice(1)[0];
-    router.push(`/${startedPath}/board/${boardTypeAddress}/regis`);
+  const handleRouteBoard = () => {
+    router.push(`${pathname}/regis`);
   };
   return (
     <div className="board">
@@ -42,7 +39,6 @@ const Board = () => {
         {data?.data.content.map((item, index) => (
           <BoardItem
             key={index}
-            boardAddress={boardTypeAddress}
             id={item.postId}
             title={item.postTitle}
             content={item.postContent}
@@ -61,7 +57,7 @@ const Board = () => {
           img={ICONS.floatingPlus}
           alt="Plus"
           inStyle={inPlusStyle}
-          onClick={() => handleRouteBoard(boardTypeAddress)}
+          onClick={handleRouteBoard}
         />
       </div>
     </div>
