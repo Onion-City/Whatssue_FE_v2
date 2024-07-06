@@ -2,9 +2,12 @@
 import { HistoryHeader, LogoHeader } from "@/components/organisms/Header";
 import { ClubHeader } from "@/components/organisms/Header/ClubHeader";
 import { ModalProvider } from "@/components/organisms/Modal/ModalProvider";
+import { store } from "@/redux/store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
 import "./globals.css";
 
 export default function RootLayout({
@@ -43,17 +46,23 @@ export default function RootLayout({
   return (
     <html lang="kr">
       <head>
-        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="upgrade-insecure-requests"
+        />
       </head>
       <body>
-        <QueryClientProvider client={queryClient}>
-          <ModalProvider>
-            {historyHeaderList.includes(pathname) && <HistoryHeader />}
-            {logoHeaderList.includes(pathname) && <LogoHeader />}
-            {clubHeaderList.includes(pathname) && <ClubHeader />}
-            {children}
-          </ModalProvider>
-        </QueryClientProvider>
+        <Provider store={store}>
+          <QueryClientProvider client={queryClient}>
+            <ModalProvider>
+              <ToastContainer />
+              {historyHeaderList.includes(pathname) && <HistoryHeader />}
+              {logoHeaderList.includes(pathname) && <LogoHeader />}
+              {clubHeaderList.includes(pathname) && <ClubHeader />}
+              {children}
+            </ModalProvider>
+          </QueryClientProvider>
+        </Provider>
       </body>
     </html>
   );
