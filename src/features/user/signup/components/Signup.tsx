@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
-import React from "react";
-import { useForm } from "react-hook-form";
+import React, { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 
 import { Button } from "@/components/atoms/button";
 import { Text } from "@/components/atoms/text";
@@ -11,6 +11,7 @@ import { COLORS } from "@/styles";
 import { SIGNUP_BTN, SIGNUP_INPUT_ARR } from "../constants";
 import { SignupHeader } from "./SignupHeader";
 
+import { AuthBox } from "@/components/molecules/authBox";
 import "./Signup.css";
 
 interface FormData {
@@ -22,12 +23,13 @@ interface FormData {
 const Signup = () => {
     const router = useRouter();
     const { data: userResponse, mutate } = useUserMutation();
+    const [isAuth, setIsAuth] = useState(false);
     const methods = useForm<FormData>({
         mode: 'onChange',
         defaultValues: {
-            userName: "",
-            userPhone: "",
-            userEmail: ""
+            userName: undefined,
+            userPhone: undefined,
+            userEmail: undefined
         }
     });
 
@@ -38,6 +40,9 @@ const Signup = () => {
             alert("필수 정보를 입력해주세요");
             return;
         }
+        if (!isAuth) {
+            alert("전화번호 인증을 진행해주세요");
+        }
         console.log(data);
         mutate(data);
         console.log(userResponse);
@@ -47,8 +52,8 @@ const Signup = () => {
     const watchedFields = watch();
 
     return (
-        <Wrapper>
-            <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <Wrapper>
                 <div>
                     <SignupHeader />
                         {SIGNUP_INPUT_ARR.map((box, index) => (
@@ -58,12 +63,12 @@ const Signup = () => {
                                     type={box.type && box.type}
                                     essential={box.essential && box.essential}
                                     name={box.name && box.name}
-                                    error={box.essential && !watchedFields[box.name as keyof FormData]}
+                                    error={box.essential && watchedFields[box.name as keyof FormData] === ""}
                                     // register={register}
                                     control={control}
                                     getValues={getValues}
                                 />
-                                {box.essential && !watchedFields[box.name as keyof FormData] && (
+                                {box.essential && watchedFields[box.name as keyof FormData] === "" && (
                                     <span
                                         className="error-msg"
                                     >
@@ -75,12 +80,24 @@ const Signup = () => {
                                 )}
                             </React.Fragment>
                         ))}
+                        <Controller
+                            name="userPhone"
+                            control={control}
+                            render={({ field }) => 
+                                <AuthBox 
+                                    field={field} 
+                                    getValues={getValues} 
+                                    error={watchedFields["userPhone"] === ""}
+                                    setIsAuth={setIsAuth}
+                                />
+                            }
+                        />
                 </div>
                 <div>
                     <Button type="submit">{SIGNUP_BTN.complete}</Button>
                 </div>
-            </form>
-        </Wrapper>
+            </Wrapper>
+        </form>
     )
 }
 

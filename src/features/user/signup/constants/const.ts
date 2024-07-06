@@ -13,12 +13,12 @@ export const SIGNUP_INPUT_ARR = [
         essential: true,
         name: "userEmail"
     },
-    {
-        title: "회원 전화번호",
-        type: "btnInput",
-        essential: true,
-        name: "userPhone"
-    }
+    // {
+    //     title: "회원 전화번호",
+    //     type: "btnInput",
+    //     essential: true,
+    //     name: "userPhone"
+    // }
 ]
 
 export const SIGNUP_BTN = {
