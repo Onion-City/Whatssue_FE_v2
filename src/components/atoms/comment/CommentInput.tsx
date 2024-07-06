@@ -2,8 +2,8 @@ import submitIcon from "@/assets/images/ic_commentSubmit.png";
 import { useCommentChildMutation } from "@/hook/comment/useCommentChildMutation";
 import { useCommentMutation } from "@/hook/comment/useCommentMutation";
 import { CommentData } from "@/types/comment";
+import { FormatClubId, FormatPostId } from "@/utils/extractPathElements";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { useForm } from "react-hook-form";
 import "./CommentInput.css";
 
@@ -11,8 +11,6 @@ interface props {
   parentId?: number;
 }
 export const CommentInput = ({ parentId }: props) => {
-  const path = usePathname();
-  const pathProps = path.split("/").slice(1);
   const {
     register,
     formState: { errors },
@@ -25,26 +23,26 @@ export const CommentInput = ({ parentId }: props) => {
       content: "",
     },
   });
-  const { mutate: ToCommentMutate } = useCommentMutation({
-    clubId: parseInt(pathProps[0], 10),
-    postId: parseInt(pathProps[3], 10),
-  });
-  const { mutate: ToCommentChildMutate } = useCommentChildMutation({
-    clubId: parseInt(pathProps[0], 10),
-    postId: parseInt(pathProps[3], 10),
-  });
+  const currentInfo = {
+    clubId: FormatClubId(),
+    postId: FormatPostId(),
+  };
+  const { mutate: ToCommentMutate } = useCommentMutation(currentInfo);
+  const { mutate: ToCommentChildMutate } = useCommentChildMutation(currentInfo);
+
   const onCommentSubmit = (data: CommentData) => {
     const postData = {
       ...data,
-      postId: parseInt(pathProps[3], 10),
+      postId: currentInfo.postId,
     };
     ToCommentMutate(postData);
+
     reset();
   };
   const onCommentChildSubmit = (data: CommentData) => {
     const postData = {
       ...data,
-      postId: parseInt(pathProps[3], 10),
+      postId: currentInfo.postId,
       parentId: parentId,
     };
     ToCommentChildMutate(postData);
@@ -53,7 +51,10 @@ export const CommentInput = ({ parentId }: props) => {
   const handleCommantFn =
     parentId === undefined ? onCommentSubmit : onCommentChildSubmit;
   return (
-    <div className="comment__input__wrapper">
+    <div
+      className="comment__input__wrapper"
+      onClick={(e: React.MouseEvent) => e.stopPropagation()}
+    >
       <form onSubmit={handleSubmit(handleCommantFn)} className="comment__input">
         <input placeholder="댓글을 입력해주세요." {...register("content")} />
         <label className="submit-button-label" htmlFor="submit-button">

@@ -1,5 +1,5 @@
 import { http } from "@/apis/http";
-import { postKeys } from "@/constants/keys/postKey";
+import { commentKeys } from "@/constants/keys/postKey";
 import { CommentData } from "@/types/comment";
 import { PostDetailProps } from "@/types/post";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -14,7 +14,7 @@ export const useCommentChildMutation = ({
       http.post(`/clubs/${clubId}/comment/child`, data),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
-        queryKey: [postKeys.comment({ clubId, postId })],
+        queryKey: [commentKeys.comment({ clubId, postId })],
       });
       console.log(data);
     },

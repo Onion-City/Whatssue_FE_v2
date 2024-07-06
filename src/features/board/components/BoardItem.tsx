@@ -3,13 +3,13 @@
 import { Heart } from "@/components/atoms/heart/Heart";
 import { Text } from "@/components/atoms/text";
 import { ICONS } from "@/constants/images";
+import { formatDateTime } from "@/utils/date";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import "./BoardItem.css";
 import { BoardItemProps } from "./BoardItemProps";
 
 const BoardItem = ({
-  boardAddress,
   id,
   title,
   content,
@@ -24,8 +24,7 @@ const BoardItem = ({
   const pathname = usePathname();
   // 글 작성페이지로 이동
   const handleRouteBoardDetail = (BoardId: number) => {
-    const startedPath = pathname.split("/").slice(1)[0];
-    router.push(`/${startedPath}/board/${boardAddress}/${BoardId}`);
+    router.push(`${pathname}/${BoardId}`);
   };
 
   return (
@@ -70,7 +69,7 @@ const BoardItem = ({
           </div>
 
           <Text color="#989898" fontSize="0.6875rem" fontWeight="500">
-            {createdAt}
+            {formatDateTime(new Date(createdAt))}
           </Text>
 
           <div className="board__item__box__left_bottom_comment board__item__box__left_bottom_add_info">

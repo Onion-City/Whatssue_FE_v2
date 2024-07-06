@@ -5,16 +5,18 @@ import {
 import { Text } from "@/components/atoms/text";
 import { InputBox } from "@/components/molecules/inputBox";
 import { CreatePostFormData } from "@/hook/post/CreatePostFormData";
-import { usePostMutation } from "@/hook/post/usePostMutation";
+import usePostDetailQuery from "@/hook/post/usePostDetailQuery";
+import { usePostPatchMutation } from "@/hook/post/usePostPatchMutation";
 import { PostFormDatas, PostFormProps } from "@/types/post";
 import { FormatPostCategory } from "@/utils/extractPathElements";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { REGISTER_INPUT_ARR } from "../constants/constant";
 import "./RegisBoard.css";
 
-export const RegisBoard = () => {
+export const ModifyBoard = () => {
   const getCategory = FormatPostCategory() === "free" ? "FREE" : "NOTICE";
-  const { handleSubmit, control, setValue } = useForm<PostFormDatas>({
+  const { handleSubmit, control, setValue, reset } = useForm<PostFormDatas>({
     mode: "onChange",
     defaultValues: {
       request: {
@@ -22,19 +24,29 @@ export const RegisBoard = () => {
         postContent: "",
         postCategory: getCategory,
       },
+      postImages: undefined,
     },
   });
-  const registePostMutation = usePostMutation();
+  const { data } = usePostDetailQuery();
+  useEffect(() => {
+    const postData = data?.data;
+    reset({
+      request: {
+        postTitle: postData?.postTitle,
+        postContent: postData?.postContent,
+      },
+    });
+  }, [data]);
+
   const { handleImageInputChange, handleRemoveImage, uploadImgUrls } =
     FileListUploadHandler({
       setValue,
     });
+  const modifyPostMutation = usePostPatchMutation();
   const onSubmit = (data: PostFormProps) => {
-    console.log(data);
     const postFormData = CreatePostFormData(data);
-    registePostMutation.mutate(postFormData);
+    modifyPostMutation.mutate(postFormData);
   };
-
   return (
     <form className="board__write__wrapper" onSubmit={handleSubmit(onSubmit)}>
       <>
@@ -48,7 +60,7 @@ export const RegisBoard = () => {
             fontWeight="600"
             className="board__write__type__margin"
           >
-            {getCategory === "FREE"
+            {FormatPostCategory() === "free"
               ? REGISTER_INPUT_ARR.CATEGORY.FREE
               : REGISTER_INPUT_ARR.CATEGORY.NOTICE}
           </Text>
@@ -85,7 +97,7 @@ export const RegisBoard = () => {
         </div>
         <div className="board__write__button" onClick={handleSubmit(onSubmit)}>
           <Text color="#2B2B2B" fontSize="0.9375rem" fontWeight="600">
-            등록하기
+            수정하기
           </Text>
         </div>
       </div>
