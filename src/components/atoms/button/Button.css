@@ -1,6 +1,6 @@
 .btn {
     padding: 1rem 0;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     cursor: pointer;
     border-radius: 10px;
     text-align: center;
@@ -10,6 +10,7 @@
 
 .btn.sm {
     width: 30vw;
+    /* width: 40vw; */
 }
 
 .btn.md {

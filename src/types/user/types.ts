@@ -8,3 +8,7 @@ export interface userInfo extends signUpInfo {
   userId: number;
   oauth2Id: string;
 }
+
+export interface certificationRes {
+  
+}
