@@ -22,7 +22,7 @@ const BoardItem = ({
 }: BoardItemProps) => {
   const router = useRouter();
   const pathname = usePathname();
-  // 글 작성페이지로 이동
+  // 상세 페이지 이동
   const handleRouteBoardDetail = (BoardId: number) => {
     router.push(`${pathname}/${BoardId}`);
   };
