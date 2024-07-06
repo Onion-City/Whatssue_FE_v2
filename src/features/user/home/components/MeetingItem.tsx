@@ -1,8 +1,10 @@
 import Person from "@/assets/images/ic_person_gray.png";
 import { Text } from "@/components/atoms/text";
+import { setClubId } from "@/redux/slices/club";
 import { Club } from "@/types/club";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
 import "./MeetingItem.css";
 
 const MeetingItem = ({
@@ -14,8 +16,10 @@ const MeetingItem = ({
   memberCount = 0,
 }: Club) => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const handleRouteBoard = (clubId: number) => {
-    router.push(`/${clubId}`);
+    dispatch(setClubId(clubId));
+    router.push(`/club`);
   };
   const roleName = role === "MANAGER" ? "관리자" : "일반";
   return (
