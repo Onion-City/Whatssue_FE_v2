@@ -10,6 +10,7 @@ import { ScheduleContent } from "@/types/schedule";
 import React, { useEffect, useState } from "react";
 import { ATTENDANCE_MODAL, TODAY_SCHEDULE_TITLE } from "../constants/const";
 import "./Attendance.css";
+import { useRouter } from "next/navigation";
 
 interface TodayScheduleProps {
   attendanceUpdated: boolean;
@@ -20,6 +21,7 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
   attendanceUpdated,
   onAttendanceUpdate,
 }) => {
+  const router = useRouter();
   const clubId = 1;
   const [selectedSchedule, setSelectedSchedule] =
     useState<ScheduleContent | null>(null);
@@ -53,16 +55,19 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
   });
 
   const handleOpenModal = (schedule: ScheduleContent) => {
-    console.log("handleOpenModal called with schedule:", schedule); // 디버깅 로그 추가
+    console.log("handleOpenModal called with schedule:", schedule);
     if (schedule.attendanceStatus === "BEFORE") {
       setSelectedSchedule(schedule);
       openModal();
-      console.log("Modal opened with schedule:", schedule); // 디버깅 로그 추가
+      console.log("Modal opened with schedule:", schedule);
+    } else {
+      router.push("/manager/attendance/status");
+      console.log("Redirected to attendance status page:", schedule);
     }
   };
 
   const handleAttendanceStart = () => {
-    console.log("handleAttendanceStart called"); // 디버깅 로그 추가
+    console.log("handleAttendanceStart called");
     if (selectedSchedule) {
       setStartAttendance(true);
     }
@@ -71,13 +76,15 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
   const handleRefetchAttendance = async () => {
     try {
       const { data } = await refetchAttendance();
-      console.log(data); // 여기서 응답 본문을 필요한 대로 처리할 수 있습니다
-      // 응답 데이터를 처리하기 위한 추가 로직
+      console.log(data);
     } catch (error) {
       console.error("출석 데이터를 다시 가져오는 중 에러 발생:", error);
-      // 에러를 필요한 대로 처리
     }
   };
+
+  useEffect(() => {
+    refetchTodaySchedule();
+  }, [attendanceUpdated, refetchTodaySchedule]);
 
   useEffect(() => {
     if (startAttendance && selectedSchedule) {
@@ -87,7 +94,7 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
         handleRefetchAttendance();
         closeModal();
         setStartAttendance(false);
-        console.log("Attendance started and modal closed"); // 디버깅 로그 추가
+        console.log("Attendance started and modal closed");
       });
     }
   }, [
@@ -130,7 +137,6 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
         todayScheduleData.data.content?.map((schedule) => (
           <AttendanceItem
             key={schedule.scheduleId}
-            attendanceAddress="attendance"
             scheduleId={schedule.scheduleId}
             attendanceStatus={schedule.attendanceStatus}
             scheduleName={schedule.scheduleName}

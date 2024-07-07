@@ -1,5 +1,4 @@
-"use client"; // 클라이언트 컴포넌트로 지정
-
+"use client";
 import React, { useEffect, useRef, useState } from "react";
 import { useAttendanceListQuery } from "@/hook/attendance/useAttendanceListQuery";
 import AttendanceItem from "../../../../components/molecules/attendanceItem/AttendanceItem";
@@ -71,11 +70,10 @@ const AttendanceList: React.FC = () => {
 
   return (
     <div>
-      {data && data.data && data.data?.length > 0 ? (
-        data.data.map((attendance) => (
+      {data && data.data && data.data.data && data?.data?.data?.length > 0 ? (
+        data.data.data.map((attendance) => (
           <AttendanceItem
             key={attendance.scheduleId}
-            attendanceAddress="member"
             scheduleId={attendance.scheduleId}
             attendanceStatus={attendance.attendanceStatus}
             scheduleName={attendance.scheduleName}

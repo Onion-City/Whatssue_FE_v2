@@ -7,7 +7,6 @@ import { AttendanceSchedule } from "@/types/attendance";
 import AttendanceChip from "@/components/atoms/attendance/AttendanceChip";
 
 const AttendanceItem = ({
-  attendanceAddress,
   scheduleId,
   attendanceStatus,
   scheduleName,

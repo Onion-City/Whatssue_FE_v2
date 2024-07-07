@@ -17,13 +17,17 @@ const AttendanceStatusEditItem: React.FC<AttendanceStatusEditItemProps> = ({
   onStatusChange,
 }) => {
   let iconColorClass = "";
+  let attendanceStatus = "";
 
-  if (status === "출석") {
+  if (status === "ATTENDANCE") {
     iconColorClass = "green";
-  } else if (status === "결석") {
+    attendanceStatus = "출석";
+  } else if (status === "ABSENCE") {
     iconColorClass = "red";
+    attendanceStatus = "결석";
   } else if (status === "공결") {
     iconColorClass = "yellow";
+    attendanceStatus = "공결";
   }
 
   const [selectedStatus, setSelectedStatus] = useState<string | null>(status); // 선택된 상태
