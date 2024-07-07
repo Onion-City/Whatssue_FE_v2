@@ -19,7 +19,9 @@ export interface AbsenceReasonValues {
 
 export interface AbsenceListProps {
   clubId?: number;
-  clubMemberId?: number;
+  page?: number;
+  size?: number;
+  sort?: string,
 }
 
 export interface AbsenceMemberData {
@@ -28,5 +30,8 @@ export interface AbsenceMemberData {
   scheduleId: number,
   officialAbsenceContent: string,
   officialAbsenceRequestType: "WAITING" | "ACCEPTED" | "REJECTED",
+}
 
+export interface AbsenceContent<T> {
+  content: T[]
 }
