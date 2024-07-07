@@ -8,7 +8,6 @@ import "./Home.css";
 import HomeNoneContent from "./HomeNoneContent";
 import MeetingItem from "./MeetingItem";
 import RequestedMeetingItem from "./RequestedMeetingItem";
-// import HomeNoneContent from "./HomeNoneContent";
 
 const Home = () => {
   const { data: clubList, isLoading } = useClubListQuery({ page: 0, size: 10 });

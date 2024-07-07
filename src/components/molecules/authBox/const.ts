@@ -1,3 +1,5 @@
+export const AUTH_TITLE = "회원 전화번호";
+
 export const AUTH_PLACEHOLDER = {
     mobile: "01012345678",
     authNum: "인증 번호 입력"

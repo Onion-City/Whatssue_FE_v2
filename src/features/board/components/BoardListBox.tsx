@@ -5,41 +5,23 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import "./BoardListBox.css";
 interface BoardListBoxProp {
-  clubId: number;
   boardType: "공지" | "자유";
   boardTypeAddress: "notice" | "free";
-  data: PostList[]|undefined;
-}
-interface BoardListItemProp {
-  id: number;
-  title: string;
+  data: PostList[] | undefined;
 }
 
 const BoardListBox = ({
-  clubId,
   boardType,
   boardTypeAddress,
   data,
 }: BoardListBoxProp) => {
   const router = useRouter();
   const handleRouteBoard = (boardTypeAddress: string) => {
-    router.push(`/${clubId}/board/${boardTypeAddress}`);
+    router.push(`/club/board/${boardTypeAddress}`);
   };
-  const BoardListItem = ({ id, title }: BoardListItemProp) => {
-    const handleRouteBoardDetail = (id: number) => {
-      router.push(`/${clubId}/board/${boardTypeAddress}/${id}`);
-    };
-    return (
-      <div
-        className="board__list__item"
-        onClick={() => handleRouteBoardDetail(id)}
-      >
-        <Text color="#D9D9D9" fontSize="0.8125rem" fontWeight="600">
-          {title}
-        </Text>
-        <Image src={ICONS.newBoard} alt="new" />
-      </div>
-    );
+
+  const handleRouteBoardDetail = (id: number) => {
+    router.push(`/club/board/${boardTypeAddress}/${id}`);
   };
 
   return (
@@ -59,7 +41,16 @@ const BoardListBox = ({
       </div>
       <div className="board__list__item__wrapper">
         {data?.map((item, index) => (
-          <BoardListItem key={index} id={item.postId} title={item.postTitle} />
+          <div
+            key={index}
+            className="board__list__item"
+            onClick={() => handleRouteBoardDetail(item.postId)}
+          >
+            <Text color="#D9D9D9" fontSize="0.8125rem" fontWeight="600">
+              {item.postTitle}
+            </Text>
+            <Image src={ICONS.newBoard} alt="new" />
+          </div>
         ))}
       </div>
     </div>

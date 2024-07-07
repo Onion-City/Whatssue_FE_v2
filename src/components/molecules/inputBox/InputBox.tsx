@@ -18,13 +18,15 @@ export interface InputBoxProps {
   subtitle?: string;
   essential?: boolean;
   name: string;
+  error?: boolean;
   control?: any;
+  getValues?: any;
 }
 
-const renderInputComponent = (type: string, maxCnt: number | undefined, name: string, field: any) => {
+const renderInputComponent = (type: string, maxCnt: number | undefined, name: string, error: boolean | undefined, field: any, getValues: any) => {
   switch (type) {
     case "input":
-      return <Input maxCnt={maxCnt} name={name} field={field} />;
+      return <Input maxCnt={maxCnt} name={name} field={field} error={error}/>;
     case "numInput":
       return <CodeInput maxCnt={maxCnt} {...field} />;
     case "textarea":
@@ -36,18 +38,18 @@ const renderInputComponent = (type: string, maxCnt: number | undefined, name: st
     case "fileUpload":
       return <FileUpload name={name} field={field} />;
     case "btnInput":
-      return <AuthBox field={field}/>;
+      return <AuthBox field={field} getValues={getValues} error={error}/>;
     default:
       return <Input maxCnt={maxCnt} name={name} field={field} />;
   }
 };
 
-export function InputBox({ title, maxCnt, type = "input", subtitle, essential, name, control }: InputBoxProps) {
+export function InputBox({ title, maxCnt, type = "input", subtitle, essential, name, error, control, getValues }: InputBoxProps) {
   const inputComponent = (
     <Controller
       name={name}
       control={control}
-      render={({ field }) => renderInputComponent(type, maxCnt, name, field)}
+      render={({ field }) => renderInputComponent(type, maxCnt, name, error, field, getValues)}
     />
   );
 

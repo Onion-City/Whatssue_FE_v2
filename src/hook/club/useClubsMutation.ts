@@ -35,7 +35,8 @@ async function createClub(data: ClubFormData): Promise<void> {
     const res = await http.post(`/clubs`, resData, config);
     console.log(res);
     return;
-  } catch (error) {
+  } catch (error: any) {
+    alert(error.response.data.errors[0].message);
     console.error("Error creating board:", error);
   }
 }
@@ -50,8 +51,7 @@ export function useClubsMutation(): UseCreateClubs {
     mutationFn: createClub,
     onSuccess: () => {
       console.log("모임 등록 성공");
-      router.push('/');
-
+      router.push("/");
     },
     onError: (error) => {
       console.log("모임 등록 실패", error);

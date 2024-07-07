@@ -1,10 +1,13 @@
-interface PostContent {
+export interface PostContent {
   postTitle: string;
   postContent: string;
   postCategory: "NOTICE" | "FREE";
 }
+export interface PostFormDatas {
+  request: PostContent;
+  postImages?: File[];
+}
 export interface PostFormProps {
-  clubId: number;
   request: PostContent;
   postImages?: File[];
 }
@@ -24,5 +27,5 @@ export interface PostList {
   postLikeCount: number;
   isLiked: boolean;
   commentCount: number;
-  createdAt: string;
+  createdAt: Date;
 }

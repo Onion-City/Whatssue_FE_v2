@@ -52,14 +52,6 @@
   display: flex;
   margin-top: 1rem;
 }
-.board__write__maping__img__wrapper {
-  display: flex;
-  align-items: center;
-  overflow-y: auto;
-}
-.board__write__maping__img__wrapper::-webkit-scrollbar {
-  display: none;
-}
 .board__write__bottom {
   margin-top: auto;
 }

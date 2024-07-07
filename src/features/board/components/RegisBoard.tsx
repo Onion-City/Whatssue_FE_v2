@@ -1,75 +1,38 @@
-import Iconfileupload from "@/assets/images/ic_file_upload.png";
-import { MappingImgItem } from "@/components/atoms/mappingImgItem";
+import {
+  FileListUpload,
+  FileListUploadHandler,
+} from "@/components/atoms/fileListUpload";
 import { Text } from "@/components/atoms/text";
 import { InputBox } from "@/components/molecules/inputBox";
+import { CreatePostFormData } from "@/hook/post/CreatePostFormData";
 import { usePostMutation } from "@/hook/post/usePostMutation";
-import { PostFormProps } from "@/types/post";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { PostFormDatas, PostFormProps } from "@/types/post";
+import { FormatPostCategory } from "@/utils/extractPathElements";
 import { useForm } from "react-hook-form";
 import { REGISTER_INPUT_ARR } from "../constants/constant";
 import "./RegisBoard.css";
 
 export const RegisBoard = () => {
-  const pathname = usePathname();
-  const boardTypeAddress = pathname.split("/board/")[1].split("/")[0];
-
-  const [uploadImages, setUploadImages] = useState<{
-    imageFiles: File[];
-    imageUrls: string[];
-  }>({ imageFiles: [], imageUrls: [] });
-
-  const fileUploadImgStyle: React.CSSProperties = {
-    width: "6.3875rem",
-    height: "6.3875rem",
-  };
-
-  const { control, handleSubmit } = useForm<PostFormProps>({
+  const getCategory = FormatPostCategory() === "free" ? "FREE" : "NOTICE";
+  const { handleSubmit, control, setValue } = useForm<PostFormDatas>({
     mode: "onChange",
-  });
-
-  const registePostMutation = usePostMutation();
-
-  const handleImageInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return;
-
-    const files = Array.from(e.target.files);
-
-    if (uploadImages.imageFiles.length + files.length <= 10) {
-      const newImages = files.map((file) => URL.createObjectURL(file));
-      setUploadImages({
-        imageFiles: [...uploadImages.imageFiles, ...files],
-        imageUrls: [...uploadImages.imageUrls, ...newImages],
-      });
-    } else {
-      alert(REGISTER_INPUT_ARR.IMGCONTENT.alert);
-    }
-  };
-
-  const handleRemoveImage = (index: number) => {
-    const updatedFiles = uploadImages.imageFiles.filter(
-      (_, idx) => idx !== index
-    );
-    const updatedUrls = uploadImages.imageUrls.filter(
-      (_, idx) => idx !== index
-    );
-    setUploadImages({ imageFiles: updatedFiles, imageUrls: updatedUrls });
-  };
-
-  const onSubmit = (data: PostFormProps) => {
-    const postData: PostFormProps = {
+    defaultValues: {
       request: {
-        ...data.request,
-        postCategory: boardTypeAddress === "free" ? "FREE" : "NOTICE",
+        postTitle: "",
+        postContent: "",
+        postCategory: getCategory,
       },
-      clubId: parseInt(pathname.split("/")[1]),
-      postImages:
-        uploadImages.imageFiles.length > 0
-          ? uploadImages.imageFiles
-          : undefined,
-    };
-    registePostMutation.mutate(postData);
+    },
+  });
+  const registePostMutation = usePostMutation();
+  const { handleImageInputChange, handleRemoveImage, uploadImgUrls } =
+    FileListUploadHandler({
+      setValue,
+    });
+  const onSubmit = (data: PostFormProps) => {
+    console.log(data);
+    const postFormData = CreatePostFormData(data);
+    registePostMutation.mutate(postFormData);
   };
 
   return (
@@ -85,7 +48,7 @@ export const RegisBoard = () => {
             fontWeight="600"
             className="board__write__type__margin"
           >
-            {boardTypeAddress === "free"
+            {getCategory === "FREE"
               ? REGISTER_INPUT_ARR.CATEGORY.FREE
               : REGISTER_INPUT_ARR.CATEGORY.NOTICE}
           </Text>
@@ -114,34 +77,11 @@ export const RegisBoard = () => {
           {REGISTER_INPUT_ARR.IMGCONTENT.content}
         </Text>
         <div className="board__write__img">
-          <div className="board__write__img__upload">
-            <label htmlFor="file__input">
-              <Image
-                src={Iconfileupload}
-                alt="imageUpload"
-                style={fileUploadImgStyle}
-              />
-            </label>
-            <input
-              id="file__input"
-              type="file"
-              accept="image/*"
-              multiple
-              onChange={handleImageInputChange}
-              aria-label="file__input"
-              style={{ display: "none" }}
-            />
-          </div>
-          <div className="board__write__maping__img__wrapper">
-            {uploadImages.imageUrls.map((url, index) => (
-              <MappingImgItem
-                key={index}
-                imgUrl={url}
-                index={index}
-                onClick={() => handleRemoveImage(index)}
-              />
-            ))}
-          </div>
+          <FileListUpload
+            itemArr={uploadImgUrls}
+            onClick={handleRemoveImage}
+            onChange={handleImageInputChange}
+          />
         </div>
         <div className="board__write__button" onClick={handleSubmit(onSubmit)}>
           <Text color="#2B2B2B" fontSize="0.9375rem" fontWeight="600">

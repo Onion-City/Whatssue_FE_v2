@@ -9,7 +9,11 @@ interface ImageModalProps {
   clickIndex: number;
   onClose: () => void;
 }
-export const ImageModal = ({ imageList, clickIndex, onClose }: ImageModalProps) => {
+export const ImageModal = ({
+  imageList,
+  clickIndex,
+  onClose,
+}: ImageModalProps) => {
   const [currentIndex, setCurrentIndex] = useState<number>(clickIndex);
   const [startX, setStartX] = useState<number>(0);
 
@@ -41,7 +45,7 @@ export const ImageModal = ({ imageList, clickIndex, onClose }: ImageModalProps) 
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
     >
-      <div className="image__modal__top">
+      <div className="image__modal__top" onClick={onClose}>
         <Text
           color="#fff"
           fontSize="1.0625rem"
@@ -50,7 +54,7 @@ export const ImageModal = ({ imageList, clickIndex, onClose }: ImageModalProps) 
         >
           {currentIndex + 1}/{imageList.length}
         </Text>
-        <div className="image__modal__close" onClick={onClose}>
+        <div className="image__modal__close">
           <Text color="#fff" fontSize="1.0625rem" fontWeight="600">
             X
           </Text>
@@ -74,4 +78,3 @@ export const ImageModal = ({ imageList, clickIndex, onClose }: ImageModalProps) 
     </div>
   );
 };
-

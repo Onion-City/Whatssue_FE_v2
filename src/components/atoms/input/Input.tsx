@@ -13,6 +13,7 @@ export interface InputProps {
   color?: 'bk' | 'wt';
   maxCnt?: number;
   name?: string;
+  error?: boolean;
   value?: string | number;
   field?: ControllerRenderProps<any, any>;
   control?: any;
@@ -25,6 +26,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     placeholder = "", 
     maxCnt = 0, 
     name, 
+    error,
     value, 
     field,
     control,
@@ -41,7 +43,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       <div className="input__wrapper">
         <input 
           type="text"
-          className={`input ${size} ${color}`}
+          className={`input ${size} ${color} ${error && "error"}`}
           placeholder={placeholder}
           onChange={handleChangeInput}
           value={field?.value || ""}

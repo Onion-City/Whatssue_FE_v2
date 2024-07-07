@@ -6,6 +6,7 @@ import { Text } from "@/components/atoms/text";
 import { HistoryHeader } from "@/components/organisms/Header";
 import { IMAGES } from "@/constants/images";
 import { fetchJoinClub } from "@/hook/clubJoin/useJoinClubQuery";
+import useToast from "@/utils/useToast";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
@@ -21,6 +22,7 @@ const EnterInvitationCode = () => {
   const [isComplete, setIsComplete] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const router = useRouter();
+  const { showToast } = useToast();
 
   const setFocus = (index: number) => {
     if (index >= 0 && index < inputRefs.current.length) {
@@ -51,11 +53,19 @@ const EnterInvitationCode = () => {
 
   const onSubmit = async () => {
     if (isComplete) {
-      const {
-        data: clubInfo,
-      } = await fetchJoinClub(codeValues.join(''));
-      console.log(clubInfo);
-      router.push(`/user/club/join/${clubInfo.clubId}`);
+      try {
+        const {
+          data: clubInfo,
+        } = await fetchJoinClub(codeValues.join(''));
+        console.log(clubInfo);
+        router.push(`/user/club/join/${clubInfo.clubId}`);
+      } catch (error) {
+        console.log(error);
+        showToast({
+          message: "존재하지 않는 모임코드입니다", 
+          type: "error"
+        });
+      }
     }
   }
 
@@ -96,7 +106,7 @@ const EnterInvitationCode = () => {
           color={isComplete ? "#2B2B2B" : "#fff"}
           onClick={onSubmit}
         >
-          {JOIN_BTN}
+          {JOIN_BTN.inviteCode}
         </Button>
       </div>
     </div>
