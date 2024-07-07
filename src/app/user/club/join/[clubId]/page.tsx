@@ -1,7 +1,7 @@
-import InvitationCode from "@/features/user/joinClub/InvitationCode";
+import InvitationClubInfo from "@/features/user/joinClub/InvitationClubInfo";
 
 const JoinClubInfo = () => {
-  return <InvitationCode />;
+  return <InvitationClubInfo />;
 };
 
 export default JoinClubInfo;
