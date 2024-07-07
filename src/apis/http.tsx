@@ -3,10 +3,9 @@ import axios from "axios";
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: process.env.NEXT_PUBLIC_LOCAL_URL,
   withCredentials: true,
-  
-}); 
+});
 
 export interface HttpClient extends AxiosInstance {
   get<T = unknown>(url: string, config?: AxiosRequestConfig): Promise<T>;

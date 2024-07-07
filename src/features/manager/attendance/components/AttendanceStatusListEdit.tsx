@@ -1,11 +1,11 @@
 "use client";
 import { ATTENDANCE_STATUS_EDIT } from "../constants/const";
-import { attendanceStatusDummy } from "../constants/dummy";
 import "./Attendance.css";
 import { useState } from "react";
 import { Button } from "@/components/atoms/button";
 import AttendanceStatusEditItem from "../molecules/AttendanceStatusEditItem";
 import { useRouter } from "next/navigation";
+import { useAttendanceMemberListQuery } from "@/hook/attendance/manager/useAttendanceMemberListQuery";
 
 interface AttendanceStatus {
   id: number;
@@ -15,8 +15,16 @@ interface AttendanceStatus {
 
 const AttendanceStatusListEdit: React.FC = () => {
   const router = useRouter();
+  const { data, isLoading, error } = useAttendanceMemberListQuery({
+    clubId: 1,
+    scheduleId: 20,
+  });
   const [attendanceStatus, setAttendanceStatus] = useState<AttendanceStatus[]>(
-    attendanceStatusDummy
+    data?.data.data.map((item) => ({
+      id: item.clubMemberId,
+      name: item.clubMemberName,
+      status: item.attendanceType,
+    })) || []
   );
 
   const handleStatusChange = (name: string, status: string) => {

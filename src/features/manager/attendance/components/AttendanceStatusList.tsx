@@ -8,31 +8,34 @@ import {
   ATTENDANCE_STATUS_EDIT_BTN,
   ATTENDANCE_STATUS_TITLE,
 } from "../constants/const";
-import { attendanceStatusDummy } from "../constants/dummy";
 import "./Attendance.css";
 import AttendanceStatusItem from "../molecules/AttendanceStatusItem";
-
-interface AttendanceStatus {
-  id: number;
-  name: string;
-  status: string;
-}
+import { useAttendanceMemberListQuery } from "@/hook/attendance/manager/useAttendanceMemberListQuery";
 
 const AttendanceStatusList: React.FC = () => {
   const router = useRouter();
-  const [selectedStatus, setSelectedStatus] = useState<string | null>(null); // 선택된 상태
+  const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
 
-  // 선택된 상태에 따라 필터링된 출석 상태 리스트 반환
+  const { data, error } = useAttendanceMemberListQuery({
+    clubId: 1,
+    scheduleId: 20,
+  });
+  if (error) return <Text>오류가 발생했습니다.</Text>;
+
   const filteredAttendanceStatus = selectedStatus
-    ? attendanceStatusDummy.filter(
-        (attendanceStatus) => attendanceStatus.status === selectedStatus
+    ? data?.data?.data.filter(
+        (attendanceStatus: any) =>
+          attendanceStatus.attendanceType === selectedStatus
       )
-    : attendanceStatusDummy;
+    : data?.data.data;
 
   const countPeopleByStatus = (status: string) => {
-    return attendanceStatusDummy.filter(
-      (attendanceStatus) => attendanceStatus.status === status
-    ).length;
+    if (Array.isArray(data?.data.data)) {
+      return data.data.data.filter(
+        (attendanceStatus) => attendanceStatus.attendanceType === status
+      ).length;
+    }
+    return [];
   };
 
   return (
@@ -65,7 +68,7 @@ const AttendanceStatusList: React.FC = () => {
             >
               {countPeopleByStatus(status)}명
               <Text color="#9D9D9D" fontSize="0.6875rem" fontWeight="400">
-                &nbsp;/ {attendanceStatusDummy.length}명
+                &nbsp;/ {data?.data.data.length}명
               </Text>
             </Text>
           ))}
@@ -90,13 +93,14 @@ const AttendanceStatusList: React.FC = () => {
       </div>
 
       <div className="attendance_status_list__item">
-        {filteredAttendanceStatus.map((attendanceStatus) => (
-          <AttendanceStatusItem
-            key={attendanceStatus.id}
-            name={attendanceStatus.name}
-            status={attendanceStatus.status}
-          />
-        ))}
+        {filteredAttendanceStatus &&
+          filteredAttendanceStatus.map((attendanceStatus, idx) => (
+            <AttendanceStatusItem
+              key={idx}
+              name={attendanceStatus.clubMemberName}
+              status={attendanceStatus.attendanceType}
+            />
+          ))}
       </div>
 
       <div className="attendance_status_list__edit_btn">

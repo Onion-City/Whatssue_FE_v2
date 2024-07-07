@@ -16,7 +16,6 @@ export interface AttendanceListItem {
   scheduleDateTime: string;
   attendanceStatus: Attendance;
 }
-export type GetAttendanceListResponse = AttendanceListItem[];
 
 // 오늘의 일정
 export interface TodayScheduleItem
@@ -29,11 +28,19 @@ export interface TodayScheduleItem
 // 출석 아이템
 export interface AttendanceSchedule extends ScheduleContent {
   isSuccess?: boolean;
-  attendanceAddress: string;
   onClick: () => void;
 }
 
 // 출석하기
 export interface AttendanceReqData {
   attendanceNum: number;
+}
+
+// 출석한 멤버 리스트 조회
+export interface AttendanceMemberListItem {
+  clubId: number;
+  scheduleId: number;
+  clubMemberId: number;
+  clubMemberName: string;
+  attendanceType: string;
 }

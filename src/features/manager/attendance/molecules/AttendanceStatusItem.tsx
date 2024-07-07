@@ -14,14 +14,6 @@ const AttendanceStatusItem: React.FC<AttendanceStatusItemProps> = ({
 }) => {
   let iconColorClass = "";
 
-  if (status === "출석") {
-    iconColorClass = "green";
-  } else if (status === "결석") {
-    iconColorClass = "red";
-  } else if (status === "공결") {
-    iconColorClass = "yellow";
-  }
-
   return (
     <div className="attendance_status_item">
       <Image
