@@ -1,8 +1,9 @@
 "use client";
 
-import { DateBox } from "@/components/molecules/dateBox";
 import { useAbsenceMemberQuery } from "@/hook/absence/useAbsencesMemberQuery";
 import { useMyAbsenceQuery } from "@/hook/absence/useMyAbsencesQuery";
+import { AbsenceMemberData } from "@/types/absence/types";
+import React from "react";
 import { AbsentBox } from "./AbsentBox";
 
 export const AbsentList = () => {
@@ -26,19 +27,13 @@ export const AbsentList = () => {
     console.log(myList?.data.content);
     return(
         <>
-            <DateBox
-                date="2024-06-14"
-            >
-                <AbsentBox 
-                    // scheduleId={scheduleId}
-                    // officialAbsenceRequestType={officialAbsenceRequestType}
-                />
-            </DateBox>
-            <DateBox
-                date="2024-06-14"
-            >
-                <AbsentBox />
-            </DateBox>
+            {myList?.data?.content?.map((item: AbsenceMemberData) => 
+                <React.Fragment key={item.id}>
+                    <AbsentBox
+                        data={item}
+                    />
+                </React.Fragment>
+            )}
         </>
     )
 }

@@ -1,5 +1,11 @@
 // 공결 신청
 
+export enum Absence {
+  WAITING = "미승인",
+  ACCEPTED = "승인완료",
+  REJECTED = "승인거절",
+}
+
 export interface AbsenceReqProps {
   clubId?: number;
   scheduleId?: number;
@@ -30,6 +36,7 @@ export interface AbsenceMemberData {
   scheduleId: number,
   officialAbsenceContent: string,
   officialAbsenceRequestType: "WAITING" | "ACCEPTED" | "REJECTED",
+  createAt?: string;
 }
 
 export interface AbsenceContent<T> {
