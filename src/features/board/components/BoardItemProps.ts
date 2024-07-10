@@ -6,7 +6,7 @@ export interface BoardItemProps {
   content: string;
   commentCount: number;
   hearts: number;
-  contentImgs?: string[] | undefined;
+  contentImgs?: string | undefined;
   isHeart: boolean;
   writer: {
     profile: string;

@@ -19,7 +19,6 @@ const CurrentAttendance: React.FC<CurrentAttendanceProps> = ({
   onAttendanceUpdate,
 }) => {
   const clubId = 1;
-  const scheduleId = 13;
   const { data, isError, refetch } = useAttendanceListQuery(clubId);
 
   const [selectedAttendance, setSelectedAttendance] =
@@ -28,7 +27,7 @@ const CurrentAttendance: React.FC<CurrentAttendanceProps> = ({
 
   const { mutate: endAttendance } = useAttendanceEndMutationQuery({
     clubId: 1,
-    scheduleId: 13,
+    scheduleId: selectedAttendance?.scheduleId || 0,
   });
 
   useEffect(() => {
@@ -77,11 +76,10 @@ const CurrentAttendance: React.FC<CurrentAttendanceProps> = ({
         {CURRENT_ATTENDANCE_TITLE}
       </Text>
 
-      {data && data.data && data.data?.length > 0 ? (
-        data.data.map((attendance) => (
+      {data && data.data && data.data.data && data?.data?.data?.length > 0 ? (
+        data.data.data.map((attendance) => (
           <AttendanceItem
             key={attendance.scheduleId}
-            attendanceAddress="member"
             scheduleId={attendance.scheduleId}
             attendanceStatus={attendance.attendanceStatus}
             scheduleName={attendance.scheduleName}
