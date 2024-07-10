@@ -52,6 +52,6 @@
 
 .absentBox__date {
     display: flex;
-    align-items: flex-end;
-    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
 }

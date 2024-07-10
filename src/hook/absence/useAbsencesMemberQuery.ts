@@ -8,7 +8,7 @@ interface CombinedAbsenceData {
   doneAbsences: AbsenceContent<AbsenceMemberData>;
 }
 
-// 공결 신청 현황 조회 (/{clubId}/official_absence/list)
+// 공결 신청 전체 조회 (/{clubId}/official_absence/list)
 async function absencesMember ({
   clubId,
   page,
@@ -17,7 +17,7 @@ async function absencesMember ({
 }: AbsenceListProps) {
   try {
     const res = await http.get<CommonNoPageRes<AbsenceContent<AbsenceMemberData>>>(
-      `/${clubId}/official-absence/my-list?page=${page}&size=${size}`
+      `/${clubId}/official-absence/list?page=${page}&size=${size}`
     );
     console.log(res);
     return res.data;
