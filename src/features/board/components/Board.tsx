@@ -44,7 +44,8 @@ const Board = () => {
             content={item.postContent}
             createdAt={item.createdAt}
             commentCount={item.commentCount}
-            contentImgs={item.uploadImage}
+            // contentImgs={item.uploadImage}
+            contentImgs={Object.values(item.uploadImage)[0]}
             hearts={item.postLikeCount}
             isHeart={item.isLiked}
             writer={{ name: item.writerName, profile: item.writerProfileImage }}
