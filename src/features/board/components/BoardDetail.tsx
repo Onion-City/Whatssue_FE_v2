@@ -73,15 +73,15 @@ export const BoardDetail = () => {
               </Text>
             </div>
             <div className="board__detail__content__box__img__wrapper">
-              {DetailContent.uploadImage?.map((imgItem, index) => (
+              {Object.keys(DetailContent.uploadImage).map((imgItem, index) => (
                 <div
                   key={index}
                   className="board__detail__content__box__img"
                   onClick={() => handleOpenImg(index)}
                 >
                   <Image
-                    src={imgItem}
-                    alt="contentImg"
+                    src={DetailContent.uploadImage[imgItem]}
+                    alt={`contentImg-${imgItem}`}
                     width={100}
                     height={100}
                   />
@@ -90,7 +90,7 @@ export const BoardDetail = () => {
             </div>
             {isOpenModal && (
               <ImageModal
-                imageList={DetailContent.uploadImage}
+                imageList={Object.values(DetailContent.uploadImage)}
                 clickIndex={currentIndex}
                 onClose={handleCloseImg}
               />

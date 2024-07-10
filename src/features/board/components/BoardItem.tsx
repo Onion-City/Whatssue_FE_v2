@@ -83,9 +83,9 @@ const BoardItem = ({
           </div>
         </div>
       </div>
-      {contentImgs !== undefined && contentImgs.length > 0 && (
+      {contentImgs !== undefined && (
         <Image
-          src={contentImgs[0]}
+          src={contentImgs}
           alt="contentImg"
           className="home__content__meeting__right_img"
           width={100}
