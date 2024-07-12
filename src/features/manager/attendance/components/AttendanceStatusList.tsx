@@ -11,14 +11,16 @@ import {
 import "./Attendance.css";
 import AttendanceStatusItem from "../molecules/AttendanceStatusItem";
 import { useAttendanceMemberListQuery } from "@/hook/attendance/manager/useAttendanceMemberListQuery";
+import { FormatClubId } from "@/utils/extractPathElements";
 
 const AttendanceStatusList: React.FC = () => {
   const router = useRouter();
+  const searchParams = new URLSearchParams(window.location.search);
+  const scheduleId = searchParams.get("scheduleId");
   const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
-
   const { data, error } = useAttendanceMemberListQuery({
-    clubId: 1,
-    scheduleId: 20,
+    clubId: FormatClubId(),
+    scheduleId: Number(scheduleId),
   });
   if (error) return <Text>오류가 발생했습니다.</Text>;
 
@@ -104,7 +106,9 @@ const AttendanceStatusList: React.FC = () => {
       </div>
 
       <div className="attendance_status_list__edit_btn">
-        <Button onClick={() => router.push("status/edit")}>
+        <Button
+          onClick={() => router.push(`status/edit?scheduleId=${scheduleId}`)}
+        >
           {ATTENDANCE_STATUS_EDIT_BTN}
         </Button>
       </div>

@@ -9,7 +9,7 @@ export const useAttendanceReqMutation = ({
 }: ScheduleDetailProp) => {
   return useMutation({
     mutationFn: (data: AttendanceReqData) =>
-      http.post(`/clubs/${clubId}/schedules/${scheduleId}/attendance/`, data),
+      http.post(`/clubs/${clubId}/schedules/${scheduleId}/attendance`, data),
     onSuccess: (data) => {
       console.log(data);
     },

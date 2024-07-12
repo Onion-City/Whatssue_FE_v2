@@ -6,6 +6,7 @@ import { Button } from "@/components/atoms/button";
 import AttendanceStatusEditItem from "../molecules/AttendanceStatusEditItem";
 import { useRouter } from "next/navigation";
 import { useAttendanceMemberListQuery } from "@/hook/attendance/manager/useAttendanceMemberListQuery";
+import { FormatClubId } from "@/utils/extractPathElements";
 
 interface AttendanceStatus {
   id: number;
@@ -15,9 +16,11 @@ interface AttendanceStatus {
 
 const AttendanceStatusListEdit: React.FC = () => {
   const router = useRouter();
+  const searchParams = new URLSearchParams(window.location.search);
+  const scheduleId = searchParams.get("scheduleId");
   const { data, isLoading, error } = useAttendanceMemberListQuery({
-    clubId: 1,
-    scheduleId: 20,
+    clubId: FormatClubId(),
+    scheduleId: Number(scheduleId),
   });
   const [attendanceStatus, setAttendanceStatus] = useState<AttendanceStatus[]>(
     data?.data.data.map((item) => ({

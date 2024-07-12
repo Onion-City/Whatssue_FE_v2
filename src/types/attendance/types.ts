@@ -44,3 +44,9 @@ export interface AttendanceMemberListItem {
   clubMemberName: string;
   attendanceType: string;
 }
+
+// 출석 수정
+export interface AttendanceCorrectionReqData
+  extends Omit<AttendanceMemberListItem, "clubMemberName"> {
+  memberId: number;
+}

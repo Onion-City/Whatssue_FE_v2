@@ -11,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import { ATTENDANCE_MODAL, TODAY_SCHEDULE_TITLE } from "../constants/const";
 import "./Attendance.css";
 import { useRouter } from "next/navigation";
+import { FormatClubId } from "@/utils/extractPathElements";
 
 interface TodayScheduleProps {
   attendanceUpdated: boolean;
@@ -22,7 +23,6 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
   onAttendanceUpdate,
 }) => {
   const router = useRouter();
-  const clubId = 1;
   const [selectedSchedule, setSelectedSchedule] =
     useState<ScheduleContent | null>(null);
   const { isOpen, openModal, closeModal } = useModalContext();
@@ -41,7 +41,7 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
     isError: isTodayScheduleError,
     refetch: refetchTodaySchedule,
   } = useTodayScheduleListQuery({
-    clubId: clubId,
+    clubId: FormatClubId(),
     startDate: getCurrentDate(),
     endDate: getCurrentDate(),
     page: 0,
@@ -49,7 +49,7 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
   });
 
   const { refetch: refetchAttendance } = useAttendanceStartQuery({
-    clubId: clubId,
+    clubId: FormatClubId(),
     scheduleId: selectedSchedule?.scheduleId || 0,
     enabled: false,
   });
@@ -61,7 +61,9 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
       openModal();
       console.log("Modal opened with schedule:", schedule);
     } else {
-      router.push("/manager/attendance/status");
+      router.push(
+        `/manager/attendance/status?scheduleId=${schedule.scheduleId}`
+      );
       console.log("Redirected to attendance status page:", schedule);
     }
   };
