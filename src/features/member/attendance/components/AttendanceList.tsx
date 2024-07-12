@@ -9,6 +9,7 @@ import { ATTEND_BTN, ATTEND_MODAL } from "../constants/const";
 import { CodeInput } from "@/components/atoms/input/CodeInput";
 import { AttendanceListItem } from "@/types/attendance/types";
 import { useAttendanceReqMutation } from "@/hook/attendance/member/useAttendanceMutationReqQuery";
+import { FormatClubId } from "@/utils/extractPathElements";
 
 const AttendanceList: React.FC = () => {
   const { isOpen, openModal, closeModal } = useModalContext();
@@ -19,12 +20,11 @@ const AttendanceList: React.FC = () => {
   const [selectedAttendance, setSelectedAttendance] =
     useState<AttendanceListItem | null>(null);
 
-  const clubId = 1;
-  const { data, isError } = useAttendanceListQuery(clubId);
+  const { data, isError } = useAttendanceListQuery(FormatClubId());
   console.log(data);
 
   const { mutate: requestAttendance } = useAttendanceReqMutation({
-    clubId: clubId,
+    clubId: FormatClubId(),
     scheduleId: selectedAttendance?.scheduleId || 0,
   });
 

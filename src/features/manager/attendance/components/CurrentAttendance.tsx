@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { AttendanceListItem } from "@/types/attendance/types";
 import { Modal } from "@/components/organisms/Modal/Modal";
 import { useAttendanceEndMutationQuery } from "@/hook/attendance/manager/useAttendanceEndMutationQuery";
+import { FormatClubId } from "@/utils/extractPathElements";
 
 interface CurrentAttendanceProps {
   attendanceUpdated: boolean;
@@ -18,15 +19,14 @@ const CurrentAttendance: React.FC<CurrentAttendanceProps> = ({
   attendanceUpdated,
   onAttendanceUpdate,
 }) => {
-  const clubId = 1;
-  const { data, isError, refetch } = useAttendanceListQuery(clubId);
+  const { data, isError, refetch } = useAttendanceListQuery(FormatClubId());
 
   const [selectedAttendance, setSelectedAttendance] =
     useState<AttendanceListItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { mutate: endAttendance } = useAttendanceEndMutationQuery({
-    clubId: 1,
+    clubId: FormatClubId(),
     scheduleId: selectedAttendance?.scheduleId || 0,
   });
 

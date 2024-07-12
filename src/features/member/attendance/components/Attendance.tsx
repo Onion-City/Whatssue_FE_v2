@@ -8,19 +8,12 @@ import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { ATTEND_BTN } from "../constants/const";
 import "./Attendance.css";
-// import { useAttendanceMutationQuery } from "@/hook/attendance/member/useAttendanceMutationQuery";
 
 const Attendance: React.FC = () => {
   const ClubName = "코딩하는 도토리";
   const [codeValues, setCodeValues] = useState<string[]>(Array(3).fill(""));
   const [isComplete, setIsComplete] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-
-  // const { mutate } = useAttendanceMutationQuery({
-  //   clubId: "club123",
-  //   scheduleId: "schedule123",
-  //   memberId: "member123",
-  // });
 
   const setFocus = (index: number) => {
     if (index >= 0 && index < inputRefs.current.length) {
