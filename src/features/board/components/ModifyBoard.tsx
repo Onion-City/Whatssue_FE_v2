@@ -13,7 +13,7 @@ import "./RegisBoard.css";
 
 export const ModifyBoard = () => {
   const [imgObject, setImgObject] = useState<{ [key: string]: string }>({});
-  let imgDeletePath: string[] = [];
+  const [imgDeletePath, setImgDeletePath] = useState<string[]>([]);
   const [uploadImgFiles, setUploadImgFiles] = useState<File[]>([]);
   const [uploadImgUrls, setUploadImgUrls] = useState<string[]>([]);
 
@@ -66,25 +66,23 @@ export const ModifyBoard = () => {
     const updatedUrls = uploadImgUrls.filter((_, idx) => idx !== index);
     setUploadImgFiles(updatedFiles);
     setUploadImgUrls(updatedUrls), setValue("postImages", updatedFiles);
-    const deletedUrl = uploadImgUrls[index];
-    console.log(deletedUrl);
-    handleDeleteImgKeys(deletedUrl);
+    handleDeleteImgKeys(uploadImgUrls[index]);
   };
 
-  const handleDeleteImgKeys = (value:string) => {
+  const handleDeleteImgKeys = (value: string) => {
     for (let key in imgObject) {
-      // 만약 현재 키의 값이 주어진 값과 일치하면,
       if (imgObject[key] === value) {
-        imgDeletePath.push(imgObject[key]);
-        // 해당 키를 삭제합니다.
+        setImgDeletePath([...imgDeletePath, imgObject[key]]);
         delete imgObject[key];
+        break;
       }
     }
-  }
+  };
   const modifyPostMutation = usePostPatchMutation();
   const onSubmit = (data: PostUpdataFormProps) => {
     data.postRequest.deleteImages = imgDeletePath;
     data.postRequest.maintainImages = imgObject;
+    console.log(data);
     const postFormData = ModifyPostFormData(data);
     modifyPostMutation.mutate(postFormData);
   };

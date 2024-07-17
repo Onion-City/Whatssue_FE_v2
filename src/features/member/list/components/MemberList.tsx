@@ -1,27 +1,31 @@
 import { Text } from "@/components/atoms/text";
 import { MemberProfile } from "@/components/molecules/memberProfile";
-import { Wrapper } from "@/components/organisms/Wrapper";
-import { MemberTestArr1 } from "../constants/TestArr";
+import { useMemberListQuery } from "@/hook/member/useMemberListQuery";
 import "./MemberList.css";
 
 const MemberList = () => {
+  const { data } = useMemberListQuery({ page: 0, size: 10 });
+  const MemberCount = data?.data.content.length;
   return (
-    <Wrapper isHeader={true}>
+    <>
       <div className="member__list__top">
         <Text color="#fff" fontSize="0.6875rem" fontWeight="600">
-          멤버 총 43명
+          멤버 총 {MemberCount}명
         </Text>
       </div>
-      {MemberTestArr1.map((item, idx) => (
-        <MemberProfile
-          key={idx}
-          profile={item.profile}
-          name={item.name}
-          isUser={item.isUser}
-          message={item.message}
-        />
-      ))}
-    </Wrapper>
+      <div className="member__list__bottom">
+        {data?.data.content.map((item, idx) => (
+          <MemberProfile
+            key={idx}
+            memberId={item.memberId}
+            memberImage={item.memberImage}
+            memberName={item.memberName}
+            role={item.role}
+            memberIntro={item.memberIntro}
+          />
+        ))}
+      </div>
+    </>
   );
 };
 

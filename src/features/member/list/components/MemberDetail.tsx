@@ -1,45 +1,60 @@
-import testImg from "@/assets/images/chiikyaw.png";
 import { Button } from "@/components/atoms/button";
 import { Text } from "@/components/atoms/text";
 import { InfoIcon } from "@/components/molecules/infoIcon";
 import { ICONS } from "@/constants/images";
+import { useMemberQuery } from "@/hook/member/useMemberQuery";
+import { formatPhoneNumber } from "@/utils/phone";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
 import "./MemberDetail.css";
 const MemberDetail = () => {
+  const router = useRouter();
+  const pathName = usePathname();
+  const { data, isLoading } = useMemberQuery(
+    parseInt(pathName.split("/")[3], 10)
+  );
+  const handleModify = () => {
+    router.push("/edit");
+  };
+  if (isLoading) {
+    return <div>loading</div>;
+  }
   return (
     <div className="member__detail__wrapper">
       <div className="member__detail__profile__wrapper">
         <Image
-          src={testImg}
+          src={data?.data.profileImage || ICONS.memberProfileNone}
           alt="profile"
           className="member__detail__profile"
+          height={100}
+          width={100}
         />
         <div className="member__detail__profile_inner">
           <div className="member__detail__profile_inner_name">
             <Text color="#fff" fontSize="1.5625rem" fontWeight="700">
-              김민서
+              {data?.data.memberName}
             </Text>
             <Image src={ICONS.changeProfile} alt="change" />
           </div>
           <Text color="#fff" fontSize="0.9375rem" fontWeight="600">
-            배드민터왕ㅇ&nbsp;
+            {data?.data.memberIntro}&nbsp;
           </Text>
         </div>
       </div>
       <InfoIcon
         type="phone"
-        content="010-3952-3928"
+        content={formatPhoneNumber(data?.data.userPhone)}
         imgWidth="0.9375rem"
         imgHeight="1.25rem"
       />
       <InfoIcon
         type="email"
-        content="kms02330233@gmail.com"
+        content={data?.data.userEmail || ""}
         imgWidth="1.1875rem"
         imgHeight="0.875rem"
       />
 
-      <div className="member__detail__bottom">
+      <div className="member__detail__bottom" onClick={handleModify}>
         <Button
           fontSize="0.9375rem"
           fontWeight="600"

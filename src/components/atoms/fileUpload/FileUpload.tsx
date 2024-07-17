@@ -17,23 +17,16 @@ export function FileUpload({ children, name, field }: FileUploadProps) {
   //   url?: string;
   //   name?: string;
   // }
-
   // 이미지 url
   const [image, setImage] = useState<string | undefined>(
-    field && 
-    field.value && 
-    field.value.url ? 
-    field.value.url : 
-    undefined
+    field && field.value && field.value.url ? field.value.url : undefined
   );
 
   // 이미지 file
   const [selectedImage, setSelectedImage] = useState<File | undefined>(
-    field && 
-    field.value && 
-    field.value.imageFile ? 
-    field.value.imageFile : 
-    undefined
+    field && field.value && field.value.imageFile
+      ? field.value.imageFile
+      : undefined
   );
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,44 +46,44 @@ export function FileUpload({ children, name, field }: FileUploadProps) {
     }
   };
 
-
   return (
     <div className="fileUpload">
-        <div className="fileUpload__box">
-          {!selectedImage ? (
-            <>
-              <label htmlFor="first-upload-input">
-                <div className="fileUpload__box">
-                  <Image 
-                    src={AddPic} 
-                    alt="pic"
-                    className="fileUpload__box__img"
-                    placeholder="blur"
-                    width={115}
-                    height={115}
-                  />
-                </div>
-              </label>
-              <input
-                id="first-upload-input"
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                multiple
-              />
-            </>
-          ) : (
-            <div>
-              <Image 
-                src={image ?? defaultImg} 
-                alt="clubImg"
-                className="fileUpload__box__selectedImg"
-                width={115}
-                height={115}
-              />
-            </div>
-          )}
-        </div>
+      <div className="fileUpload__box">
+        {!selectedImage ? (
+          <>
+            <label htmlFor="first-upload-input">
+              <div className="fileUpload__box">
+                <Image
+                  src={field?.value.url ?? AddPic}
+                  alt="pic"
+                  className="fileUpload__box__img"
+                  placeholder="blur"
+                  blurDataURL="@/assets/images/AddPic.png"
+                  width={115}
+                  height={115}
+                />
+              </div>
+            </label>
+            <input
+              id="first-upload-input"
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              multiple
+            />
+          </>
+        ) : (
+          <div>
+            <Image
+              src={image ?? defaultImg}
+              alt="clubImg"
+              className="fileUpload__box__selectedImg"
+              width={115}
+              height={115}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
