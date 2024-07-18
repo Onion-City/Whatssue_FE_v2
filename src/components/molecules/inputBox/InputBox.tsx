@@ -95,12 +95,6 @@ export function InputBox({
         )}
         {type === "input&&toggle" && (
           <div className="toggleBox">
-            {/* <Toggle
-              backgroundColor="#404040"
-              height="1.39006rem"
-              width="2.8125rem"
-              name={plusName}
-            /> */}
             <InputField
               maxCnt={maxCnt}
               type="toggle"

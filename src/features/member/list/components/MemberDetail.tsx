@@ -14,7 +14,7 @@ const MemberDetail = () => {
     parseInt(pathName.split("/")[3], 10)
   );
   const handleModify = () => {
-    router.push("/edit");
+    router.push(`${pathName}/edit`);
   };
   if (isLoading) {
     return <div>loading</div>;

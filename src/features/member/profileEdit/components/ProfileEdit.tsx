@@ -1,5 +1,5 @@
+import AddPic from "@/assets/images/AddPic.png";
 import { Button } from "@/components/atoms/button";
-import { FileUpload } from "@/components/atoms/fileUpload";
 import { Text } from "@/components/atoms/text";
 import { InputBox } from "@/components/molecules/inputBox";
 import { Wrapper } from "@/components/organisms/Wrapper";
@@ -7,7 +7,8 @@ import { ModifyPostFormData } from "@/hook/member/ProfileModifyForm";
 import { useMemberModifyMutation } from "@/hook/member/useMemberModifyMutation";
 import { useMyMemberQuery } from "@/hook/member/useMyMemberQuery";
 import { MemberProfileUpdata, MemberProfileUpdataMid } from "@/types/member";
-import React, { useEffect } from "react";
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   MEMBERPROFILE_BTN,
@@ -18,9 +19,19 @@ import "./ProfileEdit.css";
 
 const ProfileEdit = () => {
   const { data: myProfile } = useMyMemberQuery();
-  const { control, reset, handleSubmit } = useForm<MemberProfileUpdataMid>({
-    mode: "onChange",
-  });
+  const { control, reset, handleSubmit, setValue } =
+    useForm<MemberProfileUpdataMid>({
+      mode: "onChange",
+    });
+  const [imageUrl, setImageUrl] = useState<string | undefined>();
+  const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+    const selectedFile = files[0];
+    const newImageUrl = URL.createObjectURL(selectedFile);
+    setImageUrl(newImageUrl);
+    setValue("profileImage", selectedFile);
+  };
   useEffect(() => {
     const memberData = myProfile?.data;
     if (memberData == undefined) {
@@ -35,19 +46,14 @@ const ProfileEdit = () => {
       isEmailPublic: memberData.isEmailPublic,
       isPhonePublic: memberData.isPhonePublic,
     });
+    setImageUrl(memberData.profileImage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [myProfile]);
+
   const createClubMutation = useMemberModifyMutation();
   const submitSignup = (data: MemberProfileUpdata) => {
     const changeProfile = myProfile?.data.profileImage !== data.profileImage;
     const ModifyData = ModifyPostFormData(data, changeProfile);
-    console.log("dddddddddd", ModifyData);
-    console.log(
-      "12332123",
-      myProfile?.data.profileImage,
-      "ㅇㅇㄴㅁㅇㄴㅁㅇ",
-      data.profileImage
-    );
     createClubMutation.mutate(ModifyData);
   };
   return (
@@ -58,16 +64,28 @@ const ProfileEdit = () => {
             <Text color="#fff" fontSize="1.0625rem" fontWeight="700">
               {MEMBERPROFILE_TITLE}
             </Text>
-            <FileUpload
-              field={{
-                name: "profileImage",
-                onChange: () => {}, // 필요한 경우 구현
-                onBlur: () => {}, // 필요한 경우 구현
-                value: { url: myProfile?.data?.profileImage },
-                ref: () => {},
-              }}
-              name="profileImage"
-            />
+            <>
+              <label htmlFor="first-upload-input">
+                <div className="fileUpload__box">
+                  <Image
+                    src={imageUrl || AddPic}
+                    alt="pic"
+                    className="fileUpload__box__img"
+                    placeholder="blur"
+                    blurDataURL="@/assets/images/AddPic.png"
+                    width={115}
+                    height={115}
+                  />
+                </div>
+              </label>
+              <input
+                id="first-upload-input"
+                type="file"
+                accept="image/*"
+                name="profileImage"
+                onChange={handleChangeImage}
+              />
+            </>
           </div>
           {MEMBERPROFILE_INPUT_ARR.map((box, index) => (
             <React.Fragment key={index}>
