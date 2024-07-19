@@ -21,38 +21,67 @@ export interface InputBoxProps {
   error?: boolean;
   control?: any;
   getValues?: any;
+  addName?: string;
 }
 
-const renderInputComponent = (type: string, maxCnt: number | undefined, name: string, error: boolean | undefined, field: any, getValues: any) => {
+const renderInputComponent = (
+  type: string,
+  maxCnt: number | undefined,
+  name: string,
+  error: boolean | undefined,
+  field: any,
+  getValues: any
+) => {
   switch (type) {
     case "input":
-      return <Input maxCnt={maxCnt} name={name} field={field} error={error}/>;
+      return <Input maxCnt={maxCnt} name={name} field={field} error={error} />;
     case "numInput":
       return <CodeInput maxCnt={maxCnt} {...field} />;
+    case "input&&toggle":
+      return <Input maxCnt={maxCnt} name={name} field={field} error={error} />;
     case "textarea":
       return <Textarea maxCnt={maxCnt} name={name} field={field} />;
     case "toggle":
       return <Toggle name={name} field={field} />;
     case "chip":
-      return <ChipBox field={field}/>;
+      return <ChipBox field={field} />;
     case "fileUpload":
       return <FileUpload name={name} field={field} />;
     case "btnInput":
-      return <AuthBox field={field} getValues={getValues} error={error}/>;
+      return <AuthBox field={field} getValues={getValues} error={error} />;
     default:
       return <Input maxCnt={maxCnt} name={name} field={field} />;
   }
 };
 
-export function InputBox({ title, maxCnt, type = "input", subtitle, essential, name, error, control, getValues }: InputBoxProps) {
-  const inputComponent = (
-    <Controller
-      name={name}
-      control={control}
-      render={({ field }) => renderInputComponent(type, maxCnt, name, error, field, getValues)}
-    />
-  );
-
+const InputField = ({
+  maxCnt,
+  type = "input",
+  name,
+  error,
+  control,
+  getValues,
+}: InputBoxProps) => (
+  <Controller
+    name={name}
+    control={control}
+    render={({ field }) =>
+      renderInputComponent(type, maxCnt, name, error, field, getValues)
+    }
+  />
+);
+export function InputBox({
+  title,
+  maxCnt,
+  type = "input",
+  subtitle,
+  essential,
+  name,
+  error,
+  control,
+  getValues,
+  addName,
+}: InputBoxProps) {
   return (
     <div className="registerBox">
       <div className="textBox">
@@ -64,13 +93,32 @@ export function InputBox({ title, maxCnt, type = "input", subtitle, essential, n
             *
           </Text>
         )}
+        {type === "input&&toggle" && (
+          <div className="toggleBox">
+            <InputField
+              maxCnt={maxCnt}
+              type="toggle"
+              name={addName ?? ""}
+              error={error}
+              control={control}
+              getValues={getValues}
+            />
+          </div>
+        )}
       </div>
       {subtitle && (
         <Text fontSize="0.6875rem" color={COLORS.whitegrey} fontWeight="500">
           {subtitle}
         </Text>
       )}
-      {inputComponent}
+      <InputField
+        maxCnt={maxCnt}
+        type={type}
+        name={name}
+        error={error}
+        control={control}
+        getValues={getValues}
+      />
     </div>
   );
 }
