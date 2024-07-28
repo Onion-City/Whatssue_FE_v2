@@ -1,7 +1,10 @@
 import { Text } from "@/components/atoms/text";
+import { Modal } from "@/components/organisms/Modal/Modal";
 import { ICONS } from "@/constants/images";
 import { Absence, AbsenceMemberData } from "@/types/absence/types";
+import moment from "moment";
 import Image from "next/image";
+import { useState } from "react";
 import { ABSENT_BOX } from "../constants";
 
 interface AbsenceProps {
@@ -9,9 +12,13 @@ interface AbsenceProps {
 };
 
 export const AbsentBox = ({data}: AbsenceProps) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const openModal = () => setIsOpen(true);
+    const closeModal = () => setIsOpen(false);
     console.log(data);
     return(
-        <div className="absentBox">
+        <>
+        <div className="absentBox" onClick={openModal}>
             <div className="absentBox__status-wrapper">
                 <span className="absentBox__status">
                     <Text
@@ -27,7 +34,7 @@ export const AbsentBox = ({data}: AbsenceProps) => {
             <Text
                 color="#FFFFFF"
                 fontSize="1.1875rem"
-            >{data.officialAbsenceContent}</Text>
+            >{data.scheduleName}</Text>
             <div className="absentBox__date">
                 <Text
                     color="#989898"
@@ -38,8 +45,33 @@ export const AbsentBox = ({data}: AbsenceProps) => {
                     color="#FFFFFF"
                     fontSize="0.75rem"
                     fontWeight="500"
-                >{data.createAt}</Text>
+                >{moment(data.createAt).format("YYYY년 MM월 DD일")}</Text>
             </div>
         </div>
+
+        <Modal isOpen={isOpen}>
+            <Modal.Dimmed />
+            <Modal.Header closeModal={closeModal}>
+                <Modal.Title>{data.scheduleName}</Modal.Title>
+                <Modal.Subtitle>{moment(data.createAt).format("YYYY.MM.DD")}</Modal.Subtitle>
+            </Modal.Header>
+            <Modal.Content>
+                <div className="absentBox__modal-content">
+                    <Text
+                        fontSize="0.6875rem"
+                        color="#666666"
+                    >거절 사유</Text>
+                    <Text
+                        fontWeight="500"
+                    >{data.officialAbsenceContent}</Text>
+                </div>
+            </Modal.Content>
+            <Modal.Footer>
+                <Modal.Button
+                    onClick={closeModal}
+                >확인</Modal.Button>
+            </Modal.Footer>
+        </Modal>
+        </>
     )
 }
