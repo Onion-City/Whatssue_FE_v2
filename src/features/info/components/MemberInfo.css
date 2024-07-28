@@ -1,5 +1,9 @@
-/* MemberContent */
+/* MemberInfo */
+.memberInfo {
+}
 
+
+/* MemberContent */
 .memberInfoContent {
     width: 90vw;
     margin: 1rem auto;
@@ -144,5 +148,5 @@
     background-color: #2b2b2b;
     border-radius: 2px;
     cursor: pointer;
-    margin-bottom: 2.25rem;
+    margin-bottom: 5.5rem;
 }

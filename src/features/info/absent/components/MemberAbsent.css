@@ -37,6 +37,18 @@
 
     display: flex;
     flex-direction: column;
+    cursor: pointer;
+}
+
+.absentBox__status-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.absentBox__status-wrapper > img {
+    width: 10px;
+    height: 15px;
 }
 
 .absentBox__status {

@@ -8,7 +8,7 @@ export default function MemberInfo () {
         <>
             <Wrapper isHeader={true}>
                 <MemberContent />
-                <div>
+                <div className="memberInfo">
                     <MemberBtn />
                     <Nav />
                 </div>
