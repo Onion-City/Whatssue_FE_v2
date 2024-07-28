@@ -1,3 +1,9 @@
+/* MemberAbsentInfo */
+
+.memberAbsentInfo {
+    padding-top: 5.5rem;
+}
+
 /* AbsentHeader */
 
 .absentHeader {
@@ -66,4 +72,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.absentBox__modal-content {
+    width: 75%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem 0;
+    gap: 0.5rem;
 }
