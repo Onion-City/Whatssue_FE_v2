@@ -1,4 +1,5 @@
 import { Attendance, FetchScheduleParams, ScheduleContent } from "../schedule";
+import { CommonPage } from "../types";
 
 // 출석 열기
 export interface AttendanceInfo {
@@ -45,6 +46,26 @@ export interface AttendanceMemberListItem {
   attendanceType: string;
 }
 
+// 내 출석 조회 params
+export interface AttendanceMyResultsParams {
+  clubId: number;
+  startDate: string;
+  endDate: string;
+  attendanceType: "TOTAL" | "ATTENDANCE" | "ABSENCE" | "OFFICIAL_ABSENCE";
+}
+
+// 내 출석 조회 response
+export interface AttendanceMyResultRes extends Omit<AttendanceMemberListItem, 'clubId' | 'scheduleId'> {
+  id?: number;
+  scheduleTitle: string;
+  scheduleDate: string;
+}
+
+export interface AttendanceRes {
+  attendanceList: CommonPage<AttendanceMyResultRes>;
+  memberId: number;
+  memberName: string;
+}
 // 출석 수정
 export interface AttendanceCorrectionReqData
   extends Omit<AttendanceMemberListItem, "clubMemberName"> {

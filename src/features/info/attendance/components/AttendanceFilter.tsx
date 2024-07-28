@@ -1,15 +1,18 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
 
 import { Text } from "@/components/atoms/text";
 import { BottomSheet } from "@/components/organisms/BottomSheet/BottomSheet";
 import { ICONS } from "@/constants/images";
+import { CalendarFilterProps } from "@/features/home/calendar/components/CalendarFilter";
+import { CalendarPeriod } from "@/features/home/calendar/components/CalendarPeriod";
 import { COLORS } from "@/styles";
+import { useState } from "react";
 import { ATTEND_FILTER } from "../constants";
 
-export const AttendanceFilter = () => {
+export const AttendanceFilter = ({refetchPeriodSchedule}: CalendarFilterProps) => {
     const [openFloating, setOpenFloating] = useState(false);
+    // const {openFloating, setOpenFloating, isPeriod, period} = useCalendarFilter();
     return(
         <div className="attendFilter">
             <Text
@@ -36,7 +39,9 @@ export const AttendanceFilter = () => {
                     color="white"
                     setOpenFloating={setOpenFloating}
                 >
-                    <div>기간 설정</div>
+                    <CalendarPeriod
+                        refetchPeriodSchedule={refetchPeriodSchedule}
+                    />
                 </BottomSheet>
             )}
         </div>
