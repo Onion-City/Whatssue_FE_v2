@@ -1,4 +1,3 @@
-"use client";
 import SetupNoticeBoard from "@/features/board/SetupUserBoard";
 
 const NoticeBoard = () => {

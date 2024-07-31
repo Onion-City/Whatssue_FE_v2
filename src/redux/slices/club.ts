@@ -9,7 +9,7 @@ interface ClubInfo {
   memberId: number;
   memberName: string;
   memberProfileImage: string;
-  role: "MEMBER" | "MEMBER";
+  role: "MEMBER" | "MANAGER";
   clubProfileImage: string;
   clubName: string;
 }

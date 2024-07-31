@@ -1,12 +1,12 @@
 "use client";
-import { ATTENDANCE_STATUS_EDIT } from "../constants/const";
-import "./Attendance.css";
-import { useState } from "react";
 import { Button } from "@/components/atoms/button";
-import AttendanceStatusEditItem from "../molecules/AttendanceStatusEditItem";
-import { useRouter } from "next/navigation";
 import { useAttendanceMemberListQuery } from "@/hook/attendance/manager/useAttendanceMemberListQuery";
 import { FormatClubId } from "@/utils/extractPathElements";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
+import { ATTENDANCE_STATUS_EDIT } from "../constants/const";
+import AttendanceStatusEditItem from "../molecules/AttendanceStatusEditItem";
+import "./Attendance.css";
 
 interface AttendanceStatus {
   id: number;
@@ -16,7 +16,7 @@ interface AttendanceStatus {
 
 const AttendanceStatusListEdit: React.FC = () => {
   const router = useRouter();
-  const searchParams = new URLSearchParams(window.location.search);
+  const searchParams = useSearchParams();
   const scheduleId = searchParams.get("scheduleId");
   const { data, isLoading, error } = useAttendanceMemberListQuery({
     clubId: FormatClubId(),

@@ -7,6 +7,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { ABSENT_BOX } from "../constants";
 
+import "./MemberAbsent.css";
+
 interface AbsenceProps {
     data: AbsenceMemberData
 };

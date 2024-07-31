@@ -1,4 +1,3 @@
-"use client";
 import SetupRegisBoard from "@/features/board/SetupRegisBoard";
 
 const RegisBoard = () => {

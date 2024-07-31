@@ -1,6 +1,6 @@
 import Person from "@/assets/images/ic_person_gray.png";
 import { Text } from "@/components/atoms/text";
-import { setClubId } from "@/redux/slices/club";
+import { setClub, setClubId } from "@/redux/slices/club";
 import { Club } from "@/types/club";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -18,7 +18,21 @@ const MeetingItem = ({
   const router = useRouter();
   const dispatch = useDispatch();
   const handleRouteBoard = (clubId: number) => {
+    console.log(clubId,
+      clubName,
+      clubProfileImage,
+      createdAt,
+      role,
+      memberCount);
     dispatch(setClubId(clubId));
+    dispatch(setClub({
+      memberId: -1,
+      memberName: "",
+      memberProfileImage: "",
+      role: role,
+      clubProfileImage: clubProfileImage,
+      clubName: clubName,
+    }))
     router.push(`/club`);
   };
   const roleName = role === "MANAGER" ? "관리자" : "일반";

@@ -3,12 +3,12 @@ import { Wrapper } from "@/components/organisms/Wrapper";
 import { MemberBtn } from "./components/MemberBtn";
 import { MemberContent } from "./components/MemberContent";
 
-export default function MemberInfo () {
+export default function ManagerInfo () {
     return(
         <>
             <Wrapper isHeader={true}>
                 <MemberContent 
-                    role='MEMBER'
+                    role='MANAGER'
                 />
                 <div className="memberInfo">
                     <MemberBtn />

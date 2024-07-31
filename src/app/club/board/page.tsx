@@ -1,4 +1,3 @@
-"use client";
 import SetupUserBoardList from "@/features/board/SetupUserBoardList";
 
 const Board = () => {

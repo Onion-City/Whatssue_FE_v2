@@ -9,7 +9,7 @@ import "./components/BoardWrite.css";
 
 export const InfoBoardWrite = () => {
     const { data: boardInfo } = useMyPostQuery({
-        clubId: 7,
+        clubId: 1,
         category: "FREE",
         page: 0,
         size: 10,
