@@ -1,4 +1,4 @@
-import AttendanceChip from "@/components/atoms/attendance/AttendanceChip";
+import AttendanceChip from "@/components/atoms/chip/AttendanceChip";
 import { Text } from "@/components/atoms/text";
 import { COLORS } from "@/styles";
 import { ScheduleBoxProps } from "@/types/schedule";

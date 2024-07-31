@@ -55,3 +55,10 @@ export interface AbsenceMyResultsParams {
   page?: number;
   size?: number;
 }
+
+// 공결 수락
+
+export interface AbsenceAcceptParams {
+  clubId: number;
+  officialAbsenceId: number;
+}

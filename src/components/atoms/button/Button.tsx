@@ -7,7 +7,7 @@ export interface ButtonProps {
   color?: string;
   backgroundColor?: string;
   width?: string;
-  size?: 'sm' | 'md' | 'lg' | 'pr';
+  size?: 'sm' | 'md' | 'lg' | 'pr' | 'lt' | 'rt';
   height?: string;
   fontSize?: string;
   fontWeight?: string;

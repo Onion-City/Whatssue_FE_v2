@@ -1,10 +1,10 @@
 "use client";
+import AttendanceChip from "@/components/atoms/chip/AttendanceChip";
 import { Text } from "@/components/atoms/text";
-import "./AttendanceItem.css";
-import Image from "next/image";
 import { IMAGES } from "@/constants/images";
 import { AttendanceSchedule } from "@/types/attendance";
-import AttendanceChip from "@/components/atoms/attendance/AttendanceChip";
+import Image from "next/image";
+import "./AttendanceItem.css";
 
 const AttendanceItem = ({
   scheduleId,
