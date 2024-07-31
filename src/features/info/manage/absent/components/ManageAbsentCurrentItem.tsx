@@ -31,7 +31,7 @@ export const ManageAbsentCurrentItem = ({data}: AbsenceProps) => {
     })
     const { mutate: rejectMutate } = useAbsenceRejectMutation({
       clubId: clubId,
-      officialAbsenceId: 1
+      officialAbsenceId: 2
     })
 
     // 공결 수락
