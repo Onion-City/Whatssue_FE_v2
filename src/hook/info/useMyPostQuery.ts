@@ -11,7 +11,7 @@ export const useMyPostQuery = ({
   size,
   sort="",
 }: MyPostProps) => {
-  const myPostUrl = `/clubs/${clubId}/posts/my_posts?postCategory=${category}&page=${page}&size=${size}&sort=${sort}`;
+  const myPostUrl = `/clubs/${clubId}/posts/my-posts?page=${page}&size=${size}&sort=${sort}`;
   return useQuery<CommonRes<PostList>>({
     queryKey: ["postMyPost", { clubId, category, size, page, sort }],
     queryFn: async () => 

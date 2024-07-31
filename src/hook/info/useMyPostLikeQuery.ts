@@ -6,13 +6,12 @@ import { useQuery } from "@tanstack/react-query";
 
 export const useMyPostLikeQuery = ({
   clubId,
-  userId,
   category,
   page,
   size,
   sort="",
 }: MyPostProps) => {
-  const myPostUrl = `/clubs/${clubId}/posts/my_like_posts?userId=${userId}&postCategory=${category}&page=${page}&size=${size}&sort=${sort}`;
+  const myPostUrl = `/clubs/${clubId}/posts/my-like-posts?page=${page}&size=${size}&sort=${sort}`;
   return useQuery<CommonRes<PostList>>({
     queryKey: ["postMyLikePost", { clubId, category, size, page, sort }],
     queryFn: async () => 
