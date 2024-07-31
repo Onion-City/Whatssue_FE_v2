@@ -1,4 +1,4 @@
-import AttendanceChip from "@/components/atoms/attendance/AttendanceChip";
+import AttendanceChip from "@/components/atoms/chip/AttendanceChip";
 import { Text } from "@/components/atoms/text";
 import { ICONS } from "@/constants/images";
 import { ScheduleDetailContent } from "@/types/schedule";

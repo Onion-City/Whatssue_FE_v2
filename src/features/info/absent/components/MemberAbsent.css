@@ -72,6 +72,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 3rem;
+}
+
+.absentBox__date-title {
+    white-space: nowrap;
+}
+
+.absentBox__date-content {
+    overflow: hidden;
 }
 
 .absentBox__modal-content {
@@ -82,4 +91,11 @@
     justify-content: center;
     padding: 1rem 0;
     gap: 0.5rem;
+}
+
+.modalBtn__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
 }

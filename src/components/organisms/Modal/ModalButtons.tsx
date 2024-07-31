@@ -6,13 +6,23 @@ interface ModalButtonsProps {
   children?: ReactNode;
   onClick?: () => void;
   type?: 'submit' | 'button';
+  size?: 'sm' | 'md' | 'lg' | 'pr' | 'lt' | 'rt';
+  color?: string;
+  backgroundColor?: string;
 }
-export const ModalButtons = ({ children, onClick, type }: ModalButtonsProps) => {
+export const ModalButtons = ({ 
+  children, 
+  onClick, 
+  type, 
+  size = 'pr',
+  color = COLORS.white,
+  backgroundColor = COLORS.background
+}: ModalButtonsProps) => {
   return (
     <Button 
-      size="pr"
-      backgroundColor={COLORS.background}
-      color={COLORS.white}
+      size={size}
+      backgroundColor={backgroundColor}
+      color={color}
       onClick={onClick}
       type={type}
     >{children}</Button>

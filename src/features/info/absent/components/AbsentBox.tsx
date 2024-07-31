@@ -5,7 +5,7 @@ import { Absence, AbsenceMemberData } from "@/types/absence/types";
 import moment from "moment";
 import Image from "next/image";
 import { useState } from "react";
-import { ABSENT_BOX } from "../constants";
+import { ABSENT_BOX, ABSENT_MODAL } from "../constants";
 
 import "./MemberAbsent.css";
 
@@ -17,7 +17,6 @@ export const AbsentBox = ({data}: AbsenceProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const openModal = () => setIsOpen(true);
     const closeModal = () => setIsOpen(false);
-    console.log(data);
     return(
         <>
         <div className="absentBox" onClick={openModal}>
@@ -49,6 +48,21 @@ export const AbsentBox = ({data}: AbsenceProps) => {
                     fontWeight="500"
                 >{moment(data.createAt).format("YYYY년 MM월 DD일")}</Text>
             </div>
+            {
+                data.createAt !== data.updateAt &&
+                <div className="absentBox__date">
+                    <Text
+                        color="#989898"
+                        fontSize="0.75rem"
+                        fontWeight="500"
+                    >{ABSENT_BOX.updateAt}</Text>
+                    <Text
+                        color="#FFFFFF"
+                        fontSize="0.75rem"
+                        fontWeight="500"
+                    >{moment(data.updateAt).format("YYYY년 MM월 DD일")}</Text>
+                </div>
+            }
         </div>
 
         <Modal isOpen={isOpen}>
@@ -62,7 +76,7 @@ export const AbsentBox = ({data}: AbsenceProps) => {
                     <Text
                         fontSize="0.6875rem"
                         color="#666666"
-                    >거절 사유</Text>
+                    >{ABSENT_MODAL.title}</Text>
                     <Text
                         fontWeight="500"
                     >{data.officialAbsenceContent}</Text>
@@ -71,7 +85,7 @@ export const AbsentBox = ({data}: AbsenceProps) => {
             <Modal.Footer>
                 <Modal.Button
                     onClick={closeModal}
-                >확인</Modal.Button>
+                >{ABSENT_MODAL.btn}</Modal.Button>
             </Modal.Footer>
         </Modal>
         </>
