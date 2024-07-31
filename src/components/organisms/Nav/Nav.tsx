@@ -18,7 +18,7 @@ export function Nav({ title, maxCnt, type, subtitle, essential }: NavProps) {
     pathname === "/" ? pathname : pathname.split("/").slice(1, 3).join("/");
   const handleNavigate = (path: string) => {
     const startedPath = pathname.split("/").slice(1)[0];
-    if (startedPath) router.push(`/${startedPath}/${path}`);
+    if (startedPath) router.push(`/${path}`);
     else alert("게시판 부터!"); //수정 필요
   };
   return (

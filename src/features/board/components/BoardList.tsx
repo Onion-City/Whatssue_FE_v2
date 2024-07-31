@@ -1,3 +1,5 @@
+"use client";
+
 import usePostListQuery from "@/hook/post/usePostListQuery";
 import "./BoardList.css";
 import BoardListBox from "./BoardListBox";

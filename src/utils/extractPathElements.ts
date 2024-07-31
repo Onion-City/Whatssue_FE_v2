@@ -1,3 +1,4 @@
+"use client";
 import { RootState } from "@/redux/store";
 import { usePathname, useRouter } from "next/navigation";
 import { useSelector } from "react-redux";

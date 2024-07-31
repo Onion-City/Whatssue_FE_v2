@@ -1,3 +1,5 @@
+"use client";
+
 import { http } from "@/apis/http";
 import { CommonRes } from "@/types";
 import { PostList } from "@/types/post";
