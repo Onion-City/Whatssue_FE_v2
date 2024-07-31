@@ -23,7 +23,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-			# .env에 있던 환경변수들을 등록해주는 단계
       - name: .env setting
         run: |
           echo "NEXT_API_URL=${{ secrets.NEXT_API_URL }}" >> .env
