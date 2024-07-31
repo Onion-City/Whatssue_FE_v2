@@ -1,22 +1,22 @@
 "use client";
 import { Button } from "@/components/atoms/button";
 import { Text } from "@/components/atoms/text";
-import { useRouter } from "next/navigation";
+import { useAttendanceMemberListQuery } from "@/hook/attendance/manager/useAttendanceMemberListQuery";
+import { FormatClubId } from "@/utils/extractPathElements";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import {
   ATTENDANCE_STATUS_ARR,
   ATTENDANCE_STATUS_EDIT_BTN,
   ATTENDANCE_STATUS_TITLE,
 } from "../constants/const";
-import "./Attendance.css";
 import AttendanceStatusItem from "../molecules/AttendanceStatusItem";
-import { useAttendanceMemberListQuery } from "@/hook/attendance/manager/useAttendanceMemberListQuery";
-import { FormatClubId } from "@/utils/extractPathElements";
+import "./Attendance.css";
 
 const AttendanceStatusList: React.FC = () => {
   const router = useRouter();
-  const searchParams = new URLSearchParams(window.location.search);
-  const scheduleId = searchParams.get("scheduleId");
+  const searchParams = useSearchParams();
+  const scheduleId = searchParams.get('scheduleId');
   const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
   const { data, error } = useAttendanceMemberListQuery({
     clubId: FormatClubId(),

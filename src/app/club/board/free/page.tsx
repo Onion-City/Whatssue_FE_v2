@@ -1,4 +1,3 @@
-"use client";
 import SetupFreeBoard from "@/features/board/SetupFreeBoard";
 
 const FreeBoard = () => {
