@@ -1,3 +1,4 @@
+"use client";
 import { Heart } from "@/components/atoms/heart/Heart";
 import { Text } from "@/components/atoms/text";
 import { ImageModal } from "@/components/molecules/ImageModal";

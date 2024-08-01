@@ -26,7 +26,7 @@ export default function RootLayout({
     "/board",
     "/board/notice",
     "/board/free",
-    "/member/list",
+    // "/member/list",
     "/member/attendance",
   ];
 

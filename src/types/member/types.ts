@@ -2,7 +2,15 @@ export interface MemeberPages {
   page: number;
   size: number;
 }
-
+export interface MemberAuthInfo {
+  memberId: number;
+  memberName: string;
+  memberProfileImage: string;
+  role: "MEMBER" | "MANAGER";
+  clubProfileImage: string;
+  clubName: string;
+  namePolicy: "REAL_NAME" | "NICK_NAME";
+}
 export interface MemberInfo {
   memberId: number;
   memberName: string;

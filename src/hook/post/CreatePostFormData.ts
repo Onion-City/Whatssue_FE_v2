@@ -10,6 +10,8 @@ export const CreatePostFormData = (postData: PostFormProps) => {
     postData.postImages.forEach((file) => {
       resData.append(`postImages`, file);
     });
+  } else {
+    resData.append(`postImages`, new Blob([], { type: "application/json" }));
   }
   return resData;
 };

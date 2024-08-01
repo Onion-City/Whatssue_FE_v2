@@ -5,12 +5,10 @@
   padding-bottom: 0.75rem;
   padding-left: 5vw;
   padding-right: 5vw;
+  padding-top: 5rem;
 }
-.member__list__bottom{
+.member__list__bottom {
   padding-bottom: 4rem;
-  /* height: 95%;
-  overflow-y: auto; */
-  /* 힝,,, */
 }
 .member__list__bottom::-webkit-scrollbar {
   display: none;
