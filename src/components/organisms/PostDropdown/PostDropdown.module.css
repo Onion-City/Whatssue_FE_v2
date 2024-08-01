@@ -6,6 +6,11 @@
   margin-left: auto;
 }
 
+.PostDropdown img {
+  width: 0.15625rem;
+  height: 1.15625rem;
+}
+
 /* PostDropdownItem */
 .PostDropdownContentWrapper {
   position: absolute;

@@ -5,28 +5,20 @@ import Image from "next/image";
 import "./ClubBox.css";
 
 interface ClubBoxProps {
-    children: React.ReactNode;
-    clubImg: string;
+  children: React.ReactNode;
+  clubImg: string;
 }
 
-export const ClubBox = ({clubImg, children}: ClubBoxProps) => {
-    return (
-        <span className="clubBox">
-            <span className="clubBox__info">
-                <Image 
-                    src={clubImg}
-                    alt="profile"
-                />
-                <Text
-                    color={COLORS.white}
-                    fontSize="1.0625rem"
-                    fontWeight="500"
-                >{children}</Text>
-            </span>
-            <Image 
-                src={ICONS.exchange}
-                alt="exchange"
-            />
-        </span>
-    )
-}
+export const ClubBox = ({ clubImg, children }: ClubBoxProps) => {
+  return (
+    <span className="clubBox">
+      <span className="clubBox__info">
+        <Image src={clubImg} alt="profile" width={100} height={100} />
+        <Text color={COLORS.white} fontSize="1.0625rem" fontWeight="500">
+          {children}
+        </Text>
+      </span>
+      <Image src={ICONS.exchange} alt="exchange" width={100} height={100} />
+    </span>
+  );
+};
