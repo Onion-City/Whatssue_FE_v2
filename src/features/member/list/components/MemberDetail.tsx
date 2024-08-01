@@ -48,7 +48,6 @@ const MemberDetail = () => {
       ) : (
         <>
           <HistoryHeader />
-          <div style={{ marginBottom: "5rem" }} />
         </>
       )}
       <div className="member__detail__wrapper">

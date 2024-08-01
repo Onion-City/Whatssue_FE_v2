@@ -12,12 +12,7 @@ export function FormatClubId() {
       router.push("/");
     }
   }, [clubId, router]);
-  if (clubId === undefined || clubId === null) {
-    console.log(`클럽아이디 설정안됨`);
-    router.push("/");
-    return -1;
-  }
-  return clubId;
+  return clubId || -1;
 }
 
 export function FormatPostId() {
