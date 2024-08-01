@@ -1,3 +1,4 @@
+"use client";
 import { Dropdown } from "@/types/dropdown";
 import { useState } from "react";
 import styles from "./PostDropdown.module.css";

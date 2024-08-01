@@ -1,3 +1,4 @@
+import { MemberAuthInfo } from "@/types/member";
 import {
   clearClubIdFromLocalStorage,
   getClubIdFromLocalStorage,
@@ -12,6 +13,7 @@ interface ClubInfo {
   role: "MEMBER" | "MANAGER";
   clubProfileImage: string;
   clubName: string;
+  // namePolicy?: "REAL_NAME" | "NICK_NAME";
 }
 interface ClubState {
   clubId: number | null;
@@ -37,7 +39,7 @@ export const clubSlice = createSlice({
       state.clubId = action.payload;
       setClubIdToLocalStorage(action.payload);
     },
-    setClub: (state, action: PayloadAction<ClubInfo>) => {
+    setClub: (state, action: PayloadAction<MemberAuthInfo>) => {
       state.children = action.payload;
     },
     clearClub: (state) => {

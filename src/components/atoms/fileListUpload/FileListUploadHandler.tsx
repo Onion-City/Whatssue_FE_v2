@@ -1,3 +1,4 @@
+"use client";
 import { REGISTER_INPUT_ARR } from "@/features/board/constants/constant";
 import { PostFormDatas } from "@/types/post";
 import { useState } from "react";

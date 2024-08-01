@@ -21,7 +21,6 @@ const Home = () => {
   const handleChoice = (e: number) => {
     setIsChoice(e);
   };
-  console.log(clubList?.data);
   return (
     <div className="home">
       <ChoiceBox
@@ -40,7 +39,6 @@ const Home = () => {
               <HomeNoneContent />
             ) : (
               <>
-                {console.log(clubList.data)}
                 {/* 모임 */}
                 {clubList?.data?.content &&
                   clubList?.data?.content.map((item, idx) => (

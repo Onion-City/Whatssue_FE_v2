@@ -1,3 +1,4 @@
+"use client";
 import { FileListUpload } from "@/components/atoms/fileListUpload";
 import { Text } from "@/components/atoms/text";
 import { InputBox } from "@/components/molecules/inputBox";
