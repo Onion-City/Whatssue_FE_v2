@@ -1,0 +1,2 @@
+export { HeaderMyInfo } from "./HeaderMyInfo";
+
