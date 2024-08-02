@@ -7,9 +7,7 @@ export default function ManagerInfo () {
     return(
         <>
             <Wrapper isHeader={true}>
-                <MemberContent 
-                    role='MANAGER'
-                />
+                <MemberContent />
                 <div className="memberInfo">
                     <MemberBtn />
                     <Nav />
