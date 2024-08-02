@@ -20,3 +20,12 @@ export interface MyPostContent {
   isLiked: boolean;
   createdAt: string;
 }
+
+export interface ClubMember {
+  memberName: string;
+  memberProfileImage: string;
+  role: 'MANAGER' | "MEMBER";
+  memberIntro?: string;
+  clubName: string;
+  createAt: string;
+}

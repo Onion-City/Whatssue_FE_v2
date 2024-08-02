@@ -4,10 +4,17 @@ import { Text } from "@/components/atoms/text";
 import { RouterBtn } from "@/components/organisms/RouterBtn/RouterBtn";
 import { ICONS } from "@/constants/images";
 import { COLORS } from "@/styles";
+import moment from "moment";
 import Image from "next/image";
 import { MEMBERINFO_TXT } from "../constants";
 
-export const MemberClubInfo = () => {
+export const MemberClubInfo = ({
+    clubName,
+    createAt
+}: {
+    clubName: string;
+    createAt: string
+}) => {
     return(
         <RouterBtn
             path="info/1"
@@ -28,7 +35,7 @@ export const MemberClubInfo = () => {
                         color={COLORS.white}
                         fontSize="0.8125rem"
                         fontWeight="700"
-                    >파주배드민턴소모임안녕하세요^^</Text>
+                    >{clubName}</Text>
                 </div>
                 <div className="memberInfoClub__clubDate">
                     <span className="memberInfoClub__clubName__span">
@@ -45,7 +52,7 @@ export const MemberClubInfo = () => {
                         color={COLORS.white}
                         fontSize="0.8125rem"
                         fontWeight="700"
-                    >2024.03.05</Text>
+                    >{moment(createAt).format("YYYY.MM.DD")}</Text>
                 </div>
             </div>
         </RouterBtn>

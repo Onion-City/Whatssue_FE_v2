@@ -3,6 +3,7 @@
 import { Text } from "@/components/atoms/text";
 import { ICONS } from "@/constants/images";
 import { ClubInfos } from "@/types/club";
+import moment from "moment";
 import Image from "next/image";
 import React from "react";
 import { CLUBINFO_TXT } from "../constants";
@@ -37,7 +38,7 @@ export const ClubInfo = ({ infos }: ClubInfoProps) => {
         {
             id: 2,
             title: CLUBINFO_TXT[2],
-            content: ["https://github.com/", "https://naver.com"],
+            content: infos?.link,
             isCopy: true
         },
     ]
@@ -64,7 +65,7 @@ export const ClubInfo = ({ infos }: ClubInfoProps) => {
                     color="#c2c2c2"
                     fontSize="0.8125rem"
                     fontWeight="500"
-                >2023년 7월 29일 생성</Text>
+                >{moment(infos?.createdAt).format("YYYY년 M월 D일")} 생성</Text>
             </div>
             <div>
                 {clubInfoList?.map((item) => (
@@ -73,6 +74,7 @@ export const ClubInfo = ({ infos }: ClubInfoProps) => {
                             title={item.title}
                             content={item.content}
                             isCopy={item.isCopy}
+                            isFirst={item.id === 0}
                         />
                     </React.Fragment>
                 ))}
