@@ -3,7 +3,8 @@
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
-  padding-bottom: 5rem;
+  padding: 5rem 0; 
+  /* padding은 5씩 */
 }
 .board__list__wrapper::-webkit-scrollbar {
   display: none;

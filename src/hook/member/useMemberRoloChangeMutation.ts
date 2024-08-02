@@ -7,7 +7,7 @@ interface memberData {
   role: "MANAGER" | "MEMBER";
   memberId: number;
 }
-export function useMemberRoloChangeMutation(clubId: number) {
+export function useMemberRoloChangeMutation(clubId: number, memberId: number) {
   const router = useRouter();
   const { showToast } = useToast();
   const queryClient = useQueryClient();
@@ -17,6 +17,9 @@ export function useMemberRoloChangeMutation(clubId: number) {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["clubMemberList", [clubId]],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["MemberProfile", [clubId, memberId]],
       });
       console.log("권한 수정 성공");
       showToast({

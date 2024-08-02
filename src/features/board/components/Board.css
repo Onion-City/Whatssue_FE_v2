@@ -1,6 +1,6 @@
 /* 5.5rem: bottom에 대한 값 */
 .board {
-  padding-bottom: 4rem;
+  padding: 5rem 0; 
   height: calc(100vh - 5.5rem);
   display: flex;
   flex-direction: column;

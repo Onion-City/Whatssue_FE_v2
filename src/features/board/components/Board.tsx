@@ -1,6 +1,4 @@
-"use client"; //set으로 만들고 해당을 제거
 import { Floating } from "@/components/atoms/floating";
-import { Text } from "@/components/atoms/text";
 import { ICONS } from "@/constants/images";
 import usePostListQuery from "@/hook/post/usePostListQuery";
 import { FormatPostCategory } from "@/utils/extractPathElements";
@@ -13,8 +11,6 @@ const Board = () => {
   const router = useRouter();
   const pathname = usePathname();
   const category = FormatPostCategory() === "notice" ? "NOTICE" : "FREE";
-  const boardType = category === "NOTICE" ? "공지" : "자유";
-
   const { data } = usePostListQuery({
     category: category,
     page: 0,
@@ -30,11 +26,7 @@ const Board = () => {
   };
   return (
     <div className="board">
-      <div className="board__content__list__top">
-        <Text color="#989898" fontSize="0.9375rem" fontWeight="600">
-          {boardType} 게시판
-        </Text>
-      </div>
+      <div className="board__content__list__top"/>
       <div className="board__content__meeting">
         {data?.data.content.map((item, index) => (
           <BoardItem

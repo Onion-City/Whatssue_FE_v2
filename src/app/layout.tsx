@@ -23,10 +23,6 @@ export default function RootLayout({
 
   const clubHeaderList = [
     "/info",
-    "/board",
-    "/board/notice",
-    "/board/free",
-    "/member/list",
     "/member/attendance",
   ];
 

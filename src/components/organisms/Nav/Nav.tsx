@@ -17,14 +17,12 @@ export function Nav({ title, maxCnt, type, subtitle, essential }: NavProps) {
   const selectedPath =
     pathname === "/" ? pathname : pathname.split("/").slice(1, 3).join("/");
   const handleNavigate = (path: string) => {
-    const startedPath = pathname.split("/").slice(1)[0];
-    if (startedPath) router.push(`/${path}`);
-    else alert("게시판 부터!"); //수정 필요
+    router.push(`/${path}`);
   };
   return (
     <div className="Nav__wrapper">
       {navItems.map(({ path, icon: Icon, text }) => {
-        const isIcon = path.startsWith(selectedPath);
+        const isIcon = path.endsWith(selectedPath);
         return (
           <div
             key={path}
