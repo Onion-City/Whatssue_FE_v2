@@ -3,10 +3,9 @@ import axios from "axios";
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: process.env.NEXT_PUBLIC_LOCAL_URL,
   withCredentials: true,
-  
-}); 
+});
 
 export interface HttpClient extends AxiosInstance {
   get<T = unknown>(url: string, config?: AxiosRequestConfig): Promise<T>;
@@ -58,7 +57,9 @@ axiosInstance.interceptors.response.use(
     console.log(err);
     // access token 만료 시
     if (response?.status && response?.status === 403) {
-      window.location.href = "/user/login";
+      if (typeof window !== 'undefined') {
+        window.location.href = "/user/login";
+      }
       localStorage.clear();
       return config;
     }

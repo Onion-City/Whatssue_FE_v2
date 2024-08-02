@@ -8,7 +8,6 @@ import "./Home.css";
 import HomeNoneContent from "./HomeNoneContent";
 import MeetingItem from "./MeetingItem";
 import RequestedMeetingItem from "./RequestedMeetingItem";
-// import HomeNoneContent from "./HomeNoneContent";
 
 const Home = () => {
   const { data: clubList, isLoading } = useClubListQuery({ page: 0, size: 10 });
@@ -22,7 +21,6 @@ const Home = () => {
   const handleChoice = (e: number) => {
     setIsChoice(e);
   };
-  console.log(clubList?.data);
   return (
     <div className="home">
       <ChoiceBox
@@ -41,7 +39,6 @@ const Home = () => {
               <HomeNoneContent />
             ) : (
               <>
-                {console.log(clubList.data)}
                 {/* 모임 */}
                 {clubList?.data?.content &&
                   clubList?.data?.content.map((item, idx) => (

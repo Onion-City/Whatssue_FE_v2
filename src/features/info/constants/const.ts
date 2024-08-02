@@ -9,6 +9,11 @@ export const MEMBERINFO_LIST = [
     {idx: 1, title: "출석 현황", path: "info/attendance"},
 ]
 
+export const MANAGERINFO_LIST = [
+    {idx: 0, title: "모임 가입 신청 관리", path: "info/manage-join"},
+    {idx: 1, title: "공결 신청 관리", path: "info/manage-absent"},
+]
+
 export const MEMBERINFO_BOARD_LIST = [
     {idx: 2, title: "내가 쓴 글", path: "info/board/write"},
     {idx: 3, title: "내가 좋아요 한 글", path: "info/board/like"},

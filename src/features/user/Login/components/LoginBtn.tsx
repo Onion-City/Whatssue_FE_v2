@@ -5,8 +5,8 @@ import "./Login.css";
 
 const LoginBtn: React.FC = () => {
   const handleLogin = () => {
-    window.location.href = `${process.env.NEXT_PUBLIC_KAKAO_URL}`;
-  }
+    window.location.href = `${process.env.NEXT_PUBLIC_LOCAL_KAKAO_URL}`;
+  };
   return (
     <Image
       src={IMAGES.loginKakao}

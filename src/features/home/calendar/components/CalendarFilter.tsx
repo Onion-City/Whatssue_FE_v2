@@ -8,29 +8,37 @@ import { CALENDAR_FILTER_BTN } from "../constants/const";
 import { useCalendarFilter } from "./CalendarFilterProvider";
 import { CalendarPeriod } from "./CalendarPeriod";
 
+import "./Calendar.css";
+
 export interface CalendarFilterProps {
     refetchPeriodSchedule: ({ startDate, endDate }: ScheduleDate) => void;
 }
 
 export const CalendarFilter = ({
-    refetchPeriodSchedule
-}: CalendarFilterProps) => {
+    refetchPeriodSchedule,
+    hasToday = false
+}: {
+    refetchPeriodSchedule: ({ startDate, endDate }: ScheduleDate) => void;
+    hasToday?: boolean;
+}) => {
     const {openFloating, setOpenFloating, isPeriod, period} = useCalendarFilter();
 
     return(
         <>
             <div className="calendarFilter">
-                <span className="calendarFilter__btn">
-                    <Image 
-                        src={ICONS.back}
-                        alt="back"
-                    />
-                    <Text
-                        color={COLORS.white}
-                        fontSize="0.6875rem"
-                        fontWeight="300"
-                    >{CALENDAR_FILTER_BTN.today}</Text>
-                </span>
+                {hasToday && 
+                    <span className="calendarFilter__btn">
+                        <Image 
+                            src={ICONS.back}
+                            alt="back"
+                        />
+                        <Text
+                            color={COLORS.white}
+                            fontSize="0.6875rem"
+                            fontWeight="300"
+                        >{CALENDAR_FILTER_BTN.today}</Text>
+                    </span>
+                }
                 <span onClick={() => setOpenFloating(true)}>
                     <Image 
                         src={ICONS.filter}
@@ -51,7 +59,7 @@ export const CalendarFilter = ({
                     )}
                 </span>
             </div>
-            <div className="calendarFilter__line"></div>
+            {hasToday && <div className="calendarFilter__line"></div>}
             {/* bottomSheet */}
             {openFloating && (
                 <BottomSheet 

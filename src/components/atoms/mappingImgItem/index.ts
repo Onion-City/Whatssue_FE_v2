@@ -1,2 +1,0 @@
-export { MappingImgItem } from "./MappingImgItem";
-

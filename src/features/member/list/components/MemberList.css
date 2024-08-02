@@ -1,9 +1,3 @@
-/* .member__list__wrapper {
-  height: calc(100vh - 5.5rem);
-  display: flex;
-  flex-direction: column;
-  padding-top: 4rem;
-} */
 .member__list__top {
   border-bottom: 1px solid #4b4b4b;
   width: 100%;
@@ -11,4 +5,11 @@
   padding-bottom: 0.75rem;
   padding-left: 5vw;
   padding-right: 5vw;
+  padding-top: 5rem;
+}
+.member__list__bottom {
+  padding-bottom: 4rem;
+}
+.member__list__bottom::-webkit-scrollbar {
+  display: none;
 }

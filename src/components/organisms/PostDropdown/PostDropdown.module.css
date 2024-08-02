@@ -1,0 +1,40 @@
+/* PostDropdown */
+.PostDropdown {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  margin-left: auto;
+}
+
+.PostDropdown img {
+  width: 0.15625rem;
+  height: 1.15625rem;
+}
+
+/* PostDropdownItem */
+.PostDropdownContentWrapper {
+  position: absolute;
+  top: 105%;
+  right: 0;
+  border-radius: 0.625rem;
+  background: #fff;
+  z-index: 10;
+  height: auto;
+  width: 6.25rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* height: 3.625rem; */
+}
+.PostDropdownContent {
+  justify-content: center;
+  height: 1.81rem;
+}
+.PostDropdownContentUnderLine {
+  border-bottom: 1px solid #d6d6d6;
+  min-height: 0.03125rem;
+  width: 4.375rem;
+}
+.PostDropdownContentUnderLine:last-child {
+  border-bottom: none;
+}

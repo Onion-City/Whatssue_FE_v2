@@ -1,28 +1,42 @@
 "use client";
 
-import { DateBox } from "@/components/molecules/dateBox";
 import { useAbsenceMemberQuery } from "@/hook/absence/useAbsencesMemberQuery";
+import { AbsenceMemberData } from "@/types/absence/types";
+import React from "react";
 import { AbsentBox } from "./AbsentBox";
 
-export const AbsentList = () => {
+export const AbsentList = ({
+    myList
+}: {
+    myList: AbsenceMemberData[]
+}) => {
+    // 공결 신청 내역 (MANAGER)
     const { data } = useAbsenceMemberQuery({
         clubId : 1,
-        clubMemberId: 19
+        page: 0,
+        size: 10
     });
 
-    console.log(data);
+    console.log(data?.data.memberAbsences.content);
+    console.log(data?.data.doneAbsences.content);
+
+    // 내 공결 신청 내역
+    // const { data: myList } = useMyAbsenceQuery({
+    //     clubId : 1,
+    //     page: 0,
+    //     size: 10
+    // });
+
+    console.log(myList);
     return(
         <>
-            <DateBox
-                date="2024-06-14"
-            >
-                <AbsentBox />
-            </DateBox>
-            <DateBox
-                date="2024-06-14"
-            >
-                <AbsentBox />
-            </DateBox>
+            {myList?.map((item: AbsenceMemberData) => 
+                <React.Fragment key={item.id}>
+                    <AbsentBox
+                        data={item}
+                    />
+                </React.Fragment>
+            )}
         </>
     )
 }

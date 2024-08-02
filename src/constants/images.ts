@@ -41,6 +41,10 @@ export const ICONS = {
   edit: require("@/assets/images/ic_edit.png"),
   member: require("@/assets/images/ic_member.png"),
   copy: require("@/assets/images/ic_copy.png"),
+  refresh: require("@/assets/images/ic_refresh.png"),
+
+  alarm: require("@/assets/images/ic_alarm.png"),
+  logo: require("@/assets/images/Logo_kr.png"),
 };
 
 import attenIcon from "@/assets/images/ic_nav_atten.svg";

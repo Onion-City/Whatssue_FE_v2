@@ -7,6 +7,8 @@ import { CALENDAR_PERIOD_BTN, CALENDAR_PERIOD_TXT, CALENDAR_PERIOD_TXT_LIST } fr
 import { CalendarFilterProps } from "./CalendarFilter";
 import { useCalendarFilter } from "./CalendarFilterProvider";
 
+import "./Calendar.css";
+
 export const CalendarPeriod = ({
     refetchPeriodSchedule
 }: CalendarFilterProps) => {

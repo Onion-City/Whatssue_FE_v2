@@ -34,21 +34,20 @@
   padding-left: 5vw;
   padding-right: 5vw;
 }
-.logoHeader img {
+.logoHeader__img__left img {
   object-fit: contain;
   height: 100%;
   width: 1.8125rem;
 }
-/* .logoHeader__img__left {
-} */
+
 .logoHeader__img__right {
   margin-left: auto;
 }
 .logoHeader__img__right img {
   margin-left: 0.69rem;
-}
-.logoHeader__img__right img {
-  margin-left: 0.69rem;
+  object-fit: contain;
+  height: 100%;
+  width: 1.8125rem;
 }
 
 /* boardHeader */

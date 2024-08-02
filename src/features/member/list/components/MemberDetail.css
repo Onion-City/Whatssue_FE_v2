@@ -1,10 +1,11 @@
 .member__detail__wrapper {
-  height: calc(100vh - 2.5rem);
+  height: 80vh;
   display: flex;
   flex-direction: column;
-  padding-top: 4rem;
+  /* padding-top: 4rem; */
   padding-left: 5vw;
   padding-right: 5vw;
+  padding-top: 4rem;
 }
 .member__detail__profile__wrapper {
   position: relative;
@@ -15,8 +16,8 @@
   border-radius: 1.875rem;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  /* object-fit: cover; */
+  /* object-fit: contain; */
+  object-fit: cover;
   background-color: black;
 }
 .member__detail__profile_inner {

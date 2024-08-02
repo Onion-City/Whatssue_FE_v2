@@ -24,6 +24,7 @@
   object-fit: contain;
   width: 75vw;
   height: auto;
+  background-color: black;
 }
 .image__modal__top {
   display: flex;

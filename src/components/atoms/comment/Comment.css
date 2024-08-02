@@ -1,7 +1,14 @@
 .comment__box {
+  width: 100%;
+}
+.comment__box__point {
+  background-color: rgba(242, 0, 0, 0.32); /* light orange color */
+}
+.comment__box__inner {
   display: flex;
   align-items: center;
   width: 100%;
+  padding: 0 5vw;
 }
 .comment__box__wrapper {
   margin-top: 0.94rem;
@@ -40,4 +47,5 @@
 }
 .comment__box__creat__reply {
   cursor: pointer;
+  margin-bottom: 0.94rem;
 }

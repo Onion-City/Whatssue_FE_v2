@@ -22,9 +22,9 @@ export default function SetupUserClub() {
       namePolicy: "REAL_NAME",
       profileImage: {
         url: "",
-        imageFile: undefined
-      }
-    }
+        imageFile: undefined,
+      },
+    },
   });
   const { handleSubmit, control } = methods;
 

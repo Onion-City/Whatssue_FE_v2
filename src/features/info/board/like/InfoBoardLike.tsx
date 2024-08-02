@@ -9,8 +9,7 @@ import "./components/BoardLike.css";
 
 export const InfoBoardLike = () => {
     const { data: boardInfo } = useMyPostLikeQuery({
-        clubId: 7,
-        userId: 6,
+        clubId: 1,
         category: "FREE",
         page: 0,
         size: 10,

@@ -1,7 +1,6 @@
 "use client";
-import Logo from "@/assets/images/Logo_kr.png";
-import Alarm from "@/assets/images/ic_alarm.png";
 import Person from "@/assets/images/ic_person.png";
+import { ICONS } from "@/constants/images";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import "./Header.css";
@@ -19,7 +18,7 @@ export function LogoHeader() {
       <div className="logoHeader">
         <div className="logoHeader__img__left">
           <Image
-            src={Logo}
+            src={ICONS.logo}
             alt="Logo"
             placeholder="blur"
             onClick={() => router.push("/")}
@@ -27,7 +26,7 @@ export function LogoHeader() {
         </div>
         <div className="logoHeader__img__right">
           <Image
-            src={Alarm}
+            src={ICONS.alarm}
             alt="Alarm"
             placeholder="blur"
             onClick={handleAlarmModalOpen}

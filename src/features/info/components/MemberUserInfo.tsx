@@ -1,17 +1,30 @@
 import { Text } from "@/components/atoms/text";
-import { ICONS, IMAGES } from "@/constants/images";
+// import { ICONS } from "@/constants/images";
 import Image from "next/image";
 import { MEMBERINFO_TXT } from "../constants";
 import "./MemberInfo.css";
 
-export const MemberUserInfo = () => {
+export const MemberUserInfo = ({
+    memberName,
+    memberProfileImage,
+    role,
+    memberIntro
+
+}: {
+    memberName: string;
+    memberProfileImage: string;
+    role: 'MANAGER' | 'MEMBER';
+    memberIntro?: string;
+}) => {
     return(
         <section className="memberInfoUser">
             <div className="memberInfoUser__content">
                 <span className="memberInfoUser__content-img">
                     <Image 
-                        src={IMAGES.profile}
+                        src={memberProfileImage}
                         alt="profile"
+                        width={53}
+                        height={53}
                     />
                 </span>
                 <div className="memberInfoUser__content__txt">
@@ -20,24 +33,24 @@ export const MemberUserInfo = () => {
                             color="#fff"
                             fontWeight="700"
                             fontSize="0.9375rem"
-                        >김민서</Text>
+                        >{memberName}</Text>
                         <span className="memberInfoUser__content__txt__role">
                             <Text
                                 color="#2b2b2b"
                                 fontSize="0.5625rem"
-                            >일반</Text>
+                            >{role === 'MANAGER' ? "관리자" : "멤버"}</Text>
                         </span>
-                        <Image 
+                        {/* <Image 
                             src={ICONS.edit}
                             alt="edit"
-                        />
+                        /> */}
                     </div>
                     <span className="memberInfoUser__content__txt-explain">
                         <Text
                             color="#fff"
                             fontSize="0.6875rem"
                             fontWeight="500"
-                        >배드민턴 왕이다 깝치지 말아라</Text>
+                        >{memberIntro}</Text>
                     </span>
                 </div>
             </div>

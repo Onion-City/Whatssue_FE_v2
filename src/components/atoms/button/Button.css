@@ -1,15 +1,17 @@
 .btn {
     padding: 1rem 0;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     cursor: pointer;
     border-radius: 10px;
     text-align: center;
     font-family: "Pretendard Variable";
     box-shadow: none;
+    border: none;
 }
 
 .btn.sm {
     width: 30vw;
+    /* width: 40vw; */
 }
 
 .btn.md {
@@ -22,4 +24,12 @@
 
 .btn.pr {
     width: 90%;
+}
+
+.btn.lt {
+    width: 40%;
+}
+
+.btn.rt {
+    width: 55%;
 }

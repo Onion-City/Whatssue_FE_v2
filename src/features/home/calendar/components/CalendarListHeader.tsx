@@ -20,6 +20,7 @@ export const CalendarListHeader = ({
                 />
                 <CalendarFilter 
                     refetchPeriodSchedule={refetchPeriodSchedule}
+                    hasToday={true}
                 />
             </div>
         </CalendarFilterProvider>

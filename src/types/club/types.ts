@@ -53,6 +53,8 @@ export interface ClubInfoContent {
   privateCode?: string;
   clubProfileImage?: string;
   memberCount?: number;
+  createdAt?: string;
+  link?: string;
 }
 
 export interface ClubProfiles {
@@ -66,4 +68,7 @@ export interface ClubInfos {
   contactMeans?: string | string[];
   namePolicy?: "NICK_NAME" | "REAL_NAME";
   memberCount?: number;
+  createdAt?: string;
+  link?: string;
+  privateCode?: string;
 }

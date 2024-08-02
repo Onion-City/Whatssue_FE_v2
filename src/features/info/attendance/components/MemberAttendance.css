@@ -54,6 +54,12 @@
     margin: 1rem auto;
 }
 
+.attendList__filter {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
 /* AttendanceMonth */
 
 .attendMonth {

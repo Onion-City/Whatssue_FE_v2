@@ -8,7 +8,10 @@ export const useAttendanceEndMutationQuery = ({
 }: ScheduleDetailProp) => {
   return useMutation({
     mutationFn: (data: string) =>
-      http.post(`/${clubId}/schedules/${scheduleId}/attendance-end`, data),
+      http.post(
+        `/clubs/${clubId}/schedules/${scheduleId}/attendance-end`,
+        data
+      ),
     onSuccess: (data) => {
       console.log(data);
     },
