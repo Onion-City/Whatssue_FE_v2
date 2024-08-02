@@ -5,7 +5,7 @@ import { AbsenceMemberData } from "@/types/absence/types";
 import { FormatClubId } from "@/utils/extractPathElements";
 import { useState } from "react";
 
-import "./manageAbsent.css";
+import "./ManageAbsent.css";
 import { ManageAbsentHistoryItem } from "./ManageAbsentHistoryItem";
 
 export default function ManageAbsentHistoryList() {
