@@ -6,10 +6,13 @@ import { useClubsInfoQuery } from "@/hook/club/useClubsInfoQuery";
 import { ClubInfo } from "./components/ClubInfo";
 import { ClubProfile } from "./components/ClubProfile";
 
+import { FormatClubId } from "@/utils/extractPathElements";
 import "./components/ClubInfo.css";
+import { ClubPrivateInfo } from "./components/ClubPrivateInfo";
 export const MemberClubInfo = () => {
+    const clubId = FormatClubId();
     const params = {
-        clubId : 1
+        clubId : clubId
     }
     const { data: infoData, isLoading, isError } = useClubsInfoQuery(params);
 
@@ -22,7 +25,10 @@ export const MemberClubInfo = () => {
         contactMeans,
         namePolicy,
         clubProfileImage,
-        memberCount
+        memberCount,
+        createdAt,
+        link,
+        privateCode
     } = infoData?.data || {};
 
     const profiles = {
@@ -35,25 +41,37 @@ export const MemberClubInfo = () => {
         isPrivate: isPrivate,
         contactMeans: contactMeans,
         namePolicy: namePolicy,
-        memberCount: memberCount
+        memberCount: memberCount,
+        createdAt: createdAt,
+        link: link,
+        privateCode: privateCode
+    }
+
+    const privateInfos = {
+        isPrivate: isPrivate,
+        privateCode: privateCode
     }
 
     return(
         <>
-            {!profiles && !infos ? (
+            <HistoryHeader />
+            {!profiles && !infos && !privateInfos ? (
                 <div>Loading...</div>
             ): (
                 <div className="memberClubInfo">
-                    <HistoryHeader />
                     <ClubProfile 
                         profiles={profiles}
                     />
                     <ClubInfo 
                         infos={infos}
                     />
-                    <Nav />
+                    {/* MANAGER만 */}
+                    <ClubPrivateInfo 
+                        privateInfos={privateInfos}
+                    />
                 </div>
             )}
+            <Nav />
         </>
     )
 }
