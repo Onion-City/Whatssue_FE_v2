@@ -23,6 +23,12 @@
     height: 1.5625rem;
 }
 
+.fileUpload__box__img.default {
+    width: 7.1875rem;
+    height: 7.1875rem;
+    border-radius: 11px;
+}
+
 .fileUpload__box__selectedImg {
     /* width: 7.1875rem;
     height: 7.1875rem; */

@@ -13,17 +13,14 @@ export interface FileUploadProps {
 }
 
 export function FileUpload({ children, name, field }: FileUploadProps) {
-  // interface imageState {
-  //   url?: string;
-  //   name?: string;
-  // }
-
+  console.log(field);
   // 이미지 url
   const [image, setImage] = useState<string | undefined>(
     field && 
-    field.value && 
-    field.value.url ? 
-    field.value.url : 
+    field.value ?
+    // && 
+    // field.value.url ? 
+    field.value: 
     undefined
   );
 
@@ -62,10 +59,10 @@ export function FileUpload({ children, name, field }: FileUploadProps) {
               <label htmlFor="first-upload-input">
                 <div className="fileUpload__box">
                   <Image 
-                    src={AddPic} 
+                    src={field && field.value || AddPic} 
                     alt="pic"
-                    className="fileUpload__box__img"
-                    placeholder="blur"
+                    className={`fileUpload__box__img ${field && field.value && "default"}`}
+                    // placeholder="blur"
                     width={115}
                     height={115}
                   />

@@ -22,6 +22,7 @@ export interface InputBoxProps {
   control?: any;
   getValues?: any;
   addName?: string;
+  value?: string | number;
 }
 
 const renderInputComponent = (
@@ -30,11 +31,12 @@ const renderInputComponent = (
   name: string,
   error: boolean | undefined,
   field: any,
-  getValues: any
+  getValues: any,
+  value?: string | number
 ) => {
   switch (type) {
     case "input":
-      return <Input maxCnt={maxCnt} name={name} field={field} error={error} />;
+      return <Input maxCnt={maxCnt} name={name} field={field} error={error} value={value}/>;
     case "numInput":
       return <CodeInput maxCnt={maxCnt} {...field} />;
     case "input&&toggle":
@@ -50,7 +52,7 @@ const renderInputComponent = (
     case "btnInput":
       return <AuthBox field={field} getValues={getValues} error={error} />;
     default:
-      return <Input maxCnt={maxCnt} name={name} field={field} />;
+      return <Input maxCnt={maxCnt} name={name} field={field} error={error} value={value} />;
   }
 };
 
@@ -61,12 +63,13 @@ const InputField = ({
   error,
   control,
   getValues,
+  value
 }: InputBoxProps) => (
   <Controller
     name={name}
     control={control}
     render={({ field }) =>
-      renderInputComponent(type, maxCnt, name, error, field, getValues)
+      renderInputComponent(type, maxCnt, name, error, field, getValues, value)
     }
   />
 );
@@ -81,6 +84,7 @@ export function InputBox({
   control,
   getValues,
   addName,
+  value
 }: InputBoxProps) {
   return (
     <div className="registerBox">
@@ -118,6 +122,7 @@ export function InputBox({
         error={error}
         control={control}
         getValues={getValues}
+        value={value}
       />
     </div>
   );
