@@ -6,10 +6,15 @@ import { Text } from "@/components/atoms/text";
 import "./ManageJoin.css";
 
 export default function ManageJoinHeader({
-  memberCnt
+  memberCnt,
+  selectJoins
 }: {
   memberCnt: number;
+  selectJoins: number[];
 }) {
+  const mutationJoin = (type: boolean) => {
+
+  }
   return (
     <div className="manageJoinHeader">
       <p className="manageJoinHeader__title">
@@ -28,11 +33,13 @@ export default function ManageJoinHeader({
       </p>
       <p className="manageJoinHeader__btn">
         <Button
-          size="sm"
+          size="lt"
           backgroundColor={COLORS.white}
+          onClick={() => mutationJoin(false)}
         >{BTN.reject}</Button>
         <Button
-          size="sm"
+          size="lt"
+          onClick={() => mutationJoin(true)}
         >{BTN.accept}</Button>
       </p>
     </div>

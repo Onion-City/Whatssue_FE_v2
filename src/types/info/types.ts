@@ -1,5 +1,5 @@
 export interface MyPostProps {
-  clubId: number;
+  clubId?: number;
   userId?: number;
   category?: "NOTICE" | "FREE";
   page: number;
@@ -28,4 +28,17 @@ export interface ClubMember {
   memberIntro?: string;
   clubName: string;
   createAt: string;
+}
+
+export interface ClubJoin {
+  id: number;
+  clubId: number;
+  userId: number;
+  userName: string;
+  createdAt: string;
+}
+
+export interface JoinRequestParam {
+  clubId: number;
+  clubJoinRequestId: number;
 }
