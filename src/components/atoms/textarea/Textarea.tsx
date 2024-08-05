@@ -8,7 +8,7 @@ import { Text } from "../text/Text";
 import "./textarea.css";
 
 export interface TextareaProps {
-  content?: string;
+  placeholder?: string;
   backgroundColor?: string;
   color?: string;
   size?: string;
@@ -23,12 +23,12 @@ export interface TextareaProps {
 }
 
 export function Textarea({ 
+  placeholder = "",
   backgroundColor = "#2B2B2B", 
   color = "#fff", 
   size = "big", 
   height = "12rem", 
   fontSize = "16px", 
-  content = "", 
   maxCnt, 
   isBorder = false,
   name, 
@@ -72,7 +72,7 @@ export function Textarea({
     <div className="textarea__wrapper">
       <textarea 
         style={style} 
-        placeholder={content}
+        placeholder={placeholder}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={handleTextCnt}
