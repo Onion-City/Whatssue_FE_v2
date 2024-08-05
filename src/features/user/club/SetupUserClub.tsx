@@ -38,7 +38,7 @@ export default function SetupUserClub() {
   const createClubMutation = useClubsMutation();
   const submitSignup = (data: ClubFormData) => {
     console.log(data);
-    createClubMutation.mutate(data);
+    const res = createClubMutation.mutate(data);
   };
 
   return (
