@@ -55,7 +55,8 @@ export interface AttendanceMyResultsParams {
 }
 
 // 내 출석 조회 response
-export interface AttendanceMyResultRes extends Omit<AttendanceMemberListItem, 'clubId' | 'scheduleId'> {
+export interface AttendanceMyResultRes
+  extends Omit<AttendanceMemberListItem, "clubId" | "scheduleId"> {
   id?: number;
   scheduleTitle: string;
   scheduleDate: string;
@@ -67,7 +68,12 @@ export interface AttendanceRes {
   memberName: string;
 }
 // 출석 수정
-export interface AttendanceCorrectionReqData
-  extends Omit<AttendanceMemberListItem, "clubMemberName"> {
+export interface AttendModifyDto {
   memberId: number;
+  attendanceType: string;
+  isModified: boolean;
+}
+export interface AttendanceUpdateParams {
+  scheduleId: number;
+  attendmodifyDtoList: AttendModifyDto[];
 }

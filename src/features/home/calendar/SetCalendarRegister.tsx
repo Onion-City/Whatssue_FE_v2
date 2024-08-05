@@ -8,48 +8,43 @@ import CalendarRegister from "./components/CalendarRegister";
 import { CALENDAR_BTN } from "./constants/const";
 
 const SetCalendarRegister = () => {
-    const path = usePathname();
-    
-    // 일정 등록 입력 폼 관리
-    const {
-        register,
-        formState: {errors},
-        handleSubmit,
-        setValue,
-    } = useForm<ScheduleData>({
-        mode: "onSubmit",
-        defaultValues: {
-            scheduleName: "",
-            scheduleDate: "",
-            scheduleTime: "",
-            schedulePlace: "",
-            scheduleContent: "",
-        },
-    });
+  const path = usePathname();
 
-    const { mutate } = useScheduleMutation({
-        clubId: +path.split("/")[1],
-        userId: 6
-    });
+  // 일정 등록 입력 폼 관리
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    setValue,
+  } = useForm<ScheduleData>({
+    mode: "onSubmit",
+    defaultValues: {
+      scheduleName: "",
+      scheduleDate: "",
+      scheduleTime: "",
+      schedulePlace: "",
+      scheduleContent: "",
+    },
+  });
 
-    const onsubmit = (data: ScheduleData) => {
-        console.log(data);
-        mutate(data);
-    };
+  const { mutate } = useScheduleMutation({
+    clubId: +path.split("/")[1],
+    userId: 6,
+  });
 
-    return (
-        <form onSubmit={handleSubmit(onsubmit)}>
-            <Wrapper isHeader={true}>
-                <CalendarRegister 
-                    register={register}
-                    setValue={setValue}
-                />
-                <Button 
-                    type="submit"
-                >{CALENDAR_BTN.register}</Button>
-            </Wrapper>
-        </form>
-    )
+  const onsubmit = (data: ScheduleData) => {
+    console.log(data);
+    mutate(data);
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onsubmit)}>
+      <Wrapper isHeader={true}>
+        <CalendarRegister register={register} setValue={setValue} />
+        <Button type="submit">{CALENDAR_BTN.register}</Button>
+      </Wrapper>
+    </form>
+  );
 };
 
 export default SetCalendarRegister;
