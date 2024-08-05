@@ -16,6 +16,7 @@ import {
   RECEIVE_INVITATION_CODE,
 } from "../constants/const";
 import "./EnterInvitationCode.css";
+import InvitationClub from "./InvitationClub";
 
 const EnterInvitationCode = () => {
   const [codeValues, setCodeValues] = useState<string[]>(Array(6).fill(""));
@@ -51,14 +52,26 @@ const EnterInvitationCode = () => {
     }
   }, [codeValues]);
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [clubInfo, setClubInfo] = useState({
+    clubId: 0,
+    clubIntro: '',
+    clubMemberCount: 0,
+    clubName: '',
+    clubProfileImage: '',
+    createdAt: '',
+    namePolicy: "REAL_NAME"
+  });
+
   const onSubmit = async () => {
     if (isComplete) {
       try {
         const {
           data: clubInfo,
         } = await fetchJoinClub(codeValues.join(''));
+        setClubInfo(clubInfo);
         console.log(clubInfo);
-        router.push(`/user/club/join/${clubInfo.clubId}`);
+        setIsOpen(true);
       } catch (error) {
         console.log(error);
         showToast({
@@ -70,6 +83,7 @@ const EnterInvitationCode = () => {
   }
 
   return (
+    <>
     <div className="invitation_code">
       <HistoryHeader />
       <Image
@@ -110,6 +124,19 @@ const EnterInvitationCode = () => {
         </Button>
       </div>
     </div>
+    {isOpen && 
+    clubInfo &&
+      <InvitationClub 
+        clubId={clubInfo?.clubId}
+        clubIntro={clubInfo?.clubIntro}
+        clubMemberCount={clubInfo?.clubMemberCount}
+        clubName={clubInfo?.clubName}
+        clubProfileImage={clubInfo?.clubProfileImage}
+        createdAt={clubInfo?.createdAt}
+        namePolicy={clubInfo?.namePolicy}
+      />
+    }
+    </>
   );
 };
 
