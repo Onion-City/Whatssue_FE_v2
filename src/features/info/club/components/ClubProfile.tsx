@@ -11,6 +11,7 @@ interface ClubProfileProp {
 };
 
 export const ClubProfile = ({ profiles }: ClubProfileProp) => {
+    console.log(profiles?.clubProfileImage)
     return(
         <div className="clubProfile">
             <div className="clubProfile__img">
