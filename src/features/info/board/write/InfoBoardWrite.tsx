@@ -5,11 +5,13 @@ import BoardItem from "@/features/board/components/BoardItem";
 import useMyPostQuery from "@/hook/info/useMyPostQuery";
 
 import { IMAGES } from "@/constants/images";
+import { FormatClubId } from "@/utils/extractPathElements";
 import "./components/BoardWrite.css";
 
 export const InfoBoardWrite = () => {
+    const clubId = FormatClubId();
     const { data: boardInfo } = useMyPostQuery({
-        clubId: 1,
+        clubId: clubId,
         category: "FREE",
         page: 0,
         size: 10,

@@ -5,11 +5,13 @@ import { IMAGES } from "@/constants/images";
 import BoardItem from "@/features/board/components/BoardItem";
 import useMyPostLikeQuery from "@/hook/info/useMyPostLikeQuery";
 
+import { FormatClubId } from "@/utils/extractPathElements";
 import "./components/BoardLike.css";
 
 export const InfoBoardLike = () => {
+    const clubId = FormatClubId();
     const { data: boardInfo } = useMyPostLikeQuery({
-        clubId: 1,
+        clubId: clubId,
         category: "FREE",
         page: 0,
         size: 10,
