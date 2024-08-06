@@ -16,7 +16,7 @@ import "./Attendance.css";
 const AttendanceStatusList: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const scheduleId = searchParams.get('scheduleId');
+  const scheduleId = searchParams.get("scheduleId");
   const [selectedStatus, setSelectedStatus] = useState<string | null>(null);
   const { data, error } = useAttendanceMemberListQuery({
     clubId: FormatClubId(),
