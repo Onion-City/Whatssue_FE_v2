@@ -1,11 +1,14 @@
 "use client";
+import { HistoryHeader } from "@/components/organisms/Header";
 import useSchedule from "@/hook/schedule/useSchedule";
+import { FormatClubId } from "@/utils/extractPathElements";
 import CalendarList from "./components/CalendarList";
 import { CalendarListHeader } from "./components/CalendarListHeader";
 
 const SetCalendar = () => {
+    const clubId = FormatClubId();
     const { data: scheduleData, refetchPeriodSchedule, refetchKeywordSchedule, isLoading, mark } = useSchedule({
-        clubId: 1,
+        clubId: clubId,
         keyword: "",
         startDate: "", 
         endDate: "",
@@ -15,6 +18,7 @@ const SetCalendar = () => {
 
     return (
         <>
+        <HistoryHeader />
         <div>
             <CalendarListHeader 
                 refetchPeriodSchedule={refetchPeriodSchedule}

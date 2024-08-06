@@ -2,7 +2,7 @@
 
 import { Heart } from "@/components/atoms/heart/Heart";
 import { Text } from "@/components/atoms/text";
-import { ICONS } from "@/constants/images";
+import { ICONS, IMAGES } from "@/constants/images";
 import { formatDateTime } from "@/utils/date";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
@@ -57,7 +57,7 @@ const BoardItem = ({
         <div className="board__item__box__left_bottom">
           <div className="board__item__box__left_bottom_writer">
             <Image
-              src={profile}
+              src={profile ?? IMAGES.profile}
               alt="writerProfile"
               className=""
               width={100}

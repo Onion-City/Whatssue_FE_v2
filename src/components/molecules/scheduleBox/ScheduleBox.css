@@ -24,6 +24,7 @@
 .scheduleBox span {
     display: flex;
     align-items: center;
+    white-space: nowrap;
 }
 
 .scheduleBox__attend {
