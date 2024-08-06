@@ -1,8 +1,7 @@
 import { ACCOUNT_SETTING } from "../constants/const";
 import "./AccountSetting.css";
-import React from "react";
 
-const AccountSetting: React.FC = () => {
+const AccountSetting = () => {
   return (
     <div className="account_setting">
       <div className="account_setting__logout">{ACCOUNT_SETTING.logout}</div>
