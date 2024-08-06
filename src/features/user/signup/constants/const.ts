@@ -29,7 +29,7 @@ export const SIGNUP_BTN = {
 };
 
 export const SIGNUP_COMPLETE_TXT = [
-    "김준영님 환영합니다!",
+    "님 환영합니다!",
     "다양한 모임을 즐겨보세요!"
 ];
 

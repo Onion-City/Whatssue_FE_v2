@@ -42,11 +42,12 @@ const Signup = () => {
         }
         if (!isAuth) {
             alert("전화번호 인증을 진행해주세요");
+            return;
         }
         console.log(data);
-        mutate(data);
-        console.log(userResponse);
-        router.push("/user/signup/complete");
+        const res = mutate(data);
+        console.log(res);
+        router.push(`/user/signup/complete?userName=${getValues("userName")}`);
     };
 
     const watchedFields = watch();

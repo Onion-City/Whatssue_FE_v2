@@ -9,9 +9,9 @@ export const useUserMutation = () => {
   return useMutation({
     mutationFn: (data: signUpInfo) => http.post("/user/signUp", data),
     onSuccess: (res) => {
-      alert("회원가입 성공!");
+      // alert("회원가입 성공!");
       console.log(res);
-      router.push("/user/signup/complete");
+      // router.push("/user/signup/complete");
     },
     onError: (err) => {
       console.log(err);

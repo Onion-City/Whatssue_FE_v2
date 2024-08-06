@@ -1,5 +1,5 @@
 "use client";
-import { ClubHeader } from "@/components/organisms/Header/ClubHeader";
+import { HeaderInfo } from "@/components/molecules/headerInfo";
 import { Nav } from "@/components/organisms/Nav";
 import { useMemberAuthQuery } from "@/hook/member/useMemberAuthQuery";
 import useSchedule from "@/hook/schedule/useSchedule";
@@ -37,8 +37,8 @@ const SetHome = () => {
 
   return (
     <ScheduleContext.Provider value={{ value, onChange: setValue }}>
-      <div style={{ height: "100%", paddingBottom: "4.25rem" }}>
-        <ClubHeader color={true} />
+      <HeaderInfo isClubInfo={true} isMyInfo={true} />
+      <div style={{ height: "100%", paddingBottom: "4.25rem", paddingTop: "4.25rem" }}>
         <HomeHeader mark={mark} />
         <HomeDateWrapper dateList={filteredData} isLoading={isLoading} />
       </div>

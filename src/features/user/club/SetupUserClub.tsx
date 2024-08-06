@@ -2,6 +2,9 @@
 import { useClubsMutation } from "@/hook/club/useClubsMutation";
 import { useFunnel } from "@/hook/user/useFunnel";
 import { ClubFormData } from "@/types/club";
+import useToast from "@/utils/useToast";
+import { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 import FirstClubRegister from "./components/FirstClubRegister";
 import SecondClubRegister from "./components/SecondClubRegister";
@@ -35,10 +38,33 @@ export default function SetupUserClub() {
   const prevClickHandler = (step: string) => {
     setStep(step);
   };
+  const { showToast } = useToast();
+  const router = useRouter();
+
   const createClubMutation = useClubsMutation();
   const submitSignup = (data: ClubFormData) => {
     console.log(data);
-    const res = createClubMutation.mutate(data);
+    try {
+      createClubMutation.mutate(data);
+      // if (res) {
+      //   showToast({
+      //     message: "모임 등록이 완료되었습니다.",
+      //     type: "success"
+      //   });
+      //   console.log(res);
+      //   router.push('/');
+      // }
+    } catch (error) {
+      if ((error as AxiosError).isAxiosError) {
+        const axiosError = error as AxiosError<any>;
+        if (axiosError.response) {
+          showToast({
+            message: `${axiosError.response.data.message}`,
+            type: 'error'
+          });
+        }
+      }
+    }
   };
 
   return (

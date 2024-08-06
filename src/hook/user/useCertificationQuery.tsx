@@ -1,7 +1,7 @@
 // useCertificationQuery.tsx
 import { http } from "@/apis/http";
-import { CommonNoPageRes } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
+import { AxiosResponse } from "axios";
 
 const fetchCertification = async ({
   toNumber,
@@ -9,8 +9,8 @@ const fetchCertification = async ({
 }: {
   toNumber: string;
   certificationNum: number;
-}): Promise<CommonNoPageRes<string>> => {
-  const response = await http.get<CommonNoPageRes<string>>(
+}): Promise<AxiosResponse<string>> => {
+  const response = await http.get<AxiosResponse<string>>(
     `/certification/check-random-number?toNumber=${toNumber}&certificationNum=${certificationNum}`
   );
   return response;
