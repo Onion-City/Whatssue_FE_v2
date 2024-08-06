@@ -1,13 +1,12 @@
 "use client";
 
-import "./AccountInfo.css";
-import { ACCOUNT_INFO } from "../constants/const";
 import { NAME } from "@/constants/const";
-import { useRouter } from "next/navigation";
-import React from "react";
 import { useGetUserInfoQuery } from "@/hook/user/useGetUserInfoQuery";
+import { useRouter } from "next/navigation";
+import { ACCOUNT_INFO } from "../constants/const";
+import "./AccountInfo.css";
 
-const AccountInfo: React.FC = () => {
+const AccountInfo = () => {
   const router = useRouter();
   const { data } = useGetUserInfoQuery();
   const userInfo = data?.data;
