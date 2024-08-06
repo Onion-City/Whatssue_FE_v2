@@ -42,6 +42,12 @@
     margin-bottom: 1rem;
 }
 
+.clubInfo__box-content {
+    padding: 1rem;
+    background-color: #404040;
+    border-radius: 7px;
+}
+
 .clubInfo__sub {
     display: flex;
     align-items: center;

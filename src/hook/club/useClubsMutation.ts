@@ -1,6 +1,8 @@
 import { http } from "@/apis/http";
 import { ClubFormData } from "@/types/club";
+import useToast from "@/utils/useToast";
 import { useMutation } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 
 // 모임 생성 (/clubs)
@@ -47,14 +49,28 @@ interface UseCreateClubs {
 
 export function useClubsMutation(): UseCreateClubs {
   const router = useRouter();
+  const {showToast} = useToast();
+
   const { mutate } = useMutation<void, Error, ClubFormData>({
     mutationFn: createClub,
-    onSuccess: () => {
-      console.log("모임 등록 성공");
-      router.push("/");
+    onSuccess: (res) => {
+      showToast({
+        message: "모임 등록이 완료되었습니다.",
+        type: "success"
+      });
+      console.log(res);
+      router.push('/');
     },
     onError: (error) => {
-      console.log("모임 등록 실패", error);
+      if ((error as AxiosError).isAxiosError) {
+        const axiosError = error as AxiosError<any>;
+        if (axiosError.response) {
+          showToast({
+            message: `${axiosError.response.data.message}`,
+            type: 'error'
+          });
+        }
+      }
     },
   });
   return { mutate };

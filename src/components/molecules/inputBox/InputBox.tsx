@@ -22,6 +22,8 @@ export interface InputBoxProps {
   control?: any;
   getValues?: any;
   addName?: string;
+  value?: string | number;
+  placeholder?: string;
 }
 
 const renderInputComponent = (
@@ -30,17 +32,19 @@ const renderInputComponent = (
   name: string,
   error: boolean | undefined,
   field: any,
-  getValues: any
+  getValues: any,
+  value?: string | number,
+  placeholder?: string
 ) => {
   switch (type) {
     case "input":
-      return <Input maxCnt={maxCnt} name={name} field={field} error={error} />;
+      return <Input maxCnt={maxCnt} name={name} field={field} error={error} value={value} placeholder={placeholder}/>;
     case "numInput":
       return <CodeInput maxCnt={maxCnt} {...field} />;
     case "input&&toggle":
       return <Input maxCnt={maxCnt} name={name} field={field} error={error} />;
     case "textarea":
-      return <Textarea maxCnt={maxCnt} name={name} field={field} />;
+      return <Textarea maxCnt={maxCnt} name={name} field={field} placeholder={placeholder} />;
     case "toggle":
       return <Toggle name={name} field={field} />;
     case "chip":
@@ -50,7 +54,7 @@ const renderInputComponent = (
     case "btnInput":
       return <AuthBox field={field} getValues={getValues} error={error} />;
     default:
-      return <Input maxCnt={maxCnt} name={name} field={field} />;
+      return <Input maxCnt={maxCnt} name={name} field={field} error={error} value={value} placeholder={placeholder} />;
   }
 };
 
@@ -61,12 +65,14 @@ const InputField = ({
   error,
   control,
   getValues,
+  value,
+  placeholder
 }: InputBoxProps) => (
   <Controller
     name={name}
     control={control}
     render={({ field }) =>
-      renderInputComponent(type, maxCnt, name, error, field, getValues)
+      renderInputComponent(type, maxCnt, name, error, field, getValues, value, placeholder)
     }
   />
 );
@@ -81,6 +87,8 @@ export function InputBox({
   control,
   getValues,
   addName,
+  value,
+  placeholder
 }: InputBoxProps) {
   return (
     <div className="registerBox">
@@ -102,6 +110,7 @@ export function InputBox({
               error={error}
               control={control}
               getValues={getValues}
+              placeholder={placeholder}
             />
           </div>
         )}
@@ -118,6 +127,7 @@ export function InputBox({
         error={error}
         control={control}
         getValues={getValues}
+        value={value}
       />
     </div>
   );

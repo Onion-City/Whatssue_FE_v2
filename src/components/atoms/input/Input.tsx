@@ -44,7 +44,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         <input 
           type="text"
           className={`input ${size} ${color} ${error && "error"}`}
-          placeholder={placeholder}
+          placeholder={placeholder && placeholder}
           onChange={handleChangeInput}
           value={field?.value || ""}
           maxLength={maxCnt !== 0 ? maxCnt : undefined}

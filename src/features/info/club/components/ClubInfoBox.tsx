@@ -2,7 +2,9 @@
 import { Text } from "@/components/atoms/text";
 import { ICONS } from "@/constants/images";
 import { COLORS } from "@/styles";
+import { FormatClubId } from "@/utils/extractPathElements";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface ClubInfoBoxProps {
     title: string;
@@ -12,6 +14,11 @@ interface ClubInfoBoxProps {
 }
 
 export const ClubInfoBox = ({title, content, isCopy, isFirst}: ClubInfoBoxProps) => {
+    const router = useRouter();
+    const clubId = FormatClubId();
+
+    const toModifyPage = () => router.push(`/info/${clubId}/modify`);
+
     // 클립보드 복사
     const copyToClipboard = async (text: string | undefined) => {
         try {
@@ -40,7 +47,6 @@ export const ClubInfoBox = ({title, content, isCopy, isFirst}: ClubInfoBoxProps)
             )}
         </div>
     );
-    console.log(isFirst);
 
     return(
         <div className="clubInfoBox">
@@ -52,7 +58,10 @@ export const ClubInfoBox = ({title, content, isCopy, isFirst}: ClubInfoBoxProps)
                 {
                     // TODO: 관리자인 경우
                     isFirst && 
-                    <span className="clubInfoBox__modify-box">
+                    <span 
+                        className="clubInfoBox__modify-box"
+                        onClick={toModifyPage}
+                    >
                         <Text
                             fontSize="0.625rem"
                         >수정</Text>

@@ -37,21 +37,22 @@ export const REGISTER_INPUT_ARR2 = [
     essential: false,
   },
   {
-    title: "대표 연락 수단",
+    title: "대표 연락처",
     type: "input",
     maxCnt: 30,
     name: "contactMeans",
     essential: false,
     // subtitle: "전화번호, 이메일, sns 등",
-    content: "예시) 010-7330-9731",
+    placeholder: "010-1234-5678",
   },
   {
     title: "모임 관련 링크",
-    type: "textarea",
+    type: "input",
     name: "link",
     essential: false,
     subtitle: "notion, 디스코드, 오픈 채팅방 등",
     maxCnt: 300,
+    placeholder: "URL",
   },
 ];
 
