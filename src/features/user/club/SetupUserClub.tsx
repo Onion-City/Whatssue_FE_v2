@@ -3,7 +3,6 @@ import { useClubsMutation } from "@/hook/club/useClubsMutation";
 import { useFunnel } from "@/hook/user/useFunnel";
 import { ClubFormData } from "@/types/club";
 import useToast from "@/utils/useToast";
-import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 import FirstClubRegister from "./components/FirstClubRegister";
@@ -42,7 +41,7 @@ export default function SetupUserClub() {
   const router = useRouter();
 
   const createClubMutation = useClubsMutation();
-  const submitSignup = (data: ClubFormData) => {
+  const submitSignup = async (data: ClubFormData) => {
     console.log(data);
     try {
       createClubMutation.mutate(data);
@@ -55,15 +54,16 @@ export default function SetupUserClub() {
       //   router.push('/');
       // }
     } catch (error) {
-      if ((error as AxiosError).isAxiosError) {
-        const axiosError = error as AxiosError<any>;
-        if (axiosError.response) {
-          showToast({
-            message: `${axiosError.response.data.message}`,
-            type: 'error'
-          });
-        }
-      }
+      // if ((error as AxiosError).isAxiosError) {
+      //   const axiosError = error as AxiosError<any>;
+      //   if (axiosError.response) {
+      //     showToast({
+      //       message: `${axiosError.response.data.message.errors[0].message}`,
+      //       type: 'error'
+      //     });
+      //   }
+      // }
+      console.log(error);
     }
   };
 
