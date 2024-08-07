@@ -7,7 +7,6 @@ import { Textarea } from "@/components/atoms/textarea";
 import { Toggle } from "@/components/atoms/toggle";
 import { COLORS } from "@/styles";
 import { Controller } from "react-hook-form";
-import { AuthBox } from "../authBox";
 import { ChipBox } from "../chipBox/ChipBox";
 import "./InputBox.css";
 
@@ -24,6 +23,7 @@ export interface InputBoxProps {
   addName?: string;
   value?: string | number;
   placeholder?: string;
+  setIsAuth?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const renderInputComponent = (
@@ -34,7 +34,8 @@ const renderInputComponent = (
   field: any,
   getValues: any,
   value?: string | number,
-  placeholder?: string
+  placeholder?: string,
+  setIsAuth?: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   switch (type) {
     case "input":
@@ -51,8 +52,8 @@ const renderInputComponent = (
       return <ChipBox field={field} />;
     case "fileUpload":
       return <FileUpload name={name} field={field} />;
-    case "btnInput":
-      return <AuthBox field={field} getValues={getValues} error={error} />;
+    // case "btnInput":
+    //   return <AuthBox field={field} getValues={getValues} error={error} setIsAuth={setIsAuth} />;
     default:
       return <Input maxCnt={maxCnt} name={name} field={field} error={error} value={value} placeholder={placeholder} />;
   }
@@ -66,13 +67,14 @@ const InputField = ({
   control,
   getValues,
   value,
-  placeholder
+  placeholder,
+  setIsAuth
 }: InputBoxProps) => (
   <Controller
     name={name}
     control={control}
     render={({ field }) =>
-      renderInputComponent(type, maxCnt, name, error, field, getValues, value, placeholder)
+      renderInputComponent(type, maxCnt, name, error, field, getValues, value, placeholder, setIsAuth)
     }
   />
 );
@@ -88,7 +90,8 @@ export function InputBox({
   getValues,
   addName,
   value,
-  placeholder
+  placeholder,
+  setIsAuth
 }: InputBoxProps) {
   return (
     <div className="registerBox">
@@ -111,6 +114,7 @@ export function InputBox({
               control={control}
               getValues={getValues}
               placeholder={placeholder}
+              setIsAuth={setIsAuth}
             />
           </div>
         )}

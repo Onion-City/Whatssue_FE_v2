@@ -57,30 +57,73 @@ const Signup = () => {
             <Wrapper>
                 <div>
                     <SignupHeader />
-                        {SIGNUP_INPUT_ARR.map((box, index) => (
-                            <React.Fragment key={index}>
-                                <InputBox 
-                                    title={box.title && box.title}
-                                    type={box.type && box.type}
-                                    essential={box.essential && box.essential}
-                                    name={box.name && box.name}
-                                    error={box.essential && watchedFields[box.name as keyof FormData] === ""}
-                                    // register={register}
-                                    control={control}
-                                    getValues={getValues}
-                                />
-                                {box.essential && watchedFields[box.name as keyof FormData] === "" && (
-                                    <span
-                                        className="error-msg"
-                                    >
-                                        <Text
-                                            color={COLORS.red}
-                                            fontWeight="500"
-                                        >필수 정보입니다.</Text>
-                                    </span>
-                                )}
-                            </React.Fragment>
-                        ))}
+                        {SIGNUP_INPUT_ARR.map((box, index) => {
+                            if (box.type === 'btninput') {
+                                return (
+                                <React.Fragment key={index}>
+                                    <div className="registerBox">
+                                    {/* <div className="textBox">
+                                        <Text fontSize="1.1875rem" color={COLORS.white}>
+                                        {box.title}
+                                        </Text>
+                                        {box.essential && (
+                                        <Text fontSize="1.1875rem" color={COLORS.red}>
+                                            *
+                                        </Text>
+                                        )}
+                                    </div> */}
+                                    <Controller
+                                        name="userPhone"
+                                        control={control}
+                                        render={({ field }) =>
+                                            <AuthBox 
+                                                field={field} 
+                                                getValues={getValues} 
+                                                error={box.essential && watchedFields[box.name as keyof FormData] === ""} 
+                                                setIsAuth={setIsAuth} 
+                                            />
+                                        }
+                                    />
+                                    </div>
+                                    {box.essential && watchedFields[box.name as keyof FormData] === "" && (
+                                        <span
+                                            className="error-msg"
+                                        >
+                                            <Text
+                                                color={COLORS.red}
+                                                fontWeight="500"
+                                            >필수 정보입니다.</Text>
+                                        </span>
+                                    )}
+                                </React.Fragment>
+                            )} else {
+                                return (
+                                    <React.Fragment key={index}>
+                                    <InputBox 
+                                        title={box.title && box.title}
+                                        type={box.type && box.type}
+                                        essential={box.essential && box.essential}
+                                        name={box.name && box.name}
+                                        error={box.essential && watchedFields[box.name as keyof FormData] === ""}
+                                        // register={register}
+                                        control={control}
+                                        getValues={getValues}
+                                        setIsAuth={setIsAuth}
+                                    />
+                                    {box.essential && watchedFields[box.name as keyof FormData] === "" && (
+                                        <span
+                                            className="error-msg"
+                                        >
+                                            <Text
+                                                color={COLORS.red}
+                                                fontWeight="500"
+                                            >필수 정보입니다.</Text>
+                                        </span>
+                                    )}
+                                </React.Fragment>
+                                )
+                            }
+                        })}
                         <Controller
                             name="userPhone"
                             control={control}
