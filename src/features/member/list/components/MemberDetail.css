@@ -46,3 +46,15 @@
 .member__detail__bottom {
   margin-top: auto;
 }
+
+.member__detail__bottom__push__detail__page {
+  position: absolute;
+  top: 4.5rem;
+  right: 1rem;
+}
+.member__detail__bottom__push__detail__page img {
+  transform: rotate(180deg);
+  width: 0.25rem;
+  height: 0.5625rem;
+  margin-left: 0.44rem;
+}
