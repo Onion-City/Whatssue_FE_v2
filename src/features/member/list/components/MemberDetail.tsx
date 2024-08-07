@@ -2,11 +2,12 @@ import { Button } from "@/components/atoms/button";
 import { Text } from "@/components/atoms/text";
 import { InfoIcon } from "@/components/molecules/infoIcon";
 import { HistoryHeader, MemberHeader } from "@/components/organisms/Header";
-import { ICONS } from "@/constants/images";
+import { ICONS, IMAGES } from "@/constants/images";
 import { AttendanceHeader } from "@/features/info/attendance/components/AttendanceHeader";
-import useMyAttendance from "@/hook/attendance/member/useMyAttendance";
+import useMemberAttendance from "@/hook/attendance/member/useMemberAttendance";
 import { useMemberAuthQuery } from "@/hook/member/useMemberAuthQuery";
 import { useMemberQuery } from "@/hook/member/useMemberQuery";
+import { FormatClubId } from "@/utils/extractPathElements";
 import { formatPhoneNumber } from "@/utils/phone";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
@@ -18,11 +19,12 @@ const MemberDetail = () => {
   const { data, isLoading } = useMemberQuery(
     parseInt(pathName.split("/")[3], 10)
   );
-  const { refetchPeriodSchedule, attendances } = useMyAttendance({
-    clubId: 2,
+  const { refetchPeriodSchedule, attendances } = useMemberAttendance({
+    clubId: FormatClubId(),
     startDate: "2000-01-01",
     endDate: "2030-01-01",
     attendanceType: "TOTAL",
+    memberId: parseInt(pathName.split("/")[3], 10),
   });
   const filteredData = (attendanceType: string): number => {
     return (
@@ -37,6 +39,10 @@ const MemberDetail = () => {
 
   const handleModify = () => {
     router.push(`${pathName}/edit`);
+  };
+
+  const handleAttendance = () => {
+    router.push(`${pathName}/attendance`);
   };
   if (isLoading || data === undefined) {
     return <div>loading</div>;
@@ -97,13 +103,24 @@ const MemberDetail = () => {
           </div>
         )}
         {checkManager && !editAuthority && (
-          <AttendanceHeader
-            clubMemberName={data.data?.memberName}
-            attend={filteredData("출석")}
-            absent={filteredData("공결")}
-            miss={filteredData("결석")}
-            refetchPeriodSchedule={refetchPeriodSchedule}
-          />
+          <div style={{ position: "relative" }}>
+            <AttendanceHeader
+              clubMemberName={data.data?.memberName}
+              attend={filteredData("출석")}
+              absent={filteredData("공결")}
+              miss={filteredData("결석")}
+              refetchPeriodSchedule={refetchPeriodSchedule}
+            />
+            <div
+              className="member__detail__bottom__push__detail__page"
+              onClick={handleAttendance}
+            >
+              <Text color="#9D9D9D" fontSize="0.6875rem" fontWeight="500">
+                상세보기
+              </Text>
+              <Image src={IMAGES.back} alt="push" />
+            </div>
+          </div>
         )}
       </div>
     </>
