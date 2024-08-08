@@ -20,10 +20,8 @@ export default function ManageJoinHeader({
   const mutationJoin = (type: boolean) => {
     console.log(type, selectJoins);
     if (type) {
-      console.log("Calling acceptMutate");
       acceptMutate(selectJoins);
     } else {
-      console.log("Calling denyMutate");
       denyMutate(selectJoins);
     }
   }

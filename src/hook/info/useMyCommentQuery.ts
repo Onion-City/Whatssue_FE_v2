@@ -12,7 +12,7 @@ export const useMyCommentQuery = ({
   sort="",
 }: MyPostProps) => {
   const clubId = FormatClubId();
-  const myPostUrl = `/clubs/${clubId}/comment/my?page=${page}&size=${size}`;
+  const myPostUrl = `/clubs/${clubId}/posts/my-comment-list?page=${page}&size=${size}`;
   return useQuery<CommonRes<PostList>>({
     queryKey: ["postMyComment", { clubId, size, page, sort }],
     queryFn: async () => 

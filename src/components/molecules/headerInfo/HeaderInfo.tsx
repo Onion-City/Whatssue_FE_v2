@@ -45,7 +45,11 @@ export function HeaderInfo({
 }: isHeaderInfo) {
   const router = useRouter();
   const saveData = useSelector((state: RootState) => state.club.children);
-  const { data: loadData } = useMemberAuthQuery();
+  const { data: loadData, isError, error } = useMemberAuthQuery();
+  if (isError) {
+    console.log(error.response?.status);
+    if (error.response?.status) router.push('/user/onboarding');
+  }
   if (loadData === undefined) return;
   const clubInfo = saveData.memberId === -1 ? loadData.data : saveData;
   return (
