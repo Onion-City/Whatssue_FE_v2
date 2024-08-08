@@ -1,6 +1,7 @@
 import { Checkbox } from "@/components/atoms/checkbox/Checkbox";
 import { Text } from "@/components/atoms/text";
 import { COLORS } from "@/styles";
+import moment from "moment";
 
 interface manageJoinBoxProps {
   idx: number;
@@ -45,7 +46,7 @@ export default function ManageJoinBox({
             color={COLORS.white}
             fontSize="0.75rem"
             fontWeight="500"
-          >{date}</Text>
+          >{moment(date).format("YYYY년 MM월 DD일")}</Text>
         </p>
       </div>
       <Checkbox

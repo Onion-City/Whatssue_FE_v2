@@ -40,5 +40,5 @@ export interface ClubJoin {
 
 export interface JoinRequestParam {
   clubId: number;
-  clubJoinRequestId: number;
+  clubJoinRequestId?: number;
 }

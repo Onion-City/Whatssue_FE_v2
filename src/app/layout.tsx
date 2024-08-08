@@ -22,7 +22,6 @@ export default function RootLayout({
   const historyHeaderList = ["/user/onboarding", "/user/club"];
 
   const clubHeaderList = [
-    "/info",
     "/member/attendance",
   ];
 

@@ -3,6 +3,8 @@ import { COLORS } from "@/styles";
 import { BTN, NUMBER, TOTAL } from "../constants";
 
 import { Text } from "@/components/atoms/text";
+import { useClubJoinAcceptMutation } from "@/hook/info/useClubJoinAcceptMutation";
+import { useClubJoinDenyMutation } from "@/hook/info/useClubJoinDenyMutation";
 import "./ManageJoin.css";
 
 export default function ManageJoinHeader({
@@ -12,8 +14,16 @@ export default function ManageJoinHeader({
   memberCnt: number;
   selectJoins: number[];
 }) {
+  const { mutate: acceptMutate } = useClubJoinAcceptMutation();
+  const { mutate: denyMutate } = useClubJoinDenyMutation();
+  
   const mutationJoin = (type: boolean) => {
-
+    console.log(type, selectJoins);
+    if (type) {
+      acceptMutate(selectJoins);
+    } else {
+      denyMutate(selectJoins);
+    }
   }
   return (
     <div className="manageJoinHeader">
