@@ -1,5 +1,5 @@
 import { http } from "@/apis/http"
-import { JoinRequestParam } from "@/types/info"
+import { FormatClubId } from "@/utils/extractPathElements"
 import useToast from "@/utils/useToast"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { AxiosError, AxiosResponse } from "axios"
@@ -11,15 +11,15 @@ interface ErrorData {
 }
 
 // 멤버 가입요청 거절 (/clubs/{clubId}/join/{clubJoinRequestId}/deny)
-export const useClubJoinDenyMutation = ({
-  clubId,
-  clubJoinRequestId
-}: JoinRequestParam) => {
+export const useClubJoinDenyMutation = () => {
   const { showToast } = useToast();
   const queryClient = useQueryClient();
+  const clubId = FormatClubId();
 
-  return useMutation<AxiosResponse<string>, Error>({
-    mutationFn: () => http.post(`/${clubId}/join/${clubJoinRequestId}/deny`),
+  return useMutation<AxiosResponse<string>, Error, number[]>({
+    mutationFn: async (selectJoins: number[]) => {
+      return await http.post(`/clubs/${clubId}/join/deny`, selectJoins)
+    },
     onSuccess: (data) => {
       console.log(data);
       if (data.status === 200) {
