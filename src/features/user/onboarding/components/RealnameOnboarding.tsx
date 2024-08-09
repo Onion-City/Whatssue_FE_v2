@@ -3,27 +3,46 @@ import { FileUpload } from "@/components/atoms/fileUpload";
 import { Text } from "@/components/atoms/text";
 import { InputBox } from "@/components/molecules/inputBox";
 import { Wrapper } from "@/components/organisms/Wrapper";
+import { useMemberProfileMutation } from "@/hook/member/useMemberProfileMutation";
 import { COLORS } from "@/styles";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ONBOARDING_BTN, ONBOARDING_INPUT_ARR } from "../constants/const";
 
 interface FormData {
-    name: string;
-    introduce: string;
-    emailPublic: boolean;
-    mobilePublic: boolean;
+    memberName: string;
+    memberIntro: string;
+    profileImage: string | File;
+    isEmailPublic: boolean;
+    isPhonePublic: boolean;
 }
 
 const RealnameOnboarding = () => {
-    const methods = useForm<FormData>({
-        mode: 'onChange'
+    const { control, handleSubmit, setValue } =
+    useForm<FormData>({
+      mode: "onChange",
+      defaultValues: {
+        memberName: '',
+        memberIntro: '',
+        profileImage: '',
+        isEmailPublic: false,
+        isPhonePublic: false,
+      }
     });
+    const [imageUrl, setImageUrl] = useState<string | undefined>();
+    const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const files = e.target.files;
+        if (!files || files.length === 0) return;
+        const selectedFile = files[0];
+        const newImageUrl = URL.createObjectURL(selectedFile);
+        setImageUrl(newImageUrl);
+        setValue("profileImage", selectedFile);
+    };
 
-    const { handleSubmit, control } = methods;
-
+    const { mutate } = useMemberProfileMutation()
     const submitOnboarding = (data: FormData) => {
         console.log(data);
+        // mutate(data);
     }
     return (
         <form onSubmit={handleSubmit(submitOnboarding)}>
