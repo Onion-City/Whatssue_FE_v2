@@ -1,10 +1,10 @@
 export interface Pageable {
-  pageNumber: number;
+  pageNumber: number; //현재 페이지 번호
   pageSize: number;
   sort: {
-      empty: boolean;
-      sorted: boolean;
-      unsorted: boolean;
+    empty: boolean;
+    sorted: boolean;
+    unsorted: boolean;
   };
   offset: number;
   paged: boolean;
@@ -16,14 +16,14 @@ export interface CommonPage<T> {
   content: T[];
   pageable: Pageable;
   last: boolean;
-  totalPages: number;
+  totalPages: number; // 전체 페이지 번호
   totalElements: number;
   size: number;
   number: number;
   sort: {
-      empty: boolean;
-      sorted: boolean;
-      unsorted: boolean;
+    empty: boolean;
+    sorted: boolean;
+    unsorted: boolean;
   };
   first: boolean;
   numberOfElements: number;
@@ -31,7 +31,7 @@ export interface CommonPage<T> {
 }
 
 export interface CommonRes<T> {
-  data: CommonPage<T>
+  data: CommonPage<T>;
 }
 
 export interface CommonNoPageRes<T> {
