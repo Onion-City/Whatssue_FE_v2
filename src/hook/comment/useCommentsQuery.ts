@@ -1,28 +1,23 @@
 import { http } from "@/apis/http";
 import { commentKeys } from "@/constants/keys/postKey";
-import { CommonRes } from "@/types";
+import { CommonPage, CommonRes } from "@/types";
 import { Comment } from "@/types/comment";
 import { PostDetailProps } from "@/types/post";
-import { useQuery } from "@tanstack/react-query";
+import { useCustomInfiniteQuery } from "@/utils/useCustomInfiniteQuery";
 
-interface commentListProps extends PostDetailProps {
-  size: number;
-  page: number;
-}
+export const useCommentsQuery = ({ clubId, postId }: PostDetailProps) => {
+  const size = 10;
 
-export const useCommentsQuery = ({
-  clubId,
-  postId,
-  size,
-  page,
-}: commentListProps) => {
-  return useQuery<CommonRes<Comment>>({
+  const getCommentList = async (page: number): Promise<CommonPage<Comment>> => {
+    const response = await http.get<CommonRes<Comment>>(
+      `/clubs/${clubId}/comment/${postId}?size=${size}&page=${page}`
+    );
+    const data = await response;
+    return data.data;
+  };
+  return useCustomInfiniteQuery<Comment>({
     queryKey: [commentKeys.comment({ clubId, postId })],
-    queryFn: async () =>
-      await http.get<CommonRes<Comment>>(
-        `/clubs/${clubId}/comment/${postId}?size=${size}&page=${page}`
-      ),
+    customQueryFn: getCommentList,
   });
 };
-
 export default useCommentsQuery;
