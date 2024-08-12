@@ -72,3 +72,13 @@ export interface ClubInfos {
   link?: string;
   privateCode?: string;
 }
+
+// 클럽 수정
+
+export interface ClubModifyFormData {
+  clubName: string;
+  clubIntro: string;
+  contactMeans: string;
+  link: string;
+  profileImage?: imageState;
+}
