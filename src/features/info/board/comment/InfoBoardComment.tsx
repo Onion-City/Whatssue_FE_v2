@@ -25,21 +25,26 @@ export const InfoBoardComment = () => {
                 <div>Loading...</div> :
                 (
                     <div className="infoBoard">
-                        {commentInfo?.data?.content?.map((item: any) => (
-                            <BoardItem
-                                key={item.postId}
-                                // boardAddress={boardTypeAddress}
-                                id={item.postId}
-                                title={item.postTitle}
-                                content={item.postContent}
-                                createdAt={item.createdAt}
-                                commentCount={item.commentCount}
-                                contentImgs={item.uploadImage ?? []}
-                                hearts={item.postLikeCount}
-                                isHeart={item.isLiked}
-                                writer={{ name: item.writerName, profile: item.writerProfileImage ?? IMAGES.profile }}
-                            />
-                        ))}
+                        {commentInfo
+                            ?.data
+                            ?.myCommentList
+                            ?.content
+                            ?.map((item: any) => (
+                                <BoardItem
+                                    key={item.post.postId}
+                                    // boardAddress={boardTypeAddress}
+                                    id={item.post.postId}
+                                    title={item.post.postTitle}
+                                    content={item.post.postContent}
+                                    createdAt={item.post.createdAt}
+                                    commentCount={item.post.commentCount}
+                                    contentImgs={item.post.uploadImage ?? IMAGES.profile}
+                                    hearts={item.post.postLikeCount}
+                                    isHeart={item.post.isLiked}
+                                    writer={{ name: item.post.writerName, profile: item.post.writerProfileImage ?? IMAGES.profile }}
+                                />
+                            ))
+                        }
                     </div>
                 )
             }
