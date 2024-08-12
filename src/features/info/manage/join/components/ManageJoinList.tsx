@@ -48,10 +48,10 @@ export default function ManageJoinList({
       <div className="manageJoinList__content">
         {
           joinList
-            ?.map((item) => 
+            ?.map((item, idx) => 
               <ManageJoinBox
-                key={item.id}
-                idx={item.id}
+                key={idx}
+                idx={idx}
                 joinId={item.id}
                 name={item.userName}
                 date={item.createdAt}

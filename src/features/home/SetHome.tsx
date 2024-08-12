@@ -38,7 +38,7 @@ const SetHome = () => {
   return (
     <ScheduleContext.Provider value={{ value, onChange: setValue }}>
       <HeaderInfo isClubInfo={true} isMyInfo={true} />
-      <div style={{ height: "100%", paddingBottom: "4.25rem", paddingTop: "4.25rem" }}>
+      <div style={{ height: "100%", paddingBottom: "4.25rem", paddingTop: "4.25rem", backgroundColor: "#2B2B2B" }}>
         <HomeHeader mark={mark} />
         <HomeDateWrapper dateList={filteredData} isLoading={isLoading} />
       </div>

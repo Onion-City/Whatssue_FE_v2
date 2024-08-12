@@ -7,12 +7,10 @@ import BoardListBox from "./BoardListBox";
 const BoardList = () => {
   const { data: noticeList } = usePostListQuery({
     category: "NOTICE",
-    page: 0,
     size: 7,
   });
   const { data: freeList } = usePostListQuery({
     category: "FREE",
-    page: 0,
     size: 7,
   });
   return (
@@ -21,12 +19,12 @@ const BoardList = () => {
       <BoardListBox
         boardType={"공지"}
         boardTypeAddress="notice"
-        data={noticeList?.data.content}
+        data={noticeList?.pages.flatMap((page) => page.content)}
       />
       <BoardListBox
         boardType={"자유"}
         boardTypeAddress="free"
-        data={freeList?.data.content}
+        data={freeList?.pages.flatMap((page) => page.content)}
       />
     </div>
   );

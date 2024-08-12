@@ -1,39 +1,40 @@
 "use client";
-
 import { http } from "@/apis/http";
-import { CommonRes } from "@/types";
+import { CommonPage, CommonRes } from "@/types";
 import { PostList } from "@/types/post";
 import { FormatClubId } from "@/utils/extractPathElements";
-import { useQuery } from "@tanstack/react-query";
+import { useCustomInfiniteQuery } from "@/utils/useCustomInfiniteQuery";
 
 interface props {
   keyword?: string;
   category: "NOTICE" | "FREE";
   startData?: string;
   endData?: string;
-  page: number;
-  size: number;
+  size?: number;
   sort?: string;
 }
+
 export const usePostListQuery = ({
   keyword = "",
   category,
   startData,
   endData,
-  page,
-  size,
+  size = 10,
   sort = "string",
 }: props) => {
   const clubId = FormatClubId();
-  const keywordUrl = `/clubs/${clubId}/posts?keyword=${keyword}&sortBy=createAt&category=${category}&page=${page}&size=${size}`;
-  const datePullUrl = `/clubs/${clubId}/posts?keyword=${keyword}&startDate=${startData}&endData=${endData}&sortBy=createAt&page=${page}&size=${size}`;
-  return useQuery<CommonRes<PostList>>({
-    queryKey: ["postList", { clubId, category, size, page, sort }],
-    queryFn: async () =>
-      await http.get<CommonRes<PostList>>(keywordUrl, {
-        headers: { accept: "*/*" },
-      }),
+  const getPostList = async (page: number): Promise<CommonPage<PostList>> => {
+    const response = await http.get<CommonRes<PostList>>(
+      `/clubs/${clubId}/posts?keyword=${keyword}&sortBy=createAt&category=${category}&page=${page}&size=${size}`
+    );
+    const data = await response;
+    return data.data;
+  };
+  return useCustomInfiniteQuery<PostList>({
+    queryKey: ["postList", { clubId, category, size, sort }],
+    customQueryFn: getPostList,
   });
 };
+
 
 export default usePostListQuery;

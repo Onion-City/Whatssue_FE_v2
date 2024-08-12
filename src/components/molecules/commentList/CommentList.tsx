@@ -4,14 +4,17 @@ import { Text } from "@/components/atoms/text";
 import useCommentsQuery from "@/hook/comment/useCommentsQuery";
 import { CommentsListProps } from "@/types/comment";
 import { FormatClubId, FormatPostId } from "@/utils/extractPathElements";
+import { useScrollHandler } from "@/utils/useScrollHandler";
 import React, { useImperativeHandle, useState } from "react";
 export const CommentList = React.forwardRef(
   ({ commentCount }: CommentsListProps, ref) => {
-    const { data: commentList } = useCommentsQuery({
+    const {
+      data: commentList,
+      fetchNextPage,
+      hasNextPage,
+    } = useCommentsQuery({
       clubId: FormatClubId(),
       postId: FormatPostId(),
-      size: 100,
-      page: 0,
     });
     const [targetComment, setTargetComment] = useState<undefined | number>(
       undefined
@@ -22,9 +25,14 @@ export const CommentList = React.forwardRef(
     const handleOffTargetComment = () => {
       setTargetComment(undefined);
     };
+    const handleMoreNextComment = () => {
+      if (hasNextPage) fetchNextPage();
+    };
+    const targetRef = useScrollHandler(handleMoreNextComment);
     useImperativeHandle(ref, () => ({
       handleOffTargetComment: () => handleOffTargetComment(),
     })); //부모 컴포넌트로 토스
+
     return (
       <>
         <div className="board__detail__comment__warpper" />
@@ -35,16 +43,21 @@ export const CommentList = React.forwardRef(
             </Text>
           </div>
           <div>
-            {commentList?.data.content &&
-              commentList.data.content.slice().map((comment, index: number) => (
-                <div key={index}>
-                  <CommentItem
-                    item={comment}
-                    onClick={handleTargetComment}
-                    targetCommentId={targetComment}
-                  />
-                </div>
-              ))}
+            {commentList?.pages.flatMap((page) => page.content) &&
+              commentList?.pages
+                .flatMap((page) => page.content)
+                .slice()
+                .map((comment, index: number) => (
+                  <div key={index}>
+                    <CommentItem
+                      item={comment}
+                      onClick={handleTargetComment}
+                      targetCommentId={targetComment}
+                    />
+                  </div>
+                ))}
+            <div ref={targetRef} style={{ height: "1px" }} />
+            {/* 해당을 통해 끝라인 확인 */}
           </div>
         </div>
         <CommentInput parentId={targetComment} />

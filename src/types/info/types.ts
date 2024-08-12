@@ -1,3 +1,5 @@
+import { CommonPage } from "../types";
+
 export interface MyPostProps {
   clubId?: number;
   userId?: number;
@@ -40,5 +42,44 @@ export interface ClubJoin {
 
 export interface JoinRequestParam {
   clubId: number;
-  clubJoinRequestId: number;
+  clubJoinRequestId?: number;
+}
+
+export interface MyCommentWrapperType {
+  clubMemberImage: string;
+  memberId: number;
+  memberName: string;
+  myCommentList: CommonPage<MyCommentContent>;
+}
+
+export interface MyCommentContent {
+  comment: MyCommentDetail;
+  post: MyCommentPost;
+}
+
+export interface MyCommentDetail {
+  commentId: number;
+  content: string;
+  createAt: string;
+  deleteAt?: string;
+  parentId?: number;
+  postId: number;
+  profileImage: string;
+  updateAt: string;
+  writerId: number;
+  writerName: string;
+}
+
+export interface MyCommentPost {
+  commentCount: number;
+  createdAt: string;
+  isLiked: boolean;
+  postCategory: "NOTICE" | "FREE";
+  postContent: string;
+  postId: number;
+  postLikeCount: number;
+  postTitle: string;
+  uploadImage?: {};
+  writerName: string;
+  writerProfileImage: string;
 }

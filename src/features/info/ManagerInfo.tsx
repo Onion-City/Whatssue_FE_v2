@@ -7,7 +7,9 @@ export default function ManagerInfo () {
     return(
         <>
             <Wrapper isHeader={true}>
-                <MemberContent />
+                <div style={{ paddingTop: '4.25rem' }}>   
+                    <MemberContent />
+                </div>
                 <div className="memberInfo">
                     <MemberBtn />
                     <Nav />

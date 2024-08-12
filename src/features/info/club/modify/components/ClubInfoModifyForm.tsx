@@ -8,23 +8,24 @@ import { Wrapper } from "@/components/organisms/Wrapper";
 import { useClubsInfoQuery } from "@/hook/club/useClubsInfoQuery";
 import { COLORS } from "@/styles";
 import { FormatClubId } from "@/utils/extractPathElements";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { CLUBINFO_MODIFY_INPUT_ARR } from "../constants";
 
+import { useClubsInfoMutation } from "@/hook/club/useClubsInfoMutation";
 import "../components/ClubInfoModify.css";
 
 interface ImageType {
-  url: string;
-  imageFile: File;
+  url?: string;
+  imageFile?: File;
 };
 
-interface FormData {
-  clubName?: string;
-  clubIntro?: string;
-  contactMeans?: string;
-  link?: string;
-  clubProfileImage?: string | ImageType;
+export interface ClubModifyFormData {
+  clubName: string;
+  clubIntro: string;
+  contactMeans: string;
+  link: string;
+  clubProfileImage: string | File;
 }
 
 const ClubInfoModifyForm = () => {
@@ -38,7 +39,7 @@ const ClubInfoModifyForm = () => {
 
     const defaultValues = infoData?.data;
 
-    const methods = useForm<FormData>({
+    const methods = useForm<ClubModifyFormData>({
       mode: 'onChange',
       defaultValues: {
         clubName: defaultValues?.clubName || '',
@@ -49,9 +50,20 @@ const ClubInfoModifyForm = () => {
       }
     });
 
-    const { handleSubmit, control, reset } = methods;
+    const { handleSubmit, control, reset, setValue } = methods;
+
+    const [imageUrl, setImageUrl] = useState<string | undefined>();
+    const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const files = e.target.files;
+      if (!files || files.length === 0) return;
+      const selectedFile = files[0];
+      const newImageUrl = URL.createObjectURL(selectedFile);
+      setImageUrl(newImageUrl);
+      setValue("clubProfileImage", selectedFile);
+    };
 
     useEffect(() => {
+      if (infoData?.data === undefined) return;
       if (defaultValues) {
         reset({
           clubName: defaultValues.clubName,
@@ -60,11 +72,19 @@ const ClubInfoModifyForm = () => {
           link: defaultValues.link,
           clubProfileImage: defaultValues?.clubProfileImage
         });
-      }
-    }, [defaultValues, reset]);
+        setImageUrl(defaultValues.clubProfileImage);
+      };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [infoData]);
 
-    const submitModifyInfo = (data: FormData) => {
+    const { mutate } = useClubsInfoMutation()
+    const submitModifyInfo = (data: ClubModifyFormData) => {
+      const imageIsChanged = infoData?.data.clubProfileImage !== data.clubProfileImage;
       console.log(data);
+      mutate({
+        data: data,
+        imageIsChanged: imageIsChanged
+      });
     }
 
     return (
