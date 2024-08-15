@@ -46,11 +46,11 @@ export function HeaderInfo({
   const router = useRouter();
   const saveData = useSelector((state: RootState) => state.club.children);
   const { data: loadData, isError, error } = useMemberAuthQuery();
-  if (isError) {
-    console.log(error.response?.status);
-    if (error.response?.status)
-      router.push("/user/onboarding?policy=REAL_NAME");
-  }
+  // if (isError) {
+  //   console.log(error.response?.data);
+  //   if (error.response?.data.code === "2200")
+  //     router.push("/user/onboarding?policy=REAL_NAME");
+  // }
   if (loadData === undefined) return;
   const clubInfo = saveData.memberId === -1 ? loadData.data : saveData;
   return (
