@@ -43,6 +43,7 @@ async function modifyClubs({
     },
   };
   try {
+    console.log(resData);
     const clubId = FormatClubId();
     const res = await http.patch<AxiosResponse<string>>(`/clubs/${clubId}/info`, resData, config);
     console.log(res);

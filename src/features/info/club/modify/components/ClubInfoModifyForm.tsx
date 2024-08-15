@@ -80,7 +80,7 @@ const ClubInfoModifyForm = () => {
     const { mutate } = useClubsInfoMutation()
     const submitModifyInfo = (data: ClubModifyFormData) => {
       const imageIsChanged = infoData?.data.clubProfileImage !== data.clubProfileImage;
-      console.log(data);
+      console.log(data, imageIsChanged);
       mutate({
         data: data,
         imageIsChanged: imageIsChanged
