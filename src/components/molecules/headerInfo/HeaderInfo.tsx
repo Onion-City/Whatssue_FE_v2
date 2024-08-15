@@ -48,7 +48,8 @@ export function HeaderInfo({
   const { data: loadData, isError, error } = useMemberAuthQuery();
   if (isError) {
     console.log(error.response?.status);
-    if (error.response?.status) router.push('/user/onboarding');
+    if (error.response?.status)
+      router.push("/user/onboarding?policy=REAL_NAME");
   }
   if (loadData === undefined) return;
   const clubInfo = saveData.memberId === -1 ? loadData.data : saveData;
