@@ -12,8 +12,6 @@ export interface AbsenceReqProps {
 }
 
 export interface AbsenceReqData {
-  clubMemberId: number;
-  scheduleId: number;
   officialAbsenceContent: string;
 }
 
@@ -29,28 +27,28 @@ export interface AbsenceListProps {
   endDate?: string;
   page?: number;
   size?: number;
-  sort?: string,
+  sort?: string;
 }
 
 export interface AbsenceMemberData {
-  id: number,
-  clubMemberId: number,
-  scheduleId: number,
+  id: number;
+  clubMemberId: number;
+  scheduleId: number;
   scheduleDate: string;
   scheduleName: string;
-  officialAbsenceContent: string,
-  officialAbsenceRequestType: "WAITING" | "ACCEPTED" | "REJECTED",
+  officialAbsenceContent: string;
+  officialAbsenceRequestType: "WAITING" | "ACCEPTED" | "REJECTED";
   createAt?: string;
   updateAt?: string;
 }
 
 export interface AbsenceContent<T> {
-  content: T[]
+  content: T[];
 }
 
 export interface AbsenceMyResultsParams {
-  clubId: number; 
-  startDate?: string; 
+  clubId: number;
+  startDate?: string;
   endDate?: string;
   page?: number;
   size?: number;
