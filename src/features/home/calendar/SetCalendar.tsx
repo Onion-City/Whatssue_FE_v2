@@ -33,7 +33,10 @@ const SetCalendar = () => {
         {isLoading ? (
           <></>
         ) : (
-          <CalendarList data={scheduleData?.data} mark={mark} />
+          <CalendarList
+            data={scheduleData?.data}
+            mark={Array.from(new Set(mark))}
+          />
         )}
       </div>
     </>
