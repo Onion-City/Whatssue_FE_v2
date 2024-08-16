@@ -1,12 +1,10 @@
 "use client";
-import { Text } from "@/components/atoms/text";
 import { HeaderInfo } from "@/components/molecules/headerInfo";
 import { Nav } from "@/components/organisms/Nav";
 import { useMemberAuthQuery } from "@/hook/member/useMemberAuthQuery";
 import useSchedule from "@/hook/schedule/useSchedule";
 import { setClub } from "@/redux/slices/club";
 import { AppDispatch, RootState } from "@/redux/store";
-import { COLORS } from "@/styles";
 import { FormatClubId } from "@/utils/extractPathElements";
 import moment from "moment";
 import { useRouter } from "next/navigation";
@@ -14,6 +12,7 @@ import { createContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import HomeDateWrapper from "./components/HomeDateWrapper";
 import HomeHeader from "./components/HomeHeader";
+import HomeRegBtn from "./components/HomeRegBtn";
 
 export const ScheduleContext = createContext<{
   value: Date;
@@ -56,32 +55,7 @@ const SetHome = () => {
         <HomeHeader mark={mark} />
         <HomeDateWrapper dateList={filteredData} isLoading={isLoading} />
       </div>
-      {role === "MANAGER" && (
-        <div
-          style={{
-            width: "90%",
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "flex-end",
-            margin: "0 auto",
-          }}
-        >
-          <span
-            style={{
-              backgroundColor: COLORS.lightBackground,
-              padding: "0.25rem 0.75rem",
-              borderRadius: "50px",
-              cursor: "pointer",
-              border: `1px solid ${COLORS.whitegrey}`,
-            }}
-            onClick={() => router.push("/club/calendar/register")}
-          >
-            <Text color={COLORS.whitegrey} fontSize="0.875rem">
-              일정 생성
-            </Text>
-          </span>
-        </div>
-      )}
+      {role === "MANAGER" && <HomeRegBtn />}
       <Nav />
     </ScheduleContext.Provider>
   );
