@@ -21,7 +21,7 @@ export const useScheduleMutation = () => {
           message: "일정이 등록되었습니다.",
           type: "success",
         });
-        router.push("/");
+        router.push("/club");
       } else {
         showToast({
           message: data.data,
@@ -30,21 +30,36 @@ export const useScheduleMutation = () => {
       }
     },
     onError: (error) => {
-      if ((error as AxiosError).isAxiosError) {
-        const axiosError = error as AxiosError<any>;
-        if (axiosError.response) {
-          if (axiosError.response.data.errors) {
-            showToast({
-              message: `${axiosError.response.data.errors[0].message}`,
-              type: "error",
-            });
-          } else {
-            showToast({
-              message: `${axiosError.response.data.message}`,
-              type: "error",
-            });
-          }
-        }
+      if (!(error as AxiosError).isAxiosError) return;
+
+      const axiosError = error as AxiosError<any>;
+      const response = axiosError.response;
+
+      if (!response || !response.data) return;
+
+      const { errors, code, message } = response.data;
+
+      if (errors && errors.length > 0) {
+        showToast({
+          message: errors[0].message,
+          type: "error",
+        });
+        return;
+      }
+
+      if (code === "0400") {
+        showToast({
+          message: "필수 값을 입력해주세요.",
+          type: "error",
+        });
+        return;
+      }
+
+      if (message) {
+        showToast({
+          message: message,
+          type: "error",
+        });
       }
     },
   });
