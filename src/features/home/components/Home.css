@@ -1,68 +1,94 @@
 /* HomeHeader */
 
 .homeHeader {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #1B1B1B;
-    border-radius: 0 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #1b1b1b;
+  border-radius: 0 0 20px 20px;
 }
 
 /* HomeDateWrapper */
 
 .homeDate {
-    margin: 1rem auto;
-    width: 90vw;
-    height: calc(50% - 5.5rem);
+  margin: 1rem auto;
+  width: 90vw;
+  height: calc(50% - 5.5rem);
 }
 
 .homeDateWrapper__header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
 }
 
 .homeDateWrapper__header::before {
-    width: 0px !important;
-    height: 0px !important;
+  width: 0px !important;
+  height: 0px !important;
 }
 
 .homeDateWrapper__header-btn {
-    cursor: pointer;
+  cursor: pointer;
+}
+
+.homeDateWrapper__content {
+  height: calc(50% - 7.5rem);
+  overflow-y: auto;
 }
 
 /* HomeDateBox */
 
 .homeDateBox {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
-    background-color: #404040;
-    border-radius: 10px;
-    width: 100%;
-    height: 3.375rem;
-    padding: 0 1rem;
-    margin: 0.5rem 0;
-    cursor: pointer;
+  background-color: #404040;
+  border-radius: 10px;
+  width: 100%;
+  height: 3.375rem;
+  padding: 0 1rem;
+  margin: 0.5rem 0;
+  cursor: pointer;
 }
 
 .homeDateBox__content {
-    display: flex;
-    width: 100%;
+  display: flex;
+  width: 100%;
 }
 
 .homeDateBox__content__time {
-    margin-right: 1rem;
+  margin-right: 1rem;
 }
 
 .homeDateBox span {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .homeDateBox__attend {
-    display: flex;
-    justify-content: flex-end;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* HomeRegBtn */
+
+.homeRegBtn {
+  /* width: 90%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin: 0 auto; */
+  position: fixed;
+  bottom: 5.5rem;
+  right: 5vw;
+}
+
+.homeRegBtn__back {
+  background-color: #404040;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  cursor: pointer;
+  border: 1px solid #d9d9d9;
 }
