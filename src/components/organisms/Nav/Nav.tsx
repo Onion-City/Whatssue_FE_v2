@@ -1,6 +1,8 @@
 "use client";
 import { Text } from "@/components/atoms/text";
+import { RootState } from "@/redux/store";
 import { usePathname, useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
 import "./Nav.css";
 import { navItems } from "./constants";
 
@@ -14,10 +16,17 @@ export interface NavProps {
 export function Nav({ title, maxCnt, type, subtitle, essential }: NavProps) {
   const router = useRouter();
   const pathname = usePathname();
+  const role = useSelector((state: RootState) => state.club.children.role);
   const selectedPath =
     pathname === "/" ? pathname : pathname.split("/").slice(1, 3).join("/");
   const handleNavigate = (path: string) => {
-    router.push(`/${path}`);
+    if (path === "attendance") {
+      role === "MANAGER"
+        ? router.push("/manager/attendance")
+        : router.push("member/attendance");
+    } else {
+      router.push(`/${path}`);
+    }
   };
   return (
     <div className="Nav__wrapper">
