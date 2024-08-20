@@ -21,9 +21,7 @@ export default function RootLayout({
 
   const historyHeaderList = ["/user/onboarding", "/user/club"];
 
-  const clubHeaderList = [
-    "/member/attendance",
-  ];
+  const clubHeaderList = ["/club/attendance"];
 
   const [queryClient] = useState(
     () =>
