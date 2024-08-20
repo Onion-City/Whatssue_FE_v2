@@ -1,4 +1,4 @@
-import AttendanceStatusEdit from "@/features/manager/attendance/AttendanceStatusEdit";
+import AttendanceStatusEdit from "@/features/attendance/manager/AttendanceStatusEdit";
 
 const ManagerAttendanceStatusEdit = () => {
   return (
