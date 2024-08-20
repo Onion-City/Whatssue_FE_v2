@@ -1,4 +1,4 @@
-import AttendanceStatus from "@/features/manager/attendance/AttendanceStatus";
+import AttendanceStatus from "@/features/attendance/manager/AttendanceStatus";
 
 const ManagerAttendanceStatus = () => {
   return (
