@@ -7,7 +7,7 @@ import { ICONS, IMAGES } from "@/constants/images";
 import { useMemberAuthQuery } from "@/hook/member/useMemberAuthQuery";
 import { RootState } from "@/redux/store";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import "./HeaderInfo.css";
 
@@ -25,13 +25,7 @@ interface isHeaderInfo {
   color?: string;
   children?: React.ReactNode;
 }
-function Search() {
-  return (
-    <div className="search__icon">
-      <Image src={ICONS.search} alt="search" width={100} height={100} />
-    </div>
-  );
-}
+
 export function HeaderInfo({
   isBack = false,
   isClubInfo = false,
@@ -44,13 +38,13 @@ export function HeaderInfo({
   children,
 }: isHeaderInfo) {
   const router = useRouter();
+  const pathname = usePathname();
+  // 상세 페이지 이동
+  const handleSearch = () => {
+    router.push(`${pathname}/search`);
+  };
   const saveData = useSelector((state: RootState) => state.club.children);
   const { data: loadData, isError, error } = useMemberAuthQuery();
-  // if (isError) {
-  //   console.log(error.response?.data);
-  //   if (error.response?.data.code === "2200")
-  //     router.push("/user/onboarding?policy=REAL_NAME");
-  // }
   if (loadData === undefined) return;
   const clubInfo = saveData.memberId === -1 ? loadData.data : saveData;
   return (
@@ -83,7 +77,11 @@ export function HeaderInfo({
         {content2 && (
           <HeaderContent title={content2.title} subTitle={content2.subTitle} />
         )}
-        {isSearch && <Search />}
+        {isSearch && (
+          <div className="search__icon" onClick={handleSearch}>
+            <Image src={ICONS.search} alt="search" width={100} height={100} />
+          </div>
+        )}
         {isDropdown && isDropdown.length > 0 && (
           <PostDropdown item={isDropdown} />
         )}
