@@ -4,8 +4,11 @@ import { BottomSheet } from "@/components/organisms/BottomSheet/BottomSheet";
 import { RouterBtn } from "@/components/organisms/RouterBtn/RouterBtn";
 import { ICONS } from "@/constants/images";
 import { useClubListQuery } from "@/hook/user/useClubListQuery";
+import { setClubId } from "@/redux/slices/club";
+import { AppDispatch } from "@/redux/store";
 import Image from "next/image";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Text } from "../text";
 import "./HeaderClubInfo.css";
 interface HeaderClubInfoProps {
@@ -20,6 +23,16 @@ export function HeaderClubInfo({
 }: HeaderClubInfoProps) {
   const [openFloating, setOpenFloating] = useState<boolean>(false);
   const clubList = useClubListQuery({ page: 0, size: 10 }).data?.data.content;
+  const dispatch = useDispatch<AppDispatch>();
+  // const { data: memberInfo } = useMemberAuthQuery();
+  const dispath = useDispatch<AppDispatch>();
+  // if (memberInfo?.data) {
+  //   dispath(setClub(memberInfo.data));
+  // }
+  const handleChange = (clubId: number) => {
+    dispatch(setClubId(clubId));
+    setOpenFloating((prev) => !prev);
+  };
 
   return (
     <>
@@ -49,8 +62,8 @@ export function HeaderClubInfo({
           {clubList?.map((club) => (
             <React.Fragment key={club.clubId}>
               <RouterBtn
-                path={`${club.clubId}`}
-                onClick={() => setOpenFloating(false)}
+                path={`/club`}
+                onClick={() => handleChange(club.clubId)}
               >
                 <ClubBox clubImg={club.clubProfileImage}>
                   {club.clubName}

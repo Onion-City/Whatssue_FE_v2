@@ -24,7 +24,7 @@ const BoardItem = ({
   const pathname = usePathname();
   // 상세 페이지 이동
   const handleRouteBoardDetail = (BoardId: number) => {
-    router.push(`${pathname}/${BoardId}`);
+    router.push(`${pathname.split("/").slice(0, 4).join("/")}/${BoardId}`);
   };
 
   return (
