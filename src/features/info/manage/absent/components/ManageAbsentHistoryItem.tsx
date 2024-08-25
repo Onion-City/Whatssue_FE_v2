@@ -13,102 +13,85 @@ import AbsenceChip from "@/components/atoms/chip/AbsenceChip";
 import "../../../absent/components/MemberAbsent.css";
 
 interface AbsenceProps {
-    data: AbsenceMemberData
-};
+  data: AbsenceMemberData;
+}
 
 // 공결 신청 현황 item
-export const ManageAbsentHistoryItem = ({data}: AbsenceProps) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const openModal = () => setIsOpen(true);
-    const closeModal = () => setIsOpen(false);
+export const ManageAbsentHistoryItem = ({ data }: AbsenceProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
 
-
-    return(
-        <>
-        <div className="absentBox" onClick={openModal}>
-            <div className="absentBox__status-wrapper">
-              {/* <span className="absentBox__status"> */}
-                <AbsenceChip 
-                  type={data.officialAbsenceRequestType}
-                />
-              {/* </span> */}
-              <Image 
-                  src={ICONS.arrowRight}
-                  alt="arrow"
-              />
-            </div>
-            <Text
-                color="#FFFFFF"
-                fontSize="1.1875rem"
-            >{data.scheduleName}</Text>
-            <div className="absentBox__date">
-              <span className="absentBox__date-title">
-                <Text
-                    color="#989898"
-                    fontSize="0.75rem"
-                    fontWeight="500"
-                >{ABSENT_BOX.memberName}</Text>
-              </span>
-              <span className="absentBox__date-content">
-                <Text
-                    color="#FFFFFF"
-                    fontSize="0.75rem"
-                    fontWeight="500"
-                >{data.officialAbsenceRequestType}</Text>
-              </span>
-            </div>
-            <div className="absentBox__date">
-                <Text
-                    color="#989898"
-                    fontSize="0.75rem"
-                    fontWeight="500"
-                >{ABSENT_BOX.createAt}</Text>
-                <Text
-                    color="#FFFFFF"
-                    fontSize="0.75rem"
-                    fontWeight="500"
-                >{moment(data.createAt).format("YYYY년 MM월 DD일")}</Text>
-            </div>
-            <div className="absentBox__date">
-                <Text
-                    color="#989898"
-                    fontSize="0.75rem"
-                    fontWeight="500"
-                >{ABSENT_BOX.updateAt}</Text>
-                <Text
-                    color="#FFFFFF"
-                    fontSize="0.75rem"
-                    fontWeight="500"
-                >{moment(data.updateAt).format("YYYY년 MM월 DD일")}</Text>
-            </div>
+  return (
+    <>
+      <div className="absentBox" onClick={openModal}>
+        <div className="absentBox__status-wrapper">
+          {/* <span className="absentBox__status"> */}
+          <AbsenceChip type={data.officialAbsenceRequestType} />
+          {/* </span> */}
+          <Image src={ICONS.arrowRight} alt="arrow" />
         </div>
+        <Text color="#FFFFFF" fontSize="1.1875rem">
+          {data.scheduleName}
+        </Text>
+        <div className="absentBox__date">
+          <span className="absentBox__date-title">
+            <Text color="#989898" fontSize="0.75rem" fontWeight="500">
+              {ABSENT_BOX.memberName}
+            </Text>
+          </span>
+          <span className="absentBox__date-content">
+            <Text color="#FFFFFF" fontSize="0.75rem" fontWeight="500">
+              {data.clubMemberName ?? "익명"}
+            </Text>
+          </span>
+        </div>
+        <div className="absentBox__date">
+          <Text color="#989898" fontSize="0.75rem" fontWeight="500">
+            {ABSENT_BOX.createAt}
+          </Text>
+          <Text color="#FFFFFF" fontSize="0.75rem" fontWeight="500">
+            {moment(data?.createdAt?.split("T")[0]).format("YYYY년 MM월 DD일")}
+          </Text>
+        </div>
+        <div className="absentBox__date">
+          <Text color="#989898" fontSize="0.75rem" fontWeight="500">
+            {ABSENT_BOX.updateAt}
+          </Text>
+          <Text color="#FFFFFF" fontSize="0.75rem" fontWeight="500">
+            {moment(data?.updatedAt?.split("T")[0]).format("YYYY년 MM월 DD일")}
+          </Text>
+        </div>
+      </div>
 
-        <Modal isOpen={isOpen}>
-            <Modal.Dimmed />
-            <Modal.Header closeModal={closeModal}>
-                <Modal.Title>{data.scheduleName}</Modal.Title>
-                <Modal.Subtitle>{data.officialAbsenceRequestType} / {moment(data.createAt).format("YYYY.MM.DD")}</Modal.Subtitle>
-            </Modal.Header>
-            <Modal.Content>
-                <div className="absentBox__modal-content">
-                    <Text
-                        fontSize="0.6875rem"
-                        color="#666666"
-                    >{ABSENT_REQUEST_MODAL.contentTitle}</Text>
-                    <Text
-                        fontWeight="500"
-                    >{data.officialAbsenceContent}</Text>
-                </div>
-            </Modal.Content>
-            <Modal.Footer>
-                <Modal.Button
-                  onClick={closeModal}
-                  size="pr"
-                  backgroundColor={COLORS.lightBackground}
-                  color={COLORS.white}
-                >{ABSENT_MODAL.btn}</Modal.Button>
-            </Modal.Footer>
-        </Modal>
-        </>
-    )
-}
+      <Modal isOpen={isOpen}>
+        <Modal.Dimmed />
+        <Modal.Header closeModal={closeModal}>
+          <Modal.Title>{data.scheduleName}</Modal.Title>
+          <Modal.Subtitle>
+            {data.clubMemberName ?? "익명"} /{" "}
+            {moment(data.createdAt).format("YYYY.MM.DD")}
+          </Modal.Subtitle>
+        </Modal.Header>
+        <Modal.Content>
+          <div className="absentBox__modal-content">
+            <Text fontSize="0.6875rem" color="#666666">
+              {ABSENT_REQUEST_MODAL.contentTitle}
+            </Text>
+            <Text fontWeight="500">{data.officialAbsenceContent}</Text>
+          </div>
+        </Modal.Content>
+        <Modal.Footer>
+          <Modal.Button
+            onClick={closeModal}
+            size="pr"
+            backgroundColor={COLORS.lightBackground}
+            color={COLORS.white}
+          >
+            {ABSENT_MODAL.btn}
+          </Modal.Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+};

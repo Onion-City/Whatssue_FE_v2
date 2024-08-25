@@ -33,13 +33,15 @@ export interface AbsenceListProps {
 export interface AbsenceMemberData {
   id: number;
   clubMemberId: number;
+  clubMemberName: string;
   scheduleId: number;
   scheduleDate: string;
   scheduleName: string;
+  officialAbsenceId: number;
   officialAbsenceContent: string;
   officialAbsenceRequestType: "WAITING" | "ACCEPTED" | "REJECTED";
-  createAt?: string;
-  updateAt?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface AbsenceContent<T> {
@@ -58,5 +60,4 @@ export interface AbsenceMyResultsParams {
 
 export interface AbsenceAcceptParams {
   clubId: number;
-  officialAbsenceId: number;
 }
