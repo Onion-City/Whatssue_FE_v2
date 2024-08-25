@@ -24,17 +24,28 @@ export const usePostListQuery = ({
 }: props) => {
   const clubId = FormatClubId();
   const getPostList = async (page: number): Promise<CommonPage<PostList>> => {
+    // 쿼리 문자열 생성
+    const query = new URLSearchParams({
+      keyword: keyword || "", // 비어 있을 경우 빈 문자열로 설정
+      sortBy: sort,
+      category: category,
+      page: page.toString(),
+      size: size.toString(),
+    });
+    if (startData && endData) {
+      query.append("startDate", startData);
+      query.append("endDate", endData);
+    }
+
     const response = await http.get<CommonRes<PostList>>(
-      `/clubs/${clubId}/posts?keyword=${keyword}&sortBy=createAt&category=${category}&page=${page}&size=${size}`
+      `/clubs/${clubId}/posts?${query.toString()}`
     );
-    const data = await response;
-    return data.data;
+    return response.data;
   };
   return useCustomInfiniteQuery<PostList>({
-    queryKey: ["postList", { clubId, category, size, sort }],
+    queryKey: ["postList", { clubId, category, keyword, size, sort }],
     customQueryFn: getPostList,
   });
 };
-
 
 export default usePostListQuery;

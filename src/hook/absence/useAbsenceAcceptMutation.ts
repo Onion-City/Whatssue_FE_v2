@@ -11,15 +11,12 @@ interface ErrorData {
 }
 
 // 공결 신청 수락 (/{clubId}/official_absence/accept/{officialAbsenceId})
-export const useAbsenceAcceptMutation = ({
-  clubId,
-  officialAbsenceId,
-}: AbsenceAcceptParams) => {
+export const useAbsenceAcceptMutation = ({ clubId }: AbsenceAcceptParams) => {
   const { showToast } = useToast();
   const queryClient = useQueryClient();
 
-  return useMutation<AxiosResponse<string>, Error>({
-    mutationFn: () =>
+  return useMutation<AxiosResponse<string>, Error, number>({
+    mutationFn: (officialAbsenceId: number) =>
       http.post(`/${clubId}/official-absence/accept/${officialAbsenceId}`),
     onSuccess: (data) => {
       console.log(data);

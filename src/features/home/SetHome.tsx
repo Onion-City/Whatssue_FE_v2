@@ -1,15 +1,13 @@
 "use client";
 import { HeaderInfo } from "@/components/molecules/headerInfo";
 import { Nav } from "@/components/organisms/Nav";
-import { useMemberAuthQuery } from "@/hook/member/useMemberAuthQuery";
 import useSchedule from "@/hook/schedule/useSchedule";
-import { setClub } from "@/redux/slices/club";
-import { AppDispatch, RootState } from "@/redux/store";
+import { RootState } from "@/redux/store";
 import { FormatClubId } from "@/utils/extractPathElements";
 import moment from "moment";
 import { useRouter } from "next/navigation";
 import { createContext } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import HomeDateWrapper from "./components/HomeDateWrapper";
 import HomeHeader from "./components/HomeHeader";
 import HomeRegBtn from "./components/HomeRegBtn";
@@ -32,11 +30,6 @@ const SetHome = () => {
     page: 0,
     size: 20,
   });
-  const { data: memberInfo } = useMemberAuthQuery();
-  const dispath = useDispatch<AppDispatch>();
-  if (memberInfo?.data) {
-    dispath(setClub(memberInfo.data));
-  }
 
   const role = useSelector((state: RootState) => state.club.children.role);
   console.log(role);
