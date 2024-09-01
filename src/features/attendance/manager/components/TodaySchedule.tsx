@@ -3,7 +3,6 @@
 import { Text } from "@/components/atoms/text";
 import AttendanceItem from "@/components/molecules/attendanceItem/AttendanceItem";
 import { Modal } from "@/components/organisms/Modal/Modal";
-import { useModalContext } from "@/components/organisms/Modal/ModalProvider";
 import { useAttendanceStartQuery } from "@/hook/attendance/manager/useAttendanceStartQuery";
 import { useTodayScheduleListQuery } from "@/hook/attendance/manager/useTodayScheduleListQuery";
 import { ScheduleContent } from "@/types/schedule";
@@ -25,7 +24,9 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
   const router = useRouter();
   const [selectedSchedule, setSelectedSchedule] =
     useState<ScheduleContent | null>(null);
-  const { isOpen, openModal, closeModal } = useModalContext();
+  const [isOpen, setIsOpen] = useState(false);
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
   const [startAttendance, setStartAttendance] = useState(false);
 
   const getCurrentDate = () => {
@@ -61,9 +62,7 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
       openModal();
       console.log("Modal opened with schedule:", schedule);
     } else {
-      router.push(
-        `/manager/attendance/status?scheduleId=${schedule.scheduleId}`
-      );
+      router.push(`/club/attendance/status?scheduleId=${schedule.scheduleId}`);
       console.log("Redirected to attendance status page:", schedule);
     }
   };
@@ -150,7 +149,7 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
 
       <Modal isOpen={isOpen}>
         <Modal.Dimmed />
-        <Modal.Header>
+        <Modal.Header closeModal={closeModal}>
           <Modal.Title>{ATTENDANCE_MODAL.start}</Modal.Title>
         </Modal.Header>
         <Modal.Content></Modal.Content>
