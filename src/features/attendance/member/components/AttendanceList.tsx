@@ -4,7 +4,6 @@ import { useAttendanceListQuery } from "@/hook/attendance/useAttendanceListQuery
 import AttendanceItem from "../../../../components/molecules/attendanceItem/AttendanceItem";
 import AttendanceEmpty from "./AttendanceEmpty";
 import { Modal } from "@/components/organisms/Modal/Modal";
-import { useModalContext } from "@/components/organisms/Modal/ModalProvider";
 import { ATTEND_BTN, ATTEND_MODAL } from "../constants/const";
 import { CodeInput } from "@/components/atoms/input/CodeInput";
 import { AttendanceListItem } from "@/types/attendance/types";
@@ -12,7 +11,9 @@ import { useAttendanceReqMutation } from "@/hook/attendance/member/useAttendance
 import { FormatClubId } from "@/utils/extractPathElements";
 
 const AttendanceList: React.FC = () => {
-  const { isOpen, openModal, closeModal } = useModalContext();
+  const [isOpen, setIsOpen] = useState(false);
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
   const [codeValues, setCodeValues] = useState<string[]>(Array(3).fill(""));
   const [isComplete, setIsComplete] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
