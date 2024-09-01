@@ -19,12 +19,14 @@ const BoardItem = ({
   createdAt,
   isHeart = false,
   writer: { profile, name },
+  type,
 }: BoardItemProps) => {
   const router = useRouter();
   const pathname = usePathname();
   // 상세 페이지 이동
   const handleRouteBoardDetail = (BoardId: number) => {
-    router.push(`${pathname.split("/").slice(0, 4).join("/")}/${BoardId}`);
+    if (type) router.push(`/club/board/${type.toLowerCase()}/${BoardId}`);
+    else router.push(`${pathname.split("/").slice(0, 4).join("/")}/${BoardId}`);
   };
 
   return (
