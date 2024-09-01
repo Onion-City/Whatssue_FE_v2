@@ -1,4 +1,3 @@
-
 export interface BoardItemProps {
   boardAddress?: string;
   id: number;
@@ -13,4 +12,5 @@ export interface BoardItemProps {
     name: string;
   };
   createdAt: Date;
+  type?: string;
 }
