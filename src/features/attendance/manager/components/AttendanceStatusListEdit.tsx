@@ -68,7 +68,7 @@ const AttendanceStatusListEdit: React.FC = () => {
       attendmodifyDtoList: modifiedData,
     });
 
-    router.replace(`/manager/attendance/status?scheduleId=${scheduleId}`);
+    router.replace(`/club/attendance/status?scheduleId=${scheduleId}`);
   };
 
   return (
