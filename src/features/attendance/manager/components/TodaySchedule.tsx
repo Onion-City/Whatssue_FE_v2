@@ -61,9 +61,7 @@ const TodaySchedule: React.FC<TodayScheduleProps> = ({
       openModal();
       console.log("Modal opened with schedule:", schedule);
     } else {
-      router.push(
-        `/manager/attendance/status?scheduleId=${schedule.scheduleId}`
-      );
+      router.push(`/club/attendance/status?scheduleId=${schedule.scheduleId}`);
       console.log("Redirected to attendance status page:", schedule);
     }
   };
